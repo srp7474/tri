@@ -1,0 +1,23 @@
+@ngdoc overview
+@name Guide: Form Page Design
+@description
+### Overview
+An CRUD application needs a place to display and print various views of the `Tables` that belong to the application.  The `FormHello.htm`, `FormCheque.htm` and `FormDeposit.htm`
+are examples of this type of page.  They may be considered the secondary pages of an application.  The corresponding `FormHello.js`, `FormCheque.js` and `FormDeposit.js` provide
+local functions that handle the needs of the Form Page.
+
+The **Triangular** standard design places a menu at the extreme right (off the printable area of the page) which allows for the page
+to have multiple renderings using <a target=_blank href="http://angularjs.org/">AngularJS</a> to transition the sections.
+
+The window `print` function is used to print the 'printable area' of the page.
+
+To deal with cross-domain browser limitations, the windows messaging/post system is used to move data from the primary page to the secondary page.
+This saves memory and also
+makes cache management easier (only the primary window has to be synchronized).
+
+The links {@link /apps/hello-app#FormHello.htm FormHello.htm} and {@link /apps/hello-app#FormHello.js FormHello.js} gives a detailed explanation
+of the interaction between the primary and secondary windows as well as other considerations in the design.
+
+See also the {@link /guide/disp-page-design Display Page Design} page for design guidelines on display pages (application primary page).
+
+

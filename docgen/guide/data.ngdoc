@@ -1,0 +1,19 @@
+@ngdoc overview
+@name Guide: Data Object
+@description
+
+### Overview
+The `Data Object` is an object created internally.  It represents a single object (record) stored on the server.
+
+If the  `recServ` parameter points at {@link /api/tri.servREC servREC} the Data Objects are stored as stringified JSON.array with each Data Object
+being a JSON.object.  If there are too many, they are stored as 64K chunks.
+
+If the  `recServ` parameter points at {@link /api/tri.servTBL servTBL} each Data Object is stored separately on the server.
+
+Refer to {@link /guide/records Record Storage} for more details.
+
+The internal implementation of the `Data Object` uses a Javascript object.
+The properties of the Javascript object are used to represent the columns stored on and retrieved from the server.  The JSON
+`stringify` and `parse` are used to transform the data between these 2 functions.  Upon occasion the <a target=_blank href="http://angularjs.org/">AngularJS</a> versions are used because they
+also clean up any <a target=_blank href="http://angularjs.org/">AngularJS</a> special $$ tags inserted into the working copy of Javascript object.
+

@@ -1,0 +1,17 @@
+/*
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+*/
+
+/*Custom Positioning for Tables fields */
+
+/* --- User --*/
+table#list-User td.c0, table#list-User th.c0         {width:80px;}
+table#list-User td.c1, table#list-User th.c1         {width:820px;}
+table#list-User td.c1                                {text-align:left;}
+table#list-User span.nodrop                          {color:rgb(220,220,220);}
+
+div#editor div#flds-User                             {height:200px; width:900px; overflow:scroll;}

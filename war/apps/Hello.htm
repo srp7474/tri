@@ -1,0 +1,64 @@
+<html>
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-msgs0.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="tri/AppStd.css" title=default>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="Hello.js"></script>
+  <title>Hello:Defined during bootstrap</title>
+  <script>gaTracking();</script>
+</head>
+
+<body id=bodyID>
+  <macro fetch='apps-body.html' alter='##TITLE##/Message Board System Login'></macro>                 <!-- standard body -->
+
+  <macro fetch='apps-copyright-notice.html'></macro>                                                  <!-- copyright notice -->
+
+  <object data='tri/AppsBase.htm?app=Chqs' id=apps-templates style='width:0px;height:0px;'></object>  <!-- load standard templates -->
+
+  <!---------------------------- Custom CSS ----------------------------------!>
+  <style type="text/css">
+    /* Note: this could be in a separate .css file if preferred */
+    /* messages lister */
+    table#list-messages                                    {width:980px;}
+    table#list-messages thead                              {width:980px;}
+    table#list-messages td.c0, table#list-messages th.c0   {width:100px;}
+    table#list-messages td.c1, table#list-messages th.c1   {width:120px; }
+    table#list-messages td.c2, table#list-messages th.c2   {width:100px; }
+    table#list-messages td.c3, table#list-messages th.c3   {width:80px; }
+    table#list-messages td.c4, table#list-messages th.c4   {width:580px; }
+    table#list-messages td.c4                              {text-align:left; padding-left:10px; }
+    fieldset.list-comm input#_custmask                     {width:180px;}
+
+    /* messages editor */
+    div#editor                                             {width:900px;}
+    div#chq-edit                                           {margin-left:10px;}
+    div#chq-hdr                                            {width:900px;}
+    div#flds-messages  #msg-text                           {width:500px; height:200px;}
+  </style>
+
+  <!------- Custom Templates ------!>
+  <object type='text/html' id=cust-templates style='width:0px;height:0px;'>
+    <pre class=template id="textarea.html">
+       <textarea id=msg-text ng-model='oObj[oCol.col]' placeHolder='enter or paste the message text (30 chars min)'>
+         enter text here
+       </textarea>
+    </pre>
+
+    <pre class=template id="select.html">
+       <select id=msg-type ng-model='oObj[oCol.col]' ng-init=technical>
+         <option>technical</option>
+         <option>sports</option>
+         <option>politics</option>
+         <option>legal</option>
+         <option>other</option>
+       </select>
+    </pre>
+  </object>
+</body>
+</html>
+

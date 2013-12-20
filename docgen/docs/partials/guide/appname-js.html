@@ -1,0 +1,57 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <code>appname.js</code> file is the file that contains the Javascript code that supports the matching <a href="/guide/appname-html">appname-html</a> file.  By convention it
+is uses the same name as the <code>appname.html</code> file with a replacement of the extension with .js.</p>
+
+<p>Samples include the <code>Deps.js</code> and <code>Chqs.js</code> in the Apps and tutorial examples.
+The samples are documented and can be used to create new
+<code>appname.js</code> files.</p>
+
+<p>The following major sections are found in the <code>appname.js</code> file:</p>
+
+<h3 id="ctrlmainfunction">ctrlMain function</h4>
+
+<p>The <code>ctrlMain</code> function is called by the <a target=_blank href="http://angularjs.org/">AngularJS</a>  infrastructure because it is the ng-controller specified on the <code>&lt;body&gt;</code> statement
+of the <code>appname.html</code> file.</p>
+
+<p>Here is a sample of the beginning of the <code>ctrlMain</code> function taken from <code>Deps.js</code>.</p>
+
+<pre class="prettyprint linenums">
+function ctrlMain($scope,servSess,servGAE,tblDEP,tblENV,tblDON,servCRUD,servREG) {
+  log("Created ctrlMain for deps application");
+  servGAE.setCust("deps");
+  servSess.setTitle("Deposit Recording System");
+  var oOpts = [{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'},{menu:"Deposit Summaries",func:printDepSum,role:'elder',sandbox:true}];
+  servSess.setOptMenuItems(oOpts);
+
+  function xfrAdminFunctions() {
+    servSess.xfrAdminApp("deps",["TableDonors"]);
+  }
+  ...
+</pre>
+
+<p>It contains the following components.</p>
+
+<ol>
+<li><p>Line 1, the function statement references, beside the Triangular services such as <code>servSess</code>, the <code>Tables</code> that should be accessible to the application.</p></li>
+<li><p>Line 3, initialization code that defines the customer (see <a href="/api/tri.servGAE#setCust">servGAE.setCust</a>)</p></li>
+<li><p>Line 4, initialization code that defines the application title (see <a href="/api/tri.servSess#setTitle">servSess.setTitle</a>)</p></li>
+<li><p>lines 4 &amp; 5, initialization code that defines the optional menu items (see <a href="/api/tri.servSess#setOptMenuItems">servSess.setOptMenuItems</a>)</p></li>
+<li><p>line 8, the local function referenced in line 5 that defines how to transfer to the <a href="/guide/admin">Admin app</a>.</p></li>
+<li><p>An optional <code>logonExit</code> that modifies the optional menu items depending on the role or profile of the User that logged on.  See <code>Chq.js</code> as an example.</p></li>
+<li><p>Any functions required to support the optional menu items</p></li>
+<li><p>Any functions that extend the standard <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a>  or <a href="/api/tri.controller:ctrlCommList">List Controller</a>.  Note that the sample <code>Deps.js</code> code
+does extend the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> but has no additional functions as they were found useful and moved to the
+standard <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a>.</p></li>
+</ol>
+
+<h3 id="tabledefinitions">Table definition(s)</h4>
+
+<p>The table defintition(s) can be defined in an external .js file or here.  By convention at least the primary 'Table` definition is coded here.
+External definitions have the advantage that they can be used in more than 1 application (such as the <a href="/guide/admin">Admin Application</a> where updates to
+certain tables can be limited to the system administrator).</p>
+
+<p>The <code>Table</code> defintion syntax is extensive and defined in <a href="/guide/table">Table (static version)</a>.</p></div>

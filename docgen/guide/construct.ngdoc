@@ -1,0 +1,651 @@
+@ngdoc overview
+@name Guide: Construct Index
+@description
+
+### Overview
+Often in developing an application you need to add some functionality for which you suspect or know an example exists.  This page is designed
+to be an aid to finding examples of working code in the **Triangular** code base.
+
+Refer also to the {@link /guide/hints-tech Hints and Techniques} page where other aids may be found, especially related to debugging techniques.
+
+### Example Code
+
+The examples are broken into catagories to assist in finding them.  Each points at the approximate location where it can be found.
+It may reference othe pieces of code elsewhere. If the
+{@link /guide/construct explain} link is present it points to some code that has supplementary documentation.
+
+* {@link #tableexits Table Exits}
+* {@link #recordvalidation    Record Validation}
+* {@link #userinterface       User Interface}
+* {@link #editorcustomization Editor Customization}
+* {@link #filters             Filters}
+* {@link #angularjs           AngularJS Subtleties}
+* {@link #actionpanels        Action Panels}
+* {@link #forms               Forms}
+* {@link #datastoretopics     Datastore Topics}
+
+
+
+<style>
+  table th                  {color:rgb(180,180,180); font-size:90%;}
+  table th.c1 ,table td.c1  {min-width:140px;max-width:140px;} /*These do not seem to fully take */
+  table th.c2 ,table td.c2  {width:100%;}
+  table th.c3 ,table td.c3  {min-width:100px;max-width:100px;}
+  table th.c4 ,table td.c4  {min-width:100px;max-width:100px;}
+</style>
+
+#### Table Exits
+
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>cacheLoadExit</td>
+       <td class=c2>This exit is taken when a new object or set of objects is loaded from the server. It can be used to rearrange the objects received from the server.</td>
+       <td class=c3>Deps.js 641</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>createExit</td>
+       <td class=c2>Exit taken by {@link /api/tri.controller:ctrlCommEdit Editor} during the creation of a new object</td>
+       <td class=c3>Chqs.js line 11</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>fileKey</td>
+       <td class=c2>
+        This exit allows a table to dynamically set the {@link /guide/records#keystructure Key Part3}
+        based on a {@link /guide/user User Profile}. It is often accompanied with the fileKeyRef.
+        {@link /guide/table#exitfilekey exitfilekey}</td>
+        <td class=c3>Chqs.js line 670</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>getEditRecordExit</td>
+       <td class=c2>
+       This exit is taken when the {@link /api/tri.controller:ctrlCommEdit Editor} wishes to load an object to be edited.
+       Given {@link /guide/records#addressingrecords oaa} this function returns the record to be edited.
+       In the example referenced the actual record is within a substructure (details) of the record persisted to the server.
+       The outer structure is used to store computed control information.
+       </td>
+       <td class=c3>Deps.js line 597</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>menuWhen</td>
+       <td class=c2>
+       This exit is used to populate the left side menu with action item {@link /guide/action List ... Records}.
+       By default each loaded Table is added to the menu.
+       This exit if it returns false causes the {@link /guide/action Action Item} to not be added.
+       </td>
+       <td class=c3>
+         Chqs.js line 655
+         <br><br>
+         Deps.js line 172
+       </td>
+       <td class=c4>
+         {@link /apps/chqs-app#Chqs.js explained}
+         <br><br>
+         <br><br>
+         {@link /apps/deps-app#Deps.js explained}
+       </td>
+    </tr>
+    <tr>
+       <td class=c1>primeEdit</td>
+       <td class=c2>
+       This exit is taken before an object is displayed in the {@link /api/tri.controller:ctrlCommEdit Editor}.
+       It can be used to prepare the <code>$scope</code> of the {@link /api/tri.controller:ctrlCommEdit Edit Controller} (<code>scope</code> parameter).
+       </td>
+       <td class=c3>Chqs.js line 136</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>primeList</td>
+       <td class=c2>
+       This exit is taken before an object is displayed in the {@link /api/tri.controller:ctrlCommList Lister}.
+       It can be used to prepare the <code>$scope</code> of the {@link /api/tri.controller:ctrlCommList List Controller} (<code>scope</code> parameter)
+       primarily the {@link /api/tri.object.Filter Filter} work areas
+       </td>
+       <td class=c3>Chqs.js line 116</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>saveRecordExit</td>
+       <td class=c2>
+         This exit is taken before an object is saved by the {@link /api/tri.controller:ctrlCommEdit Editor}.
+         It can be used to adjust the contents of a record such as deleting intermediate work fields that might have been created by support routines.
+       </td>
+       <td class=c3>Chqs.js line 225</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>validate</td>
+       <td class=c2>See {@link #recordvalidation Record Validation} section</td>
+       <td class=c3></td>
+       <td class=c4></td>
+    </tr>
+  </tbody>
+</table>
+
+#### Record Validation
+
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>validate Exit</td>
+       <td class=c2>
+       This is called after changes are made to object <code>oObj</code> by the {@link /api/tri.controller:ctrlCommEdit Editor}. It
+       is used to determine if a record is now in a valid state.  If not an error message is posted (1st error).
+       <br><br>
+       The custom validate method can optionally call the standard validate method (which is passed as a parameter).
+       </td>
+       <td class=c3>
+         Chqs.js line 382
+         <br><br>
+         Deps.js line 203
+       </td>
+       <td class=c4>
+         {@link /apps/chqs-app#Chqs.js explained}
+         <br><br>
+         <br><br>
+         {@link /apps/deps-app#Deps.js explained}
+       </td>
+    </tr>
+    <tr>
+       <td class=c1>validate Mask</td>
+       <td class=c2>A regular expression can often be sufficient to validate an input field. See {@link /guide/col#definitionsyntax Col:mask}</td>
+       <td class=c3>Hello.js line 56</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Field not required</td>
+       <td class=c2>The <code>reqd=false</code> means a field does not have to have contents.  The default is <code>reqd=true</code>.
+       See {@link /guide/col#definitionsyntax Col:reqd}</td>
+       <td class=c3>Chqs.js line 93</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Minimum field length</td>
+       <td class=c2>The <code>reqd=n</code> is an easy way to specify the minimum length of a field. See {@link /guide/col#definitionsyntax Col:reqd}</td>
+       <td class=c3>Hello.js line 68</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+  </tbody>
+</table>
+
+#### User Interface
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>JQueryUI</td>
+       <td class=c2>The <a target=_blank href=http://jqueryui.com/>JQueryUI Interface</a> can be used in conjunction with <b>Triangular</b>  The <code>HelloUI</code>
+       demonstrates this and includes use of the
+       <a target=_blank href=http://api.jqueryui.com/dialog/>JQueryUI Dialog</a> and
+       <a target=_blank href=http://api.jqueryui.com/datepicker/>JQueryUI Datepicker</a> widgets.
+       </td>
+       <td class=c3>HelloUI.htm HelloUI.js</td>
+       <td class=c4>{@link /apps/helloui-app#HelloUI.htm explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>logonExit</td>
+       <td class=c2>The <code>logonExit</code> facility allows the menu system to be adjusted depending on the {@link /guide/user User Profile}.
+       </td>
+       <td class=c3>Chqs.js line 54</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Double Login</td>
+       <td class=c2>The "Deps" app requires 2 people to simultaneously login in order to count the donations.  This is handled with built in <b>Triangular</b> facilities.
+       </td>
+       <td class=c3>Deps.htm line 27</td>
+       <td class=c4>{@link /apps/deps-app#Deps.htm explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>User Inactivity Timeout</td>
+       <td class=c2>The user inactivity timeout facility is controlled by the <code>autolog</code> property in the {@link /guide/user#reservedpropertynames User Profile}
+       </td>
+       <td class=c3></td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>User Profile Properties</td>
+       <td class=c2>The {@link /guide/user#reservedpropertynames User Profile} can be used to specify values that can alter the path of execution in
+       the application code.  The {@link /api/tri.servSess#getProfile servSess.getProfile} is used to get the {@link /guide/user#reservedpropertynames User Profile}
+       properties. The <code>fileKey</code> in the {@link #tableexits Table Exits} above is an example of this technique.
+       </td>
+       <td class=c3>Chqs.js line 670</td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Auto-Complete</td>
+       <td class=c2>The auto-complete feature allows for an input text field to display possible values based on a reference to
+       another table.
+       </td>
+       <td class=c3>Chqs.htm line 144, line 173</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.htm explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Auto-Skip</td>
+       <td class=c2>
+       The auto-skip feature allows for the next input field to be determine progromatically.
+       </td>
+       <td class=c3>Chqs.htm line 144, line 173</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.htm explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Custom field handlers</td>
+       <td class=c2>The {@link /api/tri.controller:ctrlCommEdit Editor} allows for custom field handlers to take care of special input requirements.
+       These are brought in through the template mechanism.
+       </td>
+       <td class=c3>Hello.js line 60, line 70</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Special field handlers</td>
+       <td class=c2>With <a target=_blank href="http://angularjs.org/">AngularJS</a> you can use directives to handle special cases.  The "Chqs" app uses this to handle
+       the special input requirements of the amount fields.
+       </td>
+       <td class=c3>Chqs.js line 742, Chqs.htm line 180</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Hints</td>
+       <td class=c2>Hints generate the underlying the HTML <code>title=</code> statement that often guide the user. The
+       {@link /guide/col#definitionsyntax Col hint:} property is used to add hints.
+       Hints can be strings or dynamically generated.  Normally they appear
+       in {@link /api/tri.controller:ctrlCommEdit Editor} fields.  The {@link /guide/col#definitionsyntax Col listHint:} facility can be used to add them to the
+       {@link /api/tri.controller:ctrlCommList Lister} columns.
+       </td>
+       <td class=c3>Hello.js line 53, line 67 and line 63</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Placeholders</td>
+       <td class=c2>Placeholders guide a user as to the input requirements of a text field. The
+       {@link /guide/col#definitionsyntax Col place:} property is used to add placeholders.
+       Placeholders can be strings or dynamically generated.  They appear
+       in {@link /api/tri.controller:ctrlCommEdit Editor} text input fields.
+       </td>
+       <td class=c3>Hello.js line 54 and line 66</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>External Tables</td>
+       <td class=c2>It is possible that a {@link /guide/table Table Definition} is required by more than one application.
+       In this case the {@link /guide/table Table} is defined as a separate <code>.js</code> file.
+       <b>Triangular</b> can handle this.  The "Deps" app is an example of this use case.
+       </td>
+       <td class=c3>Deps.htm lines 19 and 20</td>
+       <td class=c4>{@link /apps/deps-app#Deps.htm explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Optional Tables</td>
+       <td class=c2>In some circumstances the {@link /guide/table Table} to be loaded is not known until run-time.
+       The "Admin" App handles this use case.  Refer to the <code>loadOptTables</code> in <code>tri/Admin.js</code>.
+       Note that it requires the <code>&LT;script src="LAB.js">&LT;/script></code> in <code>tri/Admin.htm</code>
+       </td>
+       <td class=c3>tri/Admin.js</td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Default App</td>
+       <td class=c2>If no app is specified on the URL it is good to have a default.
+       The statement <code>oFuncs.getStartPage =</code> <code> function(){return "apps/Hello.htm";}</code> specified
+       the app.  This can be adjusted.
+       </td>
+       <td class=c3>AppConfig.js</td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Favorite Icons</td>
+       <td class=c2>Used to show in the tabs of a browser for easy recognition of the contents of the tab
+       <br><br>
+       {@link /guide/hints-tech#makingicons Making Icons} has instructions for making them plus the names of
+       some spare provided with the development package.
+       </td>
+       <td class=c3></td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Google Analytics</td>
+       <td class=c2>To add {@link http://www.google.com/analytics/ Google Analytics} statistics to your site refer to
+       {@link /guide/ganalytics Google Analytics Insertion}
+       </td>
+       <td class=c3>AppConfig.js</td>
+       <td class=c4></td>
+    </tr>
+  </tbody>
+</table>
+
+#### Editor Customization
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>Add sub-list</td>
+       <td class=c2>
+       A sub-list allows for a repeating group of fields to be handled within the {@link /api/tri.controller:ctrlCommEdit Editor} as a list
+       with separate {@link /guide/action action} links.
+       </td>
+       <td class=c3>Deps.js line 120</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Add panel</td>
+       <td class=c2>
+       A panel allows for a repeating group edit to be handled within the {@link /api/tri.controller:ctrlCommEdit Editor} as a
+       separate panel that opens up within the edit fields.
+       </td>
+       <td class=c3>Deps.js line 119</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Custom layout</td>
+       <td class=c2>
+       In some circumstances the entire default {@link /api/tri.controller:ctrlCommEdit Editor} layout needs to be replaced.  The
+       {@link /api/tri.controller:ctrlCommEdit Editor} can be configured to use a different template to accomplish this.
+       </td>
+       <td class=c3>Chqs.js line 93</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Extending Editor</td>
+       <td class=c2>
+       The {@link /api/tri.controller:ctrlCommEdit Editor Controller} object can be extended so that addition functions can be reached by the HTML
+       code loaded by the {@link /api/tri.controller:ctrlCommEdit Editor Controller}.
+       <br><br>
+       The "Deps" app hooks in the object extension (subclass) but
+       never actually makes use of the extra functionality.  It remains in the code base for completeness of the documentation.
+       </td>
+       <td class=c3>Deps.js line 43, Deps.htm line 27</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Filters
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>Filter mask</td>
+       <td class=c2>
+       A filter mask is a simple filter that allows for a regular expression to match the contents of the subject field.
+       To use the <code>type:'mask'</code> is used in the <code>filters</code> {@link /guide/table Table} properties and the
+      <code>field</code> property names the column to match against.
+       </td>
+       <td class=c3>Hello.js lines 80, 81</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Filter method</td>
+       <td class=c2>
+       A filter method calls a method which determines if the record matches the filter requirements.
+       To use the <code>type:'cust'</code> is used in the <code>filters</code> {@link /guide/table Table} properties and the
+      <code>field</code> property names a unique field to use as a scope variable.
+       </td>
+       <td class=c3>Hello.js line 82</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+    <tr>
+       <td class=c1>Smart Filter</td>
+       <td class=c2>
+       A smart filter is a special variation of the <b>Filter method</b>.  It uses the input data to determine what field to inspect.
+       The "Hello.js" example of line 82 does this but it is contrived.  The TableDonors.js filter is more realistic in that it uses the input data
+       to determine what field to test.
+       </td>
+       <td class=c3>TablesDonors.js line 42</td>
+       <td class=c4>{@link /apps/deps-app#TableDonors.js explained}</td>
+    </tr>
+  </tbody>
+</table>
+
+<span id="angularjs"></span>
+#### <a target=_blank href="http://angularjs.org/">AngularJS</a> Subtleties
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>Delayed $digest</td>
+       <td class=c2>
+       Sometimes an external event requires that you run a <a target=_blank href="http://angularjs.org/">AngularJS</a> $digest cycle when the event completes.  The <b>Triangular</b> encounters this situation when
+       a record read completes.  The idiom
+       <br><code>setTimeout(function()</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;{$rootScope.$digest()},0);</code>
+       <br>causes the <a target=_blank href="http://angularjs.org/">AngularJS</a> $digest cycle to run
+       immediately the current task completes.
+       </td>
+       <td class=c3>tri/Tri.js</td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Focus change</td>
+       <td class=c2>
+       Sometimes during a $digest cycle you wish to set the window focus to an input field.  The plain <code>setFocus</code> on the input field
+       will not do this because the interface is too unstable running the $digest cycle.  A variation on the previous idiom of
+       <br><code>setTimeout(function()</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;{setCustFocus(...)},0);</code><br> where <code>setCustFocus</code> is the custom routine to call will
+       set the focus when the interface is stable.
+       </td>
+       <td class=c3>Chqs.js line 272 and others</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Use of $eval</td>
+       <td class=c2>
+       Sometimes it is necessary to postpone evaluations until late in the game.  This is particuarly true with code in the HTML pages that is handled
+       by directives.  The <a target=_blank href="http://angularjs.org/">AngularJS</a> <code>$eval</code> method was found to achieve this postponement.
+       </td>
+       <td class=c3>tri/AppsBase.htm apps-lister.html template</td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Hidden input field</td>
+       <td class=c2>
+       Sometimes an event needs to trigger a UI update in a complex page. A <code>&LT;input type=hidden ng-model=xxx</code> can be used.  The <code>xxx</code>
+       model is updated with a unique value such as one that depends on the timer when the UI page needs to be refreshed.
+       Be careful not to update the model too many times.
+       <br><br>
+       <b>Triangular</b> uses this to update the {@link /api/tri.controller:ctrlCommList Lister} after a record is dropped.  Refer to
+       <code>dropTableRecord</code> in "tri/TRI.js" and <code>apps-lister.html</code> in "tri/AppsBase.htm".
+       </td>
+       <td class=c3>
+       tri/TRI.js
+       <br><br>
+       tri/AppsBase.htm
+       </td>
+       <td class=c4></td>
+    </tr>
+  </tbody>
+</table>
+
+#### Action Panels
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>More {@link /api/tri.controller:ctrlCommList Lister} Actions</td>
+       <td class=c2>
+       On the {@link /api/tri.controller:ctrlCommList Lister} <code>Actions</code> column it is
+       possible to add extra {@link /guide/action actions}. The <code>actions</code> type in the {@link /guide/col#definitionsyntax Col:type} is used to add
+       them.
+       </td>
+       <td class=c3>Chqs.js line 80</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>No default {@link /api/tri.controller:ctrlCommList Lister} actions</td>
+       <td class=c2>The <code>actions</code> type in the {@link /guide/col#definitionsyntax Col:type} is used to add
+       {@link /guide/action actions} to <code>actions</code> column of the {@link /api/tri.controller:ctrlCommList Lister} display.
+       The inclusion of the <code>addDefaults:false</code> option to the definition removes the <code>add</code> <code>drop</code> actions that are added by default.
+       </td>
+       <td class=c3>Chqs.js line 80</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Extra at left</td>
+       <td class=c2>
+       The left-side menu is populated with {@link /guide/action actions} either by the {@link /api/tri.servSess#setOptMenuItems servSess.setOptMenuItems}
+       method or automatically by the use of a {@link /guide/table Table}. In either case the optional <code>role:</code> property can limit its appearance
+       even though it is in the list.
+       </td>
+       <td class=c3>Deps.js line 22</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Extra at top</td>
+       <td class=c2>
+       On the {@link /api/tri.controller:ctrlCommList Lister} where the <code>Create New xxx Record</code> is shown it is required to
+       add extra functionality.  This is acheived with the <code>optActions</code> property added to the {@link /guide/table Table}
+       definition.
+       </td>
+       <td class=c3>TableEnvelope.js line 38</td>
+       <td class=c4>{@link /apps/deps-app#TableEnvelope.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>{@link /api/tri.controller:ctrlCommEdit Editor} Actions</td>
+       <td class=c2>
+       When there is a sub-list it is often equired to have some {@link /guide/action actions} with that list.  This is shown in the "Deps.js" code,
+       </td>
+       <td class=c3>Deps.js line 57</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Form Actions</td>
+       <td class=c2>See the {@link #forms Forms} section</td>
+       <td class=c3></td>
+       <td class=c4></td>
+    </tr>
+    <tr>
+       <td class=c1>Complex Actions</td>
+       <td class=c2>
+       Depending on the application, the {@link /guide/action actions} shown on the
+       {@link /api/tri.controller:ctrlCommList Lister} <code>Actions</code> column may need to vary or be disabled depending on
+       data or other conditions.  This can be achieved with the <code>getAnchorClass</code> method and the use of the <code>role</code>
+       parameter.
+       </td>
+       <td class=c3>Chrs.js line 80</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Forms
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1>Add an Action</td>
+       <td class=c2>
+       Adding an object list of <code>[{whatClass: etc }]</code> with <code>$scope.oOptActions</code> to the <code>$scope</code> will cause them to be
+       displayed in the right hand print control panel.
+       </td>
+       <td class=c3>FormCheque.js line 17</td>
+       <td class=c4>{@link /apps/chqs-app#FormCheque.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Add templated actions</td>
+       <td class=c2>
+       Using the <code>text/ng-template</code> in concert with the built in functionailty enables
+       a custom template to be added to the right hand print control panel.  This is explained in
+       detail in the {@link /apps/deps-app#Deps.htm explained} reference.
+       </td>
+       <td class=c3>Deps.htm line 258</td>
+       <td class=c4>{@link /apps/deps-app#Deps.htm explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Add complex interactions with primary</td>
+       <td class=c2>The standard {@link /guide/form-page-design Form}
+       has a single custom interaction to retrieve the data to process.  Sometimes, as in the "Chqs" app, this is
+       not sufficient.  Follow the {@link /apps/deps-app#FormCheque.htm explained} to see how this is done.
+       </td>
+       <td class=c3>FormCheque.js line 74</td>
+       <td class=c4>{@link /apps/deps-app#FormCheque.htm explained}</td>
+    </tr>
+  </tbody>
+</table>
+
+#### Datastore Topics
+<table>
+  <thead>
+    <tr><th class=c1>Construct</th><th class=c2>Usage</th><th class=c3>Reference</th><th class=c4>Explained</th></tr>
+  </head>
+  <tbody>
+    <tr>
+       <td class=c1><b>REC</b> Data</td>
+       <td class=c2>The {@link /guide/records#supportedrecordtypes REC Mode} stores individual records are grouped together under a single key.
+       It is implemented by specifying <code>servRec: servREC</code> in the {@link /guide/table Table Definition}.
+       </td>
+       <td class=c3>Hello.js 38</td>
+       <td class=c4>{@link /apps/hello-app#Hello.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1><b>TBL</b> Data</td>
+       <td class=c2>The {@link /guide/records#supportedrecordtypes TBL Mode} stores individual records each with their own key.
+       It is implemented by specifying <code>servRec: servTBL</code> in the {@link /guide/table Table Definition}.
+       </td>
+       <td class=c3>Deps.js 98</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Chunked Data</td>
+       <td class=c2>The {@link /guide/records#supportedrecordtypes REC Mode} can be stored as chunks when there are a large number or records
+       It is implemented by adding a <code>%</code> at the end of the <code>recName</code> property while still specifying <code>servRec: servREC</code> in the {@link /guide/table Table Definition}.
+       </td>
+       <td class=c3>TableDonors.js line 22</td>
+       <td class=c4>{@link /apps/deps-app#TableDonors.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Unique Keys</td>
+       <td class=c2>By default a fields value does not have to be unique.  Adding property setting <code>many:false</code>
+       to the {@link /guide/col#definitionsyntax Col:many} causes <b>Triangular</b> validation routines to insist that a column's field value be unique.
+       </td>
+       <td class=c3>Deps.js line 106</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Intermediate Saves</td>
+       <td class=c2>During a long {@link /api/tri.controller:ctrlCommEdit Edit} operation, especially if there are intermediate
+       lines being added, it is desirable that the results be stored so that in the event of a crash the usre's work is not lost.
+       The {@link /guide/records#supportedrecordtypes TBL Mode} <code>insertRec</code> supports this. See {@link /api/tri.servTBL#insertRec servTBL.insertRec}.
+       Note that means of a rollback if necessary will have to be programmed into the application.
+       <td class=c3>Deps.js 397</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Variable Keys</td>
+       <td class=c2>The key of the {@link /guide/table Table} to use sometimes needs to be arrived at progromatically. The "Chqs" app has such a need.
+       The <code>fileKey</code> and <code>fileKeyRef</code> properties in the {@link /guide/table Table Definition} are used.
+       </td>
+       <td class=c3>Chqs.js line 101</td>
+       <td class=c4>{@link /apps/chqs-app#Chqs.js explained}</td>
+    </tr>
+    <tr>
+       <td class=c1>Dynamic Key Names</td>
+       <td class=c2>The key under which a {@link /guide/records#supportedrecordtypes TBL Mode} record is stored
+       sometimes needs to be arrived at progromatically. The "Deps" app has such a need.
+       The <code>createExit</code> {@link /guide/table Table Definition} is used.  In that exit the value is computed and the
+       <code>oObj.KeyName</code> special field name set with the computed value.  This will be used by <n>Triangular</b> to store the values.
+       </td>
+       <td class=c3>Deps.js line 614</td>
+       <td class=c4>{@link /apps/deps-app#Deps.js explained}</td>
+    </tr>
+  </tbody>
+</table>

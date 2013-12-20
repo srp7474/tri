@@ -1,0 +1,287 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p><strong>Triangular</strong> uses a server to store data and provide <a href="/guide/user">User</a> authentication services.</p>
+
+<p>Section <a href="#googleappengineimplementation">Google App Engine Implementation</a> describes the implementation used
+by the <a href="/apps">Apps Examples</a> and the <a href="/tutorial">Tutorial Examples</a></p>
+
+<p>Should another implementation be required, section <a href="#buildinganotherimplementation">Building Another Implementation</a> gives untested
+steps for doing this.</p>
+
+<h3 id="requirements">Requirements</h4>
+
+<p>At is minimum the server must provide:</p>
+
+<ul>
+<li>Ajax support</li>
+<li>Customer Notion. See <a href="#customernotion">Customer Notion</a></li>
+<li>key --> data support</li>
+<li>static page support</li>
+<li>The command set functionality described in <a href="#commandset">Command Set</a></li>
+<li>Support of the token security model described in <a href="#token">Token</a></li>
+<li>For security, honouring of the <a href="/guide/sandbox">Sandbox Mode</a> to prevent hackers updating the server contents with a public Userid.</li>
+<li>Support of the <a href="#superusernotion">SuperUser Notion</a>.</li>
+<li>The command set functionality described in <a href="#superusercommandset">SuperUser Command Set</a></li>
+</ul>
+
+<h3 id="customernotion">Customer Notion</h4>
+
+<p>Each application has a unique alphanumeric id such as "deps" that is used to reference the application on the server.
+This is set with the <a href="/api/tri.servGAE#setCust">servGAE.setCust</a> and usually defined in the <a href="/guide/appname-js">appname-js</a> file.</p>
+
+<p>It is used to construct the <a href="#keystructure">key</a> used to access <a href="/guide/data">Data Objects</a> and <a href="/guide/user">User Records</a>.</p>
+
+<p>The result of this design is that a single server instance can host many applications each with an independent <a href="/guide/admin">admin</a> function and pool of
+<a href="/guide/data">Data Objects</a>.</p>
+
+<h3 id="superusernotion">SuperUser Notion</h4>
+
+<p>The SuperUser is a special <a href="/guide/user#superuser">User Record</a> that controls the applications and AdminUser on the server.</p>
+
+<h3 id="token">Token</h4>
+
+<p>The <strong>token</strong> is an integer created during the <a href="/api/tri.servGAE#login">servGAE.login</a> process and stored in the <a href="/guide/user">User Record</a> on the server
+and returned to the <strong>Triangular</strong> infrastructure during the <a href="/api/tri.servGAE#login">servGAE.login</a> process.  All commands except the
+<code>ajaxLogin</code> command that are sent to the server
+must include this <strong>token</strong>.</p>
+
+<p>It is used on the server to validate each request that there is a proper authenticated session established between the <a href="/guide/user">User</a> and the server.</p>
+
+<h3 id="keystructure">Key Structure</h4>
+
+<p>The key structure is a 3 part key, each part separated by the  "/" character and concatenated into a single string.</p>
+
+<p>The first part defines the application.</p>
+
+<p>The second part defines the record type allowing an application to have several record types.</p>
+
+<p>The third part defines the record or group of records key.</p>
+
+<p>This is defined in more detail in the <a href="/guide/records#keystructure">Record Key Structure</a></p>
+
+<h3 id="googleappengineimplementation">Google App Engine Implementation</h4>
+
+<p>The implementation uses a version of the <a target=_blank href='http://gems-bbb.appspot.com/gems/bbb/load.home'>BBB WebServer Framework</a>.
+(<strong>Note:</strong> This link is included for reference.  At this point there is no need to examine too closely the capabilities of the "BBB WebServer Framework").
+One application, namely the CITA application, was added to the BBB standard framework.  This CITA application provides the required functionailty
+given in <a href="#requirements">Requirements</a> and can be used unmodified to host any number of applications.</p>
+
+<p>The <a href="/tutorial">Tutorial Examples</a> explains how to obtain and install a version on your own Google App Engine account.</p>
+
+<p>This <a target=_blank href='http://gems-bbb.appspot.com/gems/bbb/load.home'>BBB WebServer Framework</a> implementation has much functionality that is not required for <strong>Triangular</strong>.
+However, it was there and in the interest of expediency was used
+rather than spend development time creating a streamlined version to just support the <strong>Triangular</strong> required functionailty.</p>
+
+<p>The
+<a target=_blank href='http://gems-bbb.appspot.com/gems/bbb/load.home'>BBB WebServer Framework</a> has been optimized for the <a href="/guide/gaesite">GAE Site</a> environment.
+<strong>Triangular</strong> exploits this design during the <strong>Login Page Load</strong> in doing an asynchronous request that warms up a possibly paged out server.
+This warming up is done while the user is entering the login information and will give good response to the login request.</p>
+
+<p>The code for the CITA application is purposely omitted from the source code provided for <strong>Triangular</strong>.  The reason is that it contains some code that
+if divulged would make the server less secure.  Should someone be interested in building an alternate server the author can be contacted at
+<a href="mailto:public.pritchard@gmail.com?subject=BBB.WebServer.Source">Steve P Pritchard</a>.</p>
+
+<h3 id="nodejsimplementation">Node.js Implementation</h4>
+
+<p>Included in the download is a file <code>tri-server.js</code> and <code>run-tri.bat</code>.  These implement the protocols descibed in the following sections.  The
+first strategy described in <a href="#buildinganotherimplementation">Building Another Implementation</a> was utilized.  The implementation is
+described at <a href="/guide/node-server">NodeJS Server</a>.
+The implementation of the datastore is
+described in <a href="/guide/datastore-node">Datastore NodeJS</a>.</p>
+
+<h3 id="commandset">Command Set</h4>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:200px; margin-left:-200px;}
+  span.srp-propdef {display:inline-block; margin-left:200px;}
+</style>
+
+<p>The method invoked is obtained by passing in the verb name in the <code>ajaxMeth</code> property of the request block (see <a href="#requestformat">Request Format</a>).
+Most often there is a one-to-one correspondence with a <a href="/api/tri.servGAE">servGAE method</a>.</p>
+
+<p>For each command (apart from <code>ajaxLogin</code>) the <a href="#token">token</a> is provided in the <a href="#requestformat">request block</a> and validated against the one stored for the
+<a href="/guide/user">User</a> on the server.  The <code>ajaxLogin</code> actually sets a new <a href="#token">token</a> value in the <a href="/guide/user">User</a> record.</p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxLogin</code>Used to log a user into the system. See <a href="/api/tri.servGAE#login">servGAE.login</a>.
+<br><br>
+The user names(s) provided are validated against the <a href="/guide/user">Users</a> in the <a href="#requestformat">Request Format</a>
+and a good or fail <a href="#responseformats">response</a> is returned.  For a good response the new calculated <a href="#token">token</a> value is stored
+in the <a href="/guide/user">User</a> record
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxValidateToken</code>Used to validate whether a <a href="#token">token</a> is stale or not.
+See <a href="/api/tri.servGAE#validateToken">servGAE.validateToken</a>.
+A good or fail <a href="#responseformats">response</a> is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxChangePassword</code>Used by the <a href="/guide/user">User</a> to change his/her password.
+See <a href="/api/tri.servGAE#changePassword">servGAE.changePassword</a>.  The old and new passwords are included in the <a href="#requestformat">request block</a>.
+<br><br>
+<b>Note:</b> Passwords must contain at least one alphabetic character to distinguish them
+from the encrypted value stored on the server.  Internally the server checks the encrypted password stored on file against the value provided
+that is passed through the same encryption algorithm.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxSendCitaData</code>Used to update a record or block of records.  If the <a href="#keystructure">key</a> record does not exist
+a new key/data pair is created. See <a href="/api/tri.servGAE#putKeyData">servGAE.putKeyData</a>.
+A good or fail <a href="#responseformats">response</a> is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxFindCitaData</code>Used to retrieve the headers for a group of records.
+It can also be used to return the contents of a specific record.
+See <a href="/api/tri.servGAE#issueFindFile">servGAE.issueFindFile</a>.
+A good or fail <a href="#responseformats">response</a> is returned.  It can contain a group of record headers.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxFindUserData</code>Used to retrieve the headers for a group of <a href="/guide/user">User</a> records.
+It can also be used to return the contents of a specific <a href="/guide/user">User</a> record.  It requires that the <a href="/guide/user">User</a> have
+admin authority.
+See <a href="/api/tri.servGAE#issueFindFile">servGAE.issueFindFile</a>.
+A good or fail <a href="#responseformats">response</a> is returned.  It can contain a group of record headers.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxDeleteKey</code>Used to delete a specific record from the server.  See <a href="/api/tri.servGAE#dropObj">servGAE.dropObj</a>.
+The <a href="#requestformat">request block</a> contains the 'GekID' of the record to be dropped.
+A good or fail <a href="#responseformats">response</a> is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxReadCitaData</code>
+Used to retrieve the data for a record or block of records based on the <a href="#keystructure">key</a> of the record.
+See <a href="/api/tri.servGAE#getKeyData">servGAE.getKeyData</a>.
+A good or fail <a href="#responseformats">response</a> is returned.
+</span></p>
+
+<h3 id="superusercommandset">SuperUser Command Set</h4>
+
+<p>Note that for this command set the SuperUser ID and password must be provided in the <code>auth</code> section of the <a href="#requestformat">Request</a>.</p>
+
+<p>This command set is used by the <a href="/guide/waks">WAKS Utility Program</a>.</p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxWaksFindCitaData</code>Used to retrieve the headers for a group of records.
+See <a href="/api/tri.servGAE#issueFindFile">servGAE.issueFindFile</a>.
+A good or fail <a href="#responseformats">response</a> is returned.  It can contain a group of record headers.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxWaksSendCitaData</code>Used to update a record or block of records.  If the <a href="#keystructure">key</a> record does not exist
+a new key/data pair is created.
+A good or fail <a href="#responseformats">response</a> is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxWaksReadCitaData</code>
+Used to retrieve the data for a record or block of records based on the <a href="#keystructure">key</a> of the record.
+A good or fail <a href="#responseformats">response</a> is returned.
+</span></p>
+
+<p>This command set requires a <code>gems/boot/ajax.ajax</code> URL request signature.  The first does not require a SuperUser ID or password.
+They are used by the <code>Prime.htm</code> system file used to initialize the server Datastore.</p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxValidateStore</code>Used
+to test the presence of the Datastore control record indicating it has been primed.  If found a <a href="#responseformats">GOOD Response</a> is returned.
+Otherwise a <a href="#responseformats">FAIL Response</a>  is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxPrimeStore</code>If
+the server is not primed a control record is created and <a href="/guide/user#superuser">SuperUser</a> created using the provided
+SuperUser ID and password in the <a href="#requestformat">Request</a>.
+A <a href="#responseformats">GOOD Response</a>  is returned.
+<br><br>
+Otherwise a <a href="#responseformats">FAIL Response</a>  is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxSuperLogin</code>If the provided
+SuperUser ID and password in the <a href="#requestformat">Request</a> match the existing <a href="/guide/user#superuser">SuperUser</a> record
+a <a href="#responseformats">GOOD Response</a>  is returned.
+<br><br>
+Otherwise a <a href="#responseformats">FAIL Response</a>  is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxAddAdminUser</code>If the provided
+SuperUser ID and password in the <a href="#requestformat">Request</a> match the existing <a href="/guide/user#superuser">SuperUser</a> record
+an <a href="/guide/user#AdminUser">AdminUser</a> is created with the information in the <a href="#requestformat">Request</a>.
+A <a href="#responseformats">GOOD Response</a>  is returned.
+<br><br>
+Otherwise a <a href="#responseformats">FAIL Response</a>  is returned.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>ajaxListApps</code>If the provided
+SuperUser ID and password in the <a href="#requestformat">Request</a> match the existing <a href="/guide/user#superuser">SuperUser</a> record
+a <a href="#responseformats">GOOD Response</a>  is returned. In addition the response returns a list of applications and their
+<a href="/guide/user#adminuser">AdminUser ID</a>s.
+<br><br>
+Otherwise a <a href="#responseformats">FAIL Response</a>  is returned.
+</span></p>
+
+<h3 id="requestformat">Request Format</h4>
+
+<p>The Request Object is constructed as properties within a Javascript Object and sent as a JSON stringified rendition of that object.  On the server
+a Java JSONObject is created from the JSON stringified rendition and used to process the command request.
+The browser console.log may be examined to see the fine details of each request block.  It is recognized with a 'AJAX.AJAX.AJAX' string in the browser console
+window.</p>
+
+<p>An example structure is:
+<pre class="prettyprint linenums">
+   AjaxID: "AngJS.100"              // An id used for debugging to correlate server side
+                                    // and browser side requests
+   EXEC: {                          // The 'EXEC' block
+     ajaxMeth: "ValidateToken"      // The command to invoke less the 'ajax' prefix
+     auth: {                        // The authorization block
+       cust: "deps"                 // The application (customer) the request is for.
+       token: "3104379893"          // The current token
+       user: "user_name"            // The User name
+     }
+     payload: {                     // Specific data such as the data to write
+       ...
+     }
+   }
+</pre>
+
+<p>For the <code>cust:</code> value refer to See <a href="#customernotion">cust</a> and <a href="#keystructure">key</a></p>
+
+<p>For the <code>token:</code> value refer <a href="#token">token</a></p>
+
+<p>For the <code>user:</code> value refer <a href="/guide/user">User</a> name</p>
+
+<h3 id="responseformats">Response Formats</h4>
+
+<p>The Response Object Format is constructed on the server as properties within a Java JSONObject.  It is transmitted as a JSON stringified rendition of that object.
+In the browser the <strong>Triangular</strong> response handler renders this into a Javascript object.</p>
+
+<p>The browser console.log may be examined to see the fine details of each response block.
+It is recognized as a log output statement that follows the initiating 'AJAX.AJAX.AJAX' statement.  Since these are run asynchronously care must be taken
+to correlate the correct response.</p>
+
+<p>The following example give the general structure of the response:</p>
+
+<pre class="prettyprint linenums">
+  RESULT: {                                    // result block
+    DataStat: {                                // Data block
+      CODE: "found"                            // indicator of command success
+      RECORD: [...]                            // The record or array of records
+      STATUS: "OK"                             // command status
+    }
+    PROFILE: {...}                             // For 'ajaxLogin' and `ajaxValidateToken'
+                                               // the user profile for local customization
+    STATUS: "OK"                               // command status
+    status: "GOOD"                             // success or failure indicator
+    status-message: "validate OK"              // processing message
+    status-ts: "2013-09-29 09:46:28 0.031ms"   // processing timestamp
+  }
+</pre>
+
+<h3 id="buildinganotherimplementation">Building Another Implementation</h4>
+
+<p>This section presents the high level strategy that could be used to build another server implementation.  This has not been done and
+is therefore hypothetical.</p>
+
+<p>One of two strategies could be used.</p>
+
+<ol>
+<li><p>Direct the <a href="/api/tri.servGAE">servGAE</a> to a site that implements the same
+<a href="#requestformat">Request Format</a>/<a href="#responseformats">Response Formats</a> and
+internally implements the same <a href="#commandset">Command Set</a>.</p></li>
+<li><p>Replace <a href="/api/tri.servGAE">servGAE</a> with a new protocol and command structure directed at a server with
+an entirely different protocol.  This could be achieved by replacing the servGAE function call handlers with a new set.  See the oFuncs object.</p></li>
+</ol></div>

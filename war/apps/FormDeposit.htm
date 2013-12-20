@@ -1,0 +1,265 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-deps1.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=defualt>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="FormDeposit.js"></script>
+  <title>FormDeposit Printer</title>
+  <script>gaTracking();</script>
+
+</head>
+<body ng-app=app>
+
+  <div ng-controller=ctrlForm>
+
+    <!-- -------------Deposit Print Reports ---------------------->
+    <div>
+      <style type="text/css">
+        div#depForm a#print             {}
+        div#depForm                     {font-size:85%; font-weight:normal; margin-top:10px;}
+
+        div#depForm div#panel           {position:fixed;left:1200px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250);}
+        div#depForm div#panel p.lab     {text-align:center; width:310px; position:relative; top:auto;}
+        div#depForm div#panel a#print   {position:relative; top:auto; left:0px; z-index:10;}
+        div#depForm div#panel p#admin   {position:relative; top:auto; left:0px; z-index:10;}
+        div#depForm input#txtCust       {width:280px; margin-left:20px;}
+        div#depForm div#dormant         {width:700px; margin-left:20px; font-size:120%;}
+        div#depForm h5                  {font-size:120%;}
+
+      </style>
+      <div id=depForm style='margin-left:20px'>
+        <div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Report'></div>
+
+        <div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/deposit record'></div>
+
+        <!-- ----------------------------- Bank Deposit Statement ------------------------>
+        <style type="text/css">
+          div#depPage                             {font-size:65%;}
+          div#depPage table#master                {width:540px; margin-left:-15px; border-right:dashed 1px black; border-bottom:dashed 1px black;}
+          div#depPage td#rgt                      {height:580px;  margin-left:20px; border-left:solid 2px black; vertical-align:top;}
+          div#depPage td#lft                      {height:580px;  margin-left:20px; vertical-align:top; width:260px;}
+          div#depPage p.hdr                       {margin-left:10px; margin-top:0px; margin-bottom:5px;}
+          div#depPage pre.addr                    {font-size:90%; margin-top:0px; margin-bottom:5px; margin-left:10px;}
+          div#depPage p.acct                      {margin-left:20px; margin-top:-5px; margin-bottom:5px;}
+          div#depPage p.label                     {font-size:80%;}
+          div#depPage p.counter                   {font-size:80%; margin-left:10px; margin-bottom:0px; margin-top:20px; clear:both;}
+          div#depPage p.fileref                   {font-size:80%; margin-left:10px; margin-top:0px; margin-bottom:0px;}
+          div#depPage p.counter span.sig          {font-weight:bold; display:inline-block; margin-left:15px; border-top:solid 2px black; width:80px;}
+          div#depPage p.clear                     {font-size:80%;clear:both; margin-bottom:0px;}
+          div#depPage div.box                     {border:solid 1px black; width:115px; padding-bottom:10px; float:left;}
+          div#depPage div.boxes                   {margin-left:10px;}
+          div#depPage div.boxes pre               {padding-right:10px; text-align:right; margin-top:5px; margin-bottom:0px;}
+          div#depPage div.boxes pre.total         {border-top: solid 1px black; background-color:rgb(232,232,232); height:25px; font-weight:bold; font-size:110%; margin-bottom:-10px;}
+
+          div#depPage p.date                      {margin-left:10px;}
+          div#depPage span.small                  {font-size:70%; color:rgb(160,160,160);}
+          div#depPage .upper                      {font-variant:small-caps;}
+          div#depPage table#chq-list              {width:250px; font-size:70%; margin-left:-0px;}
+          div#depPage table#chq-list td.c0        {width:20px; text-align:right; padding-right:10px;  background-color:white;}
+          div#depPage table#chq-list td.c1        {width:90%;}
+          div#depPage table#chq-list td.c2        {width:100px; text-align:right;}
+          div#depPage p.chqs                      {margin-left:10px; margin-top:5px; margin-bottom:0px;}
+          div#depPage table#chq-list tr.tr-even   {background-color:rgb(255,255,255);}
+          div#depPage table#chq-list tr.tr-odd    {background-color:rgb(240,240,240);}
+          div#depPage table#chq-list tr           {font-size:75%;}
+        </style>
+        <div id=depPage ng-show='isLoaded() && oObjRep.type == "deposit"'>
+          <table id=master>
+             <tr>
+               <td id=lft>
+                 <p class=hdr>{{oInfo.bank}} Deposit Slip</p>
+                 <p class='hdr upper'>{{oInfo.acctHolder}}</p>
+                 <p class=hdr> {{oObj.currency}}: {{oInfo['acct'+oObj.currency]}}</p>
+                 <p class=chqs>Cheque Particulars:</p>
+                 <table id=chq-list style='margin-bottom:15px;'>
+                   <tr ng-repeat='oChq in oTots.cheques' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'">
+                     <td class=c0>{{""+($index+1)}}</td>
+                     <td class=c1>{{oChq.name}} {{getDonorName(oChq.name)}}</td>
+                     <td class=c2>{{oChq.amt}}</td>
+                   </tr>
+                 </table>
+                 <div class=boxes style='margin-top:20px;margin-left:12px;'>
+                   <div class=box>
+                     <pre>Cheque Count</pre>
+                     <pre class=total>Total</pre>
+                   </div>
+                   <div class=box>
+                     <pre>{{oTots.chequeCount}}</pre>
+                     <pre class=total>{{oObj.chequeSum}}</pre>
+                   </div>
+                 </div>
+                 <p class=counter>
+                   &nbsp;<br>
+                   Signed:<br>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class=sig>{{oObj.details.counter1}}</span><span class=sig>{{oObj.details.counter2}}
+                 </p>
+                 <p class=fileref>FileRef: {{oObj.name}}</p>
+               </td>
+               <td id=rgt>
+                 <p class=hdr>{{oInfo.bank}} Deposit Slip</p>
+                 <pre class=addr>{{oInfo.bankAddr}}</pre>
+                 <p class='hdr label'>Credit the account of:</p>
+                 <p class='acct upper'>{{oInfo.acctHolder}}</p>
+                 <p class=acct> {{oObj.currency}}: {{oInfo['acct'+oObj.currency]}}</p>
+                 <p class=date> Date: {{oTots.date}} <span class=small>(ymd)</span></p>
+                 <p class='hdr label'>Cash Count</p>
+                 <div id=cash class=boxes>
+                   <div class=box>
+                     <pre>{{oTots['5']}} x 5  </pre>
+                     <pre>{{oTots['10']}} x 10 </pre>
+                     <pre>{{oTots['20']}} x 20 </pre>
+                     <pre>{{oTots['50']}} x 50 </pre>
+                     <pre>{{oTots['100']}} x 100</pre>
+                     <pre>{{oTots['500']}} x 500</pre>
+                     <pre>Coins {{oTots['coin'] | number:2}}</pre>
+                     <pre class=total>Total</pre>
+                   </div>
+                   <div class=box>
+                     <pre>&nbsp;{{(oTots['5'] * 5) |number:2}}</pre>
+                     <pre>&nbsp;{{(oTots['10'] * 10) |number:2}}</pre>
+                     <pre>&nbsp;{{(oTots['20'] * 20) |number:2}}</pre>
+                     <pre>&nbsp;{{(oTots['50'] * 50) |number:2}}</pre>
+                     <pre>&nbsp;{{(oTots['100'] * 100) |number:2}}</pre>
+                     <pre>&nbsp;{{(oTots['500'] * 500) |number:2}}</pre>
+                     <pre>&nbsp;{{oTots['coin'] | number:2}}</pre>
+                     <pre class=total>{{oObj.cashSum}}</pre>
+                   </div>
+                 </div>
+                 <p class=clear>&nbsp;</p>
+                 <p class='hdr label'>Total Cheques</p>
+                 <div class=boxes>
+                   <div class=box>
+                     <pre>{{oTots.chequeCount}} cheques</pre>
+                     <pre class=total>Total</pre>
+                   </div>
+                   <div class=box>
+                     <pre>{{oObj.chequeSum}}</pre>
+                     <pre class=total>{{oObj.chequeSum}}</pre>
+                   </div>
+                 </div>
+                 <p class=clear>&nbsp;</p>
+                 <p class='hdr label'>TOTAL DEPOSIT</p>
+                 <div id=coin class=boxes>
+                   <div class=box>
+                     <pre class=total>TOTAL</pre>
+                   </div>
+                   <div class=box>
+                     <pre class=total>{{oTots.total}}</pre>
+                   </div>
+                 </div>
+               </td>
+             </tr>
+          </table>
+        </div>
+        <!-- ----------------------------- Deposit Summary Statement ------------------------>
+        <style type="text/css">
+
+          div#sumPage                             {font-size:75%; width:1100px; /*border-right:solid 1px red;*/}
+          div#sumPage h2                          {text-align:center;}
+          div#sumPage table                       {width:100%; font-size:100%; border-collapse:collapse;}
+          div#sumPage table                       {border-left:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black;}
+          div#sumPage thead                       {font-weight:normal; color:gray; background-color:rgb(250,250,250);}
+          div#sumPage thead tr.r1 th              {border-top: solid 1px black;}
+          div#sumPage thead tr.r3 th              {border-bottom: solid 1px black; /*border-spacing: 10px;*/}
+          div#sumPage table tr.tr-even            {background-color:rgb(255,255,255);}
+          div#sumPage table tr.tr-odd             {background-color:rgb(240,240,240);}
+          div#sumPage table .c1                   {width:80px; padding-left:10px;}
+          div#sumPage table .c2                   {width:400px;}
+          div#sumPage table .c3                   {width:100px;}
+          div#sumPage table .c4                   {width:100px; padding-right:10px;border-right:solid 1px black;}
+          div#sumPage table .cb                   {border-right:solid 1px black;}
+          div#sumPage table .cf                   {width:0px;border-right:solid 1px black;}
+          div#sumPage table .c-bin                {width:80px;}
+          div#sumPage thead .c1                   {background-color:rgb(250,250,250);}
+          div#sumPage thead .c2                   {}
+          div#sumPage thead .c3                   {}
+          div#sumPage thead .c4                   {}
+          div#sumPage thead .c-bin                {background-color:rgb(240,240,240);}
+          div#sumPage tbody .c3                   {text-align:right;}
+          div#sumPage tbody .c4                   {text-align:right;}
+          div#sumPage tbody .c2 pre               {font-family:Verdana;}
+          div#sumPage tbody .c-bin                {text-align:right;}
+          div#sumPage tbody tr.total              {font-weight:bold; height:30px;}
+          div#sumPage tbody tr.total td           {border-bottom: solid 1px black;}
+          div#sumPage div#sumlnes                 {margin-top:10px;}
+          div#sumPage div#sumlnes div#tots        {float:left;font-size:130%;font-weight:bold; width:540px;}
+          div#sumPage div#sumlnes div.note        {float:left; width:57px;}
+          div#sumPage div#sumlnes div#note        {float:left; width:500px; height:40px;border:solid 1px black;}
+          div#sumPage p.sigs                      {clear:both; padding-top:0px;}
+          div#sumPage span.sig                    {font-weight:bold; display:inline-block; margin-left:60px; border-top:solid 2px black; width:200px;}
+        </style>
+        <div id=sumPage ng-show='isLoaded() && oObjRep.type == "sum"'>
+          <h2>{{oInfo.acctHolder}}</h2>
+          <h2>Summary Page for Deposit {{oObj.name}}</h2>
+          <table id=sum>
+            <thead>
+              <tr class=r1>
+                <th class=c1></th>
+                <th class=c2></th>
+                <th class='c3 cb' colspan=2></th>
+                <th class=c-bin colspan=7>Designations</th>
+                <th class=cf></th>
+              </tr>
+              <tr>
+                <th class=c1 colspan=2>Received Funds From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th class='c3 cb' colspan=2>Tender</th>
+                <th class=c-bin ng-repeat='oBin in oTots.bins'>{{oBin.acct}}</th>
+                <th class=cf></th>
+              </tr>
+              <tr class=r3>
+                <th class=c1>Code</th>
+                <th class=c2>Name</th>
+                <th class=c3>$Cash</th>
+                <th class=c4>$Cheque</th>
+                <th class=c-bin ng-repeat='oBin in oTots.bins'>{{oBin.name}}</th>
+                <th class=cf></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan=3></td><td class=c4>&nbsp;</td><td colspan=7></td><td class=cf></td></tr>
+              <tr>
+                <tr ng-repeat='oSL in oTots.sumLines' ng-class='oSL.class' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'">
+                  <td class=c1>{{oSL.code}}</td>
+                  <td class=c2><pre>{{oSL.name}}</pre></td>
+                  <td class=c3>{{oSL.cashAmt}}</td>
+                  <td class=c4>{{oSL.chqAmt}}</td>
+                  <td class=c-bin ng-repeat='oBin in oTots.bins'>{{oBin.amt[oSL.ix]}}</td>
+                  <td class=cf></td>
+                </tr>
+              </tr>
+            </tbody>
+          </table>
+          <div id=sumlnes>
+            <div id=tots>Cheques={{oTots.chequeCount}}&nbsp;&nbsp;&nbsp; Total deposit=${{oTots.total}}</div>
+            <div class=note>Deposit Notes:</div>
+            <div id=note>{{oObj.details.note}}</div>
+          </div>
+          <p class=sigs>Signed:<p>
+          <p class=sigs><span class=sig>{{oObj.details.counter1}}</span><span class=sig>{{oObj.details.counter2}}</span><p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!------- Custom Templates ------!>
+  <script type="text/ng-template" id="panel-extra.html">
+    <p id=admin><input id=radDeposit type=radio ng-model=oObjRep.type value='deposit'><label for=radDeposit>Bank Deposit Form</label></p>
+    <p id=admin><input id=radSum     type=radio ng-model=oObjRep.type value='sum'><label for=radSum>Deposit Summary</label></p>
+  </script>
+
+</body>
+
+</html>

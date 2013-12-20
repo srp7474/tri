@@ -1,0 +1,2665 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><div ng-show='isFireFox()' class=firewarn>
+This page does not show correctly on FireFox.  The <code>hide/show</code> buttons do not work.
+</div>
+
+<p><span id=close-sections>{{closeSections()}}</span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaoverview"><a class=hider ng-click=toggleHide($event)>hide</a>Overview</h4>
+
+<p>The <strong>Deps</strong> application is a Donation Counting System currently in production use.</p>
+
+<ul>
+<li>Tallys cash and cheque donations into a deposit</li>
+<li>Side-by-side filtered tables to allow easy assignment of donor codes</li>
+<li>Allows a donation to be split across many designations</li>
+<li>Cash tender is counted bill by bill</li>
+<li>Produces a bank deposit slip including cash bill counts</li>
+<li>Produces a donation summary by designation</li>
+<li>A secondary management application can view donation summaries</li>
+<li>An additional application page is used to enter and print envelopes designated for individuals</li>
+</ul>
+
+<p>The <strong>... Explained</strong> sections which follow the <strong>Demonstration</strong> section give you an explanation of the crucial parts of the code required
+to create this application.</p>
+
+<p>To avoid teduim only the note worthy points are explained.  The reader is advised to look at
+<a href="/apps/hello-app">hello App Explained</a> which has details on the more basic constructs.</p>
+
+<p>To run a demonstration now click on the <a ng-click=appLoader($event) href=/apps/Deps.htm>Deps App Demo</a> link.
+It will be in a new tab so you can still refer to the instructions in the next section.</p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideademonstration"><a class=hider ng-click=toggleHide($event)>hide</a>Demonstration</h4>
+
+<p><strong>Note 1</strong> It runs in <a href="/guide/sandbox">SandBox Mode</a> so you cannot damage anything.</p>
+
+<p><strong>Note 2</strong> This has been tested under <strong>Chrome</strong> which is the recommended browser for these demonstrations.</p>
+
+<ul>
+<li><p>If not started, open up link <a ng-click=appLoader($event) href=/apps/Deps.htm>Deps App Demo</a>. It will be in a new tab so you can still refer to these instructions.</p></li>
+<li><p>You will see screen <code>Donation Recording System Login</code>. Press <strong>login</strong> button, the <code>UserName</code> and <code>Password</code> are already provided.</p></li>
+</ul>
+
+<p><strong>Donations Recording and Reporting</strong></p>
+
+<ul>
+<li><p>Click on <code>List Deposit Records</code> action.  You will see some records.</p></li>
+<li><p>Click on <code>edit</code> of a selected record or <code>Create New Deposit Record</code>.</p></li>
+<li><p>You will see a summary of the donation on the left and a list of Donors on the right.</p></li>
+<li><p>Use the Filter on the right to select a record.  It is a smart filter and uses the input to determine what field to test.
+Thus all numerics imply the
+telephone fields, numeric then address the address field.  All alphabetic tests the name field.</p></li>
+<li><p>When you have chosen a Donor click on the <code>&lt;==</code> field and it will add it to the record on the left.</p></li>
+<li><p>Click on the <code>$</code> field and enter an amount.  Press <code>&lt;enter&gt;</code>.  The focus moves to <code>Add Donotion</code> where another <code>&lt;enter&gt;</code> will add the donation to the record.
+Note that the summary information gets updated.</p></li>
+<li><p>Add another Donor. Click on the <code>$</code> field and enter an amount. Toggle to <code>Cash</code> and a new line will open up giving its best guess breakdown of how the
+amount is tendered.  You can adjust this.  When done click <code>Add Donotion</code></p></li>
+<li><p>Add another Donor. Click on the <code>$</code> field and enter an amount. The <code>Designations</code> will have the same amount.  Enter a smaller amount in the <code>Designations</code> and a new line will
+open up.  You can adjust how the donation is designated and split the donation in this way.</p></li>
+<li><p>Click <code>Save Changes</code> and then <code>print</code> on the record you just edited.</p></li>
+<li><p>A new tab will open which will show you a <code>Deposit Summary</code> or a <code>Bank Deposit Form</code>.  The Ban Summar will give a breakdown of the cheques (left side) and
+cash (right side).</p></li>
+<li><p>Press <code>Close Page</code></p></li>
+</ul>
+
+<p><strong>Donations Summary</strong></p>
+
+<ul>
+<li><p>Click <code>Deposit Summaries</code> on the left menu</p></li>
+<li><p>A new tab will open which will show you a list of active donors.</p></li>
+<li><p>Change the Report parameters in the <code>Deposit Summary Print Control Panel</code> and various reports will show up.</p></li>
+<li><p>Press <code>Close Page</code></p></li>
+</ul>
+
+<p><strong>Envelopes</strong></p>
+
+<ul>
+<li><p>Click <code>List Envelope Records</code> on the left menu</p></li>
+<li><p>A list of Envelope records will show.  If none for today's date exist then the <code>Print Batch</code> will be inactive.</p></li>
+<li><p>Create some records using the <code>Create New Envelope Record</code> link.</p></li>
+<li><p>Click <code>Print Batch</code></p></li>
+<li><p>A new tab will open which will show you a 6-up page of envelope records.</p></li>
+<li><p>If you create more than 6 envelope records you will be able to exercise the <code>Prepare next page</code> on the form.</p></li>
+<li><p>Press <code>Close Page</code></p></li>
+</ul>
+
+<p><span id='Deps.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideadepshtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>Deps.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;!--
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+--&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-deps0.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="Deps.css" title=defualt&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="Deps.js"&gt;&lt;/script&gt;
+&lt;script src="TableDonors.js"&gt;&lt;/script&gt;
+&lt;script src="TableEnvelopes.js"&gt;&lt;/script&gt;
+&lt;title&gt;Deps:Defined during bootstrap&lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body id=bodyID&gt;
+                                                                                                 &lt;!-- standard body --&gt;
+&lt;macro fetch='apps-body.html' alter='##TITLE##/Donation Recording System Login;!SINGLE/SINGLE!SINGLE/DOUBLE;!ctrlCommEdit/ctrlCommEdit!ctrlCommEdit/ctrlDepsEdit'&gt;&lt;/macro&gt;
+
+&lt;macro fetch='apps-copyright-notice.html'&gt;&lt;/macro&gt;                                               &lt;!-- copyright notice --&gt;
+
+&lt;object data='tri/AppsBase.htm?app=Deps' id=apps-templates style='width:0px;height:0px;'&gt;&lt;/object&gt; &lt;!-- load standard templates --&gt;
+
+&lt;!------- Custom Templates ------!&gt;
+&lt;object type='text/html' id=cust-templates style='width:0px;height:0px;'&gt;
+&LT;pre class=template id="donor-edit.css"&gt;
+  &lt;style type="text/css"&gt;
+
+     table#list-deposit td.c0, table#list-deposit th.c0      {width:130px;}
+     table#list-deposit td.c1, table#list-deposit th.c1      {width:260px; }
+     table#list-deposit td.c2, table#list-deposit th.c2      {width:150px; }
+     table#list-deposit td.c3, table#list-deposit th.c3      {width:50px; }
+     table#list-deposit td.c4, table#list-deposit th.c4      {width:50px; }
+     table#list-deposit td.c5, table#list-deposit th.c5      {width:90px; }
+     table#list-deposit td.c6, table#list-deposit th.c6      {width:90px; }
+     table#list-deposit td.c7, table#list-deposit th.c7      {width:90px; }
+     table#list-deposit td.c5                                {text-align:right;}
+     table#list-deposit td.c6                                {text-align:right;}
+     table#list-deposit td.c7                                {text-align:right;}
+
+     table#list-Envelope                                     {width:770px;}
+     table#list-Envelope thead                               {width:770px;}
+     table#list-Envelope td.c0, table#list-Envelope th.c0    {width:150px;}
+     table#list-Envelope td.c1, table#list-Envelope th.c1    {width:170px; }
+     table#list-Envelope td.c2, table#list-Envelope th.c2    {width:250px; }
+     table#list-Envelope td.c3, table#list-Envelope th.c3    {width:200px; }
+     table#list-Envelope td.c4, table#list-Envelope th.c4    {width:100px; }
+     table#list-Envelope td.c4                               {text-align:right;}
+
+
+     div#css-edp div#fld-actions                             {width:530px;  margin-bottom:12px;}
+     div#css-edp div#fld-actions a                           {color:rgb(00,88,159); font-size:90%;}
+     div#css-edp div#fld-amount input                        {width:70px; text-align:right; position:relative; top:-15px;}
+     div#css-edp div#fld-amount label                        {position:relative; top:-15px;}
+     div#css-edp div#fld-amount                              {position:absolute;right:34px;top:85px; float:clear;}
+     div#css-edp div#fld-amount a                            {color:rgb(00,88,159); font-size:80%;}
+     div#css-edp fieldset#fld-code                           {border-width:1px; font-size:90%; width:140px; float:left;}
+     div#css-edp fieldset#fld-code input                     {width:50px;}
+     div#css-edp fieldset#fld-code a                         {color:rgb(00,88,159);}
+     div#css-edp fieldset#fld-tender                         {border-width:1px; font-size:90%; width:342px;}
+     div#css-edp fieldset#fld-tender div#tally-tot           {width:340px; text-align:right; margin-top:10px;}
+     div#css-edp fieldset#fld-tender div#tally-tot input     {width:70px; text-align:right;}
+     div#css-edp fieldset#fld-tender div#tallys              {font-size:90%;}
+     div#css-edp fieldset#fld-tender div.labels              {width:340px; text-align:right; margin-top:5px; margin-bottom:0px;}
+     div#css-edp fieldset#fld-tender div.labels span         {width:48px; text-align:center; display:inline-block;}
+     div#css-edp fieldset#fld-tender div.inputs              {width:340px; text-align:right; margin-top:10px; margin-bottom:5px;}
+     div#css-edp fieldset#fld-tender div.bills               {width:340px; text-align:right; margin-top:0px; margin-bottom:5px;}
+     div#css-edp fieldset#fld-tender div.bills  input.ctr    {width:44px; text-align:right;}
+     div#css-edp fieldset#fld-tender div.tots                {width:340px; text-align:right; margin-top:0px; margin-bottom:5px;}
+     div#css-edp fieldset#fld-tender div.tots input.tot      {width:44px; text-align:right;}
+     div#css-edp fieldset#fld-desigs                         {border-width:1px; font-size:90%;}
+     div#css-edp fieldset#fld-desigs select.justacct         {width:200px;}
+     div#css-edp fieldset#fld-desigs select.bothacct         {width:100px;}
+     div#css-edp fieldset#fld-desigs select.subacct          {width:100px;}
+     div#css-edp fieldset#fld-desigs span.acctcode           {width:40px; display:inline-block; margin-left:20px;}
+     div#css-edp fieldset#fld-desigs input.amt               {width:70px; text-align:right;}
+     div#css-edp div#fld-note                                {float:left; margin-top:5px; margin-left:2px;}
+     div#css-edp div#fld-note input                          {font-size:90%; width:533px;}
+
+     div#editor div#flds-deposit                            {height:700px; width:650px;}
+     div#editor div#flds-deposit   div#name                 {position:relative; left:0px;   top:0px;}
+     div#editor div#flds-deposit   div#Counters             {position:relative; left:400px; top:-50px;}
+     div#editor div#flds-deposit   input#Counters           {width:178px;}
+     div#editor div#flds-deposit   div#Cash                 {position:relative; left:210px; top:-50px;}
+     div#editor div#flds-deposit   div#Cheque               {position:relative; left:371px; top:-100px;}
+     div#editor div#flds-deposit   div#Total                {position:relative; left:512px; top:-150px;}
+     div#editor div#flds-deposit   div#Acct                 {position:relative; left:0px;   top:-200px;}
+     div#editor div#flds-deposit   input#Acct               {width:40px;}
+     div#editor div#flds-deposit   input#Cash               {width:65px; text-align:right;}
+     div#editor div#flds-deposit   input#Cheque             {width:65px; text-align:right;}
+     div#editor div#flds-deposit   input#Total              {width:65px; text-align:right;}
+     div#editor div#flds-deposit   div#Note                 {position:relative; left:0px;   top:-150px;}
+     div#editor div#flds-deposit   input#Note               {width:580px;}
+     div#editor div#flds-deposit   div#Donors               {position:relative; left:0px;   top:-150px; width:695px;}
+     div#editor div#flds-deposit   div#donors  a.adj-rgt    {margin-left:120px; margin-top:-25px;}
+     div#editor div#flds-deposit   div#Code                 {position:relative; left:0px;   top:-200;}
+     div#editor div#flds-deposit   div#Tender               {position:relative; left:150px; top:-250;}
+     div#editor div#flds-deposit   div#Amount               {position:relative; left:300px; top:-300;}
+     div#editor div#flds-deposit   input#Code               {width:50px;}
+     div#editor div#flds-deposit   input#Tender             {width:50px;}
+     div#editor div#flds-deposit   input#Amount             {width:50px; text-align:right;}
+
+     div#editor div#flds-deposit   div#sub-scroll           {padding-left:5px; overflow:scroll; height:200px;}
+     div#editor div#flds-deposit   div#Edit-Donor           {width:675px; position:relative; left:0px; top:-170px; height:280px; margin-right:0px;}
+     div#editor div#flds-deposit   div#Edit-Donor div.name  {margin-right:7px;}
+     div#editor div#flds-deposit   fieldset#Edit-Donor      {width:536px; height:250px; background-color:white;}
+
+     div#editor table#sublist-Donors thead                  {background-color:rgb(240,240,240); font-weight:normal; font-size:90%; color:rgb(151,208,255);text-align:center;  width:575px; position:fixed; margin-top:-150px; margin-left:-40px;}
+     div#editor table#sublist-Donors thead th               {height:15px; border-right:1px solid rgb(250,250,255);}
+     div#editor table#sublist-Donors tr.tr-odd              {background-color:rgb(240,250,255); height:25px;}
+     div#editor table#sublist-Donors tr.tr-even             {background-color:rgb(250,250,255); height:25px;}
+     table#sublist-Donors td.c1, table#sublist-Donors th.c1 {width:80px;}
+     table#sublist-Donors td.c2, table#sublist-Donors th.c2 {width:85px; }
+     table#sublist-Donors td.c3, table#sublist-Donors th.c3 {width:245px; }
+     table#sublist-Donors td.c4, table#sublist-Donors th.c4 {width:80px; }
+     table#sublist-Donors td.c5, table#sublist-Donors th.c5 {width:55px; }
+     table#sublist-Donors td.c6, table#sublist-Donors th.c6 {width:30px; }
+     table#sublist-Donors td.c1 {text-align:center;}
+     table#sublist-Donors td.c2 {text-align:center;}
+     table#sublist-Donors td.c3 {text-align:left;}
+     table#sublist-Donors td.c4 {text-align:right;}
+     table#sublist-Donors td.c5 {text-align:center;}
+     table#sublist-Donors td.c6 {text-align:center;}
+
+  &lt;/style&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="note.html"&gt;
+  &lt;div id=fld-note&gt;
+    &lt;input type=text ng-model='$MODEL$' placeholder='Special notes on this one donation'&gt;
+  &lt;/div&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="actions.html"&gt;
+  &lt;div id=fld-actions&gt;
+     &lt;span style='float:left;' class=warn ng-show='oPanel.state.errorMsg!=null'&gt;Error:{{oPanel.state.errorMsg}}&lt;/span&gt;
+     &lt;span style='float:right;'&gt;
+        &lt;a href="" id=action-add-donor class=c-action ng-class='isTrue(!oPanel.state.bNoValidate && oSubC.methCanSave(this,$MODOBJ$),"show","hide")' when-active='oSubC.methSave(this,$MODOBJ$);'&gt;{{isTrue(oPanel.sMode=="Add","Add Donotion","Save Changes")}}&lt;/a&gt;
+        &nbsp;&nbsp;&nbsp;
+        &lt;a class=c-action ng-click='oSubC.methCancel(this,$MODOBJ$);'&gt;Cancel {{oPanel.sMode}}&lt;/a&gt;
+     &lt;/span&gt;
+     &lt;span style='float:clear;'&gt;&nbsp;&lt;/span&gt;
+  &lt;/div&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="editActions.html"&gt;
+  &lt;a class='c-action sz-90 adj-rgt' href="" when-active="changeCurrency();"&gt;Change to ${{getOtherCurrency()}}&lt;/a&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="tender.html"&gt;
+  &lt;fieldset id=fld-tender&gt;
+    &lt;legend&gt;Payment&lt;/legend&gt;
+    &lt;span class=note&gt;Tender:&nbsp;&lt;/span&gt;
+    &lt;input type=radio value='cheque' ng-model='$MODEL$' id=tender-chq ng-change='oSubC.methChangeTender(this,$MODOBJ$)'&gt;&lt;label for=tender-chq&gt;Cheque&lt;/label&gt;
+    &lt;input type=radio value='cash' ng-model='$MODEL$' id=tender-cash ng-change='oSubC.methChangeTender(this,$MODOBJ$)'&gt;&lt;label for=tender-cash&gt;Cash&lt;/label&gt;
+    &lt;div ng-show='$MODEL$=="cash"' id=tallys&gt;
+       &lt;div id=tally-tot&gt;
+         &lt;input type=hidden ng-model='$MODOBJ$.tallystr'&gt;
+         &lt;a class=c-action ng-click='oSubC.methResetTally(this,$MODOBJ$)'&gt;Reset&nbsp;&lt;/a&gt;
+         &lt;span class=note&gt;{{$MODOBJ$.tallystr}}&nbsp;&nbsp;&lt;/span&gt;
+         &lt;span class=note&gt;Tally Total:&nbsp;&lt;/span&gt;
+         &lt;input id=tally-tot type=text value='{{oPanel.state["tally-total"]}}' readonly&gt;
+       &lt;/div&gt;
+       &lt;div ng-show='isTrue(oPanel.state.showTally)'&gt;
+         &lt;div class=labels&gt;
+           &lt;span class=note&gt;$500&lt;/span&gt;
+           &lt;span class=note&gt;$100&lt;/span&gt;
+           &lt;span class=note&gt;$50&lt;/span&gt;
+           &lt;span class=note&gt;$20&lt;/span&gt;
+           &lt;span class=note&gt;$10&lt;/span&gt;
+           &lt;span class=note&gt;$5&lt;/span&gt;
+           &lt;span class=note&gt;Coin&lt;/span&gt;
+         &lt;/div&gt;
+         &lt;div class=bills&gt;
+           &lt;input class=ctr type=number ng-model='oPanel.state[500]' min=0 max=100&gt;&nbsp;
+           &lt;input class=ctr type=number ng-model='oPanel.state[100]' min=0 max=100&gt;&nbsp;
+           &lt;input class=ctr type=number ng-model='oPanel.state[50]' min=0 max=100&gt;&nbsp;
+           &lt;input class=ctr type=number ng-model='oPanel.state[20]' min=0 max=100&gt;&nbsp;
+           &lt;input class=ctr type=number ng-model='oPanel.state[10]' min=0 max=100&gt;&nbsp;
+           &lt;input class=ctr type=number ng-model='oPanel.state[5]' min=0 max=100&gt;&nbsp;
+           &lt;input class=ctr type=text focus-clear ng-model='oPanel.state["coin"]'&gt;
+         &lt;/div&gt;
+         &lt;div class=tots&gt;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state[500] || 0)*500}}'&gt;&nbsp;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state[100] || 0)*100}}'&gt;&nbsp;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state[50] || 0)*50}}'&gt;&nbsp;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state[20] || 0)*20}}'&gt;&nbsp;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state[10] || 0)*10}}'&gt;&nbsp;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state[5] || 0)*5}}'&gt;&nbsp;
+           &lt;input class=tot type=text readonly value='{{(oPanel.state["coin"] || 0)}}'&gt;
+         &lt;/div&gt;
+       &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="amount.html"&gt;
+  &lt;div id=fld-amount&gt;
+    &lt;!-- grab-focus=inp-grab-focus --&gt;
+    &lt;a class=c-action ng-show='$MODOBJ$.tender=="cash"' ng-click='oSubC.methToggleTally(this,$MODOBJ$)'&gt;{{isTrue(oPanel.state.showTally,'Hide Tally','See Tally')}}&nbsp;&lt;/a&gt;
+    &lt;label&gt;$&lt;/label&gt;
+    &lt;input id=inp-grab-focus type=text ng-model='$MODEL$' ng-change='oSubC.methAmtChange(this,$MODOBJ$)' focus-clear='oSubC.methAmtFocus(this,$MODOBJ$)' blur-next=setAddFocus(oObj) blur-event='oSubC.methAmtBlur(this,$MODOBJ$)'&gt;
+  &lt;/div&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="code.html"&gt;
+  &lt;fieldset id=fld-code&gt;
+    &lt;legend&gt;Donor {{$MODOBJ$.code}}&lt;/legend&gt;
+    &lt;div&gt;{{$MODOBJ$.donor.name}}&lt;/div&gt;
+    &LT;pre&gt;{{$MODOBJ$.donor.address}}&LT;/pre&gt;
+    &LT;pre&gt;{{$MODOBJ$.donor.phones}}&LT;/pre&gt;
+  &lt;/fieldset&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="donors-list.html"&gt;
+  &lt;style type="text/css"&gt;
+
+    div#donors-list               {position:absolute; left:720px; top:0px; border:1px solid rgb(151,208,255); width:600px;height:850px;}
+    div#donors-list div#scroll    {overflow:scroll;   height:750px;}
+    div#donors-list table         {width:580px;}
+    div#donors-list input#_custmask {width:200px;}
+    div#donors-list table td.c0   {width:30px;}
+    div#donors-list table td.c1   {width:300px; text-align:left;}
+    div#donors-list table td.c2   {width:200px; text-align:left;}
+    div#donors-list table td.c3   {width:100px; text-align:center;}
+  &lt;/style&gt;
+  &lt;div id=donors-list ng-show="hasSession() && isSect('CommList') && inEdit()" scope-var='oDonTab = useTable("Donor","oDonSel")'&gt;
+
+    &lt;macro fetch="apps-filter.html" alter='oFil/oDonFil;oTAB/oDonTab;oSel/oDonSel'&gt;&lt;/macro&gt;
+
+    &lt;div id=scroll&gt;
+      &lt;table id='list-{{oDonTab.props.recTitle}}' class=list-comm cellpadding=0 cellspacing=0&gt;
+        &lt;tbody&gt;
+          &lt;tr ng-repeat='oDonRow in oDonTab.getSelObjs()' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'"&gt;
+            &lt;td ng-repeat='oCol in oDonTab.getTableCols("=cust")' class=C{{$index}}&gt;
+              &lt;span ng-switch on=oCol.type&gt;
+                &lt;span ng-switch-when='action'&gt;
+                   &lt;a class='c-action sz-90' href="" when-active="oCol.method(this,oDonRow,$index);" title={{oCol.title(oDonRow)}}&gt;{{oCol.label}}&lt;/a&gt;
+                &lt;/span&gt;
+                &lt;span ng-switch-default&gt;
+                   {{oCol.getValue(this,oDonRow)}}
+                &lt;/span&gt;
+              &lt;/span&gt;
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+      &lt;br&gt;
+    &lt;/div&gt;
+    &lt;p class=note&gt;Selected {{oDonTab.getSelObjs().length}} {{getTabProp().recName}} record(s) of possible {{oDonTab.getObjs().length}}&lt;/p&gt;
+  &lt;/div&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="desigs.html"&gt;
+  &lt;fieldset id=fld-desigs ng-hide='isTrue(oPanel.state.showTally)'&gt;
+    &lt;legend&gt;Designations&lt;/legend&gt;
+    &lt;div ng-show='isTrue(nRow&lt;$MODOBJ$.desigs.length)' ng-repeat='nRow in [0,1,2,3]'&gt;
+      &lt;select ng-class='isTrue(oSubC.methHasSubcodes(this,$MODOBJ$,nRow),"bothacct","justacct")' ng-change='call(oSubC.methHasAcctChange,$MODOBJ$,nRow)' ng-model='$MODEL$[nRow].acct' ng-options='oOpt.value as oOpt.name for oOpt in call(oSubC.methOptions,$MODOBJ$,nRow)'&gt;&lt;/select&gt;
+      &lt;span ng-show='isTrue(oSubC.methHasSubcodes(this,$MODOBJ$,nRow))'&gt;
+        &lt;select class=subacct ng-model='$MODEL$[nRow].subacct' ng-options='oOpt.value as oOpt.name for oOpt in call(oSubC.methGetSubcodes,$MODOBJ$,nRow)'&gt;&lt;/select&gt;
+      &lt;/span&gt;
+      &lt;span class=acctcode&gt;{{$MODEL$[nRow].acct}}&lt;/span&gt;&lt;/span&gt;$&lt;/span&gt;
+      &lt;input id=desig-amt-{{nRow}} class=amt ng-model='$MODEL$[nRow].amt' type=searchText blur-event='oSubC.methDesigAmtBlur(this,$MODOBJ$,nRow)' focus-clear='oSubC.methDesigAmtFocus(this,$MODOBJ$,nRow)'&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&LT;/pre&gt;
+
+&lt;/object&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li><p>Lines <code>2</code> thru <code>8</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Lines <code>19</code> and <code>20</code> show the use of separately defined tables, namely <code>TableDonors.js</code> and <code>TableEnvelopes.js</code>.  These are explained separately in this page.</p></li>
+<li><p>Line <code>27</code> shows the inclusion of <code>apps-body.html</code>.  The <code>!SINGLE/SINGLE!SINGLE/DOUBLE</code> changes the login panel so it uses the <code>DOUBLE</code> login format using the
+technique described in <a href="/guide/hints-tech#nestedalteronfetch">Nested alter= on fetch</a>.  The controller is also changed to the
+custom edit  controller <code>ctrlDepsEdit</code> using the same technique.</p></li>
+<li><p>Lines <code>33</code> thru <code>277</code> define the custom templates.</p></li>
+<li><p>Lines <code>33</code> thru <code>134</code> add extensive <strong>css</strong> code to properly display the various tables being processed by the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>
+and <a href="/api/tri.controller:ctrlCommList">Lister</a>.</p></li>
+<li><p>Lines <code>224</code> thru <code>261</code> define the side-by-side donor list that is displayed on the right side of the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>.
+This is achieved by setting <code>sEditSuppName</code> to <code>donors-list.html</code> in line <code>145</code> of <code>Chqs.js</code>.  This causes the triggering of <code>ng-include</code> at the end of
+<code>apps-editor.html</code> in <code>AppsBase.htm</code> which causes the donors to be listed.</p></li>
+</ul>
+
+<p><span id='Deps.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideadepsjsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>Deps.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+// ---------------------------------------------------------------------------
+/* This forces angular to load the tables and their dependencies
+*
+* We rely on the implied dependency injection to haul in only the tables needed and
+* thus automatically configure the system menus and available actions.
+*/
+
+function ctrlMain($scope,servSess,servGAE,tblDEP,tblENV,tblDON,servCRUD,servREG) {
+log("Created ctrlMain for deps application");
+servGAE.setCust("deps");
+servSess.setTitle("Deposit Recording System");
+var oOpts = [{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'},{menu:"Deposit Summaries",func:printDepSum,role:'elder',sandbox:true}];
+servSess.setOptMenuItems(oOpts);
+
+function xfrAdminFunctions() {
+  servSess.xfrAdminApp("deps",["TableDonors"]);
+}
+
+function printDepSum() {
+  var oDepTab = servREG.findTable("Deposit");
+  var oDonTab = servREG.findTable("Donor");
+  var oDonMap = oDonTab.getDonorMap();
+  var oObjs   = oDepTab.getTabProp().oObjs;
+  var oHandler = function printReqHandler(event) {
+    log("printDepSum called %o obj=%o tab=%o",event,oObjs,oDepTab);
+    var oMsg = {verb:'deps:deps-sum-data',payload:{oObjs:oObjs,oMap:oDonMap,oProf:servSess.getProfile()}};
+    event.source.postMessage(oMsg,"*");
+  }
+  servSess.createFormWindow('deps',oHandler,"Deps.htm","FormDepSum.htm");
+}
+
+}
+
+function ctrlDepsEdit($controller,$scope,servSess,servREC) {
+log("Created ctrlDepsEdit by extending ctrlCommEdit");
+var ctrl = $controller(ctrlCommEdit,{$scope:$scope});
+}
+
+//----------------------------------------------------------------------------
+//-------------------------------- Deposit records ------------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblDEP',['servREG','servGAE','servTBL','servSess','servCRUD','$rootScope','servConfig',function(servREG,servGAE,servTBL,servSess,servCRUD,$rootScope,servConfig) {
+var oFuncs = {};
+
+var donors = {
+     base:    'donors'
+    ,cols:    [ {col: 'actions',    title: 'Actions', type:'action',methods:[{name:'edit',method:editExistDonor},{name:'drop',method:dropDonor}],hint:getDonorTitle}
+               ,{col: 'code',       title: 'Code'         ,readonly:true,showList:true ,hint:getDonorTitle}
+               ,{col: getDonorName, title: 'Donor' }
+               ,{col: getAmt,       title: '$'         }
+               ,{col: getTender,    title: 'How'     }
+               ,{col: getLines,     title: '#'         }
+              ]
+}
+
+var donedit = {
+     base:    'oDonEdit'
+    ,cols:    [ {col: 'actions' ,showEdit:true  ,htmlEdit: 'actions.html',methCancel         :cancelEditDonor
+                                                                         ,methSave           :saveEditDonor
+                                                                         ,methCanSave        :methCanSave
+                                                                         }
+               ,{col: 'code'    ,showEdit:true  ,htmlEdit: 'code.html'}
+               ,{col: 'tender'  ,showEdit:true  ,htmlEdit: 'tender.html' ,methBill           :methBill
+                                                                         ,methChangeTender   :methChangeTender
+                                                                         ,methResetTally     :methResetTally
+                                                                         }
+               ,{col: 'amount'  ,showEdit:true  ,htmlEdit: 'amount.html' ,methAmtChange      :methAmtChange
+                                                                         ,methToggleTally    :methToggleTally
+                                                                         ,methAmtFocus       :methAmtFocus
+                                                                         ,methAmtBlur        :methAmtBlur
+                                                                         }
+               ,{col: 'desigs'  ,showEdit:true  ,htmlEdit: 'desigs.html' ,methOptions        :methOptions
+                                                                         ,methHasSubcodes    :methHasSubcodes
+                                                                         ,methGetSubcodes    :methGetSubcodes
+                                                                         ,methHasAcctChange  :methHasAcctChange
+                                                                         ,methDesigAmtBlur   :methDesigAmtBlur
+                                                                         ,methDesigAmtFocus  :methDesigAmtFocus
+                                                                         }
+               ,{col: 'note'    ,showEdit:true  ,htmlEdit: 'note.html'}
+              ]
+}
+
+var oTabProp = {
+     recTitle: 'Deposit'
+    ,recName:  'deposit'
+    ,recType:  'dep'
+    ,lsName:   "-deps"
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servTBL
+    ,order:    {col:'name',seq:'reverse'}
+    ,cols:     [{type:'actions',    title: 'Actions'      ,showEdit:false, addDefault:false,
+                       actions:[{label:'edit',click:'editRecord(oRow.oaa)',title:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                               ,{label:'drop',click:'dropRecord(oRow.oaa)',title:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                               ,{label:'print',method:printFormDeposit,click:'printFormDeposit(this,oRow)',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                               ]
+                }
+               ,{col: 'name',       title: 'FileName'     ,many:false                    ,  readonly:true }
+               ,{col: 'counter1',   title: 'Counter1'     ,showList:false ,showEdit:false,  readonly:true }
+               ,{col: 'counter2',   title: 'Counter2'     ,showList:false ,showEdit:false,  readonly:true }
+               ,{col:  counters,    title: 'Counters'     ,showEdit:true  ,showList:true                  }
+               ,{col:  cashTot,     title: 'Cash'         ,field:'cashTot',showEdit:true,showList:false }
+               ,{col:  chequeTot,   title: 'Cheque'       ,showEdit:true  ,showList:false               }
+               ,{col:  totalTot,    title: 'Total'        ,showEdit:true  ,showList:false               }
+               ,{col:  'currency',  title: 'Acct'         ,readonly:true  ,showList:true,showEdit:true } // morphed to be acct to handle BKS acct
+               ,{col:  'src',       title: 'Src'          ,readonly:true  ,showList:true,showEdit:false }
+               ,{col:  'cashSum',   title: 'Cash'         ,readonly:true  ,showList:true,showEdit:false }
+               ,{col:  'chequeSum', title: 'Cheque'       ,readonly:true  ,showList:true,showEdit:false }
+               ,{col:  depositTot,  title: 'Deposit$'     ,readonly:true  ,showList:true,showEdit:false }
+               ,{col:  'note',      title: 'Note'         ,reqd:false     ,showList:false             }
+               ,{col:  'edit-don',  title: 'Edit Donor'   ,type:'panel',showList:false,scope:'oDonEdit',objName:'oPanel.oDonEdit',schema:donedit,showEdit:showDonorEdit, htmlCSS:'donor-edit.css', cssid:'css-edp',legend:'Donor'}
+               ,{col:  'donors',    title: 'Donors'       ,type:'list', schema:donors,showEdit:true,showList:false}
+              ]
+    ,editActions       : []
+    ,validate          : validateDeposit
+    ,createExit        : createExit
+    ,getEditRecordExit : getEditRecordExit
+    ,menuWhen          : testDoubleLogin
+    ,cacheLoadExit     : cacheLoadExit
+    ,addDonorLine      : addDonorLine  // allow callback from Donor click
+    ,primeEdit         : primeEdit
+};
+
+var oInfo  = servConfig.getInfo();
+var  accts = oInfo.accts;
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+// -------------------------------------------------------------------------
+
+function primeEdit(scope,oTP,oObj) {
+  log("primeEdit scope=%o oTP=%o obj=%o",scope,oTP,oObj);
+  scope.setAddFocus    = setAddFocus;
+  scope.sAutoName      = '';//force autotab to take
+  scope.sEditSuppName  = 'donors-list.html';
+  return oObj;
+}
+
+function getAnchorClass(scope,oObj,oA) {
+  //log("isActive %o anchor=%o",oObj,oA);
+  if (oA.label == 'print') return 'c-action';
+  if (oA.label == 'edit') {
+    var oDate = new Date();
+    var sToday = getNowYMD();
+    var sYest  = getYMD(new Date(oDate.getTime()-(24*60*60*1000)));
+    if (oObj && oObj.details && oObj.details.name) {
+      var sFileDate = oObj.details.name.substring(0,10);
+      if (sFileDate == sToday) return 'c-action';
+      if (sFileDate == sYest) return 'c-action';
+    }
+    if (servSess.isSandboxMode()) return 'c-action';
+    //log("isActive %o anchor=%o yest=%s today=%s",oObj,oA,sYest,sToday);
+  }
+  if (oA.label == 'drop') {
+    var oProp = servSess.getProfile();
+    if (oProp.role && oProp.role.indexOf("admin") &gt;= 0) return 'c-action';
+    if (servSess.isSandboxMode()) return 'c-action';
+  }
+  return 'c-quiet';
+}
+
+function testDoubleLogin() {
+  var sUser1 = servSess.getUser();
+  var sUser2 = servSess.getUser2();
+  if (!sUser1) return false;
+  if (!sUser2) return false;
+  //log("testDoubleLogin "+sUser1+" "+sUser2);
+  if (sUser1 != sUser2) return true;
+  return false;
+}
+
+// This only is called before the first save
+function changeCurrency(scope,oObj,$event) {
+  log('Change currency obj=%o evt=%o',oObj,$event);
+  oObj.currency = getOtherCurrency(oObj);
+  oObj.name = oObj.name.replace(/(USD|CND|BKS)/,oObj.currency);
+  oObj.KeyName   = servGAE.getCust()+"/"+oTabProp.recType+"/"+oObj.name;
+}
+
+function getOtherCurrency(oObj) {
+  var sCur = getCurrency(oObj);
+  if (sCur == 'CND') return "USD";
+  if (sCur == 'USD') return "BKS";
+  return 'CND';
+}
+
+function getCurrency(oObj) {
+  if (!oObj) return "CND";
+  if (!oObj.currency) return "CND";
+  return oObj.currency;
+}
+
+function validateDeposit(scope,oObj,oCopy,fnValStd,fnEditErr) {
+  if (oObj.donors.length == 0) return fnEditErr("add donors");
+  if (scope.oPanel.oDonEdit) return false; // no error but do not allow save
+  return true;
+}
+
+function getUserID(oObj) {
+  var sStr = oObj.KeyName;
+  var nIX = sStr.lastIndexOf("/");
+  return sStr.substring(nIX+1);
+}
+
+function findAcct(sAcct) {
+  for(var i=0; i &lt; accts.length; i+= 1) {
+    if (sAcct == accts[i].code) return accts[i];
+  }
+  return null;
+}
+
+function getDonorTitle(oObj) {
+  if (!oObj.donor) return '';
+  return (oObj.donor.address+"\r\n"+oObj.donor.phones).trim();
+}
+
+function methHasSubcodes(scope,oObj,nRow) {
+  if (nRow &gt;= oObj.desigs.length) return false;
+  //log("HasSubCodes "+nRow+" "+oObj.desigs[nRow].acct);
+  var oAcct = findAcct(oObj.desigs[nRow].acct);
+  if (!oAcct) return false;
+  if (oAcct.subcodes) return true;
+  return false;
+}
+
+function methHasAcctChange(scope,oObj,nRow) {
+  if (nRow &gt;= oObj.desigs.length) return;
+  log("HasAcctChange "+nRow+" "+oObj.desigs[nRow].acct+" "+oObj.desigs[nRow].subacct);
+  oObj.desigs[nRow].subacct = null;
+}
+
+function methGetSubcodes(scope,oObj,nRow) {
+  if (nRow &gt;= oObj.desigs.length) return [];
+  log("HasSubCodes "+nRow+" "+oObj.desigs[nRow].acct);
+  var oAcct = findAcct(oObj.desigs[nRow].acct);
+  if (!oAcct) return [];
+  if (!oAcct.subcodes) return [];
+  var oOpts = [{name:'--assign--',value:null}];
+  for(var i=0; i &lt; oAcct.subcodes.length; i+= 1) {
+    oOpts.push({value:oAcct.subcodes[i],name:oAcct.subcodes[i]});
+  }
+  return oOpts;
+}
+
+function methOptions(scope,oObj,nRow) {
+  if (nRow &gt;= oObj.desigs.length) return [];
+  var oOpts = [];
+  for(var i=0; i &lt; accts.length; i+= 1) {
+    oOpts.push({value:accts[i].code,name:accts[i].name});
+  }
+  return oOpts;
+}
+
+function methCanSave(scope,oObj) {
+  log("methCanSave called "+scope.$id+" noval="+scope.oPanel.state.bNoValidate);
+  if (scope.oPanel.state.bNoValidate) return false;
+  setTallyTotal(scope);
+  if (!validate(scope,oObj)) return false;
+  return true;
+}
+
+function validate(scope,oObj) {
+  scope.oPanel.state.errorMsg = null;
+  if (oObj.code && oObj.code.substring(0,2) == '**') {
+    if (!oObj.note) return withError(scope,"Note is required for donor code "+oObj.code);
+  }
+  if (oObj.amount && (oObj.amount == 0)) return withError(scope,"Amount required");
+  if (oObj.tender == 'cash') {
+    var sTally = (+(scope.oPanel.state['tally-total'])).toFixed(2);
+    var sAmt  = (+(oObj.amount)).toFixed(2);
+    if (sTally != sAmt) {
+      var sDiff = (+sTally - +sAmt).toFixed(2);
+      return withError(scope,"Tally:"+sTally+" Cash:"+sAmt+" Difference:"+sDiff);
+    }
+    oObj.tallystr = getTallyStr(scope);
+    log("TallyStr "+oObj.tallystr);
+  }
+  var sTot = calcTotDesig(scope,oObj,true);
+  if (sTot != null) {
+    var sTotAmt = (+oObj.amount).toFixed(2);
+    if (sTotAmt != sTot) {
+      var sDiff = (+sTot - +sTotAmt).toFixed(2);
+      return withError(scope,"Designated="+sTot+" exceeds "+sTotAmt+" by "+sDiff);
+    }
+  }
+  for(var i=0,iMax=oObj.desigs.length; i&lt;iMax; i++) {
+    var oDesig = oObj.desigs[i];
+    var oAcct = findAcct(oDesig.acct);
+    if (oAcct == null) return withError(scope,"Missing account code "+oDesig.acct);
+    if (oAcct.subcodes && (oDesig.subacct == null)) {
+      return withError(scope,"Subacct not assigned for "+oDesig.acct);
+    }
+  }
+  return true;
+}
+
+function withError(scope,sMsg) {
+  scope.oPanel.state.errorMsg = sMsg;
+  return false;
+}
+
+function setAddFocus(oObj) {
+  var oA =  document.getElementById('action-add-donor');
+  log("setAddFocus obj=%o A=%o %s",oObj,{A:oA},typeof oA);
+  if (oA) setTimeout(function(){oA.focus();},0); // delay so focus takes because DOM is built
+}
+
+function showDonorEdit(scope,oObj) {
+  var bRet = false;
+  if (scope.oPanel.oDonEdit) bRet = true;
+  //if (bRet) log("showDonorEdit "+oObj.name+" scope="+scope.$id+" ret="+bRet+" lines="+scope.oPanel.oDonEdit.lines);
+  return bRet;
+}
+
+function dropDonor(scope,oObj,sIndex) {
+  log('drop donor ix='+sIndex+" of "+scope.oObj.donors.length+" in "+scope.oObj.name);
+  scope.oObj.donors = removeObj(scope.oObj.donors,scope.oObj.donors[sIndex]);
+  scope.oObj.cash = null; // trigger recalc
+  scope.oObj.cheque = null;
+}
+
+function printFormDeposit(scope,oObj) {
+  var oDonTab = servREG.findTable("Donor");
+  var oDonMap = oDonTab.getDonorMap();
+  var oHandler = function printReqHandler(event) {
+    log("printReqHandler called %o obj=%o",event,oObj);
+    var oMsg = {verb:'deps:deps-data',payload:{oObj:oObj,oInfo:oInfo,oMap:oDonMap}};
+    event.source.postMessage(oMsg,"*");
+  }
+  servSess.createFormWindow('deps',oHandler,"Deps.htm","FormDeposit.htm?oaa="+oObj.oaa);
+}
+
+function editExistDonor(scope,oObj,sIndex) {
+  editDonor(scope,oObj,"Edit",sIndex);
+}
+
+function editDonor(scope,oObj,sMode,sIndex) {
+  if (scope.oPanel.oDonEdit) return;
+  scope.oPanel.state = {errorMsg:null, bNoValidate:false};
+  var oEditObj = angular.copy(oObj);
+  scope.oPanel.state.oOrig = oObj;
+  scope.oPanel.state.ix = sIndex;
+  if (sMode == "Add") {
+    scope.grabFocus = grabFocus;
+  } else {
+    scope.grabFocus = null;
+  }
+  //scope.trigger = ""+(new Date().getTime()); //ngModel value
+  scope.bNoValidate = false;
+  log('edit donor '+oObj.tender+" "+oObj.amount+" trigger="+scope.trigger+" lines="+oObj.lines+" mode="+sMode+" scope="+scope.$id+" index="+sIndex);
+  log("donor ",oObj);
+  scope.oPanel.oDonEdit = oEditObj;
+  scope.oPanel.sMode = sMode;
+  if (sMode == "Edit") loadTallyStr(scope,oEditObj.tallystr);
+}
+
+function grabFocus(scope,oElem,sTagID) {
+  log("grabFocus called "+sTagID);
+  var oInp =  document.getElementById(sTagID);
+  if (oInp) {
+    oInp.focus();
+  }
+}
+
+function cancelEditDonor(scope,oDon) {
+  log('cancel edit donor '+oDon.tender+" scope="+scope.$id);
+  scope.oPanel.oDonEdit = null;
+  scope.oPanel.state = {errorMsg:null, bNoValidate:false};
+}
+
+function saveEditDonor(scope,oDon) {
+  var oObjEdit = servCRUD.getObjEdit();
+  var nEditIX = servCRUD.getEditIX();
+  log('save edit donor %s %s obj=%o oe=%o ix=%s don=%o',oDon.tender,oDon.code,scope.oObj,oObjEdit,nEditIX,oDon);
+  if (scope.oPanel.sMode == "Add") {
+    scope.oObj.donors.push(oDon);
+  } else {
+    scope.oObj.donors[scope.oPanel.state.ix] = oDon;
+  }
+  scope.oPanel.oDonEdit = null;
+  scope.oPanel.state = {errorMsg:null, bNoValidate:false};
+  scope.oObj.cash = null; // trigger recalc
+  scope.oObj.cheque = null;
+
+  cashTot(oObjEdit); // update fields
+  chequeTot(oObjEdit);
+  oTabProp.recServ.insertRec(oTabProp,oObjEdit,nEditIX,true); // do intermedate persist
+  oTabProp.editActions = []; // T/off account switch now committed
+
+  var oInp =  document.getElementById("_custmask");
+  if (oInp) {
+    oInp.focus();
+  }
+}
+
+function methBill(scope,oObj,sFlag) {
+  log("methBill "+scope.oPanel.state[sFlag]+" "+sFlag);
+}
+
+function methAmtChange(scope,oObj) {
+  log("methAmtChange "+scope.oPanel.oDonEdit.amount+" "+scope.$id+" "+oObj.amount);
+  if (oObj.tender == 'cash') scope.oPanel.state.showTally = true;
+}
+
+function methAmtFocus(scope,oObj) {
+  log("methAmtFocus "+scope.$id+" "+oObj.amount);
+  scope.oPanel.state.bNoValidate = true;
+  scope.$apply();
+}
+
+function methAmtBlur(scope,oObj) {
+  var sNew = (+oObj.amount).toFixed(2)
+  log("methAmtBlur "+scope.$id+" "+oObj.amount+" "+sNew);
+  oObj.amount = sNew;
+  estimateTally(scope,oObj,true);
+  oObj.desigs.length = 1;
+  oObj.desigs[0].amt = oObj.amount;
+  scope.oPanel.state.bNoValidate = false;
+  scope.$apply();
+}
+
+function methDesigAmtFocus(scope,oObj) {
+  log("methDesigAmtFocus "+scope.$id+" "+oObj.amount);
+  scope.oPanel.state.bNoValidate = true;
+  scope.$apply();
+}
+
+function methDesigAmtBlur(scope,oObj,nRow) {
+  var sAmt = (+oObj.desigs[nRow].amt).toFixed(2);
+  oObj.desigs[nRow].amt = sAmt;
+  var sTot = calcTotDesig(scope,oObj,false);
+  var sTotAmt = (+oObj.amount).toFixed(2);
+  log("methDesigAmtBlur "+scope.$id+" "+oObj.amount+" row="+nRow+" d-tot="+sTot+" tot="+sTotAmt);
+  if ((+sAmt &gt; 0) && (+sTot &lt; +sTotAmt) && (oObj.desigs.length &lt; 4)) {
+    var sRem = (+sTotAmt - +sTot).toFixed(2);
+    oObj.desigs.push({amt:sRem,acct:getBestAcct(oObj,['R005','R705','R706','R701']),subacct:null});
+  }
+  if ((+sAmt == 0) && (nRow &gt; 0)) {
+    oObj.desigs = removeObj(oObj.desigs,oObj.desigs[nRow]);
+  }
+  scope.oPanel.state.bNoValidate = false;
+  scope.$apply();
+}
+
+function getBestAcct(oObj,sAccts) {
+  for(var j=0,jMax=sAccts.length; j&lt;jMax; j += 1) {
+    var bUsed = false;
+    for(var i=0,iMax=oObj.desigs.length; i&lt;iMax; i+=1) {
+      if (oObj.desigs[i].acct == sAccts[j]) {
+        bUsed = true;
+        break;
+      }
+    }
+    if (!bUsed) return sAccts[j];
+  }
+  return sAccts[0];
+}
+
+function calcTotDesig(scope,oObj,bNullFind) {
+  var nAmt = 0;
+  for(var i=0,iMax=oObj.desigs.length; i&lt;iMax; i++) {
+    if (oObj.desigs[i].amt == null) {
+      if (bNullFind) return null;
+    } else {
+      nAmt += +oObj.desigs[i].amt;
+    }
+  }
+  return nAmt.toFixed(2);
+}
+
+function methChangeTender(scope,oObj) {
+  log("methChangeTender "+oObj.tender);
+  scope.oPanel.state.showTally = (oObj.tender == 'cash');
+}
+
+function methToggleTally(scope,oObj) {
+  log("methToggleTally "+oObj.tender);
+  scope.oPanel.state.showTally = !scope.oPanel.state.showTally;
+}
+
+function methResetTally(scope,oObj) {
+  log("methResetTally "+oObj.tender);
+  scope.oPanel.state[500]    = 0;
+  scope.oPanel.state[100]    = 0;
+  scope.oPanel.state[50]     = 0;
+  scope.oPanel.state[20]     = 0;
+  scope.oPanel.state[10]     = 0;
+  scope.oPanel.state[5]      = 0;
+  scope.oPanel.state['coin'] = 0;
+}
+
+function getTallyStr(scope) {
+  var sStr = "";
+  sStr = assignStr(scope,sStr,500);
+  sStr = assignStr(scope,sStr,100);
+  sStr = assignStr(scope,sStr,50);
+  sStr = assignStr(scope,sStr,20);
+  sStr = assignStr(scope,sStr,10);
+  sStr = assignStr(scope,sStr,5);
+  sStr = assignStr(scope,sStr,'coin');
+  return sStr.trim();
+}
+
+function loadTallyStr(scope,sTallyStr) {
+  if (!sTallyStr) return;
+  var sParts = sTallyStr.split(" ");
+  log("tallystr "+sTallyStr+" "+sParts.length);
+  for(var i=0,iMax=sParts.length; i&lt;iMax; i+=1) {
+    var sItem = sParts[i].split("=");
+    scope.oPanel.state[sItem[0]] = sItem[1];
+  }
+}
+
+function assignStr(scope,sStr,nBill) {
+  if (!scope.oPanel.state[nBill]) return sStr;
+  return sStr + " "+nBill+"="+scope.oPanel.state[nBill];
+}
+
+function estimateTally(scope,oObj,bReset) {
+  if (bReset) {
+    scope.oPanel.state[500] = null;
+    scope.oPanel.state[100] = null;
+    scope.oPanel.state[50] = null;
+    scope.oPanel.state[20] = null;
+    scope.oPanel.state[10] = null;
+    scope.oPanel.state[5] = null;
+    scope.oPanel.state['coin'] = null;
+  }
+  var nRem = oObj.amount;
+  //nRem = assign(scope,nRem,500);
+  nRem = assign(scope,nRem,100);
+  nRem = assign(scope,nRem,50);
+  nRem = assign(scope,nRem,20);
+  nRem = assign(scope,nRem,10);
+  nRem = assign(scope,nRem,5);
+  if (nRem &gt; 0) scope.oPanel.state['coin'] = nRem.toFixed(2);
+}
+
+function assign(scope,nRem,nBill) {
+  if (nRem &gt;= nBill) {
+    var nNum = Math.floor(nRem / nBill);
+    scope.oPanel.state[nBill] = nNum;
+    //log("Doing "+nBill+" num="+nNum+" rem="+nRem);
+    nRem -= nBill * nNum;
+
+  }
+  return +nRem;
+}
+
+function setTallyTotal(scope) {
+  var nTot = 0;
+  nTot += (scope.oPanel.state[500] || 0) * 500;
+  nTot += (scope.oPanel.state[100] || 0) * 100;
+  nTot += (scope.oPanel.state[50]  || 0) * 50;
+  nTot += (scope.oPanel.state[20]  || 0) * 20;
+  nTot += (scope.oPanel.state[10]  || 0) * 10;
+  nTot += (scope.oPanel.state[5]   || 0) * 5;
+  nTot += +(scope.oPanel.state['coin'] || 0);
+  scope.oPanel.state['tally-total'] = nTot.toFixed(2);
+  //log("set TallyTotal "+nTot);
+}
+
+function getDonorName(oObj) {
+  if (oObj.donor) return oObj.donor.name;
+  return "?Last, ?First";
+}
+
+function getAmount(oObj) {
+  return oObj.amount;
+}
+
+function getAmt(oObj) {
+  return (+(oObj.amount)).toFixed(2);
+}
+
+function getTender(oObj) {
+  if (oObj.tender == 'cheque') return 'chq';
+  return 'cash';
+}
+
+
+function getLines(oObj) {
+  return ""+oObj.desigs.length;
+}
+
+
+function getEditRecordExit(oaa) {
+  var oObj = oTabProp.oObjs[oaa];
+  return oObj.details;
+}
+
+function createExit(oObj) {
+  var sNow       = ""+getNowYMD();
+  var sDPx       = nextDPx(sNow);
+  var sSrc       = getSource();
+  oObj.name      = sNow+"."+sSrc+".CND."+sDPx;
+  oObj.counter1  = servSess.getUser();
+  oObj.counter2  = servSess.getUser2();
+  oObj.cash      = null;
+  oObj.cheque    = null;
+  oObj.currency  = "CND";
+  oObj.donors    = [];
+  oObj.dummy     = null;
+  oObj.KeyName   = servGAE.getCust()+"/"+oTabProp.recType+"/"+oObj.name;
+  oTabProp.editActions = [{click:changeCurrency,text:'Switch Account'}]; // Allow account switch
+  return true;
+}
+
+function getSource() {
+  var oProf = servSess.getProfile();
+  if (!oProf || !oProf.src) return "DEM";
+  return oProf.src;
+}
+
+function nextDPx(sNow) {
+  var nNext = 0;
+  if (!oTabProp.oObjs) return 1;
+  for(var i=0,iMax=oTabProp.oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = oTabProp.oObjs[i];
+    //2013-06-25.ES1.CND.dp1
+    var sParts = oObj.name.split(/[.]/);
+    log("inspect "+oObj.name+" "+sNow+" "+sParts[0]+" "+sParts[3]);
+    if (sParts[0] == sNow) {
+      var nMax = +(sParts[3].substring(2));
+      if (nMax &gt; nNext) nNext = nMax;
+    }
+  }
+  return "dp"+(nNext+1);
+}
+
+function cacheLoadExit(sFile,oRec) {
+  var sParts = sFile.split(/[.]/);
+  var oObj   = {name:sFile,src:sParts[1],currency:sParts[2],counter1:""+oRec.counter1,counter2:""+oRec.counter2,acct:"?",cashSum:oRec.cash,chequeSum:oRec.cheque,details:oRec};
+  log("cacheLoadExit %s rec=%o obj=%o",sFile,oRec,oObj);
+  return oObj;
+}
+
+function depositTot(oObj) {
+  return (+oObj.cashSum + +oObj.chequeSum).toFixed(2);
+}
+
+function addDonorLine(scope,oDonor) {
+  if (scope.oPanel.oDonEdit) return;
+  log("addDonorLine clicked "+scope.$id+" "+oDonor.code+" obj=%o evt=%o %s",scope.oObj,$rootScope.oCurEvent,typeof $rootScope.oCurEvent);
+  var dAmt = 0.00;
+  var sTender = 'cheque';
+  if ($rootScope.oCurEvent  && ($rootScope.oCurEvent.type == 'click') && $rootScope.oCurEvent.shiftKey) sTender = 'cash';
+  var oDon = {code:oDonor.code,donor:oDonor,amount:dAmt,tender:sTender};
+  oDon.desigs = [{amt:null,acct:'R000',subacct:null}];
+  editDonor(scope,oDon,"Add");
+}
+
+function counters(oObj) {
+   if (!oObj) return null;
+  return oObj.counter1+"/"+oObj.counter2;
+}
+
+function cashTot(oObj) {
+  if (!oObj) return 0;
+  if (!oObj.donors) return 0;
+  var nAmt = 0;
+  if (oObj.cash != null) return oObj.cash;
+  for(var i=0,iMax=oObj.donors.length; i&lt;iMax; i+=1) {
+    var oDon = oObj.donors[i]
+    if (oDon.tender == 'cash') {
+      nAmt += +oDon.amount;
+    }
+  }
+  oObj.cash = nAmt.toFixed(2);
+  return oObj.cash;
+}
+
+function chequeTot(oObj) {
+  if (!oObj) return 0;
+  if (!oObj.donors) return 0;
+  var nAmt = 0;
+  if (oObj.cheque != null) return oObj.cheque;
+  for(var i=0,iMax=oObj.donors.length; i&lt;iMax; i+=1) {
+    var oDon = oObj.donors[i]
+    if (oDon.tender == 'cheque') {
+      nAmt += +oDon.amount;
+    }
+  }
+  oObj.cheque = nAmt.toFixed(2);
+  return oObj.cheque;
+}
+
+function totalTot(oObj) {
+  return (+chequeTot(oObj) + +cashTot(oObj)).toFixed(2);
+}
+
+}]);
+</pre></div>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideapreamble"><a class=hider ng-click=toggleHide($event)>hide</a>Pre-amble</h6>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Lines <code>28</code> thru <code>39</code> define a function used to process the <code>FormDepSum.js</code> <code>deps:send-sum-info</code> request issued in line <code>53</code>.
+Note that it uses the <a href="/api/tri.servREG#findTable">servREG.findTable</a> method to return the <code>tblDEP</code> and <code>tblDON</code> definitions.
+The public method <code>getDonorMap</code> is used to build a donor map (See <code>TableDonors.js</code> lines <code>49</code> and <code>59</code> thru <code>69</code>.  This is returned along with
+the <code>tblDEP</code> object array to <code>FormDepSum.js</code> with the verb <code>deps:deps-sum-data</code> where it is processed beginning in line  <code>63</code> of <code>FormDepSum.js</code>.</p></li>
+<li><p>Lines <code>43</code> thru <code>45</code> show how to extend the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>.  At this point extra functions could be added.  Originally
+the additional functionality was going to be needed but other ways were found to achieve what was required.  This code was left in, however, to demonstrate the
+capability of extending <a href="/api/tri.controller:ctrlCommEdit">Editor</a>.  It also required the replacement explained in line <code>27</code> of <code>Deps.htm</code>.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideatbldepdefinition"><a class=hider ng-click=toggleHide($event)>hide</a><code>tblDEP</code> Definition</h6>
+
+<ul>
+<li><p>Lines <code>51</code> thru <code>702</code> define <code>tblDEP</code>, the primary table of this application.</p></li>
+<li><p>Lines <code>54</code> thru <code>63</code> define <code>donors</code>, a sub-list used by the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>.  It is referenced in line <code>120</code>.  It uses
+the <a href="/guide/col#definitionsyntax">col.Definition Syntax</a> to define the sub-columns used in the list. This is handled by the
+<code>&lt;div ng-switch-when='list'&gt;</code> section beginning around line <code>376</code> of <code>tri/AppsBase.htm</code>.  This is a stripped down  <a href="/api/tri.controller:ctrlCommList">Lister</a>
+used to handle lists inside the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>.</p></li>
+<li><p>Lines <code>65</code> thru <code>90</code> define <code>donedit</code>, a panel used by the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>.  It is referenced in line <code>119</code>.  It uses
+the <a href="/guide/col#definitionsyntax">Col.Definition Syntax</a> to define the sub-columns used in the panel. This is handled by the
+<code>&lt;div ng-switch-when='panel' id={{oCol.cssid}}&gt;</code> section beginning around line <code>366</code> of <code>tri/AppsBase.htm</code>.
+It uses the <code>&lt;macro col='oSubC' objref=oCol.objName mode='Edit' marker=mark-2a&gt;&lt;/macro&gt;</code> to insert the columns which uses the specified <code>htmlEdit</code>
+template reference to construct the field.  The linkage to the <code>meth...</code> references is automatically established by this process.</p></li>
+<li><p>Lines <code>92</code> thru <code>130</code> define the properties of <code>tblDEP</code> according to <a href="/guide/table#definitionsyntax">Table.Definition Syntax</a></p></li>
+<li><p>Line <code>98</code> means this table will be stored in <a href="/guide/records#supportedrecordtypes">TBL Mode</a> (single records).</p></li>
+<li><p>Line <code>106</code> means the object <code>name</code> property values will be unique across all rows.</p></li>
+<li><p>Line <code>119</code> is special in that it defines the <code>Edit Donor</code> panel made visible when the <code>edit</code> is pressed on the sub-donor list or <code>addDonorLine</code> is called externally
+from the <code>TableDonors.js</code> code in <code>154</code>.  The scoped variable <code>oPanel.oDonEdit</code> is used to control whether the panel is visible.  The <code>scope</code> property
+names the object that will hold property/value pairs.  The <code>schema</code> property informs <strong>Triangular</strong> what schema is used to define the panel.  The <code>cssid</code> property
+creates an id so that the <strong>css</strong> definitions have easy access to the HTML elements.  The <code>legend</code> property causes a &LT;FieldSet> element to be built with
+<code>Donor</code> as its legend element.</p></li>
+<li><p>Line <code>120</code> builds the donor sub-list using <code>donors</code> defined beginning in line <code>54</code>.</p></li>
+<li><p>Line <code>125</code> defines the <code>getEditRecordExit</code> which is implemented in line <code>597</code>.  It returns the <code>oObj.details</code> object which is the actual object being edited.  This is because <code>tblDEP</code> uses the
+the <a href="/guide/records#supportedrecordtypes">TBL Mode</a> means of storage and the record is one level down.</p></li>
+<li><p>Line <code>128</code> makes <code>addDonorLine</code>  public so <code>TableDonors.js</code> code in <code>154</code> can use it.</p></li>
+<li><p>Line 132 creates <code>oInfo</code> from the <a href="/api/tri.servConfig#getInfo">servConfig.getInfo</a> call.  It mainly provides the banking information so that
+the same code base can be used in multiple environments.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideatbldeplocalfunctions"><a class=hider ng-click=toggleHide($event)>hide</a><code>tblDEP</code> Local Functions</h6>
+
+<ul>
+<li><p>Lines <code>92</code> thru <code>130</code> implement <code>testDoubleLogin</code> which determines whether 2 users are logged on.  This is used to alter the available functions.  For
+example, only a single-user logon can change the password.</p></li>
+<li><p>Lines <code>203</code> thru <code>207</code> implement <code>validateDeposit</code> referenced in line <code>123</code>.  It insists on there being at least one donor
+and the <code>Edfit Donor</code> panel must not be open.</p></li>
+<li><p>Lines <code>264</code> thru <code>270</code> implement <code>methCanSave</code> referenced in line <code>69</code>. It validates a single donor donation and returns <code>true</code> if it is good.  Among other
+things this allows the single donation to be saved back into the object.</p></li>
+<li><p>Lines <code>381</code> thru <code>404</code> implement <code>saveEditDonor</code> referenced in line <code>68</code>. Line <code>397</code> persists the record using <a href="/api/tri.servTBL#insertRec">servTBL#insertRec</a>
+with the <code>bInter</code> flag turned on.  That means the data is saved to the main record even if the system crashes. Line <code>398</code> makes it impossible
+to change the KeyName (line <code>614</code>) by removing the action to do so.</p></li>
+<li><p>Lines <code>400</code> thru <code>403</code> attempt to set the focus on a field called <code>_custmask</code> as a help to the user.</p></li>
+<li><p>Lines <code>421</code> thru <code>430</code> implement <code>methAmtBlur</code> referenced in line <code>79</code>.  It updates the various fields when the focus is lost.  This and other
+similar functions use the code sequence
+<br><br>
+<code>scope.oPanel.state.bNoValidate = false;</code>
+<br>
+<code>scope.$apply();</code>
+<br><br>
+to force <a target=_blank href="http://angularjs.org/">AngularJS</a> to re-apply the changed variable states.</p></li>
+<li><p>Lines <code>602</code> thru <code>617</code> implement <code>createExit</code> referenced in line <code>124</code>.  It computes the KeyName defined in <a href="/guide/records#keystructure">Key Structure</a>
+in line <code>614</code>.</p></li>
+</ul>
+
+<p><span id='FormDeposit.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformdeposithtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormDeposit.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;!--
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+--&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-deps1.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="Deps.css" title=defualt&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="FormDeposit.js"&gt;&lt;/script&gt;
+&lt;title&gt;FormDeposit Printer&lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body ng-app=app&gt;
+
+&lt;div ng-controller=ctrlForm&gt;
+
+  &lt;!-- -------------Deposit Print Reports ----------------------&gt;
+  &lt;div&gt;
+    &lt;style type="text/css"&gt;
+      div#depForm a#print             {}
+      div#depForm                     {font-size:85%; font-weight:normal; margin-top:10px;}
+
+      div#depForm div#panel           {position:fixed;left:1200px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250);}
+      div#depForm div#panel p.lab     {text-align:center; width:310px; position:relative; top:auto;}
+      div#depForm div#panel a#print   {position:relative; top:auto; left:0px; z-index:10;}
+      div#depForm div#panel p#admin   {position:relative; top:auto; left:0px; z-index:10;}
+      div#depForm input#txtCust       {width:280px; margin-left:20px;}
+      div#depForm div#dormant         {width:700px; margin-left:20px; font-size:120%;}
+      div#depForm h5                  {font-size:120%;}
+
+    &lt;/style&gt;
+    &lt;div id=depForm style='margin-left:20px'&gt;
+      &lt;div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Report'&gt;&lt;/div&gt;
+
+      &lt;div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/deposit record'&gt;&lt;/div&gt;
+
+      &lt;!-- ----------------------------- Bank Deposit Statement ------------------------&gt;
+      &lt;style type="text/css"&gt;
+        div#depPage                             {font-size:65%;}
+        div#depPage table#master                {width:540px; margin-left:-15px; border-right:dashed 1px black; border-bottom:dashed 1px black;}
+        div#depPage td#rgt                      {height:580px;  margin-left:20px; border-left:solid 2px black; vertical-align:top;}
+        div#depPage td#lft                      {height:580px;  margin-left:20px; vertical-align:top; width:260px;}
+        div#depPage p.hdr                       {margin-left:10px; margin-top:0px; margin-bottom:5px;}
+        div#depPage pre.addr                    {font-size:90%; margin-top:0px; margin-bottom:5px; margin-left:10px;}
+        div#depPage p.acct                      {margin-left:20px; margin-top:-5px; margin-bottom:5px;}
+        div#depPage p.label                     {font-size:80%;}
+        div#depPage p.counter                   {font-size:80%; margin-left:10px; margin-bottom:0px; margin-top:20px; clear:both;}
+        div#depPage p.fileref                   {font-size:80%; margin-left:10px; margin-top:0px; margin-bottom:0px;}
+        div#depPage p.counter span.sig          {font-weight:bold; display:inline-block; margin-left:15px; border-top:solid 2px black; width:80px;}
+        div#depPage p.clear                     {font-size:80%;clear:both; margin-bottom:0px;}
+        div#depPage div.box                     {border:solid 1px black; width:115px; padding-bottom:10px; float:left;}
+        div#depPage div.boxes                   {margin-left:10px;}
+        div#depPage div.boxes pre               {padding-right:10px; text-align:right; margin-top:5px; margin-bottom:0px;}
+        div#depPage div.boxes pre.total         {border-top: solid 1px black; background-color:rgb(232,232,232); height:25px; font-weight:bold; font-size:110%; margin-bottom:-10px;}
+
+        div#depPage p.date                      {margin-left:10px;}
+        div#depPage span.small                  {font-size:70%; color:rgb(160,160,160);}
+        div#depPage .upper                      {font-variant:small-caps;}
+        div#depPage table#chq-list              {width:250px; font-size:70%; margin-left:-0px;}
+        div#depPage table#chq-list td.c0        {width:20px; text-align:right; padding-right:10px;  background-color:white;}
+        div#depPage table#chq-list td.c1        {width:90%;}
+        div#depPage table#chq-list td.c2        {width:100px; text-align:right;}
+        div#depPage p.chqs                      {margin-left:10px; margin-top:5px; margin-bottom:0px;}
+        div#depPage table#chq-list tr.tr-even   {background-color:rgb(255,255,255);}
+        div#depPage table#chq-list tr.tr-odd    {background-color:rgb(240,240,240);}
+        div#depPage table#chq-list tr           {font-size:75%;}
+      &lt;/style&gt;
+      &lt;div id=depPage ng-show='isLoaded() && oObjRep.type == "deposit"'&gt;
+        &lt;table id=master&gt;
+           &lt;tr&gt;
+             &lt;td id=lft&gt;
+               &lt;p class=hdr&gt;{{oInfo.bank}} Deposit Slip&lt;/p&gt;
+               &lt;p class='hdr upper'&gt;{{oInfo.acctHolder}}&lt;/p&gt;
+               &lt;p class=hdr&gt; {{oObj.currency}}: {{oInfo['acct'+oObj.currency]}}&lt;/p&gt;
+               &lt;p class=chqs&gt;Cheque Particulars:&lt;/p&gt;
+               &lt;table id=chq-list style='margin-bottom:15px;'&gt;
+                 &lt;tr ng-repeat='oChq in oTots.cheques' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'"&gt;
+                   &lt;td class=c0&gt;{{""+($index+1)}}&lt;/td&gt;
+                   &lt;td class=c1&gt;{{oChq.name}} {{getDonorName(oChq.name)}}&lt;/td&gt;
+                   &lt;td class=c2&gt;{{oChq.amt}}&lt;/td&gt;
+                 &lt;/tr&gt;
+               &lt;/table&gt;
+               &lt;div class=boxes style='margin-top:20px;margin-left:12px;'&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;Cheque Count&LT;/pre&gt;
+                   &LT;pre class=total&gt;Total&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oTots.chequeCount}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;{{oObj.chequeSum}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p class=counter&gt;
+                 &nbsp;&lt;br&gt;
+                 Signed:&lt;br&gt;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span class=sig&gt;{{oObj.details.counter1}}&lt;/span&gt;&lt;span class=sig&gt;{{oObj.details.counter2}}
+               &lt;/p&gt;
+               &lt;p class=fileref&gt;FileRef: {{oObj.name}}&lt;/p&gt;
+             &lt;/td&gt;
+             &lt;td id=rgt&gt;
+               &lt;p class=hdr&gt;{{oInfo.bank}} Deposit Slip&lt;/p&gt;
+               &LT;pre class=addr&gt;{{oInfo.bankAddr}}&LT;/pre&gt;
+               &lt;p class='hdr label'&gt;Credit the account of:&lt;/p&gt;
+               &lt;p class='acct upper'&gt;{{oInfo.acctHolder}}&lt;/p&gt;
+               &lt;p class=acct&gt; {{oObj.currency}}: {{oInfo['acct'+oObj.currency]}}&lt;/p&gt;
+               &lt;p class=date&gt; Date: {{oTots.date}} &lt;span class=small&gt;(ymd)&lt;/span&gt;&lt;/p&gt;
+               &lt;p class='hdr label'&gt;Cash Count&lt;/p&gt;
+               &lt;div id=cash class=boxes&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oTots['5']}} x 5  &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['10']}} x 10 &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['20']}} x 20 &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['50']}} x 50 &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['100']}} x 100&LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['500']}} x 500&LT;/pre&gt;
+                   &LT;pre&gt;Coins {{oTots['coin'] | number:2}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;Total&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['5'] * 5) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['10'] * 10) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['20'] * 20) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['50'] * 50) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['100'] * 100) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['500'] * 500) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{oTots['coin'] | number:2}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;{{oObj.cashSum}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p class=clear&gt;&nbsp;&lt;/p&gt;
+               &lt;p class='hdr label'&gt;Total Cheques&lt;/p&gt;
+               &lt;div class=boxes&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oTots.chequeCount}} cheques&LT;/pre&gt;
+                   &LT;pre class=total&gt;Total&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oObj.chequeSum}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;{{oObj.chequeSum}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p class=clear&gt;&nbsp;&lt;/p&gt;
+               &lt;p class='hdr label'&gt;TOTAL DEPOSIT&lt;/p&gt;
+               &lt;div id=coin class=boxes&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre class=total&gt;TOTAL&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre class=total&gt;{{oTots.total}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+             &lt;/td&gt;
+           &lt;/tr&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+      &lt;!-- ----------------------------- Deposit Summary Statement ------------------------&gt;
+      &lt;style type="text/css"&gt;
+
+        div#sumPage                             {font-size:75%; width:1100px; /*border-right:solid 1px red;*/}
+        div#sumPage h2                          {text-align:center;}
+        div#sumPage table                       {width:100%; font-size:100%; border-collapse:collapse;}
+        div#sumPage table                       {border-left:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black;}
+        div#sumPage thead                       {font-weight:normal; color:gray; background-color:rgb(250,250,250);}
+        div#sumPage thead tr.r1 th              {border-top: solid 1px black;}
+        div#sumPage thead tr.r3 th              {border-bottom: solid 1px black; /*border-spacing: 10px;*/}
+        div#sumPage table tr.tr-even            {background-color:rgb(255,255,255);}
+        div#sumPage table tr.tr-odd             {background-color:rgb(240,240,240);}
+        div#sumPage table .c1                   {width:80px; padding-left:10px;}
+        div#sumPage table .c2                   {width:400px;}
+        div#sumPage table .c3                   {width:100px;}
+        div#sumPage table .c4                   {width:100px; padding-right:10px;border-right:solid 1px black;}
+        div#sumPage table .cb                   {border-right:solid 1px black;}
+        div#sumPage table .cf                   {width:0px;border-right:solid 1px black;}
+        div#sumPage table .c-bin                {width:80px;}
+        div#sumPage thead .c1                   {background-color:rgb(250,250,250);}
+        div#sumPage thead .c2                   {}
+        div#sumPage thead .c3                   {}
+        div#sumPage thead .c4                   {}
+        div#sumPage thead .c-bin                {background-color:rgb(240,240,240);}
+        div#sumPage tbody .c3                   {text-align:right;}
+        div#sumPage tbody .c4                   {text-align:right;}
+        div#sumPage tbody .c2 pre               {font-family:Verdana;}
+        div#sumPage tbody .c-bin                {text-align:right;}
+        div#sumPage tbody tr.total              {font-weight:bold; height:30px;}
+        div#sumPage tbody tr.total td           {border-bottom: solid 1px black;}
+        div#sumPage div#sumlnes                 {margin-top:10px;}
+        div#sumPage div#sumlnes div#tots        {float:left;font-size:130%;font-weight:bold; width:540px;}
+        div#sumPage div#sumlnes div.note        {float:left; width:57px;}
+        div#sumPage div#sumlnes div#note        {float:left; width:500px; height:40px;border:solid 1px black;}
+        div#sumPage p.sigs                      {clear:both; padding-top:0px;}
+        div#sumPage span.sig                    {font-weight:bold; display:inline-block; margin-left:60px; border-top:solid 2px black; width:200px;}
+      &lt;/style&gt;
+      &lt;div id=sumPage ng-show='isLoaded() && oObjRep.type == "sum"'&gt;
+        &lt;h2&gt;{{oInfo.acctHolder}}&lt;/h2&gt;
+        &lt;h2&gt;Summary Page for Deposit {{oObj.name}}&lt;/h2&gt;
+        &lt;table id=sum&gt;
+          &lt;thead&gt;
+            &lt;tr class=r1&gt;
+              &lt;th class=c1&gt;&lt;/th&gt;
+              &lt;th class=c2&gt;&lt;/th&gt;
+              &lt;th class='c3 cb' colspan=2&gt;&lt;/th&gt;
+              &lt;th class=c-bin colspan=7&gt;Designations&lt;/th&gt;
+              &lt;th class=cf&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;th class=c1 colspan=2&gt;Received Funds From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/th&gt;
+              &lt;th class='c3 cb' colspan=2&gt;Tender&lt;/th&gt;
+              &lt;th class=c-bin ng-repeat='oBin in oTots.bins'&gt;{{oBin.acct}}&lt;/th&gt;
+              &lt;th class=cf&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr class=r3&gt;
+              &lt;th class=c1&gt;Code&lt;/th&gt;
+              &lt;th class=c2&gt;Name&lt;/th&gt;
+              &lt;th class=c3&gt;$Cash&lt;/th&gt;
+              &lt;th class=c4&gt;$Cheque&lt;/th&gt;
+              &lt;th class=c-bin ng-repeat='oBin in oTots.bins'&gt;{{oBin.name}}&lt;/th&gt;
+              &lt;th class=cf&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;&lt;td colspan=3&gt;&lt;/td&gt;&lt;td class=c4&gt;&nbsp;&lt;/td&gt;&lt;td colspan=7&gt;&lt;/td&gt;&lt;td class=cf&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;tr ng-repeat='oSL in oTots.sumLines' ng-class='oSL.class' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'"&gt;
+                &lt;td class=c1&gt;{{oSL.code}}&lt;/td&gt;
+                &lt;td class=c2&gt;&LT;pre&gt;{{oSL.name}}&LT;/pre&gt;&lt;/td&gt;
+                &lt;td class=c3&gt;{{oSL.cashAmt}}&lt;/td&gt;
+                &lt;td class=c4&gt;{{oSL.chqAmt}}&lt;/td&gt;
+                &lt;td class=c-bin ng-repeat='oBin in oTots.bins'&gt;{{oBin.amt[oSL.ix]}}&lt;/td&gt;
+                &lt;td class=cf&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;div id=sumlnes&gt;
+          &lt;div id=tots&gt;Cheques={{oTots.chequeCount}}&nbsp;&nbsp;&nbsp; Total deposit=${{oTots.total}}&lt;/div&gt;
+          &lt;div class=note&gt;Deposit Notes:&lt;/div&gt;
+          &lt;div id=note&gt;{{oObj.details.note}}&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p class=sigs&gt;Signed:&lt;p&gt;
+        &lt;p class=sigs&gt;&lt;span class=sig&gt;{{oObj.details.counter1}}&lt;/span&gt;&lt;span class=sig&gt;{{oObj.details.counter2}}&lt;/span&gt;&lt;p&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!------- Custom Templates ------!&gt;
+&lt;script type="text/ng-template" id="panel-extra.html"&gt;
+  &lt;p id=admin&gt;&lt;input id=radDeposit type=radio ng-model=oObjRep.type value='deposit'&gt;&lt;label for=radDeposit&gt;Bank Deposit Form&lt;/label&gt;&lt;/p&gt;
+  &lt;p id=admin&gt;&lt;input id=radSum     type=radio ng-model=oObjRep.type value='sum'&gt;&lt;label for=radSum&gt;Deposit Summary&lt;/label&gt;&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li><p>Lines <code>2</code> thru <code>8</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>78</code> and others inspect <code>oObjRep.type</code> which is an object defined in <code>FormDeposit.js</code> line <code>22</code>.  It uses the
+<a href="/guide/hints-tech#useofobjectsasmodels">Use of Objects as models</a> technique to simplify the code.  This is also used in lines <code>258</code> and <code>259</code>
+where the <code>type</code> property is set by the control.</p></li>
+<li><p>Lines <code>258</code> thru <code>261</code> use the <a target=_blank href="http://angularjs.org/">AngularJS</a> <code>text/ng-template</code> facility to add the templace to the <code>$templateCache</code> where it is retrieved in line
+<br><br>
+<code>&lt;p ng-include='panel_extra'&gt;&lt;/p&gt;</code>
+<br><br>
+inside the <code>forms-panel.html</code> of the <code>tri/AppsBase.htm</code> file.  This also requires line <code>28</code> in <code>FormDeposit.js</code>.</p></li>
+</ul>
+
+<p><span id='FormDeposit.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformdepositjsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormDeposit.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+// ---------------------------------------------------------------------------
+// ----------------------------- Controllers ---------------------------------
+// ---------------------------------------------------------------------------
+
+
+// ---------------------------------------------------------------------------
+function ctrlForm($scope,$rootScope,$templateCache) {
+$scope.oObj          = null;
+$scope.oInfo         = null;
+$scope.oTots         = {};
+$scope.oDonMap       = {};
+$scope.sYear         = getNowString().substring(0,4);
+$scope.oObjRep       = {type:'sum'}
+
+$scope.printPage     = function()           {printList();}
+$scope.closePage     = function()           {closePage();}
+$scope.getDonorName  = function(sCode)      {return getDonorName(sCode);}
+$scope.isLoaded      = function()           {return ($scope.oObj != null);}
+$scope.panel_extra   = 'panel-extra.html';
+
+
+log("ctrlForm loaded %o",$templateCache);
+
+if (!window.opener) return;
+
+
+hookMsgListener();
+tri.postToOpener({verb:"deps:send-print-info"});
+return;
+
+function hookMsgListener() {
+  log("Hooked message listener in Print.js");
+  tri.loadTemplates($rootScope,$templateCache);
+
+
+  var oHandler = function(event) {
+    console.log("return message ",event);
+    if (event.data.verb) {
+      if (event.data.verb == "deps:deps-data") {
+        console.log("have deps-data ",event.data);
+        $scope.oObj    = event.data.payload.oObj;
+        $scope.oInfo   = event.data.payload.oInfo;
+        $scope.oDonMap = event.data.payload.oMap;
+        primeTotals();
+        $scope.$digest();
+      } else {
+        console.log("spurious msg ",event.data);
+      }
+    }
+  }
+  oGBL.msgHandler.deps = oHandler;
+}
+
+function printList() {
+  window.print();
+}
+
+function loadTallyStr(scope,sTallyStr) {
+  if (!sTallyStr) return;
+  var sParts = sTallyStr.split(" ");
+  log("tallystr "+sTallyStr+" "+sParts.length);
+  for(var i=0,iMax=sParts.length; i&lt;iMax; i+=1) {
+    var sItem = sParts[i].split("=");
+    if (!(sItem[0] in scope.oTots)) scope.oTots[sItem[0]] = 0;
+    scope.oTots[sItem[0]] += (+sItem[1]);
+  }
+}
+
+function primeTotals() {
+  if (!$scope.oObj) return 0;
+  if (!$scope.oObj.details) return 0;
+  if (!$scope.oObj.details.donors) return 0;
+  console.log("priming oObj",$scope.oObj);
+  var oDonors = $scope.oObj.details.donors;
+  var nChqs = 0;
+  $scope.oTots.cheques = [];
+  for(var i=0,iMax=oDonors.length; i&lt;iMax; i+=1) {
+    var oDon = oDonors[i];
+    if (oDon.tender == 'cheque') {
+      var oChq = {amt:oDon.amount,name:oDon.code};
+      $scope.oTots.cheques.push(oChq);
+      nChqs += 1;
+    } else {
+      loadTallyStr($scope,oDon.tallystr);
+    }
+  }
+  while($scope.oTots.cheques.length &lt; 23) {
+    $scope.oTots.cheques.push({name:'.'});
+  }
+  createSummaryInfo(oDonors);
+  $scope.oTots.chequeCount = nChqs;
+  $scope.oTots.total = ((+$scope.oObj.cashSum)+(+$scope.oObj.chequeSum)).toFixed(2);
+  $scope.oTots.date = $scope.oObj.name.substring(0,10);
+  $scope.oTots.counters = $scope.oObj.details.counter1+"/"+$scope.oObj.details.counter1;
+}
+
+function getDonorName(sCode) {
+  if (sCode == ".") return null;
+  var oDon = $scope.oDonMap[sCode];
+  if (oDon == null) return "not-found";
+  return oDon.LastName+", "+oDon.FirstName;
+}
+
+function getNote(oDon) {
+  if (oDon.note) return "\r\n"+oDon.note;
+  return '';
+}
+
+function createSummaryInfo(oDonors) {
+  $scope.oTots.sumLines = [];
+  console.log("DonorRecords %o",oDonors);
+  console.log("Accounts %o",$scope.oInfo.accts);
+  var oMap = {};
+  var nSeq = 0;
+  var amts = [];
+  for(var i=0,iMax=oDonors.length+1; i&lt;iMax; i+=1) amts.push(0);
+  for(var i=0,iMax=$scope.oInfo.accts.length; i&lt;iMax; i+=1) {
+    var oAcct = $scope.oInfo.accts[i];
+    if (oAcct.subcodes) {
+      for(var j=0,jMax=oAcct.subcodes.length; j&lt;jMax; j+=1) {
+        var sSubCode = oAcct.subcodes[j];
+        oMap[sSubCode] = {name:sSubCode,seq:nSeq++,amt:angular.copy(amts),acct:oAcct.code};
+      }
+    } else {
+      oMap[oAcct.code] = {name:oAcct.name,seq:nSeq++,amt:angular.copy(amts),acct:oAcct.code};
+    }
+  }
+  console.log("map ",oMap);
+  for(var i=0,iMax=oDonors.length; i&lt;iMax; i+=1) {
+    var oDon = oDonors[i];
+    var oDonMap = angular.copy(oMap);
+    var oSL = {code:oDon.code,name:getDonorName(oDon.code)+getNote(oDon),ix:i+1,class:'detail'};
+    $scope.oTots.sumLines.push(oSL);
+    if (oDon.tender == 'cheque') {
+      oSL.chqAmt=oDon.amount;
+    } else {
+      oSL.cashAmt=oDon.amount;
+    }
+    for(var j=0,jMax=oDon.desigs.length; j&lt;jMax; j+=1) {
+      var oDes = oDon.desigs[j];
+      //console.log("des ",oDes);
+      if (oDes.subacct) {
+        oMap[oDes.subacct].amt[0] += +oDes.amt;
+        oMap[oDes.subacct].amt[oSL.ix] += +oDes.amt;
+      } else {
+        oMap[oDes.acct].amt[0] += +oDes.amt;
+        oMap[oDes.acct].amt[oSL.ix] += +oDes.amt;
+      }
+      oSL.oDonMap = oDonMap;
+    }
+  }
+  oSL = {name:'**** TOTAL',chqAmt:$scope.oObj.chequeSum,cashAmt:$scope.oObj.cashSum,ix:0,class:'total'};
+  $scope.oTots.sumLines.push(oSL);
+  var oBins = []
+  for(var i in oMap) {
+    var oBin = oMap[i];
+    if (oBin.amt[0] &gt; 0) {
+      for(var j=0,jMax=oBin.amt.length; j&lt;jMax; j+=1) {
+        if (oBin.amt[j] &gt; 0) {
+          oBin.amt[j] = (+oBin.amt[j]).toFixed(2);
+        } else {
+          oBin.amt[j] = null;
+        }
+      }
+      oBins.push(oBin);
+    }
+  }
+  while(oBins.length &lt; 7) {
+    oBins.push({name:'.',seq:100+oBins.length,acct:'',amt:[]});
+  }
+  oBins.sort(function(a,b) {
+    if (a.seq &lt; b.seq) return -1;
+    if (a.seq &gt; b.seq) return 1;
+    return 0;
+  });
+  console.log("lines ",$scope.oTots.sumLines);
+  console.log("bins ",oBins);
+  $scope.oTots.bins = oBins;
+}
+}
+
+
+</pre></div>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>28</code> is needed to cause the <code>panel-extra.html</code> to be displayed.  See line <code>258</code> in <code>FormDeposit.htm</code>.</p></li>
+</ul>
+
+<p><span id='FormDepSum.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformdepsumhtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormDepSum.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;!--
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+--&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-deps1.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="Deps.css" title=defualt&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="FormDeposit.js"&gt;&lt;/script&gt;
+&lt;title&gt;FormDeposit Printer&lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body ng-app=app&gt;
+
+&lt;div ng-controller=ctrlForm&gt;
+
+  &lt;!-- -------------Deposit Print Reports ----------------------&gt;
+  &lt;div&gt;
+    &lt;style type="text/css"&gt;
+      div#depForm a#print             {}
+      div#depForm                     {font-size:85%; font-weight:normal; margin-top:10px;}
+
+      div#depForm div#panel           {position:fixed;left:1200px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250);}
+      div#depForm div#panel p.lab     {text-align:center; width:310px; position:relative; top:auto;}
+      div#depForm div#panel a#print   {position:relative; top:auto; left:0px; z-index:10;}
+      div#depForm div#panel p#admin   {position:relative; top:auto; left:0px; z-index:10;}
+      div#depForm input#txtCust       {width:280px; margin-left:20px;}
+      div#depForm div#dormant         {width:700px; margin-left:20px; font-size:120%;}
+      div#depForm h5                  {font-size:120%;}
+
+    &lt;/style&gt;
+    &lt;div id=depForm style='margin-left:20px'&gt;
+      &lt;div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Report'&gt;&lt;/div&gt;
+
+      &lt;div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/deposit record'&gt;&lt;/div&gt;
+
+      &lt;!-- ----------------------------- Bank Deposit Statement ------------------------&gt;
+      &lt;style type="text/css"&gt;
+        div#depPage                             {font-size:65%;}
+        div#depPage table#master                {width:540px; margin-left:-15px; border-right:dashed 1px black; border-bottom:dashed 1px black;}
+        div#depPage td#rgt                      {height:580px;  margin-left:20px; border-left:solid 2px black; vertical-align:top;}
+        div#depPage td#lft                      {height:580px;  margin-left:20px; vertical-align:top; width:260px;}
+        div#depPage p.hdr                       {margin-left:10px; margin-top:0px; margin-bottom:5px;}
+        div#depPage pre.addr                    {font-size:90%; margin-top:0px; margin-bottom:5px; margin-left:10px;}
+        div#depPage p.acct                      {margin-left:20px; margin-top:-5px; margin-bottom:5px;}
+        div#depPage p.label                     {font-size:80%;}
+        div#depPage p.counter                   {font-size:80%; margin-left:10px; margin-bottom:0px; margin-top:20px; clear:both;}
+        div#depPage p.fileref                   {font-size:80%; margin-left:10px; margin-top:0px; margin-bottom:0px;}
+        div#depPage p.counter span.sig          {font-weight:bold; display:inline-block; margin-left:15px; border-top:solid 2px black; width:80px;}
+        div#depPage p.clear                     {font-size:80%;clear:both; margin-bottom:0px;}
+        div#depPage div.box                     {border:solid 1px black; width:115px; padding-bottom:10px; float:left;}
+        div#depPage div.boxes                   {margin-left:10px;}
+        div#depPage div.boxes pre               {padding-right:10px; text-align:right; margin-top:5px; margin-bottom:0px;}
+        div#depPage div.boxes pre.total         {border-top: solid 1px black; background-color:rgb(232,232,232); height:25px; font-weight:bold; font-size:110%; margin-bottom:-10px;}
+
+        div#depPage p.date                      {margin-left:10px;}
+        div#depPage span.small                  {font-size:70%; color:rgb(160,160,160);}
+        div#depPage .upper                      {font-variant:small-caps;}
+        div#depPage table#chq-list              {width:250px; font-size:70%; margin-left:-0px;}
+        div#depPage table#chq-list td.c0        {width:20px; text-align:right; padding-right:10px;  background-color:white;}
+        div#depPage table#chq-list td.c1        {width:90%;}
+        div#depPage table#chq-list td.c2        {width:100px; text-align:right;}
+        div#depPage p.chqs                      {margin-left:10px; margin-top:5px; margin-bottom:0px;}
+        div#depPage table#chq-list tr.tr-even   {background-color:rgb(255,255,255);}
+        div#depPage table#chq-list tr.tr-odd    {background-color:rgb(240,240,240);}
+        div#depPage table#chq-list tr           {font-size:75%;}
+      &lt;/style&gt;
+      &lt;div id=depPage ng-show='isLoaded() && oObjRep.type == "deposit"'&gt;
+        &lt;table id=master&gt;
+           &lt;tr&gt;
+             &lt;td id=lft&gt;
+               &lt;p class=hdr&gt;{{oInfo.bank}} Deposit Slip&lt;/p&gt;
+               &lt;p class='hdr upper'&gt;{{oInfo.acctHolder}}&lt;/p&gt;
+               &lt;p class=hdr&gt; {{oObj.currency}}: {{oInfo['acct'+oObj.currency]}}&lt;/p&gt;
+               &lt;p class=chqs&gt;Cheque Particulars:&lt;/p&gt;
+               &lt;table id=chq-list style='margin-bottom:15px;'&gt;
+                 &lt;tr ng-repeat='oChq in oTots.cheques' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'"&gt;
+                   &lt;td class=c0&gt;{{""+($index+1)}}&lt;/td&gt;
+                   &lt;td class=c1&gt;{{oChq.name}} {{getDonorName(oChq.name)}}&lt;/td&gt;
+                   &lt;td class=c2&gt;{{oChq.amt}}&lt;/td&gt;
+                 &lt;/tr&gt;
+               &lt;/table&gt;
+               &lt;div class=boxes style='margin-top:20px;margin-left:12px;'&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;Cheque Count&LT;/pre&gt;
+                   &LT;pre class=total&gt;Total&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oTots.chequeCount}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;{{oObj.chequeSum}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p class=counter&gt;
+                 &nbsp;&lt;br&gt;
+                 Signed:&lt;br&gt;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span class=sig&gt;{{oObj.details.counter1}}&lt;/span&gt;&lt;span class=sig&gt;{{oObj.details.counter2}}
+               &lt;/p&gt;
+               &lt;p class=fileref&gt;FileRef: {{oObj.name}}&lt;/p&gt;
+             &lt;/td&gt;
+             &lt;td id=rgt&gt;
+               &lt;p class=hdr&gt;{{oInfo.bank}} Deposit Slip&lt;/p&gt;
+               &LT;pre class=addr&gt;{{oInfo.bankAddr}}&LT;/pre&gt;
+               &lt;p class='hdr label'&gt;Credit the account of:&lt;/p&gt;
+               &lt;p class='acct upper'&gt;{{oInfo.acctHolder}}&lt;/p&gt;
+               &lt;p class=acct&gt; {{oObj.currency}}: {{oInfo['acct'+oObj.currency]}}&lt;/p&gt;
+               &lt;p class=date&gt; Date: {{oTots.date}} &lt;span class=small&gt;(ymd)&lt;/span&gt;&lt;/p&gt;
+               &lt;p class='hdr label'&gt;Cash Count&lt;/p&gt;
+               &lt;div id=cash class=boxes&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oTots['5']}} x 5  &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['10']}} x 10 &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['20']}} x 20 &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['50']}} x 50 &LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['100']}} x 100&LT;/pre&gt;
+                   &LT;pre&gt;{{oTots['500']}} x 500&LT;/pre&gt;
+                   &LT;pre&gt;Coins {{oTots['coin'] | number:2}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;Total&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['5'] * 5) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['10'] * 10) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['20'] * 20) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['50'] * 50) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['100'] * 100) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{(oTots['500'] * 500) |number:2}}&LT;/pre&gt;
+                   &LT;pre&gt;&nbsp;{{oTots['coin'] | number:2}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;{{oObj.cashSum}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p class=clear&gt;&nbsp;&lt;/p&gt;
+               &lt;p class='hdr label'&gt;Total Cheques&lt;/p&gt;
+               &lt;div class=boxes&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oTots.chequeCount}} cheques&LT;/pre&gt;
+                   &LT;pre class=total&gt;Total&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre&gt;{{oObj.chequeSum}}&LT;/pre&gt;
+                   &LT;pre class=total&gt;{{oObj.chequeSum}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+               &lt;p class=clear&gt;&nbsp;&lt;/p&gt;
+               &lt;p class='hdr label'&gt;TOTAL DEPOSIT&lt;/p&gt;
+               &lt;div id=coin class=boxes&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre class=total&gt;TOTAL&LT;/pre&gt;
+                 &lt;/div&gt;
+                 &lt;div class=box&gt;
+                   &LT;pre class=total&gt;{{oTots.total}}&LT;/pre&gt;
+                 &lt;/div&gt;
+               &lt;/div&gt;
+             &lt;/td&gt;
+           &lt;/tr&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+      &lt;!-- ----------------------------- Deposit Summary Statement ------------------------&gt;
+      &lt;style type="text/css"&gt;
+
+        div#sumPage                             {font-size:75%; width:1100px; /*border-right:solid 1px red;*/}
+        div#sumPage h2                          {text-align:center;}
+        div#sumPage table                       {width:100%; font-size:100%; border-collapse:collapse;}
+        div#sumPage table                       {border-left:solid 1px black; border-top:solid 1px black; border-bottom:solid 1px black;}
+        div#sumPage thead                       {font-weight:normal; color:gray; background-color:rgb(250,250,250);}
+        div#sumPage thead tr.r1 th              {border-top: solid 1px black;}
+        div#sumPage thead tr.r3 th              {border-bottom: solid 1px black; /*border-spacing: 10px;*/}
+        div#sumPage table tr.tr-even            {background-color:rgb(255,255,255);}
+        div#sumPage table tr.tr-odd             {background-color:rgb(240,240,240);}
+        div#sumPage table .c1                   {width:80px; padding-left:10px;}
+        div#sumPage table .c2                   {width:400px;}
+        div#sumPage table .c3                   {width:100px;}
+        div#sumPage table .c4                   {width:100px; padding-right:10px;border-right:solid 1px black;}
+        div#sumPage table .cb                   {border-right:solid 1px black;}
+        div#sumPage table .cf                   {width:0px;border-right:solid 1px black;}
+        div#sumPage table .c-bin                {width:80px;}
+        div#sumPage thead .c1                   {background-color:rgb(250,250,250);}
+        div#sumPage thead .c2                   {}
+        div#sumPage thead .c3                   {}
+        div#sumPage thead .c4                   {}
+        div#sumPage thead .c-bin                {background-color:rgb(240,240,240);}
+        div#sumPage tbody .c3                   {text-align:right;}
+        div#sumPage tbody .c4                   {text-align:right;}
+        div#sumPage tbody .c2 pre               {font-family:Verdana;}
+        div#sumPage tbody .c-bin                {text-align:right;}
+        div#sumPage tbody tr.total              {font-weight:bold; height:30px;}
+        div#sumPage tbody tr.total td           {border-bottom: solid 1px black;}
+        div#sumPage div#sumlnes                 {margin-top:10px;}
+        div#sumPage div#sumlnes div#tots        {float:left;font-size:130%;font-weight:bold; width:540px;}
+        div#sumPage div#sumlnes div.note        {float:left; width:57px;}
+        div#sumPage div#sumlnes div#note        {float:left; width:500px; height:40px;border:solid 1px black;}
+        div#sumPage p.sigs                      {clear:both; padding-top:0px;}
+        div#sumPage span.sig                    {font-weight:bold; display:inline-block; margin-left:60px; border-top:solid 2px black; width:200px;}
+      &lt;/style&gt;
+      &lt;div id=sumPage ng-show='isLoaded() && oObjRep.type == "sum"'&gt;
+        &lt;h2&gt;{{oInfo.acctHolder}}&lt;/h2&gt;
+        &lt;h2&gt;Summary Page for Deposit {{oObj.name}}&lt;/h2&gt;
+        &lt;table id=sum&gt;
+          &lt;thead&gt;
+            &lt;tr class=r1&gt;
+              &lt;th class=c1&gt;&lt;/th&gt;
+              &lt;th class=c2&gt;&lt;/th&gt;
+              &lt;th class='c3 cb' colspan=2&gt;&lt;/th&gt;
+              &lt;th class=c-bin colspan=7&gt;Designations&lt;/th&gt;
+              &lt;th class=cf&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;th class=c1 colspan=2&gt;Received Funds From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/th&gt;
+              &lt;th class='c3 cb' colspan=2&gt;Tender&lt;/th&gt;
+              &lt;th class=c-bin ng-repeat='oBin in oTots.bins'&gt;{{oBin.acct}}&lt;/th&gt;
+              &lt;th class=cf&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;tr class=r3&gt;
+              &lt;th class=c1&gt;Code&lt;/th&gt;
+              &lt;th class=c2&gt;Name&lt;/th&gt;
+              &lt;th class=c3&gt;$Cash&lt;/th&gt;
+              &lt;th class=c4&gt;$Cheque&lt;/th&gt;
+              &lt;th class=c-bin ng-repeat='oBin in oTots.bins'&gt;{{oBin.name}}&lt;/th&gt;
+              &lt;th class=cf&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;&lt;td colspan=3&gt;&lt;/td&gt;&lt;td class=c4&gt;&nbsp;&lt;/td&gt;&lt;td colspan=7&gt;&lt;/td&gt;&lt;td class=cf&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;tr ng-repeat='oSL in oTots.sumLines' ng-class='oSL.class' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'"&gt;
+                &lt;td class=c1&gt;{{oSL.code}}&lt;/td&gt;
+                &lt;td class=c2&gt;&LT;pre&gt;{{oSL.name}}&LT;/pre&gt;&lt;/td&gt;
+                &lt;td class=c3&gt;{{oSL.cashAmt}}&lt;/td&gt;
+                &lt;td class=c4&gt;{{oSL.chqAmt}}&lt;/td&gt;
+                &lt;td class=c-bin ng-repeat='oBin in oTots.bins'&gt;{{oBin.amt[oSL.ix]}}&lt;/td&gt;
+                &lt;td class=cf&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+        &lt;div id=sumlnes&gt;
+          &lt;div id=tots&gt;Cheques={{oTots.chequeCount}}&nbsp;&nbsp;&nbsp; Total deposit=${{oTots.total}}&lt;/div&gt;
+          &lt;div class=note&gt;Deposit Notes:&lt;/div&gt;
+          &lt;div id=note&gt;{{oObj.details.note}}&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p class=sigs&gt;Signed:&lt;p&gt;
+        &lt;p class=sigs&gt;&lt;span class=sig&gt;{{oObj.details.counter1}}&lt;/span&gt;&lt;span class=sig&gt;{{oObj.details.counter2}}&lt;/span&gt;&lt;p&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!------- Custom Templates ------!&gt;
+&lt;script type="text/ng-template" id="panel-extra.html"&gt;
+  &lt;p id=admin&gt;&lt;input id=radDeposit type=radio ng-model=oObjRep.type value='deposit'&gt;&lt;label for=radDeposit&gt;Bank Deposit Form&lt;/label&gt;&lt;/p&gt;
+  &lt;p id=admin&gt;&lt;input id=radSum     type=radio ng-model=oObjRep.type value='sum'&gt;&lt;label for=radSum&gt;Deposit Summary&lt;/label&gt;&lt;/p&gt;
+&lt;/script&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li><p>Lines <code>2</code> thru <code>8</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>48</code> and others inspect <code>oObjRep.type</code> which is an object defined in <code>FormDepSum.js</code> line <code>16</code>.  It uses the
+<a href="/guide/hints-tech#useofobjectsasmodels">Use of Objects as models</a> technique to simplify the code.  This is also used in lines <code>101</code> thru <code>103</code>
+where the <code>type</code> property is set by the control.</p></li>
+<li><p>Lines <code>99</code> thru <code>106</code> use the <a target=_blank href="http://angularjs.org/">AngularJS</a> <code>text/ng-template</code> facility to add the templace to the <code>$templateCache</code> where it is retrieved in line
+<br><br>
+<code>&lt;p ng-include='panel_extra'&gt;&lt;/p&gt;</code>
+<br><br>
+inside the <code>forms-panel.html</code> of the <code>tri/AppsBase.htm</code> file.  This also requires line <code>18</code> in <code>FormDepSum.js</code>.</p></li>
+</ul>
+
+<p><span id='FormDepSum.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformdepsumjsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormDepSum.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+// ---------------------------------------------------------------------------
+function ctrlForm($scope,$rootScope,$templateCache) {
+$scope.oAllObjs  = null;
+$scope.nPageIX    = 0;
+$scope.oPrtObjs  = [];
+$scope.oDistricts  = [];
+$scope.oObjRep   = {type:'active',district:'H1C1'};
+$scope.oOptions  = [{value:"1",name:"val1"},{value:"2",name:"val2"},{value:"3",name:"val3"}];
+$scope.panel_extra   = 'panel-extra.html';
+
+$scope.oMonths   = [{name:"Jan",objs:[]}
+                   ,{name:"Feb",objs:[]}
+                   ,{name:"Mar",objs:[]}
+                   ,{name:"Apr",objs:[]}
+                   ,{name:"May",objs:[]}
+                   ,{name:"Jun",objs:[]}
+                   ,{name:"Jul",objs:[]}
+                   ,{name:"Aug",objs:[]}
+                   ,{name:"Sep",objs:[]}
+                   ,{name:"Oct",objs:[]}
+                   ,{name:"Nov",objs:[]}
+                   ,{name:"Dec",objs:[]}
+                   ];
+$scope.oDays     = [];
+$scope.oActive   = [];
+$scope.oRecs     = [];
+$scope.sCache    = null;
+
+$scope.isLoaded         = function()               {return ($scope.oAllObjs != null);}
+$scope.printPage        = function()               {window.print();}
+$scope.isTrue           = function(b,sTrue,sFalse) {return b?(sTrue||'true'):(sFalse||'false');}
+$scope.getRows          = function(sReport)        {return getRows(sReport);}
+$scope.getName          = function(oRow)           {return getName(oRow);}
+$scope.getDistricts     = function()               {return $scope.oDistricts;}
+$scope.getNames         = function(oRow)           {return getNames(oRow);}
+$scope.getPhones        = function(oRow)           {return getPhones(oRow);}
+$scope.getAddress       = function(oRow)           {return getAddress(oRow);}
+
+log("ctrlPrt now loaded opener="+(window.opener != null));
+
+if (!window.opener) return;
+
+hookMsgListener();
+tri.postToOpener({verb:"deps:send-sum-info"});
+return;
+
+
+function hookMsgListener() {
+  log("Hooked message listener in FormEnvelope.js");
+  tri.loadTemplates($rootScope,$templateCache);
+  var oHandler = function(event) {
+    console.log("return message evt=%o",event);
+    if (event.data.verb) {
+      if (event.data.verb == "deps:deps-sum-data") {
+        console.log("have deps-sum-data ",event.data);
+        $scope.oAllObjs   = event.data.payload.oObjs;
+        initDisplay(event.data.payload);
+        $scope.$digest();
+      } else {
+        console.log("spurious msg ",event.data);
+      }
+    }
+  }
+  oGBL.msgHandler.deps = oHandler;
+}
+
+function initDisplay(payload) {
+  $scope.oDonMap = payload.oMap;
+  $scope.oProf   = payload.oProf;
+  var oDistMap  = {};
+  var oActCodes = {};
+  var oPat = null;
+  if ($scope.oProf.districts) {
+    var sParts = $scope.oProf.districts.split(",");
+    for(var i=0,iMax=sParts.length; i&lt;iMax; i+=1) {
+      oDistMap[sParts[i]] = {value:sParts[i],name:sParts[i]};
+    }
+    oPat = new RegExp(sParts[0]);
+  } else {
+    oDistMap['.?'] = {value:'.?',name:'.?'};
+    oPat = new RegExp('.?')
+  }
+  for(var i=0,iMax=payload.oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = payload.oObjs[i];
+    for(var j=0,jMax=oObj.details.donors.length; j&lt;jMax; j+=1) {
+      var oDon = oObj.details.donors[j];
+      var oWho = $scope.oDonMap[oDon.code];
+      if (oWho) {
+        oDon.who = oWho;
+        var sDistrict = null;
+        if ($scope.oProf.districts) {
+          if (oWho.District) {
+            if (oWho.District.match(oPat)) sDistrict = oWho.District;
+          }
+        } else {
+          sDistrict = ""+oWho.District;
+        }
+        if (sDistrict) {
+          if (!oDistMap[sDistrict]) oDistMap[sDistrict] = {value:sDistrict,name:sDistrict};
+        }
+      } else {
+        log("missing %s %o %o",oDon.code,oObj,oDon);
+      }
+      oActCodes[oDon.code] = oWho;
+    }
+    $scope.oDays.push({name:oObj.name,objs:[oObj]});
+    // 2013-07-14.ES1.CND.dp1
+    //                         1       2       3         4         5         6
+    var oR = oObj.name.match(/^([^-]+)-([^-]+)-([^.]+)[.]([^.]+)[.]([^.]+)[.]([^.]+)/);
+    //log("match %s %o",oObj.name,oR);
+    var nMIX = oR[2] - 1;
+    $scope.oMonths[nMIX].objs.push(oObj);
+  }
+  for(var sVar in oDistMap) $scope.oDistricts.push(oDistMap[sVar]);
+  for(var sVar in oActCodes) $scope.oActive.push(oActCodes[sVar]);
+
+  $scope.oActive.sort(function(a,b) {
+      var s1 = a.District;
+      var s2 = b.District;
+      if (s1 &lt; s2) return -1;
+      if (s1 == s2) return 0;
+      return 1;
+  });
+  $scope.oDistricts.sort(function(a,b) {
+      var s1 = a.District;
+      var s2 = b.District;
+      if (s1 &lt; s2) return -1;
+      if (s1 == s2) return 0;
+      return 1;
+  });
+
+  log("Actives %o",$scope.oActive);
+}
+
+function getRows(sReport) {
+  if ($scope.oObjRep.type != sReport) return [];
+  if ($scope.oObjRep.type == 'active') return $scope.oActive;
+  return sumRows(sReport,$scope.oObjRep.district);
+}
+
+function getName(oRow) {
+  if (!oRow) return null;
+  if (!oRow.name) return null;
+  if (oRow.name.charAt(0) == '2') return oRow.name;
+  return oRow.name+"("+oRow.objs.length+")";
+}
+
+function getNames(oRow) {
+  var sStr = ""+oRow.LastName+", "+oRow.FirstName;
+  return sStr;
+}
+
+function getPhones(oRow) {
+  var sStr = "";
+  if (oRow.HomePhone) sStr += " h:"+oRow.HomePhone;
+  if (oRow.WorkPhone) sStr += " w:"+oRow.WorkPhone;
+  if (oRow.CellPhone) sStr += " c:"+oRow.CellPhone;
+  return sStr.trim();
+}
+
+function getAddress(oRow) {
+  var sStr = "";
+  if (oRow.Address1) sStr += ""+oRow.Address1;
+  if (oRow.Address2) sStr += ", "+oRow.Address2;
+  if (oRow.City) sStr += ", "+oRow.City;
+  sStr = sStr.trim();
+  if (sStr.charAt(0) == ',') sStr = sStr.substring(1);
+  return sStr.trim();
+}
+
+function sumRows(sType,sDistrict) {
+  var sStr = sType +"/"+sDistrict;
+  if ($scope.sCache == sStr) return $scope.oRecs;
+  var oObjs = $scope.oDays;
+  if (sType == 'month') oObjs = $scope.oMonths;
+  var oRecs = [];
+  var oPat = new RegExp(sDistrict);
+  var oSum = {name:"Total:"+sDistrict,CshCnt:0,CshAmt:0.00,ChqCnt:0,ChqAmt:0.00,TotCnt:0,TotAmt:0.00,NonCnt:0,NonAmt:0.00};
+  for(var i=0,iMax=oObjs.length; i&lt;iMax; i+=1) {
+    var oLst = oObjs[i];
+    var oRec = {name:oLst.name,CshCnt:0,CshAmt:0.00,ChqCnt:0,ChqAmt:0.00,TotCnt:0,TotAmt:0.00,NonCnt:0,NonAmt:0.00};
+    oRecs.push(oRec);
+    for(var j=0,jMax=oLst.objs.length; j&lt;jMax; j+=1) {
+      var oObj = oLst.objs[j];
+      for(var k=0,kMax=oObj.details.donors.length; k&lt;kMax; k+=1) {
+        var oDon = oObj.details.donors[k];
+        //log("process %o %o",oLst,oDon);
+        if ((""+oDon.who.District).match(oPat) == null) continue;
+        oRec.TotCnt += 1;
+        oSum.TotCnt += 1;
+        var nAmt = +oDon.amount
+        oRec.TotAmt += nAmt;
+        oSum.TotAmt += nAmt;
+        if (oDon.tender == 'cash') {
+          oRec.CshCnt += 1;
+          oRec.CshAmt += nAmt;
+          oSum.CshCnt += 1;
+          oSum.CshAmt += nAmt;
+        } else {
+          oRec.ChqCnt += 1;
+          oRec.ChqAmt += nAmt;
+          oSum.ChqCnt += 1;
+          oSum.ChqAmt += nAmt;
+        }
+      }
+    }
+  }
+  oRecs.push(oSum);
+  $scope.oRecs = [];
+  for(var i=0,iMax=oRecs.length; i&lt;iMax; i+=1) {
+    var oRec = oRecs[i];
+    oRec.CshAmt = ""+oRec.CshAmt.toFixed(2);
+    oRec.ChqAmt = ""+oRec.ChqAmt.toFixed(2);
+    oRec.TotAmt = ""+oRec.TotAmt.toFixed(2);
+    oRec.NonAmt = ""+oRec.NonAmt.toFixed(2);
+    if ((sType == 'month') || (oRec.TotCnt &gt; 0)) $scope.oRecs.push(oRec);
+  }
+  $scope.sCache = sStr;
+  return $scope.oRecs;
+}
+
+}
+</pre></div>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>18</code> is needed to cause the <code>panel-extra.html</code> to be displayed.  See line <code>48</code> in <code>FormDepSum.htm</code>.</p></li>
+</ul>
+
+<p><span id='FormEnvelope.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformenvelopehtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormEnvelope.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;!--
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+--&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-deps1.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="Deps.css" title=defualt&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="FormEnvelope.js"&gt;&lt;/script&gt;
+&lt;title&gt;CIT - Envelope Printer V1.0 &lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=app&gt;
+&lt;div ng-controller=ctrlForm&gt;
+   &lt;div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/envelopes'&gt;&lt;/div&gt;
+  &lt;!-- -------------Format Array of envelopes----------------------&gt;
+  &lt;div ng-show='isLoaded()'&gt;
+    &lt;style type="text/css"&gt;
+      div#divPrint table              {font-size:9pt; font-weight:500;}
+      div#divPrint span.tiny          {font-size:80%; color:rgb(210,210,210)}
+
+      div#divPrint div#forms          {width: 950px; height:1500px; position:fixed; top:0px; left:0px;}
+      div#divPrint div#env            {border:10px rgb(210,210,210) solid; padding-left:5px; padding-top:5px;}
+      div#divPrint tr.CH              {height:30px; vertical-align:bottom;}
+
+      div#divPrint div#panel          {position:fixed;left:900px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250); font-size:80%;}
+      div#divPrint div#panel p.lab    {text-align:center; width:310px; position:relative; top:auto;}
+    &lt;/style&gt;
+    &lt;div id=divPrint style='margin-left:20px'&gt;
+
+      &lt;div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Envelope'&gt;&lt;/div&gt;
+
+      &lt;div id=forms&gt;
+        &lt;div ng-repeat='oObj in oPrtObjs'&gt;
+          &lt;div id=env ng-style={{getEnvPos($index)}}&gt;
+            &lt;table&gt;
+              &lt;tr&gt;&lt;td&gt;Date:&lt;/td&gt;&lt;td&gt;{{oObj.date}}&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Recipient:&lt;/td&gt;&lt;td&gt;{{oObj.recipient}}&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Envelopes:&lt;/td&gt;&lt;td&gt;{{oObj.number}}&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Amount:&lt;/td&gt;&lt;td&gt;{{oObj.amt}}&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;Entered by:&lt;/td&gt;&lt;td&gt;{{oObj.enteredBy}}&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr class=CH&gt;&lt;td&gt;&nbsp;&lt;/td&gt;&lt;td&gt;___________&nbsp;&nbsp;&nbsp;___________&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td colspan=2&gt;&lt;hr&gt;&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr class=CH&gt;&lt;td&gt;Received by:&lt;/td&gt;&lt;td&gt;___________________ &lt;span class=tiny&gt;(print)&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr class=CH&gt;&lt;td&gt;Signature:&lt;/td&gt;&lt;td&gt;________________________&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr class=CH&gt;&lt;td&gt;Date:&lt;/td&gt;&lt;td&gt;________________________&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li>Lines <code>2</code> thru <code>8</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</li>
+</ul>
+
+<p><span id='FormEnvelope.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformenvelopejsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormEnvelope.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+// ---------------------------------------------------------------------------
+function ctrlForm($scope,$rootScope,$templateCache) {
+$scope.oAllObjs  = null;
+$scope.nPageIX    = 0;
+$scope.oPrtObjs  = [];
+if (!window.opener) return;
+
+$scope.oOptActions = [{whatClass:'nextBatch();', click:'prepareNextPage();', title:'move to next batch of envelopes',label:'Prepare next page'}];
+$scope.isLoaded         = function()               {return ($scope.oAllObjs != null);}
+
+$scope.isTrue           = function(b,sTrue,sFalse) {return b?(sTrue||'true'):(sFalse||'false');}
+$scope.getEnvPos        = function(nIX)            {return getEnvPos(nIX);}
+$scope.nextBatch        = function()               {return nextBatch();}
+$scope.prepareNextPage  = function()               {prepareNextPage();}
+$scope.printPage        = function()               {window.print();}
+
+log("ctrlPrt now loaded opener="+(window.opener != null));
+
+if (!window.opener) return;
+
+hookMsgListener();
+tri.postToOpener({verb:"envs:send-print-info"});
+return;
+
+
+function hookMsgListener() {
+  log("Hooked message listener in FormEnvelope.js");
+  tri.loadTemplates($rootScope,$templateCache);
+  var oHandler = function(event) {
+    console.log("return message evt=%o",event);
+    if (event.data.verb) {
+      if (event.data.verb == "envs:obj-data") {
+        console.log("have envs-data ",event.data);
+        $scope.oAllObjs   = event.data.payload.objs;
+        $scope.oPrtObjs   = $scope.oAllObjs.slice(0,6);
+        $scope.$digest();
+      } else {
+        console.log("spurious msg ",event.data);
+      }
+    }
+  }
+  oGBL.msgHandler.envs = oHandler;
+}
+
+function getEnvPos(nIX) {
+  var sTop = ""+(Math.floor(nIX / 2) * 290)+"px";
+  var sLft = ""+((nIX % 2) * 340)+"px";
+  return  {position:'fixed',top:sTop,left:sLft,width:'300px',height:'250px'};
+}
+
+function nextBatch() {
+  if (!$scope.oAllObjs) return 'c-quiet';
+  if ($scope.nPageIX + 6 &lt; $scope.oAllObjs.length) return 'c-action';
+  return 'c-quiet';
+}
+
+function prepareNextPage() {
+  log("prepare next page %s len=%s",$scope.nPageIX,$scope.oAllObjs.length);
+  $scope.nPageIX += 6;
+  $scope.oPrtObjs   = $scope.oAllObjs.slice($scope.nPageIX,$scope.nPageIX+6);
+}
+
+}
+</pre></div>
+
+<ul>
+<li>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</li>
+</ul>
+
+<p><span id='TableDonors.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideatabledonorsjsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>TableDonors.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+log("loading tblDON factory code");
+oGBL.optTables.push("tblDON");
+
+//----------------------------------------------------------------------------
+//------------------------------- Donor records -----------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblDON',['servREG','servREC','servSess','servCRUD',function(servREG,servREC,servSess,servCRUD) {
+log("Running tblDON factory");
+var oFuncs = {};
+var sPhoneMask = '^[0-9]{3}-[0-9]{3}-[0-9]{4}(x[0-9]+)?$';
+var oTabProp = {
+     recTitle: 'Donor'
+    ,recName:  'donor%'  // % is chunked flag
+    ,recType:  'donor'
+    ,lsName:   "-donors" // derived
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    getName
+    ,cols:    [{type:'actions',     title: 'Actions'           ,showEdit:false, addDefault:true}
+               ,{col: 'Code',       title: 'Code'              ,many:false,showList:false}
+               ,{col: 'FirstName',  title: 'FirstName'         ,showList:false}
+               ,{col: 'LastName',   title: 'LastName'          ,showList:false}
+               ,{col: 'actions',    title:  getTitle           ,showCust:true, type:'action',method:useDonor,label:'&lt;==', showList:false}
+               ,{col: getName,      title: 'Name'              ,showCust:true  ,showList:true}
+               ,{col: getPhones,    title: 'Phones'            ,showCust:true  ,showList:true}
+               ,{col: 'District',   title: 'District'          ,showCust:true  ,showList:true}
+               ,{col: 'HomePhone',  title: 'HomePhone'         ,showList:false ,reqd:false ,mask:sPhoneMask}
+               ,{col: 'CellPhone',  title: 'CellPhone'         ,showList:false ,reqd:false ,mask:sPhoneMask}
+               ,{col: 'WorkPhone',  title: 'WorkPhone'         ,showList:false ,reqd:false ,mask:sPhoneMask}
+              ]
+    ,filters: [
+                //{type: 'mask',   field: getName}
+                {type: 'cust',   field:'_custmask', title:'cust-mask', place:'name or phone or address mask', methCust: custMask}
+               ,{type: 'mask',   field: 'District'}
+              ]
+    ,menuWhen          : testAdmin
+};
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+oFuncs.getDonorMap = function()            {return getDonorMap();}
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+function testAdmin() {
+  var sLocn = ""+window.location;
+  if (sLocn.indexOf("Admin.htm") &gt; 0) return true;
+  return false; /*servSess.isAdmin();*/
+}
+
+function getDonorMap() {
+  var oTP = oTabProp;
+  var oObjs = servCRUD.getObjs(oTP);
+  log("getDonorMap %o",oObjs.slice(0,5));
+  var oMap = {};
+  for(var i=0,iMax=oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = oObjs[i];
+    oMap[oObj.Code] = oObj;
+  }
+  return oMap;
+}
+
+function getName(oObj) {
+  return oObj.LastName+", "+oObj.FirstName;
+}
+
+function getTitle(oObj) {
+  return (""+oObj.Code+"\r\n"+getAddress(oObj)).trim();
+}
+
+function getPhones(oObj) {
+  var sStr = '';
+  if (oObj.HomePhone) sStr += " h:"+phone(oObj.HomePhone);
+  if (oObj.CellPhone) sStr += " c:"+phone(oObj.CellPhone);
+  if (oObj.WorkPhone) sStr += " w:"+phone(oObj.WorkPhone);
+  return sStr.trim();
+}
+
+function getAddress(oObj,nMax) {
+  if (!nMax) nMax = 999;
+  var sStr = '';
+  sStr += maxStr(oObj.Address1,nMax);
+  if(oObj.Address2) sStr += "\r\n"+maxStr(oObj.Address2,nMax);
+  var sCity = (oObj.City || '');
+  var sZipCode = (oObj.ZipCode || '');
+  var sSep = " ";
+  if ((sCity.length+sZipCode.length) &gt; 19) sSep = "\r\n";
+  sStr += "\r\n"+sCity+sSep+sZipCode;
+  return sStr.trim();
+}
+
+function maxStr(sStr,nMax) {
+  sStr = sStr || "";
+  if (sStr.length &lt; nMax) return sStr;
+  return sStr.substring(0,nMax-2) + "...";
+}
+
+function phone(numstr) {return ""+numstr;}
+
+function custMask(oTab,oObjs,oData,oFil) {
+  var sStr = oData[oFil.field] || '';
+  //log("custMask for called ",oTab.props.recTitle+" data="+oData[oFil.field]+" sStr="+sStr);
+  if (sStr.trim() == '') return oObjs;
+  var oResult = sStr.match(/^([0-9]+\s*[a-zA-Z])|([0-9]+$)/);
+  var sFlds = ['LastName','FirstName'];
+  var oMask = new RegExp(sStr,"i");
+  if (oResult) {
+    if (oResult[1]) {
+      sFlds = ['Address1'];
+      //log("address search");
+    } else {
+      var sMask = '^' + sStr.substring(0,3);
+      sStr =  (sStr.length &gt; 3)?sStr.substring(3):"";
+      if (sStr.length &gt; 0) {
+        sMask += '-' + sStr.substring(0,3);
+        sStr =  (sStr.length &gt; 3)?sStr.substring(3):"";
+      }
+      if (sStr.length &gt; 0) {
+        sMask += '-' + sStr;
+      }
+      //log("tel search "+sStr+" "+sMask);
+      oMask = new RegExp(sMask,"i");
+      sFlds = ['HomePhone','CellPhone','WorkPhone']
+    }
+  }
+  var oNew = [];
+  for(var i=0,iMax=oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = oObjs[i];
+    var bUse = false;
+    for(var j=0,jMax=sFlds.length; j&lt;jMax; j+=1) {
+      var sFld = sFlds[j];
+      if (oObj[sFld] && (oObj[sFld].match(oMask) != null)){
+        bUse = true;
+        break;
+      }
+    }
+    if (bUse) oNew.push(oObj);
+  }
+  return oNew;
+}
+
+function useDonor(scope,oObj) {
+  log("use donor clicked "+getName(oObj)+" "+scope.oTAB.props.recTitle+" "+oObj.Code+" scope=%o %s",scope,scope.$id);
+  var oDonor = {code:oObj.Code, name:getName(oObj), phones:getPhones(oObj).replace(/ /,'\r\n'), address:getAddress(oObj,19)};
+  //dumpObjLog(oDonor,"Donor record");
+  scope.oTAB.props.addDonorLine(scope,oDonor,oObj);
+}
+
+}]);
+</pre></div>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>11</code> makes <code>tblDON</code> available to the <a href="/guide/admin">Admin Application</a>.  This is an example of an externally defined table.</p></li>
+<li><p>Line <code>49</code> makes <code>getDonorMap</code> public. <code>getDonorMap</code> is implemented in lines <code>59</code> thru <code>69</code>.  It returns a <code>Code</code> to object map.</p></li>
+<li><p>Line <code>98</code> turns on the <a href="/guide/records#supportedrecordtypes">REC Chunked Mode</a> because of the inclusion of the trailing <code>%</code> in the <code>recName</code> field.</p></li>
+<li><p>Lines <code>108</code> thru <code>148</code> implement the <code>custMask</code> filter referenced in line <code>42</code>.  This is a smart filter. It uses the input to determine what field to test.
+Thus all numerics imply the
+telephone fields, numeric then address the address field.  All alphabetic tests the name field.  This means the user does not
+have to remember what field to test but simply enters data and the filter figures it out.</p></li>
+</ul>
+
+<p><span id='TableEnvelopes.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideatableenvelopejsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>TableEnvelope.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+log("loading tblENV factory code");
+oGBL.optTables.push("tblENV");
+
+//----------------------------------------------------------------------------
+//------------------------------- Envelope records -----------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblENV',['servREG','servREC','servSess','servCRUD',function(servREG,servREC,servSess,servCRUD) {
+log("Running tblENV factory");
+var oFuncs = {};
+var oTabProp = {
+     recTitle: 'Envelope'
+    ,recName:  'envs'  // % is chunked flag
+    ,recType:  'env'
+    ,lsName:   "-envs" // derived
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    {col:'date',seq:'reverse'}
+    ,cols:    [{type:'actions',     title: 'Actions'           ,showEdit:false, addDefault:true}
+               ,{col: 'date',       title: 'Date'              ,showList:true}
+               ,{col: 'recipient',  title: 'Recipient'         ,showList:true}
+               ,{col: 'number',     title: '#Envelopes'        ,showList:true,  reqd:true}
+               ,{col: 'amt',        title: 'Amount'            ,showList:true,  reqd:false}
+               ,{col: 'enteredBy',  title: 'EnteredBy'         ,showList:false, reqd:false, readonly:true}
+              ]
+    ,menuWhen          : testDoubleLogin
+    ,addDonorLine      : addDonorEnvLine
+    ,createExit        : createExit
+    ,primeEdit         : primeEdit
+    ,optActions        : [{click:'printBatch()',title:"Print today's envelopes",label:'Print Batch',whatClass:'testBatch()'}]
+};
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+
+// public functions
+
+function primeEdit(scope,oTP,oObj) {
+  scope.sEditSuppName  = 'donors-list.html';
+  return oObj;
+}
+
+oFuncs.printBatch = function() {
+  var oHandler = function printReqHandler(event) {
+    log("printBatch Handler called %o",event);
+    var oObjs = getTodaysObjs();
+    var oMsg = {verb:'envs:obj-data',payload:{objs:oObjs}};
+    event.source.postMessage(oMsg,"*");
+  }
+  servSess.createFormWindow('envs',oHandler,"Deps.htm","FormEnvelope.htm");
+}
+
+oFuncs.testBatch = function() {
+  var oObjs = getTodaysObjs();
+  if (oObjs.length &gt; 0) return 'c-action';
+  return 'c-quiet';
+}
+
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+function addDonorEnvLine(scope,oDonSum,oDonor) {
+  log("add Donor Line into envelope scope=%o donor=%o",scope,oDonor);
+  scope.oObj.recipient = getName(oDonor);
+}
+
+function getName(oDon) {
+  return oDon.FirstName+" "+oDon.LastName;
+}
+
+
+// private functions
+function getTodaysObjs() {
+  var oObjs = [];
+  var sNow  = getNowYMD();
+  if (!oTabProp.oObjs) oTabProp.oObjs = [];
+  for(var i=0,iMax=oTabProp.oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = oTabProp.oObjs[i];
+    if ((oObj.date == sNow) && (oObj.enteredBy == getUserStr())) oObjs.push(oObj);
+  }
+  return oObjs;
+}
+
+function createExit(oObj) {
+  oObj.date      = getNowYMD();
+  oObj.number    = 1;
+  oObj.enteredBy = getUserStr();
+  return true;
+}
+
+function getUserStr() {
+  return servSess.getUser()+"/"+servSess.getUser2();
+}
+
+function testDoubleLogin() {
+  var sUser1 = servSess.getUser();
+  var sUser2 = servSess.getUser2();
+  if (!sUser1) return false;
+  if (!sUser2) return false;
+  //log("testDoubleLogin "+sUser1+" "+sUser2);
+  if (sUser1 != sUser2) return true;
+  return false;
+}
+
+
+}]);
+</pre></div>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>11</code> makes <code>tblENV</code> available to the <a href="/guide/admin">Admin Application</a>.  This is an example of an externally defined table.</p></li>
+</ul></div>

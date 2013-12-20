@@ -1,0 +1,29 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p><a href="/guide/variants">Node.js Variant</a> Skip this step and go to <a href="/tutorial/step-10">10 MyApp on NodeJS Site</a></p>
+
+<p>At this point we are making sure the plumbing is working.  Nothing in <code>MyApp</code> should be affected by the move to the <a href="/guide/gaesite">GAE Site</a>.</p>
+
+<h3 id="validatemyapp">Validate <code>MyApp</code></h4>
+
+<ol>
+<li><p>If <code>MyApp</code> is intended to be the default app then access it with a browser with URL <code>tri-test.appspot.com</code></p></li>
+<li><p>If <code>MyApp</code> is not intended to be the default app then access it with a browser with URL <code>tri-test.appspot.com/apps/MyApp.htm</code></p></li>
+<li><p>If the demo apps are removed from the <code>x:\tri-devp\war\apps</code> folder then their use will cause <code>Error 404</code> to be displayed on the browser.</p></li>
+<li><p>If they are not removed the signon page for each app will still be presented but it will be impossible to login.</p></li>
+<li><p>If the intention was to keep them then each will need an <a href="/guide/user#adminuser">AdminUser</a> and <a href="/guide/user">User(s)</a> to be created as well
+as the loading of the <a href="/guide/datastore">Datastore</a> using the <a href="/guide/waks">WAKS Utility</a> with the data provided in the
+<code>x:\tri-devp\data</code> folder.</p></li>
+</ol>
+
+<h3 id="validategoogleanalytics">Validate <code>Google Analytics</code></h4>
+
+<ol>
+<li><p>Exercise the <code>MyApp</code> on the <a href="/guide/gaesite">GAE Site</a>.</p></li>
+<li><p>Within 30 minutes logon to your
+<a target=_blank href=https://accounts.google.com/ServiceLogin?service=analytics>Google Analytics Account</a>.</p></li>
+<li><p>Navigate to your tracker code reporting page.</p></li>
+<li><p>Use the <code>Real-Time</code> left side tab to check out the expected recording of the analytics events.</p></li>
+<li><p>Overnight this will be recorded in the historic records which are viewed under the <code>Audience</code> and <code>Behavoir</code> tabs.</p></li>
+</ol></div>

@@ -1,0 +1,65 @@
+@ngdoc overview
+@name Guide: Datastore Prime
+@description
+### Overview
+The Datastore needs to be primed.  This involves creating the {@link /guide/user#superuser SuperUser ID}.
+Internally it also involves creating a control record used to manage the  Datastore.
+
+The **Triangular** development package comes with a preinstalled Datastore that does not need priming.  If you wish to start with an empty Datastore
+
+**{@link /guide/variants GAE Variant} Only**
+
+1. Stop the webserver
+2. delete files `local_db.bin` and `datastore-indexes-auto.xml` in directory `war\WEB-INF\appengine-generated`
+3. Restart the webserver
+
+When you first load your application to the production Google App Engine environment the Datastore will need to be primed.  Also the Datastore Viewer
+on the production site can be used to delete the control record and all data.  This will also trigger a Datastore prime operation.
+
+**{@link /guide/variants Node.js Variant} Only**
+
+1. Stop the webserver
+2. delete folder `TRI-DB` in the root node.js folder.
+3. Restart the webserver
+
+If you do not ship your `TRI-DB` datastructure to the production Node.js server the Datastore will need to be primed.  If you delete the `$super` record
+it will also need to be primed and the `$user` passwords reset.  The data however will persist and be available once the `$user` records are re-established.
+Refer to {@link /guide/datastore-node Datastore NodeJS} for more details.
+
+
+### Invoking the Priming Operation.
+The standard `war\WEB-INF\web.xml` is configured to run `web/tri/Prime.htm`.  The page checks if the Datastore is primed.  If so it transitions
+to the page defined in `getStartPage` in AppsConfig.js.  If not it transitions to `apps/tri/TriBoot.htm`
+
+To see the actual prime page, use  <a ng-click=appLoader($event); href=http://localhost:8882/apps/tri/Prime.htm?jam=true>Prime.htm actual</a>
+({@link /guide/variants GAE Variant}) or
+<a ng-click=appLoader($event); href=http://localhost:8888/apps/tri/Prime.htm?jam=true>Prime.htm actual</a> ({@link /guide/variants Node.js Variant})
+
+### TriBoot.htm
+
+The URL <a ng-click=appLoader($event); href=http://localhost:8882/apps/tri/TriBoot.htm>TriBoot.htm GAE Variant</a> or
+<a ng-click=appLoader($event); href=http://localhost:8888/apps/tri/TriBoot.htm>TriBoot.htm Node.js Variant</a>
+ is an application that checks for the status of the Datastore.
+Normally it is automatically invoked but pressing the above URL will invoke it.
+
+If the status is not primed a page similar to following is shown:<br>
+<img class=screen src=img/needs-prime50.JPG><br>
+
+If the status is primed a page similar to following requesting a {@link /guide/user#superuser SuperUser} login is shown:<br>
+<img class=screen src=img/super-user-login50.JPG><br>
+
+### SuperUser Login
+Once a {@link /guide/user#superuser SuperUser} login has been performed
+a page similar to following requesting the addition of {@link /guide/user#superuser AdminUser}s is shown:<br>
+<img class=screen src=img/add-admin-user50.JPG><br>
+
+### Loading Data into the Datastore
+
+The {@link /guide/waks WAKS Utility} is used to load data into the Datastore.  It is found in the `/bats` folder of the {@link /guide/devp-pkg Development Package}.
+
+Most likely you will need to build it from other sources.
+The input should be serialized JSON Array of JSON Objects for {@link /guide/records#supportedrecordtypes REC Mode} or a serialized JSON object
+{@link /guide/records#supportedrecordtypes TBL Mode}.  The name should be as defined in the {@link /guide/waks#fileandkeyconversionprotocol WAKS Utility}
+The data provided in the `/data` folder of the {@link /guide/devp-pkg Development Package} gives examples of the format and name.
+
+

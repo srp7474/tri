@@ -1,0 +1,24 @@
+@ngdoc overview
+@name Guide: Display Page Design
+@description
+### Overview
+An CRUD application needs a place to display and update the `Tables` that belong to the application.
+They may be considered as the primary page of an application.
+The {@link /guide/appname-html appname-html} along with the
+{@link /guide/appname-js appname-js} specifies how these pages are constructed.
+
+The **Triangular** standard design has a small title at the top, a menu on the left and a variable work section that varies based on what section is
+current.  This implemented with extensive use of the {@link /guide/templates templates} and {@link /api/tri.directive:macro macro} facilities.
+
+In addition a section for error or informative messages is placed just under the title.  This section is easily removed by the user and shows again
+when the message changes.
+
+Nothing in **Triangular** restricts the design of the display pages.  There is, however, potentially some reliance on the menu system to provide a means
+of transitioning between tables views, table actions and logged on/logged off states.  An equivalent would have to be included.
+
+See also the {@link /guide/form-page-design Form Page Design} page for design guidelines on print pages (application secondary pages).
+
+The {@link /guide/appsconfig AppsConfig,js} file provides system configuration and should be loaded by the display page
+as shown in the {@link /guide/appname-html appname-html} section.
+
+

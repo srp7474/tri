@@ -1,0 +1,69 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="introduction">Introduction</h4>
+
+<p><strong>Triangular</strong> is an infrastructure built on top of <a target=_blank href="http://angularjs.org/">AngularJS</a> that lets you build CRUD applications
+in an efficient and concise manner.</p>
+
+<p>The development platform supports two environments. The first is the <a href="/guide/variants">GAE Variant</a>. The second is the
+<a href="/guide/variants">Node.js Variant</a>.  Where steps differ in this <code>Tutorial</code> the above flags will serve to alert you as to which path to take.</p>
+
+<h5 id="ahrefguidevariantsgaenodejsvarianta"><a href="/guide/variants">GAENode.js Variant</a></h6>
+
+<p>This tutorial will guide you through the all the steps needed to build your own application and upload it to the <a href="https://cloud.google.com/products/app-engine">Google App Engine</a>.</p>
+
+<h5 id="ahrefguidevariantsnodejsvarianta"><a href="/guide/variants">Node.js Variant</a></h6>
+
+<p>This tutorial will guide you through the all the steps needed to build your own application and upload it to
+a <code>Node.js</code> server environment.  The <code>Tutorial</code> uses
+<a target=_blank href=https://www.nodejitsu.com>NodeJitsu  Node.js Hosting</a> as a reference point.  The steps will have to be adjusted if you choose a different
+<code>Node.js</code> hosting site.</p>
+
+<h3 id="requiredlocalcomponents">Required Local Components</h4>
+
+<ol>
+<li><p>This tutorial is based on Windows XP through 8. The following small .bat files will have to be adjusted in a non-windows platform.
+As they are contributed they will be added to the <a href="/guide/devp-pkg">Development Package</a>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>waks.bat</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="/guide/variants">Node.js Variant</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>run-tri.bat</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="/guide/variants">GAE Variant</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>run-ws.bat</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<code>appcfg.bat</code>
+<br><br>
+<a href="/guide/variants">GAE Variant</a> Until then it will be necessary at their usage points to adjust them to your platform. Files <code>dev_appserver.sh</code> and <code>appcfg.sh</code> obtained from
+the GAE SDK
+are provided as starting points for developing
+<code>run-ws.sh</code> and <code>appcfg.sh</code>.</p></li>
+<li><p>Your favorite text editor.
+The author uses <a target=_blank href='http://multiedit.com'>MultiEdit</a> mainly because of its
+excellent column edit support and its ability to save all files on a windows task switch.</p></li>
+<li><p>The Chrome Browser.  Others can be used but please read <a href="/apps/browser">Browser Support</a> first.</p></li>
+<li><p><a href="/guide/variants">GAE Variant</a> A Java 6 or more runtime.  If not installed it can be obtained at <a href="http://www.oracle.com/technetwork/java/javase/downloads/java-se-jre-7-download-432155.html">Java Runtime</a>
+<br><br>
+If you are running a browser on the machine Java is likely already installed.  Ensuring the <code>...\jreX\bin</code> folder location is part of your standard path statement will often suffice.
+Typing <code>path</code> at a command prompt will verify this.</p></li>
+<li><p><a href="/guide/variants">Node.js Variant</a> The <code>Node.js</code> package should be installed and on the default path. This can be obtained from
+<a target=_blank href=http://nodejs.org/>Node.js Home Page</a></p></li>
+</ol>
+
+<p>This is covered in greater detail at <a href="/guide/develop">Development Environment</a></p>
+
+<h3 id="afterthisfollowthestepbystepinstructions">After this follow the step-by-step instructions.</h4>
+
+<p>To see how straight forward it is to build your own app just follow the step-by-step instructions.  You could have a starter app up and running locally
+in a few minutes.  A few more and it would be hosted on the <a href="/guide/gaesite">GAE Site</a> or <a href="/guide/nodesite">Node.js Site</a>.</p>
+
+<ol>
+<li><a href="/tutorial/step-01">01 Prepare Environment</a></li>
+<li><a href="/tutorial/step-02">02 Validate Environment</a></li>
+<li><a href="/tutorial/step-03">03 Add MyApp Files</a></li>
+<li><a href="/tutorial/step-04">04 Prepare MyApp Data</a></li>
+<li><a href="/tutorial/step-05">05 Code MyApp</a></li>
+<li><a href="/tutorial/step-06">06 Get GAE Site ID</a></li>
+<li><a href="/tutorial/step-07">07 Retest MyApp</a></li>
+<li><a href="/tutorial/step-08">08 Upload to GAE Site</a></li>
+<li><a href="/tutorial/step-09">09 Test MyApp on GAE Site</a></li>
+</ol></div>

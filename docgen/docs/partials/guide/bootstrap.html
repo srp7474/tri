@@ -1,0 +1,30 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The boot strap process is the means whereby all the component parts of Triangular are loaded and hooked together
+into a working system.</p>
+
+<p>The process is designed to be speedy yet flexible.  The Open Source "LAB.js" component <i>(c) Kyle Simpson</i> is used to provide
+dynamic loading of optional components.</p>
+
+<p>The ability to hide HTML text inside <code>&lt;object type='text/html' ...&gt;</code>  is exploited to provide for a convenient
+template file system that does result in myriads of files.</p>
+
+<h3 id="bootstrapsequence">Boot Strap Sequence</h4>
+
+<ol>
+<li><p>The user references a static .HTM file such as Deps.htm in a browser URL pointing at the server.</p></li>
+<li><p>The Deps.htm is fetched and loaded into the browser.  The following javascript files are loaded:</p></li>
+<li><p>ut.js (common static utility functions) is parsed and loaded</p></li>
+<li><p>angularjs and Trianglar javascript files are parsed and loaded.</p></li>
+<li><p>The  <a href="/api/tri.method:hookMsgListener">hookMsgListener</a> method is executed</p></li>
+<li><p>The application specfic javascript file(s) are parsed and loaded.</p></li>
+<li><p>The static <a href="/guide/table">Table</a> definitions found in application specfic javascript file(s) are
+registered with the <a href="/api/tri.servREG">servREG API</a>.</p></li>
+<li><p>The <a href="/api/tri.controller:ctrlSess#initUser">initUser</a> method is called which results in either a login request
+or an application state with a logged in User.</p></li>
+<li><p>Any role based static <a href="/guide/table">Table</a> definitions that are now authorized are loaded and the tables
+registered with the <a href="/api/tri.servREG">servREG API</a>.</p></li>
+</ol></div>

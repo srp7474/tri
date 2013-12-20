@@ -1,0 +1,205 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>This page contains a random collection of hints and/or techniques that were discovered during development and which are worthwhile to document.</p>
+
+<h3 id="browserrelated">Browser Related</h4>
+
+<h5 id="chromebrowser">Chrome Browser</h6>
+
+<p>The development environment used was Chrome under Windows XP.  The Chrome browser has server developer friendly features that may or may not be present in other browsers.
+Since at this stage of development emphasis was on functionality of the system the use of other browsers was not explored.</p>
+
+<h5 id="useofchromeinspect">Use of Chrome inspect</h6>
+
+<p>The use of the <code>View Source</code> facility is worthless in the <strong>Triangular</strong> (or <a target=_blank href="http://angularjs.org/">AngularJS</a>) environment because it shows the source before insertion of the templates.
+The <code>inspect element</code> right click on an element
+causes Chrome to display the expanded elements as they are current in the Browser.  The <strong>Triangular</strong> template engine inserts markers
+for each piece of HTML generated so the source can be tracked and the place where is it manufactured/modified can be determined.</p>
+
+<h5 id="logfunction">log function</h6>
+
+<p>A simple <code>log</code> function was implemented into the 'ut.js' file that forwards the calls to the browser <code>console.log</code> function.
+This design allowed for an easy on/off switch based on the presence in localStorage of a '.log' property.</p>
+
+<p>The extensive use of the %o in the display strings allows the display of objects.  For arrays a hidden object was sometimes created <code>{array:xxx}</code> so that
+the default action to expand the array was avoided.</p>
+
+<p>Note that when a display for an object thus shown is expanded, it shows the current value of the object, not the one at time of logging.</p>
+
+<p>This can be made visible with the shortcut key &amp;LT:Ctl Shift J></p>
+
+<h5 id="useoftrijs">Use of <code>TRi.js</code></h6>
+
+<p>If there is an error in the <code>Tri.min.js</code> code, replacement of the reference in the relevant <code>.htm</code> file with <code>TRI.js</code>, pressing <strong>&LT;REFRESH></strong>
+and rerunning the test will pinpoint the place of error in code that is more readable and may give clues as to the cause of the problem.  Remember to
+change it back to <code>TRI.min.js</code> (performance).</p>
+
+<h5 id="chromeinteractiveconsole">Chrome Interactive Console</h6>
+
+<p>Commands can be entered into the console area.  Thus <code>$("div#editor")</code> will display the HTML string for the editor.</p>
+
+<p>In addition the <code>fmt(html string)</code> will format the string to make it easier to read.</p>
+
+<h3 id="atarget_blankhrefhttpangularjsorgangularjsarelated"><a target=_blank href="http://angularjs.org/">AngularJS</a> Related</h4>
+
+<h5 id="useofinputtypehiddenngmodel">Use of <code>&lt;input type=hidden ng-model=...&gt;</code></h6>
+
+<p>In the 'Deps.htm' file a function was used to compute a value.  This was stored in a hidden field and made part of the ng-model with the result
+that the dependant fields were automatically updated by <a target=_blank href="http://angularjs.org/">AngularJS</a>.</p>
+
+<h5 id="delayedschedulingofddigestcycles">Delayed Scheduling of $digest cycles</h6>
+
+<p>Upon occasion, especially where external events occur, it is necessary to schedule a $digest cycle at the completion of the event handler.
+The statement <code>setTimeout(function(){$rootScope.$digest()},0);</code> when executed does this against the entire page.  Use of <code>$scope</code> rather than <code>$rootScope</code> would
+limit the $digest cycle to just the current scope (if known).</p>
+
+<h5 id="htmlpagethisdscope">HTML Page this === $scope</h6>
+
+<p>On an HTML page the <strong>this</strong> value is equivalent to <strong>$scope</strong> in the Javascript routines.  This feature is extensively used to pass in the <code>$scope</code> to
+common routines, especially the <a href="/api/tri.object.Col">Col</a> and <a href="/api/tri.object.Table">Table</a> methods.</p>
+
+<h5 id="useofdirectives">Use of directives</h6>
+
+<p>Directives were frequent found to be a means to concisely solve user interface problems.  It is suggested that the use of directives be learned, especially
+in the  the simpler cases.  See <a href="/guide/directives">directives</a>.</p>
+
+<h5 id="nestedalteronfetch">Nested alter= on fetch</h6>
+
+<p>This is used in <code>AppsBase.htm</code> when template a containing <code>macro</code> directives will itself be inserted by a <code>macro</code> directive
+as is the case with <code>apps-body.html</code>.  The <code>alter=</code> attribute is used to change a value to itself. Then the outer macro
+changes the alter string to the desired value using the '!' syntax because of the intermediate '/'.</p>
+
+<p>This is used by <code>Deps.htm</code>  to change <code>SINGLE</code> to <code>DOUBLE</code> and <code>ctrlCommEdit</code> to <code>ctrlDepsEdit</code></p>
+
+<h5 id="useofdeval">Use of $eval</h6>
+
+<p>In order to pick up a string from a definition and delay the evaluation until the HTML is parsed the <code>$eval</code> function can be used.
+For example in the 'AppsBase.htm' file the statement fragment <code>&lt;a class='c-action sz-90' href="" ng-class='$eval(oA.whatClass)' ...&gt;</code>
+causes the string extracted from <code>oA.whatClass</code> to be evaluated and returned as the <code>ng-class</code> value.</p>
+
+<h5 id="useofobjectsasmodels">Use of Objects as models</h6>
+
+<p>The <a target=_blank href="http://angularjs.org/">AngularJS</a> models behave best when they are dealing with an object.
+In that way only the object reference has to be added to the $scope and the underlying HTML
+can easily reference the property fields of the object.
+This is shown clearly in the example code in <a href="/apps/chqs-app#Chqs.htm">Chqs.htm Line 143 ...</a>.</p>
+
+<h3 id="triangularrelated">Triangular Related</h4>
+
+<h5 id="useofleadingnottrailinginlists">Use of leading ',' not trailing ',' in lists</h6>
+
+<p>A pattern used extensively in the code when there are lists that exceed lines is to add the next one with a leading ',' as opposed to a trailing ','.
+This makes it easier to add, delete and comment out entries without having to sometimes remember to fix up the previous entry.</p>
+
+<p>For example:
+<pre class="prettyprint linenums">
+  var oTabProp = {
+       recTitle: 'Messages'
+      ,recName:  'messages'
+      ,recType:  'msg'
+      ,lsName:   '-msgs'
+      ...
+</pre>
+
+<h5 id="minimaluseofmouseforinputintensiveapplications">Minimal use of mouse for input intensive applications</h6>
+
+<p>In the 'Deps.htm' and 'Deps.js' files the <a href="/api/tri.directive:autotab">autotab</a> and <a href="/api/tri.directive:blurEvent">blurEvent</a> directives are
+used to move the cursor to the most likely next input field.  As a result a standard input cycle can be completed with just one mouse click.</p>
+
+<h5 id="makingicons">Making Icons</h6>
+
+<p><strong>Triangular</strong> uses several Favorite Icons so, with multiple tabs open, it is easy to know which tab to select.</p>
+
+<p>The general pattern is the base triangle of 3 colors with a white (primary) or blue (secondary) letter displayed in the middle.  The present lettering scheme
+is:</p>
+
+<ul>
+<li>A - Admin app</li>
+<li>B - Boot page</li>
+<li>C - Chqs App</li>
+<li>D - Deps App</li>
+<li>M - Hello app (messages)</li>
+<li>S - Source Display</li>
+<li>T - Triangular documentation</li>
+</ul>
+
+<p>An additional 6 are provided as a convenience for use during app development numbered 1 thru 3 in white and blue.</p>
+
+<ul>
+<li><code>fav-t1w.ico</code> Number 1 white</li>
+<li><code>fav-t1b.ico</code> Number 1 blue</li>
+<li><code>fav-t2w.ico</code> Number 2 white</li>
+<li><code>fav-t2b.ico</code> Number 2 blue</li>
+<li><code>fav-t3w.ico</code> Number 3 white</li>
+<li><code>fav-t3b.ico</code> Number 3 blue</li>
+</ul>
+
+<p>The free software GIMP 2 is used to make them.  The base information is in the <code>icons</code> folder distributed with the development package.
+The steps are:</p>
+
+<ol>
+<li>open gimp2</li>
+<li>open <code>tri-base2.xrf</code></li>
+<li>Set to text, set font to sans-bold sz 550, white</li>
+<li>enter letter, adjust to centered position</li>
+<li>Merge layers</li>
+<li>Select portion left corner 148:135 size 714:714</li>
+<li>crop to selection</li>
+<li>export as .PNG file</li>
+<li>Use fill tool</li>
+<li>change to colour blue</li>
+<li>fill white number</li>
+<li>export as .PNG file</li>
+<li>Close view without destroying <code>tri-base2.xrf</code></li>
+<li>goto website http://tools.dynamicdrive.com/favicon</li>
+<li>Choose file</li>
+<li>press Create Icon</li>
+<li>press DownLoad FavIcon</li>
+</ol>
+
+<h3 id="datastorerelatedahrefguidevariantsgaevarianta">Datastore Related <a href="/guide/variants">GAE Variant</a></h4>
+
+<h5 id="accessingdataondatastorelocalcopy">Accessing Data on Datastore (Local copy)</h6>
+
+<p>On the local machine can use the <a target=_blank href=http://localhost:8882/_ah/admin>Datastore Viewer</a> to see your raw data.  Use the class
+<code>com.rsi.cita.gdo.GdoCitaData</code>.</p>
+
+<h5 id="accessingdataondatastoreviadatastoreviewer">Accessing Data on Datastore via Datastore Viewer</h6>
+
+<p>This is accessed from your Google App Signin Page.</p>
+
+<p>The standard GQL will access upto 20 records.</p>
+
+<p><code>SELECT * FROM com.rsi.cita.gdo.GdoCitaData</code></p>
+
+<p>To restrict by application use:</p>
+
+<p><code>SELECT * FROM com.rsi.cita.gdo.GdoCitaData where KeyName &gt; 'deps/' and KeyName &lt; 'deps9'</code></p>
+
+<p>where <code>deps</code> is the application in question</p>
+
+<p>To restrict by application and record type use:</p>
+
+<p><code>SELECT * FROM com.rsi.cita.gdo.GdoCitaData where KeyName &gt; 'deps/donors/' and KeyName &lt; 'deps/donors9'</code></p>
+
+<p>where <code>deps</code> is the application and <code>donors</code> is the record type in question</p>
+
+<p>To just see the KeyName use</p>
+
+<p><code>SELECT KeyName FROM com.rsi.cita.gdo.GdoCitaData</code></p>
+
+<h3 id="datastorerelatedahrefguidevariantsnodejsvarianta">Datastore Related <a href="/guide/variants">Node.js Variant</a></h4>
+
+<h5 id="accessingdataondatastorelocalcopy">Accessing Data on Datastore (Local copy)</h6>
+
+<p>The data is stored in the <code>TRI-DB</code> directory within the files referenced by <code>run-tri.bat</code>. Refer to <a href="/guide/datastore-node">Datastore Node.js</a>
+to understand the naming scheme.</p>
+
+<h5 id="accessingdataondatastoreremotecopy">Accessing Data on Datastore (Remote copy)</h6>
+
+<p>You will have to have access either to the remote <code>TRI-DB</code> folder or download it so that you do.
+Again, refer to <a href="/guide/datastore-node">Datastore Node.js</a>
+to understand the naming scheme.</p></div>

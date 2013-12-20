@@ -1,0 +1,69 @@
+@ngdoc overview
+@name Guide: Filter (static version)
+@description
+
+### Overview
+The `Filter` object defines the single instance of the `filters` collection property used in the {@link /guide/table Table Object} schema.
+
+
+### Filter Instance Types
+Two instance types for the `Filter` object are used internally.
+
+1. The first,
+the static object definition, refers to the static Javascript definition.
+
+2. The second, refers to a Javascript `Filter` object which is created as part of the static {@link /guide/table Table Object} migration process.
+This instance allows the HTML code to directly access methods defined
+for the {@link /api/tri.object.Filter Filter} object.
+
+The migration process copies all of the static properties to the dynamic version.
+
+### Definition Syntax
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+The `Filter` object definition is found in the `filters` property of the {@link /guide/table Table Object} `oTabProp` object.
+That is the `filters` property is an array of one or more `Filter` object definitions.  Each definition has one or more of the following properties.  Some property
+specifications depend on the `type` value.
+
+Note that the order the filters in this definition is the order they appear in both the {@link /api/tri.controller:ctrlCommList List Controller} Filter panel and, with the exception of the 'limit' type
+the order that the record selection cascades the results to the next filter (there is no 'OR' capability).  The 'limit' filter is applied last and limits
+the result set to no more than the specified number.
+
+If no `type` 'limit' filter is defined in the `filters` array, one is inserted with a default value of '50'.
+
+<span class=srp-propdef><code class=srp-label>type:</code>This
+property defines the type of filter.  The internal record selection routines use this `type` to alter their logic.  The possible value are:
+<br><br>
+<b>'cust'</b> The `methCust` property references a method that will be called.
+<br><br>
+<b>'mask'</b> The default string mask search against the `field` is used.  If uses standard Regular Expression syntax to match against the contents of the `field`
+for each record still in the selection set.
+<br><br>
+<b>'chkbox'</b> A binary checkbox value.  The `methCust` property should reference a method that will be called.
+<br><br>
+<b>'state'</b> A tri-state input filter not fuilly implemented.
+<br><br>
+<b>'limit'</b> The input field specifies the maximum number of rows that will be displayed.
+<br><br>
+</span>
+
+<span class=srp-propdef><code class=srp-label>place:</code>Used with `type` 'cust' and 'mask' to specify a placeholder string.
+</span>
+
+<span class=srp-propdef><code class=srp-label>title:</code>Used to provide a label for the filter and shown in the Filter Panel.
+</span>
+
+<span class=srp-propdef><code class=srp-label>methCust:</code>The reference to a local function called by a `type` 'cust' filter.
+The signature of the call is `func-name(oTab,oObjs,oData,oFil)` where
+`oTab` is the dynamic {@link /api/tri.object.Table Table Object}, `oObjs` is the cascaded array of {@link /guide/data Data Objects},
+`oData` is the `oSel` work area and in which cached results can be stored and `oFil` is the present `Filter` object.
+</span>
+
+<span class=srp-propdef><code class=srp-label>field:</code>Defines the related table field that the mask works against.  For `type` 'cust' and 'chkbox' it can define an internal scope property stored in `$scope.oSel`
+that can be used to store intermediate of cached values.
+</span>
+

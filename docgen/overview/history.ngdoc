@@ -1,0 +1,28 @@
+@ngdoc overview
+@name Release History
+@description
+
+This page details the major releases of **Triangular**.
+
+### Initial Release - Nov/1/2013
+
+The initial Google App Engine version was released.
+This is hosted at
+<a target=_blank href=http://tri-demo.appspot.com>Google App Engine Host</a>
+
+### Node.js Variant Released - Nov/15/2013
+
+This release included a Node.JS backend server and allowed for the release in a pure Node.js environment with
+no requirement for Java on the development machine and host machine.
+This is hosted at
+<a target=_blank href=http://tri-demo.nodejitsu.com>NodeJitsu Host</a>
+
+### HelloUI Added - Nov/30/2013
+
+This release added the {@link /apps/helloui-app HelloUI App} that demonstrates the integration of **Triangular** and
+the <a target=_blank href=http://jqueryui.com/>JQueryUI Interface</a>
+
+### TRI.js passed JSHint validate - Dec/2/2013
+
+It was realized that TRI.js needed to pass the JSHint validation in order to be acceptable to the Open Source Community.
+

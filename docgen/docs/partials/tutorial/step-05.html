@@ -1,0 +1,41 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p>The tutorial at this point cannot give exact assistance because <code>MyApp</code> now needs to be customized.  This page does give
+some general guidelines and point to other helpful places on this site.</p>
+
+<h3 id="modifyingcode">Modifying Code</h4>
+
+<ol>
+<li><p>Make small changes incrementally.  Test them and then make more changes.  In this way when something fails the source of the failure is easier to find.</p></li>
+<li><p>If you need to add a <a href="/guide/form-page-design">Form</a> use the <code>FormHello.htm</code> and <code>FormHello.js</code> as models calling them <code>FromMyApp.htm</code> and
+<code>FormMyApp.js</code>.</p></li>
+<li><p>Use the <a href="/guide/construct">Construct Index</a> to assist in finding working examples of code snippets.</p></li>
+<li><p>Use the <a href="/apps/src-files">Source Files</a> as a reference.  These are located in the <code>x:\tri-devp\war\apps</code> and <code>x:\tri-devp\war\apps\tri</code> folders.</p></li>
+<li><p>Use the Browser log facility to help debug and track down errors.  See <a href="/guide/hints-tech#browserrelated">Browser Related</a> for more techniques
+especially <a href="/guide/hints-tech#useoftrijs">Use of TRI.js</a>.</p></li>
+</ol>
+
+<h3 id="modifyingappconfigjs">Modifying <code>AppConfig.js</code></h4>
+
+<ol>
+<li><p>If your site will not include the demo apps you may want to simplify and adjust <code>AppsConfig.js</code>.</p></li>
+<li><p>Remove from <code>var accts = [</code> (about line <code>13</code>) upto but not including <code>oFuncs.getStartPage = ...</code> (about line <code>63</code>).  This is used by the <code>Deps</code> app.</p></li>
+<li><p>The <code>getInfo</code> would be replaced or removed.</p></li>
+<li><p>The <code>getAutoFill</code> would likely be removed unless you want the UserName and Password to be prefilled.</p></li>
+<li><p>The <code>getSite</code> would be modified or removed.</p></li>
+</ol>
+
+<h3 id="googleanalyticsaccount">Google Analytics Account</h4>
+
+<ol>
+<li><p>If you intend to keep data regarding visits to the <code>MyApp</code> site then the <a target=_blank href=http://www.google.com/analytics/>Google Analytics</a> is a technology that
+is already compatible with the <strong>Triangular</strong> code base.</p></li>
+<li><p>To implement, you need a tracker code. Use <a target=_blank href=https://accounts.google.com/ServiceLogin?service=analytics>Google Analytics Login</a> to signin and create the tracker code.</p></li>
+<li><p>Replace the existing function body of <code>gaTracker</code> in <code>AppConfig.js</code> with this new code.  It should look similar.</p></li>
+<li><p>To turn off tracking make <code>gaTracker</code> an empty function.</p></li>
+</ol>
+
+<h3 id="nextstep">Next Step</h4>
+
+<p>Now with <code>MyApp</code> working we are ready to proceed to the next section <a href="/tutorial/step-06">06 Get GAE Site ID</a>.</p></div>

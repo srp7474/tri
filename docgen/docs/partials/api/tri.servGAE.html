@@ -1,0 +1,336 @@
+<h1><code ng:non-bindable="">servGAE</code>
+<span class="hint">(service in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p><code>servGAE</code> provides the interface to its counterpart on the server which presently is the Google App Engine.
+The datastore and security services are described in <a href="/guide/server-inter">Server Interface</a>.</p>
+
+<p>Should it be necessary to replace interface there are 2 strategies that should work:</p>
+
+<ol>
+<li><p>Replace the methods in this service by
+those that exhibit the same signatures and functionality.  Behind the scenes a totally different interface could be used.</p></li>
+<li><p>Replace the interface on the server that takes the same JSON interface requests and that returns the same JSON
+object constructs.  Where more in depth datails are required than given in this document the logging function
+could be used on the Apps system to get use cases for each type of request.</p></li>
+</ol></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="addAdminUser">addAdminUser(oNew, sUser, sPW, fOK, fFail)</h3>
+<div class="addadminuser"><p>Tests whether the <code>sUser</code> and <code>sPW</code> match that of the <a href="/guide/user#superuser">SuperUser</a> record.</p>
+
+<p>It matched an <a href="/guide/user#adminuser">AdminUser</a> record is created. The <code>oNew</code> properties <code>User</code> and <code>NewPassword</code> are used
+for the <a href="/guide/user#adminuser">AdminUser</a> properties.  It is created for app ID <code>oNew.AppID</code></p>
+
+<p>It uses the <a href="/guide/server-inter#superusercommandset">SuperUser Command Set.ajaxAddAdminUser</a> to accomplish this.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oNew – {Object} – </code>
+<p>Object containing <code>AppID</code>, <code>User</code> and <code>NewPassword</code> properties.</p></li>
+<li><code ng:non-bindable="">sUser – {String} – </code>
+<p>SuperUser ID</p></li>
+<li><code ng:non-bindable="">sPW – {String} – </code>
+<p>SuperUser password</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful match</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed match</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="changePassword">changePassword(sOld, sNew, fOK, fFail)</h3>
+<div class="changepassword"><p>The <code>changePassword</code> function changes the logged in user password to the new value.</p>
+
+<p><b>Note:</b> Passwords must contain at least one alphabetic character to distinguish them
+from the encrypted value stored on the server.</p>
+
+<p>See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>If the update process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sOld – {string} – </code>
+<p>The record type</p></li>
+<li><code ng:non-bindable="">sNew – {string} – </code>
+<p>The key name</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful update</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed update</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="dropObj">dropObj(oObj, fOK, fFail)</h3>
+<div class="dropobj"><p>The <code>dropObj</code> function is ued to remove 'TBL' mode records from the system.  It is not valid for 'REC' mode records as it would
+remove a whole collection of records. See <a href="/guide/records">Record Storage</a>.</p>
+
+<p>The physical key (GekID) used is extracted from the <code>oObj</code> to actually address the <a href="/guide/data">Data Object</a> to be deleted.</p>
+
+<p>Once deleted the record cannot be recovered from the server.</p>
+
+<p>See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>If the <code>dropObj</code> process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> previously retrieved.</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful retrieval</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed  retrieval</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getCust">getCust()</h3>
+<div class="getcust"><p>Returns the value set with <code>setCust</code>. See <a href="/guide/server-inter">Server Interface</a>
+for more details on this value.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>The customer (application) name</p></div>
+</div>
+</li>
+<li><h3 id="getKeyData">getKeyData(sType, sKey, fOK, fFail)</h3>
+<div class="getkeydata"><p>The <code>getKeyData</code> function retrieves a record ('TBL' mode) or group of records ('REC" mode) from server in JSON format.</p>
+
+<p>The key used to actually address the required data is constructed on the server from 3 parts each separated by a '/'.</p>
+
+<ol>
+<li>The cust (application) ans established with <a href="/api/tri.servGAE#setCust">setCust</a></li>
+<li>The sType value</li>
+<li>The sKey value</li>
+</ol>
+
+<p>See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>If the retrieval process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sType – {string} – </code>
+<p>The record type</p></li>
+<li><code ng:non-bindable="">sKey – {string} – </code>
+<p>The key name</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful retrieval</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed  retrieval</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getToken">getToken()</h3>
+<div class="gettoken"><p>Returns the value set with <code>setToken</code>. See <a href="/guide/server-inter">Server Interface</a>
+for more details on this value.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>The token value returned from the <code>login</code> function</p></div>
+</div>
+</li>
+<li><h3 id="getURL">getURL()</h3>
+<div class="geturl"><p>returns the value set with <a href="/api/tri.servGAE#setURL">servGAE.setURL</a></p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>the value set with <a href="/api/tri.servGAE#setURL">servGAE.setURL</a></p></div>
+</div>
+</li>
+<li><h3 id="getURL">getURL()</h3>
+<div class="geturl"><p>Returns the internal URL used to access the AJAX services in the server and established with <code>setURL</code>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>url The URL to access the server AJAX services.</p></div>
+</div>
+</li>
+<li><h3 id="issueFindFile">issueFindFile(sType, sRecKey, fOK, fFail)</h3>
+<div class="issuefindfile"><p>The <code>issueKeyData</code> function retrieves a record header or array of record headers that describe the complete record key, its update datestamp an its internal physical key (GekID).</p>
+
+<p>The key used to actually address the required data is constructed on the server from 3 parts each separated by a '/'.</p>
+
+<ol>
+<li>The cust (application) ans established with <a href="/api/tri.servGAE#setCust">setCust</a></li>
+<li>The sType value</li>
+<li>The sRecKey value. When Suffixed with '%', an array of matching records is returned in the response.</li>
+</ol>
+
+<p>It can be used to retrieve a specific record (sRecType == null) or a collection of record headers.</p>
+
+<p>See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>If the retrieval process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sType – {string} – </code>
+<p>The record type. Null indicates User profile data (Admin authority required by logged in user)</p></li>
+<li><code ng:non-bindable="">sRecKey – {string} – </code>
+<p>The record key (suffixed with '%' to get an array of matching records).</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful retrieval</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed  retrieval</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="listApps">listApps(sUser, sPW, fOK, fFail)</h3>
+<div class="listapps"><p>Tests whether the <code>sUser</code> and <code>sPW</code> match that of the <a href="/guide/user#superuser">SuperUser</a> record.</p>
+
+<p>It matched a list of the applications is returned in the response object.</p>
+
+<p>It uses the <a href="/guide/server-inter#superusercommandset">SuperUser Command Set.ajaxListApps</a> to accomplish this.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sUser – {String} – </code>
+<p>SuperUser ID</p></li>
+<li><code ng:non-bindable="">sPW – {String} – </code>
+<p>SuperUser password</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful match and list</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed match and list</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="login">login(xUser, sPW, fOK, fFail)</h3>
+<div class="login"><p>The <code>login</code> function establishes the User credentials and returns a token that is used for all requests
+See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>The system supports a 2 person login, internally referred to as a double login.  This requirement is usually triggered
+by using the template system to alter 'SINGLE' to 'DOUBLE'. See Deps.js in the Apps system.  Its use case is where donation money is counted
+and two persons must be present.</p>
+
+<p>The double login requirement is conveyed to the server by xUser being an Object rather than a string.  The object contains
+the string properties <code>user</code>, <code>password1</code>, <code>user2</code> and <code>password2</code>.</p>
+
+<p>If the validation process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">xUser – {Object} – </code>
+<p>Userid(s)</p></li>
+<li><code ng:non-bindable="">sPW – {string} – </code>
+<p>password</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful login</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed login</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="primeStore">primeStore(sUser, sPW, fOK, fFail)</h3>
+<div class="primestore"><p>Primes the Datastore using the <a href="/guide/server-inter#superusercommandset">SuperUser Command Set.ajaxPrimeStore</a>.</p>
+
+<p>The <a href="/guide/user#superuser">SuperUser</a> record built uses the provided <code>sUser</code> and <code>sPW</code></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sUser – {String} – </code>
+<p>SuperUser ID</p></li>
+<li><code ng:non-bindable="">sPW – {String} – </code>
+<p>SuperUser password</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful operation</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed operation</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="putKeyData">putKeyData(sType, sKey, sStr, fOK, fFail)</h3>
+<div class="putkeydata"><p>The <code>putKeyData</code> function stores a record ('TBL' mode) or group of records ('REC" mode) on the server in JSON stringized format.</p>
+
+<p>When a record is retrieved the timestamp associated with the record on the server is also retrieved.  The server uses this to
+establish whether stale data is being returned. (ie - an update from another computer happened).  In this case the operation fails.
+In the future for 'REC' mode operations the server will attempt to update the individual data object if there is no conflict.</p>
+
+<p>The key used to actually address the required data is constructed on the server from 3 parts each separated by a '/'.</p>
+
+<ol>
+<li>The cust (application) ans established with <a href="/api/tri.servGAE#setCust">setCust</a></li>
+<li>The sType value</li>
+<li>The sKey value</li>
+</ol>
+
+<p>See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>If the retrieval process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sType – {string} – </code>
+<p>The record type</p></li>
+<li><code ng:non-bindable="">sKey – {string} – </code>
+<p>The key name</p></li>
+<li><code ng:non-bindable="">sStr – {string} – </code>
+<p>The data to store plus control information (Stringized JSON object)</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful retrieval</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed  retrieval</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="sendReminder">sendReminder(sUser, fOK, fFail)</h3>
+<div class="sendreminder"><p>The <code>sendReminder</code> function will send notification to a user using an email address found in the user profile.</p>
+
+<p><b>Note:</b> This is not implemented at present.</p>
+
+<p>If the process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sUser – {string} – </code>
+<p>The userid</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful process</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed process</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setCust">setCust(cust)</h3>
+<div class="setcust"><p>Sets the internal <code>sCust</code> value used as the 1st part of the multi-part key. See <a href="/guide/server-inter">Server Interface</a>
+for more details on this value.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">cust – {string} – </code>
+<p>The customer (application) name</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setToken">setToken(token)</h3>
+<div class="settoken"><p>Sets the internal <code>sToken</code> value used to validate all server requests. See <a href="/guide/server-inter">Server Interface</a>
+for more details on this value.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">token – {string} – </code>
+<p>The token value returned from the <code>login</code> function</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setURL">setURL(url)</h3>
+<div class="seturl"><p>Sets the internal URL used to access the AJAX services in the server.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">url – {string} – </code>
+<p>The URL where the server is located.  This icludes the 'ajax.ajax' method flags required
+by the present server inplementation.</p>
+
+<p>The prefix of the <code>url</code> passed to this routine is obtained from startup routines. Either the static reference used to load the system is used
+or if a 'file//:' is detected
+it defaults to localHost:8884.  The latter is used in a development environment.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="superLogin">superLogin(sUser, sPW, fOK, fFail)</h3>
+<div class="superlogin"><p>Tests whether the <code>sUser</code> and <code>sPW</code> match that of the <a href="/guide/user#superuser">SuperUser</a> record.  It
+uses the <a href="/guide/server-inter#superusercommandset">SuperUser Command Set.ajaxSuperLogin</a> to perform this test.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sUser – {String} – </code>
+<p>SuperUser ID</p></li>
+<li><code ng:non-bindable="">sPW – {String} – </code>
+<p>SuperUser password</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful match</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed match</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="validateStore">validateStore(fOK, fFail)</h3>
+<div class="validatestore"><p>Tests whether the Datastore is primed using the <a href="/guide/server-inter#superusercommandset">SuperUser Command Set.ajaxValidateStore</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful validation</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed validation</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="validateToken">validateToken(user, token, fOK, fFail)</h3>
+<div class="validatetoken"><p>The <code>login</code> function stores the returned server token in localStorage. When a browser revisits the site hosting the Triangular application
+the localStorage is checked for a copy of the token.  If found, <code>validateToken</code> function establishes whether the token is still valid.
+The more common reasons for failure include:</p>
+
+<ul>
+<li>There was a user inactivity timeout</li>
+<li>The User logged on to the site from a different machine</li>
+<li>The previous session ended with a logout</li>
+</ul>
+
+<p>See <a href="/guide/server-inter">Server Interface</a> for more details on this process.</p>
+
+<p>If the validation process fails on the server an indication as to why is returned in the JSON response.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">user – {string} – </code>
+<p>Userid (first in double login context)</p></li>
+<li><code ng:non-bindable="">token – {string} – </code>
+<p>from previous login</p></li>
+<li><code ng:non-bindable="">fOK – {Function} – </code>
+<p>callback routine for successful validation</p></li>
+<li><code ng:non-bindable="">fFail – {Function} – </code>
+<p>callback routine for failed validation</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>

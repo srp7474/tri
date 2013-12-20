@@ -1,0 +1,18 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <code>Data Object</code> is an object created internally.  It represents a single object (record) stored on the server.</p>
+
+<p>If the  <code>recServ</code> parameter points at <a href="/api/tri.servREC">servREC</a> the Data Objects are stored as stringified JSON.array with each Data Object
+being a JSON.object.  If there are too many, they are stored as 64K chunks.</p>
+
+<p>If the  <code>recServ</code> parameter points at <a href="/api/tri.servTBL">servTBL</a> each Data Object is stored separately on the server.</p>
+
+<p>Refer to <a href="/guide/records">Record Storage</a> for more details.</p>
+
+<p>The internal implementation of the <code>Data Object</code> uses a Javascript object.
+The properties of the Javascript object are used to represent the columns stored on and retrieved from the server.  The JSON
+<code>stringify</code> and <code>parse</code> are used to transform the data between these 2 functions.  Upon occasion the <a target=_blank href="http://angularjs.org/">AngularJS</a> versions are used because they
+also clean up any <a target=_blank href="http://angularjs.org/">AngularJS</a> special $$ tags inserted into the working copy of Javascript object.</p></div>

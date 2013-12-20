@@ -1,0 +1,47 @@
+@ngdoc overview
+@name Tutorial: 04 Prepare MyApp Data
+@description
+
+Steps {@link /tutorial/step-04 04 Prepare MyApp Data} and {@link /tutorial/step-05 05 Code MyApp} go hand in hand.
+
+If your app will generate the data through the WebPage then you can proceed to {@link /tutorial/step-05 05 Code MyApp}.
+
+If your app requires external data to be added then the steps on this page are required.
+
+**Note** The {@link /guide/waks WAKS Utility} will have to be adjusted in a non-windows platform.
+
+### Uploading data to the App
+
+1. The {@link /guide/waks WAKS Utility} is used to move batches of data to and from your app.
+
+2. Before proceeding let us experiment with uploading data to the present `MyApp` application.  We know its roots are
+the {@link /apps/hello-app Hello App} so we will use the data conveniently stored with the {@link /guide/devp-pkg#demonstrationdata Development Package Demonstration Data}
+
+3. Start a command line window and make the CWD `x:\tri-devp\bats` as defined in {@link /tutorial/step-01#developmentpackagepreparation Development Package Preparation}
+
+4. Issue command `waks set myapp super super` and you will see<br><br>
+`configured WAKS: -cust myapp -user super -pw super`
+<br><br>
+This sets the app id and the {@link /guide/user#superuser SuperUser} credentials.
+
+5. Issue command `waks dir ..\data` and you will see<br><br>
+`configured WAKSDIR: ..\data`
+<br><br>
+This sets the working directory.
+
+6. In folder `x:\tri-devp\data` copy and rename
+`msgs-msg-messages.json.txt` to `myapp-msg-messages.json.txt`
+
+5. Issue command `waks ship % %` and you will see it refuses to upload the data.
+
+6. Issue command `waks ship % % -r` and you will see it uploads and replaces the data.
+
+7. Verify this by refreshing the `MyApp` app in the browser and pressing `List Messages Records`.  You will see
+your previous data deleted and the replacement messages.
+
+### Preparing `MyApp` data
+
+8. You can now prepare your own data and upload it under the required names using the {@link /guide/waks WAKS Utility}.  The names used will be
+matched by the names in your {@link /guide/table Table Definition(s)} in the next section {@link /tutorial/step-05 05 Code MyApp}.
+
+

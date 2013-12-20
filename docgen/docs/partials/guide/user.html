@@ -1,0 +1,71 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>User records control access to the system.  Before the <strong>Triangular</strong> system will allow access to the <a href="/guide/data">Data Objects</a> stored on the server
+the User must <a href="/api/tri.controller:ctrlSess#login">login</a> to the system.</p>
+
+<p>Refer to the <a href="/guide/records#keystructure">User Record Format</a> to learn how they are stored on the server.</p>
+
+<p>The User records contains a set of property values (key/value pairs).  The reserved keys are described in the next section.  The remainder are custom properties
+available to the application with the <a href="/api/tri.servSess#getProfile">servSess#getProfile</a> function.</p>
+
+<p>The page <a href="/guide/userid-rec">UserID Recovery</a> contains procedures to restore a lost User ID or password.</p>
+
+<h3 id="superuser">SuperUser</h4>
+
+<p>When a server Datastore is first formatted a SuperUser is created whose key is '././userid' where <code>userid</code> is the SuperUser ID.
+The password property contains the encrypted token value for the SuperUser.</p>
+
+<p>The SuperUser is used to create the initial <a href="/guide/user#AdminUser">AdminUser</a> for an application.</p>
+
+<p>Assuming the Datastore is primed the link
+<a ng-click=appLoader($event); href=/apps/tri/TriBoot.htm>SuperUser Login</a> will take you to the SuperUser login screen.</p>
+
+<h3 id="adminuser">AdminUser</h4>
+
+<p>When an application is built at least one AdminUser record is created with the 'admin' role specified.  The password associated with it should be kept
+secure because the <a href="/guide/admin">Admin User</a> has unconstrained access to the application.</p>
+
+<p>The <a href="/guide/admin">Admin Application</a> is used to create more User records for the application.</p>
+
+<p>The presence of an AdminUser means that an application id exists.</p>
+
+<p>Assuming the Datastore is primed the link
+<a ng-click=appLoader($event); href=/apps/tri/TriBoot.htm>SuperUser Login</a> will take you to the SuperUser login screen.  Once logged in a list of available
+AdminUser IDs for each application will be displayed.  The link shown on the list can be used to sign in as an AdminUser.</p>
+
+<p>Alternately the link <code>/apps/tri/Admin.htm?cust=XXX</code> can be used where <code>XXX</code> is the application ID for the required AdminUser.</p>
+
+<h3 id="reservedpropertynames">Reserved Property Names</h4>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+<p><span class=srp-propdef><code class=srp-label>autolog:</code>Defines the timeout period for a User which is monitored in
+<a href="/api/tri.servSess">servSess</a>.  A value of 0 disables the inactivity timeout.
+Otherwise it is the number of seconds of inactivity before the timeout occurs.  If not specified a value of 300 (5 minutes) is implied.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>password:</code>Contains the encrypted password (A numeric integer).  When a User issues a
+<a href="/api/tri.servGAE#changePassword">servGAE.changePassword</a> function the value stored is the actual value until the first actual
+<a href="/api/tri.controller:ctrlSess#login">login</a>.  For this reason the password field must contain an alphabetic character to differentiate between
+the encrypted and unencrypted value,
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>role:</code>A string containing ',' separated values.  Each value represents a role.  The value 'admin'
+is reserved and indicates the User has administrator privileges. The remainder are application defined.
+They may be tested once a User is <a href="/api/tri.controller:ctrlSess#login">logged in</a> with the function
+<a href="/api/tri.servSess#isRole">servSess#isRole</a>
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>sandbox:</code>A value of <code>true</code> causes <a href="/guide/sandbox">Sandbox Mode</a> to be activated.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>token:</code>During
+the <a href="/api/tri.controller:ctrlSess#login">login</a> process the <a href="/guide/server-inter#token">token</a> is stored in the User record (as well as stored in a server side cache).
+This allows a session to be reconstructed if a client-side  token value is found to contain the same value as the server-side token. This value is maintained by the server.
+</span></p></div>

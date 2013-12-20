@@ -1,0 +1,65 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-deps1.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=defualt>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="FormEnvelope.js"></script>
+  <title>CIT - Envelope Printer V1.0 </title>
+  <script>gaTracking();</script>
+</head>
+<body ng-app=app>
+  <div ng-controller=ctrlForm>
+     <div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/envelopes'></div>
+    <!-- -------------Format Array of envelopes---------------------->
+    <div ng-show='isLoaded()'>
+      <style type="text/css">
+        div#divPrint table              {font-size:9pt; font-weight:500;}
+        div#divPrint span.tiny          {font-size:80%; color:rgb(210,210,210)}
+
+        div#divPrint div#forms          {width: 950px; height:1500px; position:fixed; top:0px; left:0px;}
+        div#divPrint div#env            {border:10px rgb(210,210,210) solid; padding-left:5px; padding-top:5px;}
+        div#divPrint tr.CH              {height:30px; vertical-align:bottom;}
+
+        div#divPrint div#panel          {position:fixed;left:900px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250); font-size:80%;}
+        div#divPrint div#panel p.lab    {text-align:center; width:310px; position:relative; top:auto;}
+      </style>
+      <div id=divPrint style='margin-left:20px'>
+
+        <div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Envelope'></div>
+
+        <div id=forms>
+          <div ng-repeat='oObj in oPrtObjs'>
+            <div id=env ng-style={{getEnvPos($index)}}>
+              <table>
+                <tr><td>Date:</td><td>{{oObj.date}}</td></tr>
+                <tr><td>Recipient:</td><td>{{oObj.recipient}}</td></tr>
+                <tr><td>Envelopes:</td><td>{{oObj.number}}</td></tr>
+                <tr><td>Amount:</td><td>{{oObj.amt}}</td></tr>
+                <tr><td>Entered by:</td><td>{{oObj.enteredBy}}</td></tr>
+                <tr class=CH><td>&nbsp;</td><td>___________&nbsp;&nbsp;&nbsp;___________</span></td></tr>
+                <tr><td colspan=2><hr></td></tr>
+                <tr class=CH><td>Received by:</td><td>___________________ <span class=tiny>(print)</span></td></tr>
+                <tr class=CH><td>Signature:</td><td>________________________</td></tr>
+                <tr class=CH><td>Date:</td><td>________________________</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

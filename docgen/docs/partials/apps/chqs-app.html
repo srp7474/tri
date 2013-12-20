@@ -1,0 +1,1562 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><div ng-show='isFireFox()' class=firewarn>
+This page does not show correctly on FireFox.  The <code>hide/show</code> buttons do not work.
+</div>
+
+<p><span id=close-sections>{{closeSections()}}</span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaoverview"><a class=hider ng-click=toggleHide($event)>hide</a>Overview</h4>
+
+<p>The <strong>Chqs</strong> application is a Cheque Writing System currently in production use.</p>
+
+<ul>
+<li>Handles the creation, editing, printing and voiding of cheques</li>
+<li>Includes secondary tables that has reference links.</li>
+<li>Demonstrates the <strong>auto-complete</strong> feature of <b>Triangular</b> that references a secondary table.</li>
+<li>Demonstrates the <strong>auto-skip</strong> feature of <b>Triangular</b> to speed user input</li>
+<li>Demonstrates the power of <a target=_blank href="http://angularjs.org/">AngularJS</a> directives to implement a custom user friendly <strong>Amount</strong> handler</li>
+<li>Has more advanced communication between the primary and secondary windows.</li>
+</ul>
+
+<p>The <strong>... Explained</strong> sections which follow the <strong>Demonstration</strong> section give you an explanation of the crucial parts of the code required
+to create this application.</p>
+
+<p>To avoid teduim only the note worthy points are explained.  The reader is advised to look at
+<a href="/apps/hello-app">hello App Explained</a> which has details on the more basic constructs.</p>
+
+<p>To run a demonstration now click on the <a ng-click=appLoader($event) href=/apps/Chqs.htm>Chqs App Demo</a> link.
+It will be in a new tab so you can still refer to the instructions in the next section.</p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideademonstration"><a class=hider ng-click=toggleHide($event)>hide</a>Demonstration</h4>
+
+<p><strong>Note 1</strong> It runs in <a href="/guide/sandbox">SandBox Mode</a> so you cannot damage anything.</p>
+
+<p><strong>Note 2</strong> This has been tested under <strong>Chrome</strong> which is the recommended browser for these demonstrations.</p>
+
+<ul>
+<li><p>If not started, open up link <a ng-click=appLoader($event) href=/apps/Chqs.htm>Chqs App Demo</a>. It will be in a new tab so you can still refer to these instructions.</p></li>
+<li><p>You will see screen <code>CIT Cheque Writer System Login</code>. Press <strong>login</strong> button, the <code>UserName</code> and <code>Password</code> are already provided.</p></li>
+<li><p>Click on <code>List Cheque Records</code> action.  You will see some records.</p></li>
+<li><p>Click on <code>Show All</code>.  After a slight pause more cheques will show.
+<br><br>
+<strong>Note</strong>  The <code>BalErr</code> column is a column that tests the cheque for balance.  The ones that are out
+of balance were imported from QuickBooks.  You should not be able to create out of balance cheques with this system.</p></li>
+<li><p>Play with the filters by entering data.  Masks use regular expressions with case sensitivity turned off. A leading <code>=</code> is programmed to
+look for a cheque number beginning with the number specified.</p></li>
+<li><p>Try editing a cheque that has been printed (<code>print</code> grayed out).  The <code>Payee</code> and <code>Amount</code> are readonly.</p></li>
+<li><p>You can still use the <code>add line</code> option.</p></li>
+<li><p>Focus will be on the <code>Code</code> field.  Codes start with <code>E</code>, <code>L</code>, <code>R</code> or <code>A</code>.  Enter one of these and the <strong>autocomplete</strong> will kick in.</p></li>
+<li><p>When you add the amount you will have to deduct the same from the previous line as you cannot change the cheque value (it has been printed).</p></li>
+<li><p>The <code>HST</code> flag is a Canadian tax of 1.13 in Ontario.  If checked it automatically calculates this plus creates a running total for the cheque.</p></li>
+<li><p>Cancel or save the changes to return to the main screen.</p></li>
+<li><p>To create a new cheque press <code>Create New Cheque Record</code>. Start to type the <code>Payee</code> name and the <strong>autocomplete</strong> will kick in.  Select a payee.  If only one shows
+pressing <code>&lt;enter&gt;</code> will make this the <code>Payee</code> and the fous will shift to a new line.  Enter as before.  In this case it creates a running total for the cheque.</p></li>
+<li><p>Press <code>Save Changes</code>.  You will see the check.  The <code>print</code> action will be grayed out because the previous cheque has not been printed.</p></li>
+<li><p>Print the previous cheque.  A secondary screen will show up.</p></li>
+<li><p>Either <code>Submit to print dialogue</code> or <code>Void &amp; renumber</code>.</p></li>
+<li><p><code>Submit to print dialogue</code> will bring up the "Print Dialogue".  Cancel out (but it is treated as printed at this point).</p></li>
+<li><p>Return to the primary screen.  You will see that the <code>print</code> option for this cheque is now grayed out and that the next cheque is ready for printing.</p></li>
+<li><p>If you had pressed <code>Void &amp; renumber</code> the cheque number in question increments (and all following cheques do also).</p></li>
+<li><p>To edit the supplier table press <code>List Suppliers Records</code></p></li>
+<li><p>If the supplier is used in a cheque the name cannot be changed.</p></li>
+<li><p>The name and address can be changed and will reflected in unprinted checks,</p></li>
+</ul>
+
+<p><span id='Chqs.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideachqshtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>Chqs.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;!--
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+--&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-chqs0.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="Deps.css" title=default&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="Chqs.js"&gt;&lt;/script&gt;
+&lt;title&gt;Chqs:Defined during bootstrap&lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+&lt;/head&gt;
+&lt;body id=bodyID&gt;
+&lt;macro fetch='apps-body.html' alter='##TITLE##/CIT Cheque Writer System Login'&gt;&lt;/macro&gt;                 &lt;!-- standard body --&gt;
+
+&lt;macro fetch='apps-copyright-notice.html'&gt;&lt;/macro&gt;                                                      &lt;!-- copyright notice --&gt;
+
+&lt;object data='tri/AppsBase.htm?app=Chqs' id=apps-templates style='width:0px;height:0px;'&gt;&lt;/object&gt;      &lt;!-- load standard templates --&gt;
+
+&lt;!---------------------------- Custom CSS ----------------------------------!&gt;
+&lt;style type="text/css"&gt;
+/* Note: this could be in a separate .css file if preferred */
+/* cheque lister */
+table#list-cheque                                      {width:980px;}
+table#list-cheque thead                                {width:980px;}
+table#list-cheque td.c0, table#list-cheque th.c0       {width:120px;}
+table#list-cheque td.c1, table#list-cheque th.c1       {width:80px; }
+table#list-cheque td.c2, table#list-cheque th.c2       {width:120px; }
+table#list-cheque td.c3, table#list-cheque th.c3       {width:100px; }
+table#list-cheque td.c4, table#list-cheque th.c4       {width:430px; }
+table#list-cheque td.c5, table#list-cheque th.c5       {width:50px; }
+table#list-cheque td.c6, table#list-cheque th.c6       {width:80px; }
+table#list-cheque td.c3                                {text-align:right;}
+table#list-cheque td.c3 span                           {display:inline-block; margin-right:5px;}
+table#list-cheque td.c4                                {text-align:left;}
+table#list-cheque td.c4 span                           {display:inline-block; margin-left:5px;}
+
+fieldset.list-comm input#_custmask                     {width:200px;}
+
+/* COA lister */
+table#list-COA                                         {width:800px;}
+table#list-COA thead                                   {width:800px;}
+table#list-COA td.c0, table#list-COA th.c0             {width:120px;}
+table#list-COA td.c1, table#list-COA th.c1             {width:100px; }
+table#list-COA td.c2, table#list-COA th.c2             {width:480px; }
+table#list-COA td.c3, table#list-COA th.c3             {width:100px; }
+table#list-COA td.c2                                   {text-align:left;}
+table#list-COA td.c2 span                              {display:inline-block; margin-left:5px;}
+
+/* COA Repeats */
+table#list-REPS                                        {width:900px;}
+table#list-REPS thead                                  {width:900px;}
+table#list-REPS td.c0, table#list-REPS th.c0           {width:120px;}
+table#list-REPS td.c1, table#list-REPS th.c1           {width:260px; }
+table#list-REPS td.c2, table#list-REPS th.c2           {width:120px; }
+table#list-REPS td.c3, table#list-REPS th.c3           {width:250px; }
+table#list-REPS td.c4, table#list-REPS th.c4           {width:250px; }
+table#list-REPS td.c1                                  {text-align:left;}
+table#list-REPS td.c1 span                             {display:inline-block; margin-left:5px;}
+table#list-REPS td.c3                                  {text-align:left;}
+table#list-REPS td.c3 span                             {display:inline-block; margin-left:5px;}
+table#list-REPS td.c4                                  {text-align:left;}
+table#list-REPS td.c4 span                             {display:inline-block; margin-left:5px;}
+
+
+/* Supplier lister */
+table#list-Suppliers                                   {width:980px;}
+table#list-Suppliers thead                             {width:980px;}
+table#list-Suppliers td.c0, table#list-Suppliers th.c0 {width:100px;}
+table#list-Suppliers td.c1, table#list-Suppliers th.c1 {width:300px; }
+table#list-Suppliers td.c2, table#list-Suppliers th.c2 {width:580px; }
+table#list-Suppliers td.c1                             {text-align:left;}
+table#list-Suppliers td.c1 span                        {display:inline-block; margin-left:5px;}
+table#list-Suppliers td.c2                             {text-align:left;}
+table#list-Suppliers td.c2 span                        {display:inline-block; margin-left:5px;}
+
+
+
+/* cheque editor */
+div#editor                                             {width:900px;}
+/*div#chq-edit {background-color:rgb(250,250,255); border:1px solid rgb(151,208,255);}*/
+div#chq-edit                                           {margin-left:10px;}
+div#chq-hdr                                            {width:900px;}
+div#chq-edit input#chqno                               {width:40px;}
+div#chq-edit input#date                                {width:130px;}
+div#chq-edit input#amt                                 {width:60px; text-align:right;}
+div#chq-edit input#payee                               {width:270px;}
+div#chq-edit input#note                                {width:702px;}
+div#chq-edit input[readonly]                           {background-color:rgb(240,240,240);}
+table#chq-lines thead                                  {color:rgb(206,206,206); font-size:70%; text-align:center;}
+table#chq-lines td.c1 input, table#chq-lines th.c1     {width:36px;}
+table#chq-lines td.c2 input, table#chq-lines th.c2     {width:200px;}
+table#chq-lines td.c3 input, table#chq-lines th.c3     {width:60px;}
+table#chq-lines td.c4 input, table#chq-lines th.c4     {width:60px;}
+table#chq-lines td.c5 input, table#chq-lines th.c5     {width:60px;}
+table#chq-lines td.c6 input, table#chq-lines th.c6     {width:150px;}
+table#chq-lines td.c7 span,  table#chq-lines th.c7     {width:162px;}
+table#chq-lines td.c8 a,     table#chq-lines th.c8     {width:100px; font-weight:normal;}
+table#chq-lines td.c1 input                            {text-align:center;}
+table#chq-lines td.c2 input                            {text-align:left;}
+table#chq-lines td.c3 input                            {text-align:right;}
+table#chq-lines td.c4 input                            {text-align:right;}
+table#chq-lines td.c5 input                            {text-align:right;}
+table#chq-lines td.c6 input                            {text-align:left;}
+table#chq-lines td.c7 span                             {text-align:left; font-size:70%; display:inline-block;}
+table#chq-lines td.c8 a                                {text-align:left; font-size:70%;}
+div#sup-scroll                                         {overflow:scroll; height:250px; margin-left:485px; width:280px;}
+div#sup-scroll pre                                     {margin:0px;}
+div#sup-scroll div.div-odd                             {background-color:rgb(240,250,255);}
+div#sup-scroll div.div-even                            {background-color:rgb(250,250,255);}
+div#sup-scroll div.supplier                            {border:1px solid rgb(151,208,255);}
+div#coa-scroll                                         {overflow:scroll; height:120px; margin-left:0px;}
+div#coa-scroll pre                                     {margin:0px;}
+div#coa-scroll div.div-odd                             {background-color:rgb(240,250,255);}
+div#coa-scroll div.div-even                            {background-color:rgb(250,250,255);}
+div#coa-scroll div.supplier                            {border:1px solid rgb(151,208,255);}
+&lt;/style&gt;
+
+&lt;!------- Custom Templates ------!&gt;
+&lt;object type='text/html' id=cust-templates style='width:0px;height:0px;'&gt;
+&LT;pre class=template id="xxdonor-edit.css"&gt;
+   &lt;!-- here we are --&gt;
+&LT;/pre&gt;
+
+&LT;pre class=template id="chequeEdit.html"&gt;
+
+   &lt;div id=chq-hdr&gt;
+     &lt;span class=note&gt;ChqNo:&lt;/span&gt;&lt;input type=text id=chqno  ng-readonly='bLocked' ng-model=oObj.chqno  value={{oObj.chqno}}&gt;
+     &nbsp;&nbsp;&nbsp;
+     &lt;span class=note&gt;M-D-Y:&lt;/span&gt;&lt;input type=date id=date   ng-readonly='bLocked' ng-model=oObj.date   value={{oObj.date}}&gt;
+     &nbsp;&nbsp;&nbsp;
+     &lt;span class=note&gt;Amount:&lt;/span&gt;&lt;input type=text id=amt   ng-readonly='true'    value={{getChqAmt(oObj)|number:2}}&gt;
+     &nbsp;&nbsp;&nbsp;
+     &lt;span class=note&gt;Payee:&lt;/span&gt;&lt;input type=text autocomplete=bShowSups next=insertLine(oObj) id=payee  ng-readonly='bLocked' ng-model=oObj.payee value={{oObj.payee}} placeholder='enter payee name (will auto-complete)'&gt;
+     &lt;!-- Supplier sub-list --&gt;
+     &lt;div id=sup-scroll ng-show='bShowSups'&gt;
+       &lt;div class=supplier ng-repeat='oSup in getCurSups(this,oObj.payee)' ng-class-even="'div-even'" ng-class-odd="'div-odd'" ng-click='supClick(this,oSup)'&gt;
+         {{oSup.name}}&lt;br&gt;
+         &LT;pre&gt;{{getAddrLine(oSup)}}&LT;/pre&gt;
+       &lt;/div&gt;
+     &lt;/div&gt;
+   &lt;/div&gt;
+   &lt;br&gt;&lt;br&gt;
+   &lt;span class=note&gt;&nbsp;&nbsp;Note:&lt;/span&gt;&lt;input type=text id=note  ng-model=oObj.note  value={{oObj.note}}&gt;
+   &lt;br&gt;&lt;br&gt;
+   &lt;table id=chq-lines&gt;
+     &lt;thead&gt;
+       &lt;tr&gt;
+         &lt;th class=c1&gt;HST&lt;/th&gt;
+         &lt;th class=c2&gt;Code&lt;/th&gt;
+         &lt;th class=c3&gt;Amt&lt;/th&gt;
+         &lt;th class=c4&gt;HSTAmt&lt;/th&gt;
+         &lt;th class=c5&gt;TotAmt&lt;/th&gt;
+         &lt;th class=c6&gt;Reference&lt;/th&gt;
+         &lt;th class=c7&gt;Msg/Ref-Date(M-D-Y)&lt;/th&gt;
+         &lt;th class=c8&gt;&lt;a class=c-action href=# ng-click="addNewLine(oObj);"&gt;add line&lt;/a&gt;&lt;/th&gt;
+       &lt;/tr&gt;
+     &lt;/thead&gt;
+     &lt;tbody&gt;
+       &lt;tr ng-repeat='oLine in oObj.lines' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'" style='vertical-align:top;'&gt;
+         &lt;td class=c1&gt;&lt;input id=HST-{{$index}}  type=checkbox ng-hide='oLine.code == "HST"' ng-model='oLine.HST' ng-true-value='H' ng-false-value=''&gt;&lt;/td&gt;
+         &lt;td class=c2&gt;
+           &lt;input id=code-{{$index}} type=text value={{oLine.code}} ng-model=oLine.code next=setAmtFocus(oObj,oLine) placeholder='enter account code (will auto-complete)' autocomplete=oLine.bShowCode&gt;
+           &lt;div id=coa-scroll ng-show='oLine.bShowCode'&gt;
+             &lt;div class=coa ng-repeat='oCoa in getCurCOAs(this,oObj,oLine)' ng-class-even="'div-even'" ng-class-odd="'div-odd'"&gt;
+               &LT;pre ng-click='codeClick(this,oObj,oLine,oCoa)'&gt;{{oCoa.code}} {{oCoa.name}}&LT;/pre&gt;
+             &lt;/div&gt;
+           &lt;/div&gt;
+         &lt;/td&gt;
+         &lt;td class=c3&gt;&lt;input id=RawAmt-{{$index}} amount=oLine next=setRefFocus(oObj,oLine) ng-model='oLine.amt' type=text  ng-readonly='oLine.code == "HST"'&gt;&lt;/td&gt;
+         &lt;td class=c4&gt;&lt;input id=HSTAmt-{{$index}} type=text readonly value={{getHSTAmt(oLine)|number:2}}&gt;&lt;/td&gt;
+         &lt;td class=c5&gt;&lt;input id=TotAmt-{{$index}} type=text readonly value={{getAmtTot(oLine)|number:2}}&gt;&lt;/td&gt;
+         &lt;td class=c6&gt;&lt;input id=RefFld-{{$index}} ng-model='oLine.ref' autotab=setSaveFocus(oObj,oLine)&gt;&lt;/td&gt;
+         &lt;td class='c7'&gt;
+           &lt;span class=warn ng-show='oLine.amtErr != null'&gt;{{oLine.amtErr}}&lt;/span&gt;
+           &lt;span ng-show='oLine.amtErr == null'&gt;
+             &lt;input type=date id=refdate-{{$index}} ng-model=oLine.refdate  value={{getRefDate(oLine)}}&gt;
+           &lt;/span&gt;
+         &lt;/td&gt;
+         &lt;td class=c8&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;a href=# ng-click='removeLine(oObj,oLine)' class=c-action&gt;remove&lt;/a&gt;&lt;/td&gt;
+       &lt;/tr&gt;
+       &lt;tr ng-show='getTotHST(oObj) &gt; 0'&gt;
+         &lt;td class=c1&gt;&lt;/td&gt;
+         &lt;td class=c2&gt;&lt;input id=code-hst type=text value='Total HST' readonly&gt;&lt;/td&gt;
+         &lt;td class=c3&gt;&lt;input id=HstAmt-hst value={{getTotAmt(oObj)|number:2}} type=text readonly&gt;&lt;/td&gt;
+         &lt;td class=c4&gt;&lt;input id=HstAmt-hst value={{getTotHST(oObj)|number:2}} type=text readonly&gt;&lt;/td&gt;
+         &lt;td class=c5&gt;&lt;input id=TotAmt-hst value={{getTotTot(oObj)|number:2}} type=text readonly&gt;&lt;/td&gt;
+         &lt;td class=c6&gt;&lt;/td&gt;
+         &lt;td class='c7 warn'&gt;&lt;/td&gt;
+         &lt;td class=c8&gt;&lt;/td?
+       &lt;/tr&gt;
+     &lt;/tbody&gt;
+   &lt;/table&gt;
+&LT;/pre&gt;
+
+&lt;/object&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li><p>Lines <code>2</code> thru <code>8</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Lines <code>29</code> thru <code>126</code> add extensive <strong>css</strong> code to properly display the various tables being processed by the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>
+and <a href="/api/tri.controller:ctrlCommList">Lister</a>.</p></li>
+<li><p>Lines <code>134</code> thru <code>209</code> is a replacement panel for the <a href="/api/tri.controller:ctrlCommEdit">Editor</a> referenced in line <code>93</code> of <code>Chqs.js</code> using a 'dummy` field.  The
+exact technique is explained there,</p></li>
+<li><p>Line <code>137</code> and others trigger <strong>readonly</strong> mode on the input field if the <code>bLocked</code> variable is true.  This is set progromatically
+in <code>Chqs.js</code> lines <code>168</code> thru <code>170</code> if the user has role 'admin' and the check is not printed.</p></li>
+<li><p>Lines <code>143</code> thru <code>150</code> is the <code>payee</code> input control. It uses <strong>autocomplete</strong> with variable <code>bShowSups</code> being the intermediary. It uses <code>tblSUP</code> to get the values.
+The &LT;div> panel beginning on line <code>145</code> is shown when the <code>payee</code> input field is incomplete.  Functions <code>getCurSups</code> and  <code>supClick</code> in <code>Chqs.js</code>
+round out the functionality.
+<br><br>
+When the input is complete the <code>next=insertLine(obj)</code> attribute transfers focus to the proper place in the edit window. This is the <strong>autoskip</strong> feature.
+<br><br>
+<strong>NOTE</strong> The <a target=_blank href="http://angularjs.org/">AngularJS</a> models behave best when they are dealing with an object.  In that way only the object reference has to be added to the $scope and the underlying HTML can
+easily reference the property fields of the object.  This is shown clearly in this example code.</p></li>
+<li><p>Lines <code>155</code> thru <code>202</code> is a table populated by a <strong>ng-repeat</strong> to handle the multiple lines that the cheque can have.</p></li>
+<li><p>Line <code>165</code> invokes a function <code>addNewLine</code> in <code>Chqs.js</code> that adds a new line.</p></li>
+<li><p>Lines <code>172</code> thru <code>177</code> is another variation of the <strong>autocomplete</strong> feature to input the accounting code from the <code>tblCOA</code> table.
+<br><br>
+When the input is complete the <code>next=setAmtFocus(oObj,oLine)</code> attribute transfers focus to the <code>amt</code> input field.  This is the <strong>autoskip</strong> feature.</p></li>
+<li><p>Line <code>189</code> invokes a function <code>removeLine</code> in <code>Chqs.js</code> that removes a line.</p></li>
+</ul>
+
+<p><span id='Chqs.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideachqsjsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>Chqs.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+
+// ---------------------------------------------------------------------------
+/* This forces angular to load the tables and their dependencies
+*
+* We rely on the implied dependency injection to haul in only the tables needed and
+* thus automatically configure the system menus and available actions.
+*/
+
+function ctrlMain($scope,servSess,servGAE,servREG,tblCHQS,tblCOA,tblSUP,tblREPS,servCRUD,servConfig) {
+log("Created ctrlMain for chqs application");
+servGAE.setCust("chqs");
+servSess.setTitle("Cheque Writer System");
+servSess.setLogonExit(logonExit);
+
+function xfrAdminFunctions() {
+  servSess.xfrAdminApp("chqs");
+}
+
+function addNewChqSet() {
+  log("add new chq set");
+  var oRepTbl = servREG.findTable("REPS");
+  if (!oRepTbl) return;
+  var oRecs = servCRUD.getObjs(oRepTbl.getTabProp());
+  log("Records tab=%o %o",oRepTbl,{array:oRecs});
+  var oChqTbl = servREG.findTable("Cheque");
+  var oTP = oChqTbl.getTabProp();
+  var nChqNo = 0;
+  for(var i=0,iMax=oRecs.length; i&lt;iMax; i+=1) {
+    var oRec = oRecs[i];
+    var oNew = {};
+    oTP.createExit(oNew);
+    oNew.payee = oRec.payee;
+    oNew.hstamt = '0.00';
+    oNew.amt = (+oRec.amt).toFixed(2);
+    if (i == 0) {
+      nChqNo = oNew.chqno;
+    } else {
+      oNew.chqno = nChqNo + i;
+    }
+    oNew.lines.push({amt:oNew.amt,refdate:oNew.date,hstamt:'0.00',code:oRec.code,ref:oRec.ref,totamt:oNew.amt});
+    var bIntermed = (i+1 == iMax)?false:true;
+    oTP.recServ.insertRec(oTP,oNew,null,bIntermed);
+  }
+}
+
+function logonExit(oProf) {
+  log("logonExit called");
+  var oOMs = [];
+  if (oProf && oProf.repfile) {
+    oOMs.push({menu:"Add Repeat Set",func:addNewChqSet,role:'admin'});
+  }
+  oOMs.push({menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'});
+  servSess.setOptMenuItems(oOMs);
+}
+}
+
+//----------------------------------------------------------------------------
+//-------------------------------- Cheque records ------------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblCHQS',['$rootScope','servREG','servGAE','servREC','servSess',function($rootScope,servREG,servGAE,servREC,servSess) {
+var oFuncs = {};
+var nPrintChq = null;
+
+var oTabProp = {
+     recTitle: 'Cheque'
+    ,recName:  'chq'
+    ,recType:  'chqs'
+    ,lsName:   '-chqs'
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    {col:'chqno'}
+    ,cols:     [{type:'actions',    title: 'Actions'      ,showEdit:false, addDefault:false,
+                       actions:[{label:'edit',click:'editRecord(oRow.oaa)',title:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                               ,{label:'drop',click:'dropRecord(oRow.oaa)',title:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);',role:'admin'}
+                               ,{label:'print',method:printCheque,click:'printCheque(this,oRow)',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                               ,{label:'voided',click:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                               ]
+                }
+               ,{col: 'chqno',      title: 'ChqNo'        ,showEdit:false}
+               ,{col: 'date',       title: 'Y-M-D'        ,showEdit:false}
+               ,{col: showAmt,      title: 'Amount'       ,showEdit:false}
+               ,{col: 'payee',      title: 'Payee'        ,showEdit:false}
+               ,{col: getLineCount, title: 'Lines'        ,showEdit:false}
+               ,{col: balErr,       title: 'BalErr'       ,showEdit:false}
+               ,{col: 'dummy',      title: 'chq-edit'    ,showList:false,type:'cust',showEdit:true, reqd:false, htmlCust:'chequeEdit.html', hideLabel:true}
+              ]
+    ,filters: [
+               {type: 'cust',   field:'_custmask', title:'cust-mask', place:'payee search or =chqno', methCust: custMask}
+              ,{type: 'chkbox', field:'_custprt',  title:'Show All: ', methCust: custPrt}
+              ]
+    ,validate            : validateCheque
+    ,createExit          : createExit
+    ,fileKey             : fileKey
+    ,fileKeyRef          : 'chqfile'
+    //,getEditRecordExit   :getEditRecordExit
+    ,saveRecordExit      :saveRecordExit
+    ,primeList           :primeList
+    ,primeEdit           :primeEdit
+};
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+oFuncs.getSupMap   = function()            {return getSupMap();}
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+// -------------------------------------------------------------------------
+
+function primeList(scope,oTP) {
+  log("primeList scope=%o oTP=%o",scope,oTP);
+  if ((scope.oSel) && (!('_custPrt' in scope.oSel))) {
+    scope.oSel._custprt = '0';
+    scope.oSel._custvoid = '0';
+    log("setCustPrt %o flag=%s",scope,scope.oSel._custprt);
+  }
+  nPrintChq = null;
+}
+
+function getSupMap() {
+  var oSupMap = {};
+  var oChqs = oTabProp.oCRUD.getObjs(oTabProp);
+  for(var i=0,iMax=oChqs.length; i&lt;iMax; i+=1) {
+    var oChq =oChqs[i];
+    oSupMap[oChq.payee] = true;
+  }
+  return oSupMap;
+}
+
+function primeEdit(scope,oTP,oObj) {
+  log("primeEdit scope=%o oTP=%o obj=%o",scope,oTP,oObj);
+  scope.getChqAmt      = getChqAmt;
+  scope.getHSTAmt      = getHSTAmt;
+  scope.getAmtTot      = getAmtTot;
+  scope.getTotHST      = getTotHST;
+  scope.getTotTot      = getTotTot;
+  scope.getTotAmt      = getTotAmt;
+  scope.addNewLine     = addNewLine;
+  scope.removeLine     = removeLine;
+  scope.testShowSups   = testShowSups;
+  scope.getCurSups     = getCurSups;
+  scope.supClick       = supClick;
+  scope.codeClick      = codeClick;
+  scope.getAddrLine    = getAddrLine;
+  scope.insertLine     = insertLine;
+  scope.getCurCOAs     = getCurCOAs;
+  scope.setAmtFocus    = setAmtFocus;
+  scope.setRefFocus    = setRefFocus;
+  scope.setSaveFocus   = setSaveFocus;
+  scope.printCheque    = printCheque;
+                       // prime variables
+  scope.bShowSups      = false;
+  scope.bLocked        = false;
+  if (!servSess.isAdmin()) {
+    if (oObj && oObj.bPrinted) scope.bLocked = true;
+  }
+  return oObj;
+}
+
+function printCheque(scope,oChq) {
+  log("printChq scope=%o obj=%o",scope,oChq);
+  var oHandler = function printReqHandler(event) {
+    var sVerb = event.data.verb;
+    if (sVerb == "chqs:send-print-info") {
+      log("printReqHandler called %o obj=%o",event,oChq);
+      var oAddr = getAddress(oChq);
+      var oMsg = {verb:'chqs:chqs-data',payload:{oObj:oChq,fmt:0,addr:oAddr}};
+      event.source.postMessage(oMsg,"*");
+    } else if (sVerb == "chqs:void-chq") {
+      log("renum chq %s cur=%s",event.data.chqno,oChq,chqno);
+      if (oChq.chqno == event.data.chqno) {
+        scope.nPrintChq = null;
+        var oNew = renumChq(oChq);
+        var oAddr = getAddress(oChq);
+        var oMsg = {verb:'chqs:chqs-data',payload:{oObj:oNew,fmt:0,addr:oAddr}};
+        event.source.postMessage(oMsg,"*");
+        servSess.getListCtrl().nPrintChq = null;
+        $rootScope.$digest();
+      } else {
+        log("logic error lost chq %o "+oChq);
+      }
+    } else if (sVerb == "chqs:printed-chq") {
+      if (oChq.chqno == event.data.chqno) {
+        var oTP = oTabProp;
+        oChq.bPrinted = true;
+        nPrintChq = null;
+        oTP.recServ.insertRec(oTP,oChq,oChq.oaa);
+        servSess.getListCtrl().nPrintChq = null;
+        $rootScope.$digest();
+      } else {
+        log("logic(1) error lost chq %o "+oChq);
+      }
+    } else {
+      log("printReqHandler spurious verb %s",sVerb);
+    }
+  }
+  servSess.createFormWindow('chqs',oHandler,"Chqs.htm","FormCheque.htm");
+}
+
+function createExit(oObj) {
+  var sNow = ""+getNowYMD();
+  oObj.chqno     = getNextChqNo();
+  oObj.date      = sNow;
+  oObj.lines      = [];
+  setPayeeFocus();
+  return true;
+}
+
+function getNextChqNo() {
+  var oChqs = oTabProp.oCRUD.getObjs(oTabProp);
+  var nNext = 0;
+  for(var i=0,iMax=oChqs.length; i&lt;iMax; i+=1) {
+    var oChq = oChqs[i];
+    if (+oChq.chqno &gt; nNext) nNext = +oChq.chqno;
+  }
+  return nNext + 1;
+}
+
+function saveRecordExit(oRec) {
+  log("saveRecordExit.1 %o",oRec);
+  for(var i=0,iMax=oRec.lines.length; i&lt;iMax; i+=1) {
+    var oLine = oRec.lines[i];
+    delete oLine.bShowCode;
+    delete oLine.amtErr;
+  }
+  return oRec;
+}
+
+function renumChq(oChq) {
+  var oTP = oTabProp;
+  log("located chq %i for void-chq request",oChq.chqno);
+  var oNew = angular.copy(oChq);
+  oChq.bVoid = true;
+  oNew.chqno = +oNew.chqno + 1;
+  oNew.bPrinted = false;
+  //oChq.bPrinted = true;
+  var oChqs = oTP.oCRUD.getObjs(oTP);
+  for(var i=0,iMax=oChqs.length; i&lt;iMax; i+=1) {
+    var oC = oChqs[i];
+    if (+oC.chqno &gt; oChq.chqno) {
+      oC.chqno += 1;
+      log("Renum "+oC.chqno);
+    }
+  }
+  oTP.recServ.insertRec(oTP,oNew,null);
+  return oNew;
+}
+
+function testShowSups(scope) {
+  log("testShowSups scope=%o",scope);
+  return scope.bShowSups;
+}
+
+function supClick(scope,oSup) {
+  if (!scope.oObj) return;
+  scope.oObj.payee = oSup.name;
+  scope.$parent.bShowSups = false;
+  insertLine(scope.oObj);
+  //if ($scope.moveNext) $scope.moveNext('Sup');
+}
+
+function codeClick(scope,oObj,oLine,oCoa) {
+  log("codeClick scope=%o obj=%o line=%o coa=%o",scope,oObj,oLine,oCoa);
+  oLine.code = oCoa.code+" "+oCoa.name;
+  oLine.bShowCode = false;
+  setTimeout(function(){setAmtFocus(oObj,oLine)},0);
+}
+
+function getCurSups(scope,sMask) {
+  var oTab = servREG.findTable('Suppliers');
+  if (oTab == null) return [];
+  var oTP = oTab.getTabProp();
+  var oSups = oTP.oCRUD.getObjs(oTP);
+  if (oSups == null) return [];
+  var oSelSups = [];
+  if (!sMask) return oSelSups;
+  if (sMask.trim().length == 0) return oSelSups;
+  var oMaskRG = new RegExp('^'+sMask,"i");
+  for(var i=0,iMax=oSups.length; i&lt;iMax; i+=1) {
+    var oSup = oSups[i];
+    if (oSup.name.match(oMaskRG) != null) oSelSups.push(oSup);
+  }
+  if (scope) {
+    scope.sAutoName = null;
+    if (oSelSups.length == 1) {
+      scope.sAutoName = oSelSups[0].name;
+    }
+  }
+  //log("returning sups len=%i, scope=%o mask=%s",oSelSups.length,scope,sMask);
+  return oSelSups;
+}
+
+function getAddress(oChq) {
+  var oSups = getCurSups(null,oChq.payee);
+  if (oSups.length == 0) return null;
+  return getAddrLine(oSups[0],"&lt;br&gt;");
+}
+
+function getAddrLine(oSup,sEOL) {
+  if (!sEOL) sEOL = "\r\n";
+  var sStr = "";
+  sStr = addFld(sStr,oSup.street1,sEOL);
+  sStr = addFld(sStr,oSup.street2,sEOL);
+  sStr = addFld(sStr,oSup.city,sEOL);
+  sStr = addFld(sStr,oSup.prov,', ');
+  sStr = addFld(sStr,oSup.zip,', ');
+  return sStr;
+}
+
+function getCurCOAs(scope,oObj,oLine) {
+  var oTab = servREG.findTable('COA');
+  if (oTab == null) return [];
+  var oTP = oTab.getTabProp();
+  var oCOAs = oTP.oCRUD.getObjs(oTP);
+  var sMask = oLine.code;
+  var oSelCOAs = [];
+  if (!sMask) return [];
+  if (sMask.length &gt; 4) return [];
+  var oMaskRG = new RegExp('^'+sMask,"i");
+  for(var i=0,iMax=oCOAs.length; i&lt;iMax; i+=1) {
+    var oCOA = oCOAs[i];
+    if (oCOA.code.match(oMaskRG) != null) oSelCOAs.push(oCOA);
+  }
+  scope.sAutoName = null;
+  if (oSelCOAs.length == 1) {
+    oLine.bShowCode = false;
+    scope.sAutoName = oSelCOAs[0].code+" " + oSelCOAs[0].name;
+    oLine.code = scope.sAutoName;
+    setTimeout(function(){setAmtFocus(oObj,oLine)},0);
+  }
+  return oSelCOAs;
+}
+
+function addFld(sStr,sFld,sSep) {
+  if (!sFld) return sStr;
+  if (sStr.length &gt; 0) sStr += sSep;
+  sStr += sFld.trim();
+  return sStr;
+}
+
+function showAmt(oObj,scope,oCol) {
+  if (!oObj) return null;
+  if (!oObj.amt) return null;
+  return (+oObj.amt).toFixed(2);
+  //log("showAmt %o %o %o",oObj,p1,p2);
+}
+
+function fileKey() {
+  var oProf = servSess.getProfile();
+  if (!oProf) return "no-prof";
+  if (!oProf.chqfile) return "no-chq-file";
+  return oProf.chqfile;
+}
+
+function getAnchorClass(scope,oObj,oA) {
+  //log("printChq called %o",oObj);
+  if (oA.label == 'voided') {
+    if (oObj.bVoid) return 'c-quiet';
+    return "hide";
+  }
+  if (oA.label == 'edit') return "c-action";
+  if (oA.label == 'print') {
+    //log("printChq called %s scope=%o obj=%o a=%o printChq=%o",oObj.chqno,scope,oObj,oA,nPrintChq);
+    if (oObj.bVoid) return 'hide';
+    if (oObj.bPrinted) return "c-quiet";
+    if (nPrintChq == oObj.chqno) return "c-action"; //First non-printed cheque
+    if (!nPrintChq) {  //called multiple times so cannot use binary switch.  Use local-global vbl to avoid nested scopes.
+       nPrintChq = oObj.chqno;
+       return "c-action";
+    }
+    return "c-quiet";
+  }
+  return "c-action";
+}
+
+function validateCheque(scope,oObj,oCopy,fnValStd,fnEditErr) {
+  log("validateChq scope=%o obj=%o",scope,oObj);
+  if (!oObj.payee) return fnEditErr("payee required");
+  var sPayee = oObj.payee.trim();
+  if ((sPayee.length &gt; 0) && (sPayee.length &lt; 4)) return fnEditErr('invalid payee '+sPayee);
+  if (oObj.lines.length == 0) return fnEditErr("add lines");
+  oObj.amt = getChqAmt(oObj);
+  if (!oObj.amt || (+oObj.amt == 0)) return fnEditErr("Amount cannot be zero");
+  for(var i=0,iMax=oObj.lines.length; i&lt;iMax; i+=1) {
+    var oLine = oObj.lines[i];
+    if (!oLine.code || (oLine.code.trim() == '')) return fnEditErr("Line "+(i+1)+" has no code");
+    if (oLine.code && (oLine.code.trim().length &lt; 6)) return fnEditErr("Line "+(i+1)+" code not valid: "+oLine.code);
+  }
+  oObj.hstamt = (+getHSTAmt(oObj)).toFixed(2);
+  if ((oObj.amt != oCopy.amt) && (oObj.bPrinted)) return fnEditErr("Cannot change amount of printed cheque new="+oObj.amt+" old="+oCopy.amt);
+  delete oObj.tag;
+  return true;
+}
+
+function balErr(oChq,scope,oCol) {
+  if (!oChq.amt) return 'N';
+  if (+oChq.amt == +getTotTot(oChq)) return 'N';
+  log("balErr chq=%o amt=%s tot=%s",oChq,oChq.amt,getTotTot(oChq));
+  return 'Y';
+}
+
+function getLineCount(oObj) {
+  //log("getLineCount %o",p1);
+  if (oObj.lines) return oObj.lines.length;
+  return 0;
+}
+
+function custMask(oTab,oObjs,oData,oFil) {
+  var sStr = oData[oFil.field] || '';
+  if (sStr.trim() == '') return oObjs;
+  var sFlds = ['payee'];
+  var oMask = new RegExp(sStr,"i");
+  if (sStr.substring(0,1) == '=') {
+    if (sStr.length &gt; 1) {
+      oMask = new RegExp('^'+sStr.substring(1),"i");
+      sFlds = ['chqno'];
+    }
+  }
+  var oNew = [];
+  for(var i=0,iMax=oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = oObjs[i];
+    var bUse = false;
+    for(var j=0,jMax=sFlds.length; j&lt;jMax; j+=1) {
+      var sFld = sFlds[j];
+      if (oObj[sFld] && ((""+oObj[sFld]).match(oMask) != null)){
+        bUse = true;
+        break;
+      }
+    }
+    if (bUse) oNew.push(oObj);
+  }
+  return oNew;
+}
+
+function dummy() {}
+
+function custPrt(oTab,oObjs,oData,oFil) {
+  var sStr = oData[oFil.field] || '0';
+  log("custPrt %s data=%o tab=%o",sStr,oData,oTab);
+  if (sStr == '1') return oObjs;
+  var oNew = [];
+  for(var i=0,iMax=oObjs.length; i&lt;iMax; i+=1) {
+    var oObj = oObjs[i];
+    if (oObj.bPrinted) continue;
+    oNew.push(oObj);
+  }
+  return oNew;
+}
+
+function getHSTAmt(oLine) {
+  if (oLine.code == 'HST') return +oLine.amt;
+  if (oLine.HST && oLine.HST == 'H') return (+oLine.amt * 0.13).toFixed(2);
+  return 0.00;
+}
+
+function getAmtTot(oLine) {
+  return (+getHSTAmt(oLine)) + (+oLine.amt);
+}
+
+function getTotHST(oChq) {
+  var oLines = getLines(oChq);
+  var dTot = 0.00;
+  for(var i=0,iMax=oLines.length; i&lt;iMax; i+=1) {
+    var oLine = oLines[i];
+    dTot += (+getHSTAmt(oLine));
+  }
+  return dTot.toFixed(2);
+}
+
+function getTotTot(oChq) {
+  var oLines = getLines(oChq);
+  var dTot = 0.00;
+  for(var i=0,iMax=oLines.length; i&lt;iMax; i+=1) {
+    var oLine = oLines[i];
+    dTot += (+getAmtTot(oLine));
+  }
+  return dTot.toFixed(2);
+}
+
+function getTotAmt(oChq) {
+  var oLines = getLines(oChq);
+  var dTot = 0.00;
+  for(var i=0,iMax=oLines.length; i&lt;iMax; i+=1) {
+    var oLine = oLines[i];
+    dTot += (+oLine.amt);
+  }
+  return dTot.toFixed(2);
+}
+
+function getChqAmt(oChq) {
+  return getTotTot(oChq);
+}
+
+function isBalError(oChq) {
+  if (!oChq.amt) return true;
+  if (+oChq.amt != getTotTot(oChq)) return true;
+  return false;
+}
+
+// This function normalizes lines
+function getLines(oChq) {
+  var oLines = [];
+  if (oChq) {
+    for(var i=0,iMax=oChq.lines.length; i&lt;iMax; i+=1) {
+      var oLine = oChq.lines[i];
+      oLine.hstamt = (+getHSTAmt(oLine)).toFixed(2);
+      oLine.totamt = (+getAmtTot(oLine)).toFixed(2);
+      if (oLine.code != 'HST') {
+        oLines.push(oLine);
+      }
+    }
+  }
+  return oLines;
+}
+
+function removeLine(oChq,oLine) {
+  log("removeLine %o linee=%o",oChq,oLine);
+  var oLines = [];
+  for(var i=0,iMax=oChq.lines.length; i&lt;iMax; i+=1) {
+    var oL = oChq.lines[i];
+    if (oL != oLine) oLines.push(oL);
+    log("remove oL=%o line=%o lines=%i",oL,oLine,oLines.length);
+  }
+  oChq.lines = oLines;
+}
+
+function insertLine(oObj) {
+  if (oObj.lines.length == 0) addNewLine(oObj);
+}
+
+function addNewLine(oObj) {
+  var nIX = oObj.lines.length;
+  oObj.lines.push({amt:0.00,refdate:oObj.date});
+  setTimeout(function(){setCodeFocus(nIX);},0); // delay so focus takes because DOM is built
+}
+
+function setCodeFocus(nIX) {
+  var oInp =  document.getElementById('code-'+nIX);
+  if (oInp && (oInp.value.trim().length == 0)) {
+    oInp.focus();
+  }
+}
+
+function setRefFocus(oObj,oLine) {
+  var sEditType = oTabProp.oCRUD.getEditType();
+  if (sEditType == 'Edit') return;
+  var nIX = getLineIX(oObj,oLine);
+  var oInp =  document.getElementById('RefFld-'+nIX);
+  if (oInp) oInp.focus();
+}
+
+function setSaveFocus(oObj,oLine) {
+  var sEditType = oTabProp.oCRUD.getEditType();
+  log("setSaveFocus %s %o %o",sEditType,oObj,oLine);
+  if (sEditType == 'Edit') return;
+  var oA =  document.getElementById('edit-save');
+  if (oA) setTimeout(function(){oA.focus();},0); // delay so focus takes because DOM is built
+}
+
+function setPayeeFocus() {
+  var oInp =  document.getElementById('payee');
+  if (oInp) setTimeout(function(){oInp.focus();},0); // delay so focus takes because DOM is built
+}
+
+
+function setAmtFocus(oObj,oLine) {
+  var sEditType = oTabProp.oCRUD.getEditType();
+  log("setAmtFocus %s %o %o",sEditType,oObj,oLine);
+  if (sEditType == 'Edit') return;
+  var nIX = getLineIX(oObj,oLine);
+  var oInp =  document.getElementById('RawAmt-'+nIX);
+  if (oInp && (!oInp.value || (+oInp.value == 0))) {
+    log("setAmtFocus %o",oInp);
+    oInp.focus();
+  }
+}
+
+function getLineIX(oObj,oLine) {
+  for(var i=0,iMax=oObj.lines.length; i&lt;iMax; i+=1) {
+    var oL = oObj.lines[i];
+    if (oL == oLine) return i;
+  }
+  return -1;
+}
+
+}]);
+
+//----------------------------------------------------------------------------
+//------------------------- Chart of Accounts records ------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblCOA',['servREG','servGAE','servREC','servSess',function(servREG,servGAE,servREC,servSess) {
+var oFuncs = {};
+
+var oTabProp = {
+     recTitle: 'COA'
+    ,recName:  'cit'
+    ,recType:  'coa'
+    ,lsName:   '-coas'
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    {col:'code'}
+    ,cols:     [{type:'actions',    title: 'Actions'      ,showEdit:false, addDefault:true}
+               ,{col: 'code',       title: 'Code'         ,showEdit:false}
+               ,{col: 'name',       title: 'Name'         ,showEdit:false}
+               ,{col: 'HST',        title: 'HST'         ,showEdit:false}
+              ]
+    ,filters: [
+               {type: 'mask',   field: 'code'}
+              ,{type: 'mask',   field: 'name'}
+              ]
+    ,menuWhen          : testRepFile
+};
+
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+
+function testRepFile() {
+  if (servSess.isAdmin()) return true;
+  return false;
+}
+
+}]);
+
+//----------------------------------------------------------------------------
+//------------------------- Repeated Cheques records ------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblREPS',['servREG','servGAE','servREC','servSess',function(servREG,servGAE,servREC,servSess) {
+var oFuncs = {};
+
+var oTabProp = {
+     recTitle: 'REPS'
+    ,recName:  'repeat'
+    ,recType:  'repeat'
+    ,lsName:   '-repeats'
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    {col:'payee'}
+    ,cols:     [{type:'actions',    title: 'Actions'      ,showEdit:false, addDefault:true}
+               ,{col: 'payee',      title: 'Payee'        ,showEdit:true}
+               ,{col: 'amt',        title: 'Amount'       ,showEdit:true}
+               ,{col: 'code',       title: 'Code'         ,showEdit:true}
+               ,{col: 'ref',        title: 'Ref'          ,showEdit:true}
+              ]
+    ,fileKey             : fileKey
+    ,fileKeyRef          : 'repfile'
+    ,menuWhen          : testAdmin
+};
+
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+function testAdmin() {
+  var oProf = servSess.getProfile();
+  if (!oProf) return false;
+  if (!oProf.repfile) return false;
+  return true;
+}
+
+function fileKey() {
+  var oProf = servSess.getProfile();
+  if (!oProf) return null;
+  if (!oProf.repfile) return null;
+  return oProf.repfile;
+}
+
+}]);
+
+//----------------------------------------------------------------------------
+//------------------------------ Suppliers records ---------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblSUP',['servREG','servGAE','servREC','servSess',function(servREG,servGAE,servREC,servSess) {
+var oFuncs = {};
+var oSupMap = null;
+
+var oTabProp = {
+     recTitle: 'Suppliers'
+    ,recName:  'cit'
+    ,recType:  'suppliers'
+    ,lsName:   '-suppliers'
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    {col:'name'}
+    ,cols:     [{type:'actions',    title: 'Actions'      ,showEdit:false, addDefault:false
+                 ,actions:
+                 [{label:'edit',click:'editRecord(oRow.oaa)',title:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                 ,{label:'drop',click:'dropRecord(oRow.oaa)',title:'',methClass:getAnchorClass,whatClass:'getAnchorClass(this,oRow,oA);'}
+                 ]}
+               ,{col: 'name',       title: 'Name'         ,showEdit:true,showList:true, many:false}
+               ,{col: 'street1',    title: 'Street1'      ,showEdit:true,showList:false}
+               ,{col: 'street2',    title: 'Street2'      ,showEdit:true,showList:false,reqd:false}
+               ,{col: 'city',       title: 'City'         ,showEdit:true,showList:false}
+               ,{col: 'prov',       title: 'Prov.'        ,showEdit:true,showList:false}
+               ,{col: 'zip',        title: 'ZipCode'      ,showEdit:true,showList:false,reqd:false}
+               ,{col: getAddr,      title: 'Address'      ,showEdit:false}
+              ]
+    ,filters: [{type: 'mask',   field: 'name'}
+              ,{type: 'mask',   field: getAddr}
+              ]
+};
+
+oFuncs.getTabProp  = function()            {return oTabProp;}
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+function getAddr(oObj) {
+  return oObj.street1;
+}
+
+function getAnchorClass(scope,oObj,oA) {
+  if (oA.label == 'edit') return 'c-action';
+  if (oA.label == 'drop') {
+    if (oSupMap == null) {
+      var oDonTab = servREG.findTable("Cheque");
+      oSupMap = oDonTab.getSupMap();
+      log("loaded oSupMap %o",oSupMap);
+    }
+    if (oObj.name in oSupMap) return 'c-quiet';
+    return 'c-action';
+  }
+  return 'c-quiet';
+}
+
+}]);
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+// example of app specific directive
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+oApp.directive('amount', function() {
+return {
+  restrict: 'A', // only activate on element attribute
+  require: '?ngModel', // get a hold of NgModelController
+  priority: 500,
+  link: function(scope, element, attrs, ngModel) {
+    if(!ngModel) return; // do nothing if no ng-model
+    var sFld  = attrs.amount;
+    var sNext = attrs.next;
+    element.bind('focus', function() {
+      focus();
+    });
+    element.bind('blur', function() {
+      validate(null);
+    });
+    // Listen for change events to enable binding
+    element.bind('keyup', function(oEvt) {
+      if (oEvt.keyCode == 13) { // enter
+        validate(sNext);
+      }
+    });
+
+    // Write data to the model
+    function focus() {
+      ngModel.$setViewValue("");
+      element.val("");
+      scope[sFld].amtErr = null;
+    }
+
+    function validate(sNext) {
+      var sVal = ngModel.$modelValue;
+      if (!sVal || (sVal.trim() == '')) sVal = '0';
+      scope[sFld].amtErr = null;
+      if (+sVal == 0) scope[sFld].amtErr = 'amt zero';
+      if (!scope[sFld].amtErr) {
+        if (sVal.match(/^([0-9]*)?[.]?([0-9]*)?$/) == null) scope[sFld].amtErr = "Bad amt: "+sVal;
+      }
+      var sDec = "";
+      if (!scope[sFld].amtErr) {
+         sDec = (0 + (+sVal)).toFixed(2);
+      }
+      log("keyup fld="+sFld+" amount="+ngModel.$modelValue+" "+scope[sFld].amtErr+" val="+sVal+" ix="+scope.$index+" dec="+sDec);
+      if (!scope[sFld].amtErr) {
+        if (sVal != sDec) {
+          element.val(sDec);
+          ngModel.$setViewValue(sDec);
+        }
+      }
+      if (sNext && (!scope[sFld].amtErr)) {
+        scope.$eval(sNext);
+      }
+      scope.$digest();  // trigger another cycle
+      scope.$parent.$digest();  // trigger another cycle
+    }
+
+  }
+};
+});
+
+</pre></div>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideapreamble"><a class=hider ng-click=toggleHide($event)>hide</a>Pre-amble</h6>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>21</code> links in the <code>logonExit</code> function which will be called every time a new user logs in or is
+revalidated. See <a href="/api/tri.controller:ctrlSess#initUser">ctrlSess.initUser</a> and <a href="/api/tri.servSess#setSession">servSess.setSession</a>
+<br><br>
+This is used in lines <code>54</code> thru <code>63</code> to populate the menu using  <a href="/api/tri.servSess#setOptMenuItems">servSess.setOptMenuItems</a> depending on
+the properties in the <a href="/guide/user">User Profile</a>.</p></li>
+<li><p>Lines <code>27</code> thru <code>52</code> define a function used in the optional menus in line <code>58</code> that allows a set of cheques to be created.  This is used in the production code
+(based on the <a href="/guide/user">User Profile</a>) and is not available in the demonstration version.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideatblchqsdefinition"><a class=hider ng-click=toggleHide($event)>hide</a><code>tblCHQS</code> Definition</h6>
+
+<ul>
+<li><p>Lines <code>65</code> thru <code>592</code> define the <code>tblCHQS</code>, the primary table of this application.</p></li>
+<li><p>Lines <code>80</code> thru <code>85</code> define the <code>actions</code> associated with each cheque.  They are complex and the default actions would not be suitable so they are not included.
+(<code>addDefault:false</code>) in line <code>80</code>.  The custom actions  use the <code>whatClass</code> property to call <code>getAnchorClass</code> function to determine the state (active or not).
+The <code>click</code> property defines a method and signature that is called when an <code>active</code> link is clicked.
+<br><br>
+The <code>method</code> and <code>methClass</code> properties cause <strong>Triangular</strong> to add these methods to the $scope so that the <a target=_blank href="http://angularjs.org/">AngularJS</a> handlers can reach the local function implementation.</p></li>
+<li><p>Lines <code>87</code> thru <code>92</code> define the table columns in the normal fashion.  Note that the <code>showEdit</code> property is set to false becuase the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>
+layout is defined in line <code>93</code>.</p></li>
+<li><p>Line <code>93</code> adds a <code>dummy</code> column whose <code>showList:false</code> value cause it not to show on the <a href="/api/tri.controller:ctrlCommList">Lister</a>.  The
+properties <code>type:'cust',showEdit:true, reqd:false, htmlCust:'chequeEdit.html'</code> cause it to be shown on the <a href="/api/tri.controller:ctrlCommEdit">Editor</a>
+with a custom layout defined by template <code>chequeEdit.html</code> referenced in lines <code>134</code> thru <code>209</code> of  <code>Chq.htm</code>.</p></li>
+<li><p>Lines <code>99</code> thru <code>106</code> define exits <code>validate</code>, <code>createExit</code>, <code>fileKey</code>, <code>saveRecordExit</code>, <code>primeList</code> and <code>primeEdit</code>. Their usage is described in
+<a href="/guide/table#exitfunctions">Exit Functions</a>.
+They are explained where note worthy with their local function implemetation.</p></li>
+<li><p>Line <code>110</code> makes public <code>getSupMap</code> which is used to return an object containing a list of all used supplier names from the checque <code>payee</code> field.  This is used to prevent
+the <code>drop</code> function on the <code>tblSUPS</code> from removing used records.  In editing the Supplier Table you will note that the <code>drop</code> action is sometimes
+not active as a result of this logic.</p></li>
+<li><p>Lines <code>116</code> thru <code>124</code> implement the <code>primeList</code> function called whenever the <a href="/api/tri.controller:ctrlCommList">Lister</a> is invoked.
+It ensures the <code>oSel</code> object used by the <a href="/api/tri.object.Filter">Filters</a> in $scope is properly initialized.</p></li>
+<li><p>Lines <code>136</code> thru <code>164</code> implement the <code>primeEdit</code> function called whenever the <a href="/api/tri.controller:ctrlCommEdit">Editor</a> is invoked.
+It initializes many the fields used in <code>chequeEdit.html</code>.  The <code>bLocked</code> variable is set to false unless the cheque is not printed and the user has role 'admin'.</p></li>
+<li><p>Lines <code>166</code> thru <code>204</code> implement the <code>printCheque</code> called by the action in line <code>83</code>.  It defines the message handler and registers it in line
+<code>182</code> using <a href="/api/tri.servSess#createFormWindow">servSess.createFormWindow</a>.  Observe that the <code>oHandler</code> recognizes several verbs and takes appropriate
+action for each.  These are sent with the <a href="/api/tri.object.Tri#postToOpener">tri.postToOpener</a> function in lines <code>72</code> and <code>80</code> of <code>FormCheque.js</code>.</p></li>
+<li><p>Lines <code>206</code> thru <code>213</code> implement the <code>createExit</code>. Besides initializing fields the <code>setPayeeFocus()</code> local function is called to set the
+focus on the <code>payee</code> input field.</p></li>
+<li><p>Lines <code>225</code> thru <code>233</code> implement the <code>saveRecordExit</code> exit which cleans up several fields in the object created during the editing process.</p></li>
+<li><p>Lines <code>268</code> thru <code>273</code> implement <code>codeClick</code> called when a cheque code is selected. It uses the timeout trick to set focus on another field.  (It cannot be done
+immediately because the engines are still cycling in the present context).  The timeout trick delays processing until the present cycle is complete.
+The statement <code>setTimeout(function(){setAmtFocus(oObj,oLine)},0)</code> accomplishes this.</p></li>
+<li><p>Lines <code>275</code> thru <code>297</code> implement <code>getCurSups</code> which is referenced in the <strong>autocomplete</strong> functionality in the lines <code>143</code> thru <code>150</code> of <code>Chqs.htm</code>
+It uses the provided mask to return a subset of the <code>tblSUPS</code> records that match the mask.  When the mask matches only 1 record
+the field <code>sAutoName</code> in the scope is set to a value which causes <a target=_blank href="http://angularjs.org/">AngularJS</a> to close the extra input panel and complete the input field.</p></li>
+<li><p>Lines <code>316</code> thru <code>338</code> implement <code>getCurCOAs</code> which is referenced in the <strong>autocomplete</strong> functionality in the lines <code>172</code> thru <code>177</code> of <code>Chqs.htm</code>
+It uses the provided mask to return a subset of the <code>tblCOA</code> records that match the mask.  When the mask matches only 1 record
+the field <code>sAutoName</code> in the scope is set to a value which causes <a target=_blank href="http://angularjs.org/">AngularJS</a> to close the extra input panel and complete the input field.
+In line <code>335</code> focus is set on the <code>amt</code> field using the timeout trick described previously.</p></li>
+<li><p>Lines <code>354</code> thru <code>359</code> implement <code>fileKey</code> which dynamically sets the <a href="/guide/records#keystructure">Key Part3</a> based on the <a href="/guide/user">User Profile</a>.</p></li>
+<li><p>Lines <code>354</code> thru <code>359</code> implement <code>getAnchorClass</code> which determines the whether an <code>action</code> is <code>active</code> based on what <code>action</code> and the state of the cheque.
+This was referenced in lines <code>80</code> thru <code>85</code>.</p></li>
+<li><p>Lines <code>382</code> thru <code>399</code> implement <code>validateCheque</code>.  If there is an error it uses <code>fnEditErr</code> to post the message and return with a <code>false</code> indicating failure.
+This exit returns <code>true</code> if all fields are OK.  It could also have returned with a call to <code>fnValStd</code> which would also then apply standard validation algorithms
+based on the column definitions.
+<br><br>
+Note that some of the routines are used to clean up the original production cheque base which was exported from a QuickBooks system. By the way, the user finds the new system
+much much easier to use.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideatblcoadefinition"><a class=hider ng-click=toggleHide($event)>hide</a><code>tblCOA</code> Definition</h6>
+
+<ul>
+<li><p>Lines <code>597</code> thru <code>631</code> define the <code>tblCOA</code>, the secondary table used to define the <strong>C</strong>hart <strong>O</strong>f <strong>A</strong>ccounts for this application.</p></li>
+<li><p>The Line <code>617</code> <code>menuWhen</code> property and the implementation of <code>testRepFile</code> in lines <code>626</code> thru <code>629</code> determine whether the table is added to the menu and thus available for
+the <a href="/api/tri.controller:ctrlCommEdit">Editor</a> (Does the user have an 'admin' role)</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideatblrepsdefinition"><a class=hider ng-click=toggleHide($event)>hide</a><code>tblREPS</code> Definition</h6>
+
+<ul>
+<li><p>Lines <code>636</code> thru <code>677</code> define the <code>tblREPS</code>, the secondary table used to define optional repeated cheque defintions.
+<br><br>
+Note:  This is not seen in the <strong>demo</strong> system because the <code>guest</code> <a href="/guide/user">User Profile</a> does not have a <code>repFile</code> entry.</p></li>
+<li><p>The line <code>653</code> <code>fileKey</code> property and the implementation of <code>fileKey</code> in lines <code>670</code> thru <code>675</code> determine whether the table exists and
+and dynamically sets the <a href="/guide/records#keystructure">Key Part3</a> based on the <a href="/guide/user">User Profile repFile</a> entry.  The accompanying
+<code>fileKeyRef</code> entry in line <code>654</code> tell the underlying support routines how to compute the <a href="/guide/records#keystructure">Key Part3</a>.</p></li>
+<li><p>The line <code>655</code> <code>menuWhen</code> property and the implementation of <code>testAdmin</code> in lines <code>663</code> thru <code>668</code> determine whether the table is added to the menu and thus available for
+the <a href="/api/tri.controller:ctrlCommEdit">Editor</a> based on whether the <a href="/guide/user">User Profile</a> has a <code>repFile</code> entry.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideaamountcustomdirective"><a class=hider ng-click=toggleHide($event)>hide</a>Amount Custom Directive</h6>
+
+<ul>
+<li><p>Lines <code>742</code> thru <code>799</code> implement a custom directive to make the handling of amount fields more user friendly. It does the following:</p></li>
+<li><p>Validates when <code>&lt;enter&gt;</code> is pressed or focus is lost</p></li>
+<li><p>Displays the data as 2 decimal digits</p></li>
+<li><p>Clears the field when focus is gained</p></li>
+<li><p>When <code>&lt;enter&gt;</code> is pressed it attempts to set focus on the control whose ID matches the <code>next=</code> attribute value.</p></li>
+<li><p>This is activated with line <code>180</code> in <code>Chqs.htm</code></p></li>
+</ul>
+
+<p><span id='FormCheque.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformchequehtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormCheque.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;!--
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+--&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-chqs1.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="Deps.css" title=default&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="FormCheque.js"&gt;&lt;/script&gt;
+&lt;title&gt;CIT - Cheque Printer V1.0 &lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=app&gt;
+&lt;div ng-controller=ctrlForm&gt;
+  &lt;div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/cheque'&gt;&lt;/div&gt;
+  &lt;!-- -------------Format 1 chq for srp's cheque book----------------------&gt;
+  &lt;div ng-show='isLoaded() && (nPrtFmt == 1)'&gt;
+    &lt;style type="text/css"&gt;
+      div#divPrint pre {font-weight:bold;}
+      div#divPrint span.faint {font-weight:normal; color:rgb(180,180,180);}
+    &lt;/style&gt;
+    &lt;div id=divPrint style='margin-left:20px'&gt;
+      &lt;div&gt;&lt;img src='tri/img/transparent.gif' width=1px height=10px&gt;&lt;/div&gt;
+      &LT;pre&gt;
+      &lt;a href='' onClick='print();'&gt;print&lt;/a&gt;
+
+      {{getCurChq().date}}&lt;img src='tri/img/transparent.gif' width=650px height=1px&gt;  {{dateDigits6()}}
+      {{payee()}}
+
+      &lt;span class=faint&gt;{{chqno()}}&lt;/span&gt; {{ref(26)}}{{payee(43)}}    ${{numAmount()}}
+
+                                     {{alphaAmount(60)}}
+
+                  ${{numAmount()}}
+
+                                   &lt;span class=faint&gt;{{chqno()}}&lt;/span&gt; {{ref()}}
+
+      &LT;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;!-- -------------Format 0 chq for jane's cheque book----------------------&gt;
+  &lt;div ng-show='isLoaded() && (nPrtFmt == 0)'&gt;
+    &lt;style type="text/css"&gt;
+      div#divPrint                    {font-size:70%; font-weight:500;}
+      div#divPrint span.faint         {font-weight:normal; color:rgb(235,235,235); font-size:120%;}
+
+      div#divPrint div#panel          {position:fixed;left:1150px; top:10px; width:310px; border:1px solid gray; height:300px; z-index:100; background-color:rgb(250,250,250);}
+      div#divPrint div#panel p.lab    {text-align:center; width:310px; position:relative; top:auto;}
+      div#divPrint div#panel a#print  {position:relative; top:auto; left:0px; z-index:10;}
+      div#divPrint div#panel a#void   {position:relative; top:auto; left:0px; z-index:10;}
+      div#divPrint div#panel p#admin  {position:relative; top:auto; left:0px; z-index:10;}
+
+      div#divPrint span.date8         {position:fixed;left:580px;top:50px; width:200px;}
+      div#divPrint span.dateStr       {position:fixed;left:530px;top:50px;}
+      div#divPrint span.dateFmt       {position:fixed;left:580px;top:70px; font-weight:normal; font-family:courier; font-size:8pt; width:200px;}
+      div#divPrint span#num-amt       {position:fixed;left:560px;top:95px;}
+      div#divPrint span#alpha-amt     {position:fixed;left:10px;top:95px;}
+      div#divPrint p#payee            {position:fixed;left:30px;top:130px;}
+      div#divPrint span#memo          {position:fixed;left:20px;top:215px; font-size:95%; font-weight:normal;}
+      div#divPrint span#chqno1        {position:fixed;left:20px;top:245px;}
+      div#divPrint span#chqno2        {position:fixed;left:20px;top:300px;}
+      div#divPrint span#chqno3        {position:fixed;left:20px;top:615px;}
+      div#divPrint div#details1       {position:fixed;left:20px;top:320px;  font-weight:normal;}
+      div#divPrint div#details2       {position:fixed;left:20px;top:630px;  font-weight:normal;}
+      div#divPrint div.heading        {color:rgb(180,180,180);}
+      div#divPrint span.refdate       {position:fixed;left:20px;  top:auto;}
+      div#divPrint span.ref           {position:fixed;left:120px; top:auto;}
+      div#divPrint span.amt           {position:fixed;left:350px; top:auto; text-align:right; width:100px;}
+      div#divPrint span.hstamt        {position:fixed;left:450px; top:auto; text-align:right; width:100px;}
+      div#divPrint span.totamt        {position:fixed;left:550px; top:auto; text-align:right; width:100px;}
+    &lt;/style&gt;
+    &lt;div id=divPrint style='margin-left:20px'&gt;
+      &lt;div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Cheque'&gt;&lt;/div&gt;
+
+      &lt;span id=chqno1 class=faint&gt;{{chqno()}}&lt;/span&gt;
+      &lt;span class=dateStr&gt;Date:&lt;/span&gt;
+      &lt;span class=date8&gt;{{dateDigits8()}}&lt;/span&gt;
+      &lt;span class=dateFmt&gt;M M D D Y Y Y Y&lt;/span&gt;
+
+      &lt;span id=num-amt&gt;***{{numAmount() | number:2}}&lt;/span&gt;
+
+      &lt;span id=alpha-amt&gt;{{alphaAmount(60)}}&lt;/span&gt;
+
+      &lt;p id=payee&gt;
+        {{payee()}}&lt;br&gt;
+        &lt;ANY ng-repeat="sLine in addrLine().split('&lt;br&gt;')"&gt;
+        {{sLine}}&lt;br&gt;
+        &lt;/ANY&gt;
+      &lt;/ul&gt;
+
+      &lt;span id=memo&gt;{{oPrtChq.note}}&lt;/span&gt;
+
+      &lt;span id=chqno2 class=faint&gt;{{chqno()}}&lt;/span&gt;
+      &lt;div  id=details1&gt;
+        &lt;div class=heading&gt;
+          &lt;span class=refdate&gt;Ref Date&lt;/span&gt;
+          &lt;span class=ref&gt;Reference&lt;/span&gt;
+          &lt;span class=amt&gt;Amount&lt;/span&gt;
+          &lt;span class=hstamt&gt;HST&lt;/span&gt;
+          &lt;span class=totamt&gt;Total&lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=refdate&gt;Pay to:&lt;/span&gt;
+          &lt;span class=ref&gt;{{payee()}}&lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+        &lt;div ng-repeat='oLine in oPrtChq.lines'&gt;
+          &lt;span class=refdate&gt;{{oLine.refdate}}&lt;/span&gt;
+          &lt;span class=ref&gt;{{oLine.ref}}    &lt;/span&gt;
+          &lt;span class=amt&gt;{{+oLine.amt | number:2}}    &lt;/span&gt;
+          &lt;span class=hstamt&gt;{{+oLine.hstamt | number:2}} &lt;/span&gt;
+          &lt;span class=totamt&gt;{{+oLine.totamt | number:2}} &lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=refdate&gt;{{oPrtChq.date}}&lt;/span&gt;
+          &lt;span class=ref&gt;Cheque Total&lt;/span&gt;
+          &lt;span class=totamt&gt;&lt;/span&gt;
+          &lt;span class=hstamt&gt;&lt;/span&gt;
+          &lt;span class=totamt&gt;{{+oPrtChq.amt | number:2}} &lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;span id=chqno3 class=faint&gt;{{chqno()}}&lt;/span&gt;
+      &lt;div  id=details2&gt;
+        &lt;div class=heading&gt;
+          &lt;span class=refdate&gt;Ref Date&lt;/span&gt;
+          &lt;span class=ref&gt;Reference&lt;/span&gt;
+          &lt;span class=amt&gt;Amount&lt;/span&gt;
+          &lt;span class=hstamt&gt;HST&lt;/span&gt;
+          &lt;span class=totamt&gt;Total&lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=refdate&gt;Pay to:&lt;/span&gt;
+          &lt;span class=ref&gt;{{payee()}}&lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+        &lt;div ng-repeat='oLine in oPrtChq.lines'&gt;
+          &lt;span class=refdate&gt;{{oLine.refdate}}&lt;/span&gt;
+          &lt;span class=ref&gt;{{oLine.ref}}    &lt;/span&gt;
+          &lt;span class=amt&gt;{{+oLine.amt | number:2}}    &lt;/span&gt;
+          &lt;span class=hstamt&gt;{{+oLine.hstamt | number:2}} &lt;/span&gt;
+          &lt;span class=totamt&gt;{{+oLine.totamt | number:2}} &lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;span class=refdate&gt;{{oPrtChq.date}}&lt;/span&gt;
+          &lt;span class=ref&gt;Cheque Total&lt;/span&gt;
+          &lt;span class=totamt&gt;&lt;/span&gt;
+          &lt;span class=hstamt&gt;&lt;/span&gt;
+          &lt;span class=totamt&gt;{{+oPrtChq.amt | number:2}} &lt;/span&gt;
+          &lt;br&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li><p>Lines <code>2</code> thru <code>8</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Lines <code>25</code> thru <code>48</code> define a cheque format that is not used in the <strong>demo</strong> system.  It is activated by an entry in the <a href="/guide/user">User Profile</a>
+that is passed to the code in <code>FormCheque.js</code> line <code>54</code>.</p></li>
+<li><p>Lines <code>50</code> thru <code>168</code> define a cheque the default and which is used in the <strong>demo</strong> system.
+<br><br>
+It starts with the <strong>css</strong> and is followed by the actual layout, some of which repeats content for the original and payee copy of the cheque.</p></li>
+</ul>
+
+<p><span id='FormCheque.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformchequejsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormCheque.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+&#064;license
+Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+http://creativecommons.org/licenses/by-sa/3.0/.
+Contact: public.pritchard@gmail.com
+*/
+"use strict";
+var oApp = angular.module('app',[]);
+
+// ---------------------------------------------------------------------------
+function ctrlForm($scope,$rootScope,$templateCache) {
+$scope.bPrinted = false;
+$scope.bVoided  = false;
+$scope.oPrtChq  = null;
+
+$scope.oOptActions = [{whatClass:'isPrinted();', click:'voidRenum();', title:'Void this cheque',label:'Void & renumber'}];
+if (!window.opener) return;
+
+$scope.isLoaded      = function()       {return ($scope.oPrtChq != null);}
+
+$scope.voidRenum     = function()       {return voidRenum();}
+$scope.printPage     = function()       {printChq();}
+$scope.isPrinted     = function()       {return tri.isTrue($scope.bPrinted,'c-quiet','c-action');}
+$scope.getPrtFormat  = function()       {return $scope.nPrtFmt;}
+$scope.getCurChq     = function()       {return $scope.oPrtChq;}
+$scope.dateDigits6   = function()       {if (!$scope.oPrtChq) return ""; return dateDigits6();}
+$scope.dateDigits8   = function()       {if (!$scope.oPrtChq) return ""; return dateDigits8();}
+$scope.alphaAmount   = function(nMin)   {if (!$scope.oPrtChq) return ""; return minStr(formatAmtLine(),nMin);}
+$scope.numAmount     = function()       {if (!$scope.oPrtChq) return ""; return $scope.oPrtChq.amt;}
+$scope.payee         = function(nMin)   {if (!$scope.oPrtChq) return ""; return minStr($scope.oPrtChq.payee,nMin);}
+$scope.addrLine      = function()       {if (!$scope.oPrtChq) return ""; return addrLine();}
+$scope.ref           = function(nMin)   {if (!$scope.oPrtChq) return ""; return minStr(ref(),nMin);}
+$scope.chqno         = function()       {if (!$scope.oPrtChq) return ""; return chqno();}
+$scope.isTrue        = function(b,sTrue,sFalse) {return b?(sTrue||'true'):(sFalse||'false');}
+
+log("ctrlForm now loaded opener="+(window.opener != null));
+
+if (!window.opener) return;
+
+hookMsgListener();
+tri.postToOpener({verb:"chqs:send-print-info"});
+return;
+
+function hookMsgListener() {
+  log("Hooked message listener in FormCheque.js");
+  tri.loadTemplates($rootScope,$templateCache);
+
+  var oHandler = function(event) {
+    if (event.data.verb) {
+      if (event.data.verb == "chqs:chqs-data") {
+        console.log("have chqs-data ",event.data);
+        $scope.oPrtChq    = event.data.payload.oObj;
+        $scope.nPrtFmt    = event.data.payload.fmt;
+        $scope.addrLines  = event.data.payload.addr;
+        $scope.$digest();
+      } else {
+        console.log("spurious msg ",event.data);
+      }
+    }
+  }
+  oGBL.msgHandler.chqs = oHandler;
+}
+
+function printChq() {
+  log("called printChq "+$scope.bPrinted);
+  if ($scope.bPrinted) return;  //when-active logic failed to trigger? reverted to this
+  $scope.bPrinted = true;
+  var bResult = window.print();
+  log("printed %o",bResult);
+  tri.postToOpener({verb:"chqs:printed-chq",chqno:""+$scope.oPrtChq.chqno});
+}
+
+function voidRenum() {
+  if ($scope.bPrinted) return;  //when-active logic failed to trigger? reverted to this
+  if ($scope.bVoided) return;   //when-active logic failed to trigger? reverted to this
+  $scope.bVoided = true;
+  log("voidRenum chq "+$scope.oPrtChq.chqno+" request");
+  tri.postToOpener({verb:"chqs:void-chq",chqno:""+$scope.oPrtChq.chqno});
+}
+
+function addrLine() {
+  return $scope.addrLines;
+}
+
+function ref() {
+  var sStr = "";
+  if ($scope.oPrtChq.lines[0].ref) sStr += $scope.oPrtChq.lines[0].ref;
+  return sStr;
+}
+
+function chqno() {
+  //include chq so we can validate on right page
+  var oChq = $scope.oPrtChq;
+  var sStr = ""+oChq.chqno;
+  return sStr;
+}
+
+function dateDigits8() { // for jane bmo cheques
+  // 0    5  8
+  // 2012-03-25
+  var sDate = $scope.oPrtChq.date;
+  //log("date is "+sDate);
+  var sStr = sDate.charAt(5)+" " // MM
+           + sDate.charAt(6)+" "
+           + sDate.charAt(8)+" " // DD
+           + sDate.charAt(9)+" "
+           + sDate.charAt(0)+" " // YYYY
+           + sDate.charAt(1)+" "
+           + sDate.charAt(2)+" "
+           + sDate.charAt(3)+" ";
+  return sStr;
+}
+function dateDigits6() {  // for srp bmo cheques
+  // 0    5  8
+  // 2012-03-25
+  var sDate = $scope.oPrtChq.date;
+  //log("date is "+sDate);
+  var sStr = sDate.charAt(2)+""  // YY
+           + sDate.charAt(3)+" "
+           + sDate.charAt(5)+""  // MM
+           + sDate.charAt(6)+" "
+           + sDate.charAt(8)+""  // DD
+           + sDate.charAt(9)+" ";
+  return sStr;
+}
+
+function minStr(sStr,nMin) {
+  if (!nMin) return sStr;
+  var s = '                                        ';
+  s = s + s + s;
+  return (sStr+s).substring(0,nMin);
+}
+
+function formatAmtLine() {
+  return "**"+toWords($scope.oPrtChq.amt);
+}
+
+}
+</pre></div>
+
+<ul>
+<li><p>Lines <code>1</code> thru <code>7</code> specifies the license information regarding the source code.
+In essence, you are free to use it with minor restrictions.
+Refer to <a href="http://creativecommons.org/licenses/by-sa/3.0/.">License</a>
+for exact details.</p></li>
+<li><p>Line <code>23</code> forwards the standard <code>printPage</code> call from <code>forms-panel.html</code> template to <code>printChq</code>, a local function.</p></li>
+<li><p>Lines <code>65</code> thru <code>72</code> implement <code>printChq</code>.  Once printed it informs the primary screen the cheque is no longer available
+for printing via <a href="/api/tri.object.Tri#postToOpener">tri.postToOpener</a> verb <code>chqs:printed-chq</code> which is handled at line <code>188</code> in <code>Chqs.js</code>.</p></li>
+<li><p>Lines <code>74</code> thru <code>80</code> handle the <code>voidRenum</code> request triggered by optional right-side menu action <code>Void &amp; renumber</code> in line <code>17</code>.
+It uses <a href="/api/tri.object.Tri#postToOpener">tri.postToOpener</a> to send verb <code>chqs:void-chq</code> which is handled at line <code>175</code> in <code>Chqs.js</code>.
+In the event it is successful it returns a new cheque object via verb <code>chqs:chqs-data</code> which updates the local cheque display.</p></li>
+</ul></div>

@@ -1,0 +1,122 @@
+<h1><code ng:non-bindable="">Tri</code>
+<span class="hint">(type in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides a set of static utility functions that can be accessed with the prefix <code>tri.</code></p>
+
+<p>The public methods attached to the <code>tri</code> object and described herein are
+freely accessible from Javascript code.</p>
+
+<p>These functions can be called from HTML code using the 'windows' verbs such as <code>onclick</code> vs the <a href="http://angularjs.org/">AngularJS</a> verbs such as <code>ng-click</code>.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="applyAlters">applyAlters(sHtml, sAlter)</h3>
+<div class="applyalters"><p>This is used by the template handlers to alter the HTML strings just prior to handing over to <a href="http://angularjs.org/">AngularJS</a> for insertion into
+the HTML page.</p>
+
+<p>The <code>sAlter</code> param consists of a repeated group of pairs.  Each pair group is separated by a ';'. Do not use a trailing ';'.</p>
+
+<p>Each pair is separated by a '/'.  The first of the pair
+is the regular expression to match in the template text. The second of the pair is the replacement text. <b>Note:</b> this text has been processed by the parser browser and might be transformed
+by the browser (such as making tags lowercase).</p>
+
+<p>For example the string <code>alter='##TITLE##/title;option/no-option'</code></p>
+
+<p>causes <code>##TITLE##</code> to be replaced by <code>title</code> and <code>option</code> to be replaced by <code>no-option</code>.</p>
+
+<p>In the case where the pair content needs to contain a '/' the first of the pair may start with a '!' and
+the '!' is then used to separate the two parts of the pair. eg. <code>alter='!/apps/tri!/../apps/tri'</code></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sHtml – {string} – </code>
+<p>HTML string to manipulate</p></li>
+<li><code ng:non-bindable="">sAlter – {string} – </code>
+<p>Alter strings</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>altered <code>sHtml</code></p></div>
+</div>
+</li>
+<li><h3 id="calcAgo">calcAgo(sDate, sTime)</h3>
+<div class="calcago"><p>Given the <code>sDate</code> and <code>sTime</code> parameters, this utility function returns an approximate age such a <code>2 days</code>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sDate – {string} – </code>
+<p>Date of format <code>yyyymmdd</code></p></li>
+<li><code ng:non-bindable="">sTime – {string} – </code>
+<p>24 hour time sting of format <code>hhmmss</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="closePage">closePage()</h3>
+<div class="closepage"><p>Used to close the
+<a href="/guide/form-page-design">Form Page</a> and signal the primary window this has been done.</p>
+
+<p>The signal of <code>sys-close-page</code> is sent via <a href="/api/tri.object.Tri#postToOpener">tri.postToOpener</a> to
+<a href="/api/tri.method:hookMsgListener">hookMsgListener</a></p></div>
+</li>
+<li><h3 id="isTrue">isTrue(b, sTrue, sFalse)</h3>
+<div class="istrue"><p><a href="http://angularjs.org/">AngularJS</a> prefers strings in the HTML <code>ng-</code> functions.  This utility function
+returns <code>sTrue</code> or <code>sFalse</code> depending on the boolean state of <code>b</code>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">b – {Object} – </code>
+<p>the boolean value or function to evaluate</p></li>
+<li><code ng:non-bindable="">sTrue – {string} – </code>
+<p>string returned if true</p></li>
+<li><code ng:non-bindable="">sFalse – {string} – </code>
+<p>returned if false</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="loadTemplates">loadTemplates({@link)</h3>
+<div class="loadtemplates"><p>This is used by the secondary windows described in <a href="/guide/form-page-design">Form Page Design</a> to load <a href="/guide/templates">Templates</a>
+from the primary window.</p>
+
+<p>The statements in the <code>FormXXX.htm</code> file of the form</p>
+
+<p><code>&lt;div class=for-template html='xxx.html' ng-include='zzz' alter='strs'&gt;
+&lt;/div&gt;</code></p>
+
+<p>are scanned for.  Any found cause a request of 'sys-get-template` to be made to the
+<a href="/api/tri.method:hookMsgListener">hookMsgListener</a> of the primary window.</p>
+
+<p>It responds with the data which is handled by <a href="/api/tri.object.Tri#postTemplate">tri.postTemplate</a></p>
+
+<p>The field <code>xxx.html</code> names the template to fetch.</p>
+
+<p>The field <code>zzz</code> names a unique variable added to the <code>$scope</code> used to manage the template loading process.</p>
+
+<p>The field <code>strs</code> is an optional field that represents strings passed to the <a href="/api/tri.object.Tri#alter">tri.alter</a> method.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">{@link – {event} – </code>
+<p>http://angularjs.org/ AngularJS} $event object used to provide context for this method.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="postTemplate">postTemplate(event)</h3>
+<div class="posttemplate"><p>This is used by the secondary windows described in <a href="/guide/form-page-design">Form Page Design</a> to load <a href="/guide/templates">Templates</a></p>
+
+<p>This method is the responder to the <a href="/api/tri.object.Tri#loadTemplates">tri.loadTemplates</a> invoked reponses.</p>
+
+<p>The template provided in the <code>payload</code> is added to the <code>$templateCache</code> cache after any <code>alter</code> strings are applied.</p>
+
+<p>Then the <code>ng-include</code> referenced name is changed wich causes the template to be rendered by <a href="http://angularjs.org/">AngularJS</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">event – {Object} – </code>
+<p><a href="http://angularjs.org/">AngularJS</a> $event object used to provide context for this method.  The <a href="/api/tri.object.Tri#loadTemplates">tri.loadTemplates</a>
+inserts enough information so the response provides sufficient context.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="postToOpener">postToOpener(oMsg)</h3>
+<div class="posttoopener"><p>Posts the <code>oMsg</code> serializable object to the window that opened the secondary window.  The handler of this message is described in
+<a href="/api/tri.method:hookMsgListener">hookMsgListener</a> where the <code>verb</code> and <code>payload</code> parameters are described.</p>
+
+<p>This is used by the secondary windows described in <a href="/guide/form-page-design">Form Page Design</a>.</p>
+
+<p>The messages are processed by <a href="/api/tri.method:hookMsgListener">hookMsgListener</a></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oMsg – {Object} – </code>
+<p>object that contains properties <code>verb</code> and <code>payload</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="tri">tri()</h3>
+<div class="tri"><p>Constructor used to build a single instance of the <code>tri</code> object.</p></div>
+</li>
+</ul>
+</div>
+</div>

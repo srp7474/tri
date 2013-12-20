@@ -1,0 +1,90 @@
+@ngdoc overview
+@name Browser Support
+@description
+### Overview
+
+Chrome was used as the Browser for creating **Triangular** and its documentation.
+
+The following cursory tests were conducted as to how the system worked with different Browsers.
+
+### Documentation
+
+<table>
+  <thead>
+    <tr><th>Browser</th><th>Compatibility Issues</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chrome</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>FireFox</td>
+      <td>Hide in {@link /apps/chqs-app app pages} fails</td>
+    </tr>
+    <tr>
+      <td>Safari</td>
+      <td>None known</td>
+    </tr>
+    <tr>
+      <td>Opera</td>
+      <td>Not Tested</td>
+    </tr>
+    <tr>
+      <td>IE8</td>
+      <td>Warning issued by doc generator</td>
+    </tr>
+    <tr>
+      <td>IE9</td>
+      <td>Slow, Clunky. Not recommended</td>
+    </tr>
+    <tr>
+      <td>IE10</td>
+      <td>None known</td>
+    </tr>
+  </tbody>
+</table>
+
+### **Trangular** Pages
+
+<table>
+  <thead>
+    <tr><th>Browser</th><th>Compatibility Issues</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Chrome</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>FireFox</td>
+      <td>
+        <p>Crud at bottom of page</p>
+        <p>Minor Formatting issues</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Safari</td>
+      <td><p>Loss of right-side control panel in FormXXXX pages</p>
+          <p>Minor Formatting issues</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Opera</td>
+      <td>Not Tested</td>
+    </tr>
+    <tr>
+      <td>IE8</td>
+      <td>Fails miserably</td>
+    </tr>
+    <tr>
+      <td>IE9</td>
+      <td>Fails worse than IE8</td>
+    </tr>
+    <tr>
+      <td>IE10</td>
+      <td>None known</td>
+    </tr>
+  </tbody>
+</table>
+

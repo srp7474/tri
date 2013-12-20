@@ -1,0 +1,22 @@
+@ngdoc overview
+@name Guide: Google Analytics
+@description
+### Overview
+
+**Triangular** uses {@link http://www.google.com/analytics/ Google Analytics} to record the website visit patterns.  The built in code
+makes it easy to add to your site with the following 2 steps.
+
+1. Obtain your Google Analytics script code and replace the script code in {@link /guide/appsconfig AppsConfig.js} with what you obtained. It should
+look the same apart from the tracking codes.
+
+2. In any HTML file you wish to include analytic information insert the statements
+<br><br>
+`<script src="AppsConfig.js"></script>` (If not already added)
+<br>
+`<script>gaTracking();</script>`
+
+This will record any activity on the HTML page in which the above code is inserted.
+
+In addition Google Analytics' `events` will be created whenever a {@link /api/tri.directive:whenActive whenActive} link is pressed.
+This typicaly gives a good idea of how the visitor(s) are traversing the website.  It is especially important in sites that would otherwise
+have only one page visit because the remainder of the page updating is done via AJAX calls.

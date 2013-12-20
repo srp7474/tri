@@ -1,0 +1,51 @@
+@ngdoc overview
+@name Guide: AppsConfig js File
+@description
+### Overview
+The AppsConfig.js file is used to create the {@link /api/tri.servConfig servConfig Service}.  It becomes a central point of application configuration.
+
+It is loaded by the application specific {@link /guide/appname-html AppName html File}.
+
+The functions `getAutoFill`, `getSite` and `getStartPage` are used by the startup routines of the **Triangular** system.  The remaining such as `getInfo` are optional
+and depend on the application requirements.
+
+The `AppsConfig.js` file is located in the `/war/apps` folder of the {@link /guide/devp-pkg Development Package}.
+
+### Sample File
+
+These are portions of the file shipped with the {@link /guide/devp-pkg Development Package}.
+
+<pre>
+"use strict";
+// ---------- Singleton To Provide Customization information
+oApp.factory('servConfig',[function() {
+  var oFuncs    = {};
+
+  var accts = [
+     {code:"R000",name:"General"}
+    ,{code:"R005",name:"Workers"}
+     ...
+     }
+  ];
+
+  var oInfo  = {
+     bank        : 'Fake Bank'
+    ,bankAddr    : 'Centre Branch\r\n5555 Yonge Street\r\nNorth York,Ont, M2N 5X2\r\nPhone: 416-555-7757'
+    ,acctHolder  : 'Church in Toronto'
+    ,acctUSD     : '24882-001 4668-991'
+    ...
+    ,accts       : accts
+  };
+
+  oFuncs.getStartPage = function() {return "apps/Deps.htm";}  // required
+
+  // following are optional.  Remove them to trigger default action/value.
+  oFuncs.getInfo      = function() {return oInfo;}            // Application information
+                                                              // guest will be autofilled
+  oFuncs.getAutoFill  = function() {return {user:'guest',password:'guest'};}
+  oFuncs.getSite      = function() {return "TRI-Demo";}       // Site prefix in title
+  return oFuncs;
+
+}]);
+</pre>
+

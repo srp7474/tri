@@ -1,0 +1,63 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="img/fav-admin0.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Apps.css" title=defualt>
+  <script src="ut.js"></script>
+  <script src="angular.min.js"></script>
+  <script src="TRI.min.js"></script>
+  <script src="../AppsConfig.js"></script>
+  <script src="TablesUser.js"></script>
+  <script src="LAB.js"></script>
+  <script src="Admin.js"></script>
+  <title>Admin:Defined during bootstrap</title>
+  <script>gaTracking();</script>
+</head>
+
+<body id=bodyID>
+  <div ng-controller=ctrlMain>
+    <macro fetch='apps-header.html'></macro> <!-- standard title -->
+    <div id=divBody>
+       <table id=tblWrap>
+         <tr class=atTop>
+           <td class=atTop>
+             <table id=tblLft height=100%>
+               <tr><td><img src='img/transparent.gif' width=200px height=1px></td></tr>
+               <tr class=gbl-actions>
+                 <td style='width:100%;'>
+                   <macro fetch='apps-menu.html' alter='audio-defer/audio'></macro> <!-- menu -->
+                 </td>
+               </tr>
+             </table>
+           </td>
+           <td>
+             <div id=divRgt>
+               <macro fetch='apps-boiler-plate.html'></macro>                                             <!-- standard messages panels -->
+
+               <macro fetch='apps-login.html'></macro>                                                    <!-- login panel -->
+               <macro fetch='apps-change-password.html'></macro>                                          <!-- Change Password panel -->
+               <macro fetch='apps-lister.html' alter='!tri/img!../tri/img'>></macro>                      <!-- Common Records Lister panel -->
+
+               <macro fetch='apps-editor.html'></macro>                                                   <!-- Common Editor panel -->
+             </div>
+           </td>
+         </tr>
+       </table>
+    </div>
+  </div>
+
+  <macro fetch='apps-copyright-notice.html' alter='!tri/img!../tri/img'></macro>                          <!-- copyright notice -->
+
+<object data='AppsBase.htm?app=Admin' id=apps-templates style='width:0px;height:0px;'></object>           <!-- load standard templates for App-->
+
+
+</html>
+

@@ -1,0 +1,160 @@
+[objects]
+
+[configuration]
+
+[App.Bbb]
+  $if (${HOST} eQ HP03)
+    // TODO - pull this from web.xml as a token
+    Title="CITA System Maintenance - ${HOST}"
+  $else
+    Title="CITA System Maintenance"
+  $endif
+
+  ReqClass="com.rsi.gems.bbb.run.B3Req"
+  MethClass="com.rsi.gems.bbb.run.Methods"
+
+
+  Parms=(
+    PasswordObfuscator="not used in triangular" // do not change once passwords are established on datastore
+    JspPage="com.rsi.gems.bbb.jsp.page"
+    JspSnip="com.rsi.gems.bbb.jsp.snip"
+    AppClassLoc="WEB-INF/lib/bbbrun.jar"
+    StackTraceJSP="true"
+    SuperUser="74x.12.96.210;9x9.226.193.125;1x0.1.1.11"
+    $if (${HOST} eQ HP03)
+      AnalyticsCall="false"
+      PersistCache="PersistCache"
+    $else
+      AnalyticsCall="true"
+    $endif
+    ActHandler="com.rsi.gems.bbb.act.ActHandler"
+    ActItems  = "com.rsi.gems.bbb.gdo.GdoStorage"
+              +";com.rsi.gems.bbb.gdo.GdoValueTrait"
+              +";com.rsi.gems.bbb.gdo.GdoFieldTrait"
+              +";com.rsi.gems.bbb.gdo.GdoItemModel"
+              +";com.rsi.gems.bbb.gdo.GdoSysGroups"
+              +";com.rsi.gems.bbb.gdo.GdoSysRoles"
+              +";com.rsi.gems.bbb.gdo.GdoSysTests"
+              +";com.rsi.gems.bbb.gdo.GdoSysJunk"
+              +";com.rsi.gems.bbb.gdo.GdoSysUsers"
+              +";com.rsi.gems.bbb.gdo.GdoSysConfig"
+              +";com.rsi.gems.bbb.gdo.GdoSysLocks"
+              +";com.rsi.gems.bbb.gdo.GdoSysFlags"
+              +";com.rsi.gems.bbb.gdo.GdoSysPages"
+              +";com.rsi.gems.bbb.gdo.GdoSysWiki"
+  )
+
+  Pages=(
+    [Page] name="home"
+           title="Home Page"
+           JspPage="GemsB3Frame"
+           Snippet="GemsB3Home"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipHome"
+           )
+    [Page] Title="BBB Login"
+           name="login"
+           JspPage="GemsB3Frame"
+           Snippet="std.Login"
+    [Page] name="boot"
+           title="ACT Boot Strap"
+           JspPage="GemsB3Frame"
+           Snippet="act.ActBootStrap"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipHome"
+           )
+    [Page] name="admin"
+           title="System Administration"
+           JspPage="GemsB3Frame"
+           Snippet="admin.AdminPage"
+           Parms=(
+             LeftSnipJSP="admin.LeftSnipAdmin"
+           )
+    [Page] name="models"
+           title="B3 Models"
+           JspPage="GemsB3Frame"
+           Snippet="b3.B3BootStrap"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipHome"
+           )
+    [Page] name="maint"
+           title="B3 Models List"
+           JspPage="GemsB3Frame"
+           Snippet="b3.ShowItemTypes"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipMaint"
+           )
+    [Page] name="itemedit"
+           title="B3 Item Edit"
+           JspPage="GemsB3Frame"
+           Snippet="b3.EditOldItem"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipMaint"
+           )
+    [Page] name="itemnew"
+           title="B3 Create Item"
+           JspPage="GemsB3Frame"
+           Snippet="b3.EditNewItem"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipMaint"
+           )
+    [Page] name="items"
+           title="B3 Items List"
+           JspPage="GemsB3Frame"
+           Snippet="b3.ShowItems"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipMaint"
+           )
+    [Page] name="tests"
+           title="B3 Test Menu"
+           JspPage="GemsB3Frame"
+           Snippet="b3.B3TestMenu"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipTest"
+           )
+    [Page] Title="B3 Unit Test"
+           name="testpage"
+           JspPage="GemsB3Frame"
+           Snippet="b3.TestFrame"
+           Parms=(
+             LeftSnipJSP="b3.LeftSnipTest"
+           )
+    [Page] name="snip"
+           JspPage="GemsB3Frame"
+           Snippet="snip="
+
+    [Page] name="syswiki"
+           JspPage="WikiFrame"
+           Snippet="dt.ViewWikiPageStd"
+           Parms=(
+             Handler="com.rsi.gems.bbb.wiki.WikiHandlerStd"
+           )
+
+    [Page] name="wikiedit"
+           JspPage="WikiFrame"
+           Snippet="wiki.EditOldWiki"
+           Parms=(
+             Handler="com.rsi.gems.bbb.wiki.WikiHandlerStd"
+           )
+
+    [Page] name="wikinew"
+           JspPage="WikiFrame"
+           Snippet="wiki.EditNewWiki"
+           Parms=(
+             Handler="com.rsi.gems.bbb.wiki.WikiHandlerStd"
+           )
+
+    [Page] name="wikiutil"
+           JspPage="WikiFrame"
+           Snippet="wiki.UtilPage"
+           Parms=(
+             Handler="com.rsi.gems.bbb.wiki.WikiHandlerStd"
+           )
+
+    [Page] name="data" // dummy page for posting to
+    [Page] name="ajax" // place holder for ajax requests (ajax.ajax. Can be used to specify specific parms
+    [Page] name="form" // place holder for ajax form requests used by form upload
+    [Page] name="log"  // place holder for ajax log requests used by BBB.js
+  )
+[/]
+

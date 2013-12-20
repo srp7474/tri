@@ -1,0 +1,36 @@
+@ngdoc overview
+@name Guide: App Boot Strap
+@description
+### Overview
+The boot strap process is the means whereby all the component parts of Triangular are loaded and hooked together
+into a working system.
+
+The process is designed to be speedy yet flexible.  The Open Source "LAB.js" component <i>(c) Kyle Simpson</i> is used to provide
+dynamic loading of optional components.
+
+The ability to hide HTML text inside `<object type='text/html' ...>`  is exploited to provide for a convenient
+template file system that does result in myriads of files.
+
+### Boot Strap Sequence
+
+1. The user references a static .HTM file such as Deps.htm in a browser URL pointing at the server.
+
+1. The Deps.htm is fetched and loaded into the browser.  The following javascript files are loaded:
+
+1. ut.js (common static utility functions) is parsed and loaded
+
+1. angularjs and Trianglar javascript files are parsed and loaded.
+
+1. The  {@link /api/tri.method:hookMsgListener hookMsgListener} method is executed
+
+1. The application specfic javascript file(s) are parsed and loaded.
+
+1. The static {@link /guide/table Table} definitions found in application specfic javascript file(s) are
+registered with the {@link /api/tri.servREG servREG API}.
+
+1. The {@link /api/tri.controller:ctrlSess#initUser initUser} method is called which results in either a login request
+or an application state with a logged in User.
+
+1. Any role based static {@link /guide/table Table} definitions that are now authorized are loaded and the tables
+registered with the {@link /api/tri.servREG servREG API}.
+

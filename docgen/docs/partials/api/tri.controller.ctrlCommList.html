@@ -1,0 +1,238 @@
+<h1><code ng:non-bindable="">ctrlCommList</code>
+<span class="hint">(controller in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides the common lister functionality of the system which includes:</p>
+
+<ul>
+<li>Listing of filtered sorted set of records from the current <code>Table</code></li>
+<li>The record list has a static heading and a scrollable display area</li>
+<li>The columns to list are determined using the static <a href="/api/tri.object.Table">Table</a> definition.</li>
+<li>Columns with computed values are easily inserted and automatically updated using the <a href="http://angularjs.org/">AngularJS</a> facilities</li>
+<li>Optional standard and custom 'Filter` inputs such as 'Limit', 'Mask'</li>
+<li>Optional standard and custom 'Table` clickable actions such as 'Create New xxx Record'</li>
+<li>Optional standard and custom 'Record` clickable actions such as 'edit'</li>
+<li>The ability to modify the appearance and coumn widths with CSS using the automatically provided column classes as CSS reference points.</li>
+</ul>
+
+<p>Many of the function calls are forwarded to an appropriate service and where applicable the return value is returned.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">ctrlCommList($scope, servSess, servREC, servCRUD);</pre>
+<h3 id="Parameters">Parameters</h3>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>The scope of the controller</p></li>
+<li><code ng:non-bindable="">servSess – {Object} – </code>
+<p>The <a href="/api/tri.servSess">servSess</a> service pointer</p></li>
+<li><code ng:non-bindable="">servREC – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servREC</a> service pointer</p></li>
+<li><code ng:non-bindable="">servCRUD – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servCRUD</a> service pointer</p></li>
+</ul>
+</div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="dropRecord">dropRecord(oaa)</h3>
+<div class="droprecord"><p>This removes <a href="/guide/data">Data Object</a>  from the <code>Table</code>. The <a href="/guide/data">Data Object</a> to remove is obtained using `oaa'</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#dropRecord">servCRUD.dropRecord</a>.  Refer there for more details.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the required record.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="editRecord">editRecord(oaa)</h3>
+<div class="editrecord"><p>This puts the system into 'Edit' mode and activates the system <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> using the <a href="/guide/data">Data Object</a> obtained using `oaa'</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#editRecord">servCRUD.editRecord</a>.  Refer there for more details.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the required record.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getColClass">getColClass(ix, oCol)</h3>
+<div class="getcolclass"><p>Used to provide a series of class types 'C1', 'C2', ... 'Cn' based on whether a column is shown in the list.</p>
+
+<p>This value is typically used with ng-class and then referenced in the .CSS style sheets.</p>
+
+<p>This provides a convenient way to format HTML table columns (<code>&lt;TD&gt;</code>) and their header (<code>&lt;TH&gt;</code>).</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ix – {number} – </code>
+<p>index of column</p></li>
+<li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getColTitle">getColTitle(oFil)</h3>
+<div class="getcoltitle"><p>Returns a column title suitable for display</p>
+
+<p>Returns <code>null</code> if <code>oFil.field</code> is <code>null</code> of <code>undefined</code></p>
+
+<p>Returns <code>oCol.getTitle()</code> if <a href="/api/tri.object.Col">Col</a> object <code>oCol</code> exists in the current context</p>
+
+<p>Else returns `oFil.field'</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oFil – {Object} – </code>
+<p><a href="/api/tri.object.Filter">Filter</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>computed value</p></div>
+</div>
+</li>
+<li><h3 id="getFilter">getFilter(oSel, sFld)</h3>
+<div class="getfilter"><p>Returns a <a href="/api/tri.object.Filter">Filter</a> object whose <code>type</code> matches  'state' found in <code>oSel</code>
+and whose <code>field</code> value matches <code>sFld</code>.
+Refer also to <a href="/api/tri.servSess#useTable">servSess.useTable</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oSel – {Object} – </code>
+<p>object managed with <a href="/api/tri.servSess#useTable">servSess.useTable</a></p></li>
+<li><code ng:non-bindable="">sFld – {string} – </code>
+<p>Filter name to extract</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p><a href="/api/tri.object.Filter">Filter</a> object</p></div>
+</div>
+</li>
+<li><h3 id="getFilters">getFilters(oSel, sType)</h3>
+<div class="getfilters"><p>Returns an array of <a href="/api/tri.object.Filter">Filter</a> objects that match <code>sType</code> found in <code>oSel</code>. Refer
+to <a href="/api/tri.servSess#useTable">servSess.useTable</a>.</p>
+
+<p>The returned value is cached as this function is called many times.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oSel – {Object} – </code>
+<p>object managed with <a href="/api/tri.servSess#useTable">servSess.useTable</a></p></li>
+<li><code ng:non-bindable="">sType – {string} – </code>
+<p>Filter type</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p><a href="/api/tri.object.Filter">Filter</a> objects that match <code>sType</code></p></div>
+</div>
+</li>
+<li><h3 id="getObjs">getObjs()</h3>
+<div class="getobjs"><p>Returns the <a href="/guide/data">Data Object</a> collection for the specified <code>Table</code>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#getObjs">servCRUD.getObjs</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p><a href="/guide/data">Data Object</a> collection for the specified <code>Table</code></p></div>
+</div>
+</li>
+<li><h3 id="getRefColOpt">getRefColOpt(oFil)</h3>
+<div class="getrefcolopt"><p>Typically used to populate a 'select' control with values from a related <code>Table</code> that is updated dynamically based on the values stored in that <code>Table</code>.</p>
+
+<p>Returns an empty list if <code>oFil.type</code> != 'state' or <a href="/api/tri.object.Col">Col</a> object for <code>oFil.field</code> is not located</p>
+
+<p>Returns an empty list if <code>oCol.oneOf</code> is not defined</p>
+
+<p>Else returns the <a href="/api/tri.servREC#getOptions">servREC.getOptions</a> return value</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oFil – {Object} – </code>
+<p><a href="/api/tri.object.Filter">Filter</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>A collection of options returned by <a href="/api/tri.servREC#getOptions">servREC.getOptions</a></p></div>
+</div>
+</li>
+<li><h3 id="getTabProp">getTabProp()</h3>
+<div class="gettabprop"><p>This returns the properties <code>props</code> object of current dynamic dynamic <a href="/api/tri.object.Table">Table</a> object.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#getTabProp">servCRUD.getTabProp</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>Properties object of current (oTAB) object. oTAB is set to null.</p></div>
+</div>
+</li>
+<li><h3 id="getTableCols">getTableCols(type)</h3>
+<div class="gettablecols"><p>Returns a collection of <a href="/api/tri.object.Col">Col</a> objects that match <code>type</code>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getTableCols">servREC.getTableCols</a> with the insertion of the <code>$scope</code> variable and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">type – {string} – </code>
+<p>The type of column array to extract. eg '=list', '=edit'</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>the value returned by <a href="/api/tri.servREC#getTableCols">servREC.getTableCols</a></p></div>
+</div>
+</li>
+<li><h3 id="hasSession">hasSession()</h3>
+<div class="hassession"><p>Returns whether a valid session exists. ie. The User is properly logged in and validated.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#hasSession">servSess.hasSession</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasSession">servSess.hasSession</a></p></div>
+</div>
+</li>
+<li><h3 id="inDlgEdit">inDlgEdit()</h3>
+<div class="indlgedit"><p>Returns whether the system <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active and in Dialog mode.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#inDlgEdit">servCRUD.inDlgEdit</a> and and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active and in Dialog mode</p></div>
+</div>
+</li>
+<li><h3 id="inEdit">inEdit()</h3>
+<div class="inedit"><p>Returns whether the system <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#inEdit">servCRUD.inEdit</a> and and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active</p></div>
+</div>
+</li>
+<li><h3 id="initFilter">initFilter(oFil)</h3>
+<div class="initfilter"><p>Moves the <a href="/api/tri.object.Filter">Filter</a> object to the <code>$scope.oSel</code> object if <code>$scope.oSel</code> object does not contain <code>oFil.name</code></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oFil – {Object} – </code>
+<p><a href="/api/tri.object.Filter">Filter</a> object</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="isSect">isSect(sect)</h3>
+<div class="issect"><p>Returns whether <code>sect</code> section matches the current section.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#isSect">servSess.isSect</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sect – {string} – </code>
+<p>value to match against</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#isSect">servSess.isSect</a></p></div>
+</div>
+</li>
+<li><h3 id="makeRecord">makeRecord()</h3>
+<div class="makerecord"><p>This puts the system into 'Create' mode and activates the system <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#makeRecord">servCRUD.makeRecord</a>.  Refer there for more details.</p></div>
+</li>
+<li><h3 id="showCol">showCol(oCol)</h3>
+<div class="showcol"><p>This call is forwarded  to <a href="/api/tri.servREC#showListCol">servREC.showListCol</a> and the {Boolean} result returned as a {string}.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p><a href="/api/tri.object.Col">Col</a> object to test</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'true' if column should be shown else 'false'</p></div>
+</div>
+</li>
+<li><h3 id="useTable">useTable(table, sel)</h3>
+<div class="usetable"><p>This sets a new <code>Table</code> context for the <a href="/api/tri.controller:ctrlCommList">List Controller</a>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#useTable">servSess.useTable</a> with the insertion of the <code>$scope</code> variable and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">table – {Object} – </code>
+<p>table name (title) to find</p></li>
+<li><code ng:non-bindable="">sel – {string} – </code>
+<p>previous/default selection (filter) context</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#useTable">servSess.useTable</a></p></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="member property"><h2 id="Properties">Properties</h2>
+<ul class="properties"><li><h3 id="nUsedCols">nUsedCols</h3>
+<div class="nusedcols"><p>Internal value used to compute the next <a href="/api/tri.controller:ctrlCommList#getColClass">getColClass</a> value.</p></div>
+</li>
+<li><h3 id="oSel">oSel</h3>
+<div class="osel"><p>Contains the current filter (selection) values which are preserved in the <code>Table</code> object
+during the  <code>Table</code> switch operation <a href="/api/tri.servSess#useTable">servSess.useTable</a></p></div>
+</li>
+</ul>
+</div>
+</div>

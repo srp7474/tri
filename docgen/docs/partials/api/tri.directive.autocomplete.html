@@ -1,0 +1,67 @@
+<h1><code ng:non-bindable="">autocomplete</code>
+<span class="hint">(directive in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Uses a related table field to provide a list of matching entries
+based on partial input.
+The <code>switch-name</code> is a boolean that determines whether the list of partial matches should be shown.
+The subsequent <code>&lt;div&gt;</code> displays the selected objects that match the partial input.
+When one is clicked the the <code>click-function</code> populates the related input field.
+The <code>repeat-expr</code> returns the list of selected objects.
+The optional `next='expr' names a function that focuses on the next DOM element when the input is complete.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre><code ng:non-bindable="">&lt;input autocomplete="switch-name"&gt;
+&lt;div ng-show='switch-name'&gt;
+     &lt;div class=supplier ng-repeat='oObj in repeat-expr' ng-click='click-func(oObj)'&gt;
+       &lt;span style='display:inline-block; width:100px;'&gt;{{oObj.fld1}}&lt;/span&gt;{{oObj.fld2}}
+     &lt;/div&gt;
+   &lt;/div&gt;</code>
+</pre>
+</div>
+<h2 id="Example">Example</h2>
+<div class="example"><h4>Source</h4>
+<div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html" source-edit-css="" source-edit-js="script.js" source-edit-unit="" source-edit-scenario=""></div>
+<div class="tabbable"><div class="tab-pane" title="index.html">
+<pre class="prettyprint linenums" ng-set-text="index.html" ng-html-wrap-loaded=" angular.js script.js"></pre>
+<script type="text/ng-template" id="index.html">
+ 
+ <div><b>Note: examples do not execute yet until TRI.js hooked in properly to doc environment</b></div>
+ <div ng-app='app' ng-controller="Ctrl">
+   <span class=note>Payee:</span>
+     <input type=text autocomplete=bShowSups next=insertLine(oObj) id=payee ng-model=oObj.payee placeholder='enter payee name (will auto-complete)'>
+     <!-- Supplier sub-list -->
+     <div id=sup-scroll ng-show='bShowSups'>
+       <div class=supplier ng-repeat='oSup in getCurSups(oObj.payee)' ng-class-even="'div-even'" ng-class-odd="'div-odd'" ng-click='supClick(oSup)'>
+         <span style='display:inline-block; width:100px;'>{{oSup.name}}</span>{{oSup.where}}
+       </div>
+     </div>
+    </span>
+  </div>
+</script>
+</div>
+<div class="tab-pane" title="script.js">
+<pre class="prettyprint linenums" ng-set-text="script.js"></pre>
+<script type="text/ng-template" id="script.js">
+   function Ctrl($scope) {
+     $scope.bShowSups = true;
+     $scope.oObj = {payee:'no-payee'};
+     $scope.oSups = [{name:'IBM',where:'New York'}
+              ,{name:'Xerox',where:'California'}
+              ,{name:'Google',where:'California'}
+              ,{name:'Apple',where:'California'}
+              ,{name:'Microsoft',where:'Washington'}
+              ];
+     $scope.getCurSups = function(sPayee) {
+       log("getting curSups");
+       return $scope.oSups;
+     }
+     $scope.supClick = function(oSup) {
+       $scope.oObj.payee =  oSup.name;
+     }
+   }
+ </script>
+</div>
+</div><h4>Demo</h4>
+<div class="well doc-example-live animator-container" ng-embed-app="" ng-set-html="index.html" ng-eval-javascript="script.js"></div></div>
+</div>

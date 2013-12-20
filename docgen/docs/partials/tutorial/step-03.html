@@ -1,0 +1,71 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p>We will create an application called <code>MyApp</code>.  Vary it to suit your preferences.  Like all good programmers we will use another app as the base.  In this case
+we will use the <code>Hello App</code> because it has a basic foundation.</p>
+
+<p>In this step we are adding the app and creating the required administrative connections on the <a href="/guide/datastore">Datastore</a></p>
+
+<p>The <a href="/apps/hello-app">Hello App Explained</a> may assist in understanding the changes being made.</p>
+
+<h3 id="createmyapphtmandmyappjs">Create <code>MyApp.htm</code> and <code>MyApp.js</code></h4>
+
+<ol>
+<li><p>In the folder <code>X:tri-devp\war\apps</code> you should see <code>Hello.htm</code> and <code>Hello.js</code></p></li>
+<li><p>Copy each and rename to <code>MyApp.htm</code> and <code>MyApp.js</code></p></li>
+<li><p>Edit <code>MyApp.htm</code></p></li>
+<li><p>In line <code>3</code> change from <code>fav-msgs0.ico</code> to <code>fav-t1w.ico</code> to make the favorite icon <img class=screen src=/img/fav-t1w.ico>. See <a href="/guide/hints-tech#makingicons">Making Icons</a></p></li>
+<li><p>In line <code>11</code> change from <code>Hello.js</code> to <code>MyApp.js</code></p></li>
+<li><p>In line <code>12</code> change from <code>Hello:</code> to <code>MyApp:</code></p></li>
+<li><p>In line <code>17</code> change from <code>Message Board System Login</code> to <code>MyApp System Login</code></p></li>
+<li><p>Edit <code>MyApp.js</code></p></li>
+<li><p>In line <code>15</code> change from <code>msgs</code> to <code>myapp</code> (<strong>note case</strong>)</p></li>
+<li><p>In line <code>22</code> change from <code>msgs</code> to <code>myapp</code> (<strong>note case</strong>)</p></li>
+<li><p>Edit <code>AppConfig,js</code> and change the <code>Hello.htm</code> in
+<code>oFuncs.getStartPage = function() {return "apps/Hello.htm";}</code> to <code>MyApp.htm</code>.  This will cause the <code>MyApp.htm</code> to be the default startup page
+if no app is specified in the URL.</p></li>
+</ol>
+
+<p><span id=configurethedatastore></span></p>
+
+<h3 id="configuretheahrefguidedatastoredatastorea">Configure the <a href="/guide/datastore">Datastore</a></h4>
+
+<ol>
+<li><p>Login as <a href="/guide/user#superuser">SuperUser</a> using link
+<a href="http://localhost:8882/apps/tri/TriBoot.htm">Local SuperUser Login</a>.
+Use UserName <code>super</code> and Password <code>super</code>. You should see
+<br><br>
+<img class=screen src=/img/super-page50.JPG></p></li>
+<li><p>In the <code>Add Application AdminUser</code> section enter <code>myapp</code> in the App ID field, <code>admin</code> in the remaining 3 fields.  Vary this if you wish but remember what you used.
+This creates the <a href="/guide/user#adminuser">AdminUser</a> for app <code>myapp</code>.  Press <code>Add App AdminUser</code> button.</p></li>
+<li><p>The line <code>myapp  admin   Add myapp Users</code> should be added at the foot of the page.</p></li>
+<li><p>Click on the <code>User Admin</code> column <code>myapp</code> row to get to the Admin Login page.</p></li>
+<li><p>Signon using the credentials set up in point 2.</p></li>
+<li><p>Click on <code>List User Records</code> and you should see 1 record with the user id set up in point 2.</p></li>
+<li><p>Press <code>Create New User Record</code>. It will ask you for a Unique UserID.  User <code>newuser</code> or vary as you wish.</p></li>
+<li><p>Add the password with at least one alphabetic character.</p></li>
+<li><p>Press <code>Save Changes</code> and you will see 2 records on the <code>User Record List</code>.</p></li>
+</ol>
+
+<h3 id="validatingmyappnowturnsover">Validating <code>MyApp</code> now turns over</h4>
+
+<ol>
+<li><p>Goto link <a href="http://localhost:8882/apps/MyApp.htm">Run MyApp</a></p></li>
+<li><p>You should see the <code>MyApp System Login</code> login page with favorite icon
+<img class=screen src=/img/fav-t1w.ico></p></li>
+<li><p>Login as <code>admin</code> as set up in point 2.</p></li>
+<li><p>Click <code>List Messages Records</code>.  You will see no records because this app has none.</p></li>
+<li><p>Create a record using <code>Create New Messages Record</code>.  You will be able to adjust the data because you are an <a href="/guide/user#adminuser">AdminUser</a></p></li>
+<li><p>Click <code>Save Changes</code></p></li>
+<li><p>Click <code>logoff</code>. You should see the <code>MyApp System Login</code> login page</p></li>
+<li><p>Login as <code>newuser</code> with the credentials setup in point 7.</p></li>
+<li><p>Create a record using <code>Create New Messages Record</code>.  You will be not able to adjust the data because you are not an <a href="/guide/user#adminuser">AdminUser</a></p></li>
+<li><p><a href="/guide/variants">GAE Variant</a><br> You can use the <a target=_blank href=http://localhost:8882/_ah/admin>Datastore Viewer</a> to see your new data.  Use the class
+<code>com.rsi.cita.gdo.GdoCitaData</code>. You will see your raw data at the last page of the display.</p></li>
+<li><p><a href="/guide/variants">Node.js Variant</a><br>Use your editor to examine the <code>TRI-DB</code> folder within the <code>X:\tri-devp</code> folder. The structure of this
+folder is explained in <a href="/guide/datastore-node">Datestore NodeJS.</a></p></li>
+</ol>
+
+<h3 id="nextstep">Next Step</h4>
+
+<p>Proceed to <a href="/tutorial/step-04">04 Prepare MyApp Data</a></p></div>

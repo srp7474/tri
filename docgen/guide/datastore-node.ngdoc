@@ -1,0 +1,44 @@
+@ngdoc overview
+@name Guide: Datastore NodeJS
+@description
+### Overview
+
+The Datastore is the  facility used to persist the data of the applications.
+
+In the **Triangular** Node.js variant of the development configuration this is provided by the {@link /guide/server-inter#nodejsvariant Server Node.js Variant}.
+Both the local development environment and the production
+deployed version use the same scheme.  In fact the deploying into production of a local development environment uses the local data structure as its starting point.
+
+
+ **Triangular** deploys its {@link /guide/nodesite NodeJS Site} at
+<a target=_blank href=https://www.nodejitsu.com>NodeJitsu  Node.js Hosting</a>
+
+Both local and production use the same data structure.  The default base name is TRI-DB within the deployed structure.  Each app is stored within
+a folder of the app name.
+
+Each {@link /guide/records#keystructure Record Key/Data} file is stored  as one of  3 types.
+
+* `$super ` - the {@link /guide/user#superuser SuperUser} credentials
+* `$user  ` - {@link /guide/user#adminuser AdminUsers} and {@link /guide/user Users} within the respective apps folder.  The `role:admin` distuinguishes them.
+* `$data  ` - the data records.
+
+During startup the {@link /guide/node-server NodeJS Server} loads the directory structure into an internal table.  The `db` command may be used to see this
+if the local console has been turned on with the `-quit` option.
+
+The **Node.js** single threaded architecture made the potential file contention issue a non-issue.  Whenever a record is to be physically written a copy is placed into
+the `rec.data` field of the structure and the write started. When the write completes the `rec.data` field is cleared.  If a read occurs during the time
+the `rec.data` field has a value this value is returned to the requester immediately.  Otherwise a normal read takes place and the contents returned to the requester
+when it completes.
+
+The `GekID` field is ignored and set to a value of `1`.
+
+The `CreateTS` and `UpdateTS` fields are derived from the **Node.js** `fs.stat` command using the
+`ctime` and `mtime` values converted to milliseconds using `getTime()`.
+
+The passwords on the system are encrypted using a `mangle` property in the {@link /guide/user#superuser SuperUser}  that is randomly created when the
+{@link /guide/user#superuser SuperUser} is created.  This value should not be changed without resetting all the passwords. The randomness of this string
+makes it difficult to derive the password even if the encrytped value is known. The `mangle` value should be kept secret for this reason.
+
+
+
+

@@ -1,0 +1,60 @@
+/*
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+*/
+
+/* HelloUI custom CSS*/
+
+/* Main page */
+body                           {Font: Normal 120% Verdana; margin:0px; color:black;}
+div#divHead                    {background:rgb(00,170,85); color:red; height:80px; width:1266px;}
+div#divHead span.p1            {display:none;}
+div#divHead span.p3            {display:none;}
+div#divHead span.p2            {display:inline-block; position:absolute; left:350px; top:15px;}
+div#divHead span.p6            {display:inline-block; position:absolute; left:380px; top:50px; color:yellow;}
+div#divHead table              {color:#FFFFFF;}
+div#divRgt                     {border-left:none; width:1050px;}
+div#divHead span.title         {font-size:18pt;}
+div#divRgt fieldset.list-comm  {background:rgb(132,247,166);}
+
+div#divHead,div#divBody table#tblLft, div#divBody td.atRgt, div#ui-viewer fieldset {
+   -moz-border-radius: 10px;
+   -webkit-border-radius: 10px;
+   -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+div#divRgt span#img-space     {display:inline-block; width:400px;}
+div#divBody table#tblLft      {background:rgb(132,247,166);}
+div#divBody td.atRgt          {background:rgb(132,247,166);}
+table#list-messages thead     {background-color:rgb(00,170,85)}
+
+div.ui-editor .ui-dialog-titlebar-close {
+  display: none;
+}
+
+/* UI Editor */
+div#ui-editor p#top-panel       {display:none;}
+div#ui-editor p#top-panel       {display:none;}
+
+div#ui-editor div.pair          {height:50px; width:750px; clear:both;}
+div#ui-editor div.name          {float:left;  width:100px; text-align:right; top:5px;}
+div#ui-editor div.field         {float:left;  top:5px;}
+
+div#ui-editor div#Date          {position:absolute; top:10px; left:360px;}
+div#ui-editor div#Type          {position:absolute; top:64px; left:360px;}
+div#ui-editor select#msg-type   {margin-left:7px; width:218px;}
+div#ui-editor input#title       {width:560px;}
+div#ui-editor textarea#msg-text {width:560px; margin-left:6px; height:400px;}
+div#ui-editor p.editerr         {position:absolute; top:550px;}
+div#ui-editor input[readonly=readonly]  {background:rgb(192,192,192);}
+div#ui-editor input#inp-Date    {background:rgb(248,248,248);}
+
+div#ui-viewer label            {color:rgb(192,192,192);font-size:10pt;}
+div#ui-viewer span#type        {position:absolute; left:500px;}
+div#ui-viewer span#author      {position:absolute; left:250px;}
+div#ui-viewer fieldset         {background:white;}
+

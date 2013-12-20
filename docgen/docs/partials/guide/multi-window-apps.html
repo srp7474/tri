@@ -1,0 +1,27 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p><a target=_blank href="http://angularjs.org/">AngularJS</a>, in their own documentation <a href=http://docs.angularjs.org/guide/introduction target=_blank>AngularJS introduction</a>,
+is purportedly best at single-page apps.
+While this is true it is easy to extend <a target=_blank href="http://angularjs.org/">AngularJS</a> to support multiple pages using a couple of patterns.</p>
+
+<h3 id="thedisplayformpattern">The Display/Form Pattern</h4>
+
+<p>The <a href="/guide/disp-page-design">Display Page Design</a> and <a href="/guide/form-page-design">Form Page Design</a> describe how the <a href="/guide/form-page-design">Form Page Design</a>
+can be used as secondary pages in an appliocation the uses <a href="/guide/disp-page-design">Display Page Design</a> as the primary page.</p>
+
+<p>The "Deps.htm" and "Chqs.htm" are samples of this pattern.</p>
+
+<h3 id="theadminpagepattern">The Admin Page Pattern</h4>
+
+<p>With this pattern the <a href="/api/tri.controller:ctrlSess">logged</a> in User <a href="/api/tri.servGAE#setToken">token</a> is shared among several application pages so that
+<a href="/api/tri.servGAE#validateToken">validateToken</a> of secondary pages return a 'logged in' status.
+This requires that the <a href="/api/tri.servGAE#setCust">setCust</a>
+parameter is the same for all pages.</p>
+
+<p>In this pattern either the URL or the localStorage is used to maintain the 'breadcrumbs' so that the secondary page knows how to return to the primary page.</p>
+
+<p>The "Admin.htm" page is an example of a page that acts as the secondary page.  In its case the app name is passed to as a URL parameter so that
+it can be used as the secondary page for any application.</p></div>

@@ -1,0 +1,39 @@
+<h1><code ng:non-bindable="">servConfig</code>
+<span class="hint">(service in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides app customization that can be easily swapped in and out by changing just one file. It means that one set
+of application code can be used in multiple sites.</p>
+
+<p>This is normally defined in <a href="/guide/appsconfig">AppsConfig.htm</a> and loaded by the <a href="/guide/appname-html">AppName.htm File</a>.</p>
+
+<p>Additional functions such as <code>getInfo</code> can be added following the same pattern.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="getAutoFill">getAutoFill()</h3>
+<div class="getautofill"><p><strong>Optional:</strong> Returns an object that is used to autofill the login page. A null return value or non-existant function will disable the autofill option.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>null or <code>{guest:'username',password:'password'}</code></p></div>
+</div>
+</li>
+<li><h3 id="getInfo">getInfo()</h3>
+<div class="getinfo"><p><strong>Optional:</strong> returns {Object} Application dependant information object</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>Application dependant information object</p></div>
+</div>
+</li>
+<li><h3 id="getSite">getSite()</h3>
+<div class="getsite"><p><strong>Optional:</strong> Returns the site prefix that can be displayed in the browser title</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>computed string</p></div>
+</div>
+</li>
+<li><h3 id="getStartPage">getStartPage()</h3>
+<div class="getstartpage"><p><strong>Required:</strong> Returns the first page of the application to use when not specified on the URL.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>computed string</p></div>
+</div>
+</li>
+</ul>
+</div>
+</div>

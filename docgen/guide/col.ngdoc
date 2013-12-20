@@ -1,0 +1,175 @@
+@ngdoc overview
+@name Guide: Col (static version)
+@description
+
+### Overview
+The `Col` object defines the single instance of the `cols` collection property used in the {@link /guide/table Table Object} schema.
+
+
+### Col Instance Types
+Two instance types for the `Col` object are used internally.
+
+1. The first,
+the static object definition, refers to the static Javascript definition.
+
+2. The second, refers to a Javascript `Col` object which is created as part of the static {@link /guide/table Table Object} migration process.
+This instance allows the HTML code to directly access methods defined
+for the {@link /api/tri.object.Col Col} object.
+
+The migration process copies all of the static properties to the dynamic version.  In addition, each `Col` object is assigned a `cid` property that represents
+a unique system wide ID for that 'Col' object.
+
+It is possible to specify sub-schemas.  If one is found the static `col` objects  specified in the sub-schema are also migrated.
+
+### Definition Syntax
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+The `Col` object definition is found in the `cols` property of the {@link /guide/table Table Object} `oTabProp` object.
+That is the `cols` property is an array of one or more 'Col` object definitions.  Each definition has one or more of the following properties.  Some properties are
+interdependent.
+
+Note that the order the columns are in this definition is the order they appear in both the {@link /api/tri.controller:ctrlCommList List Controller} display and
+the {@link /api/tri.controller:ctrlCommEdit Edit Controller} field display.
+
+The 'Chqs.js' file shows an example of using `custHTML` to define a custom HTML file to define the {@link /api/tri.controller:ctrlCommEdit Edit Controller} fields and layout.  This will override
+the sequence of the fields in the definition.
+
+<span class=srp-propdef><code class=srp-label>addDefault:</code>For `type` 'actions', if `false` is specified causes the default 'edit' and 'drop' actions to
+not be inserted.  If unspecified, the defualt value for `addDefault` is `true`.
+</span>
+
+<span class=srp-propdef><code class=srp-label>col:</code>If a literal value is specified it names a reference to a `Table` field (the key of a JSON key/value pair).
+<br><br>
+A non-literal value is assumed to name a locally defined function which makes the value a computed value. The function will be called with the signature
+`func-name(oObj,scope,oCol)` where `oObj` references the {@link /guide/data Data Object}, `scope` is the current controller scope and `oCol` references the
+dynamic `Col` instance.  It should return a string value.  If the computation is extensive the returned value should be cached using the <a target=_blank href="http://angularjs.org/">AngularJS</a> `$$hash` object for
+change detection.
+<br><br>
+The latter format will cause the `type` property to be set to 'virt' while the former will cause the type to be set to 'field'.
+</span>
+
+<span class=srp-propdef><code class=srp-label>cssid:</code>For `type` 'panel' and 'cust', causes the HTML element manufactured on behalf of the column to have an 'id' tag of the value specified.
+</span>
+
+<span class=srp-propdef><code class=srp-label>field:</code>Causes the {@link /api/tri.object.Col Col} `getField` function to return this value other than the computed value.
+</span>
+
+<span class=srp-propdef><code class=srp-label>hideLabel:</code>Setting this value to `false` causes the **Triangular** system to not generate
+the column name label in the edit panel.  This is used primarily to improve the format for the 'panel' `type` displays.
+</span>
+
+<span class=srp-propdef><code class=srp-label>hint:</code>Causes {@link /api/tri.object.Col#getHint col.getHint} to be invoked
+when {@link /api/tri.controller:ctrlCommEdit Edit Controller} displays the column.
+</span>
+
+<span class=srp-propdef><code class=srp-label>html????:</code>Used to override the automatically manufactured HTML to process a field. This names a standard or custom
+template that is injected into the HTML page.  The `????` value should be substituted with the mode= HTML parameter on the `macro` statement that
+is generating the array of columns (They are nested). In most cases the mode is 'Edit' but it can also be 'List' (the default) or 'Cust'.
+<br><br>
+`<macro col='oSubC' objref=oCol.objName mode='Edit' marker=mark-2a></macro>`
+<br><br>
+is an example in 'AppsBase.htm' of how a sub-template is injected.
+</span>
+
+<span class=srp-propdef><code class=srp-label>legend:</code>For `type` 'panel', causes the HTML element manufactured on behalf of the column to insert
+this value into the `<fieldset>` element.
+</span>
+
+<span class=srp-propdef><code class=srp-label>listHint:</code>Causes {@link /api/tri.object.Col#getListHint col.getListHint} to be invoked
+when {@link /api/tri.controller:ctrlCommList List Controller} displays the column.
+</span>
+
+
+<span class=srp-propdef><code class=srp-label>many:</code>Setting this property to 'false' causes the **Triangular** system to
+ensure the value of a field is unique across all rows of the `Table`.  The default for this is `true`.  This property only has meaning when the `type` property is 'field'.
+</span>
+
+<span class=srp-propdef><code class=srp-label>mask:</code>Setting this property to a quoted Regular Expression causes the
+{@link /api/tri.controller:ctrlCommEdit Editor} to ensure the field contents matches the mask as part of its validation cycle.
+<br>
+eg. `,mask:       '[A-Za-z\\s\.\-]'`
+</span>
+
+<span class=srp-propdef><code class=srp-label>meth????:</code>Used to reference a local function that is to be called by a template function.
+The **Triangular** system will ensure the method pointer is moved to the current scope.
+The sample syntax in the template
+to reference the function is
+<br><br>
+`<span ng-show='isTrue(oSubC.methHasSubcodes(this,$MODOBJ$,nRow))'>`
+<br><br>
+Refer to {@link /api/tri.directive:macro macro} to see how this is parsed.
+</span>
+
+<span class=srp-propdef><code class=srp-label>place:</code>Causes {@link /api/tri.object.Col#getPlace col.getPlace} to be invoked
+when {@link /api/tri.controller:ctrlCommEdit Edit Controller} displays the column. The result is inserted into the &LT;input ...> field as a
+`placeholder` attrribute.
+</span>
+
+<span class=srp-propdef><code class=srp-label>readonly:</code>Setting this property to 'true' causes the {@link /api/tri.controller:ctrlCommEdit Edit Controller}
+to prevent input into the field.  The default for this is `false`.
+<br><br>
+Setting this value to a local function name means the function will be called with a signature of
+`fn($scope,oCol)` which expects the value of `true` or `false` to be returned.  The object being edited is located at `$scope.oObj`.
+<br><br>
+This property only has meaning when the `type` property is 'field'.  Virtual fields (`type` == 'virt') automatically
+have a `readonly` status if the `showEdit:true` setting is applied to them.
+</span>
+
+<span class=srp-propdef><code class=srp-label>reqd:</code>Setting this value to `false` makes an input field optional.  Setting this property to `true` (the default if
+not specified) causes the **Triangular** system to ensure the field contains non-white space data during the validation cycle. ie.  The field is "required".
+<br><br>
+Setting this value to a numeric `n` where `n` > 0 causes **Triangular** to ensure the field contains at least `n` characters.
+</span>
+
+<span class=srp-propdef><code class=srp-label>schema:</code>Used in conjunction with `type` 'panel' or 'list', this value points at a locally referenced
+sub-schema that defines properties `base` and `cols`. The latter defines an array of columns according to this syntax specification.  Refer to 'Deps.js' as an example.
+</span>
+
+<span class=srp-propdef><code class=srp-label>showEdit:</code>Specify a value of `true` or `false`.  A `true` setting will cause the field to be shown on the
+{@link /api/tri.controller:ctrlCommEdit Edit Controller} display.
+<br><br>
+If not specified only `Col.type` values of 'field' are shown.
+<br><br>
+For `type` 'panel' this property points to a routine called when a sub-object is edited.  See 'Deps.js'
+</span>
+
+<span class=srp-propdef><code class=srp-label>showList:</code>Specify a value of `true` or `false`.  A `true` setting will cause the field to be shown on the
+{@link /api/tri.controller:ctrlCommList List Controller} display.
+<br><br>
+If not specified only `Col.type` values of 'field' or 'virt' or 'actions' are shown.</span>
+</span>
+
+<span class=srp-propdef><code class=srp-label>title:</code>A literal containing the string to display where the field name is to be shown.
+Typically this is {@link /api/tri.controller:ctrlCommList List Controller} heading or field name in the {@link /api/tri.controller:ctrlCommEdit Edit Controller}
+<br><br>
+If not specified **Triangular** will insert the function name or referenced field name.
+</span>
+
+<span class=srp-propdef><code class=srp-label>type:</code>This
+property defines the type of column.  Many internal routines use this `type` to alter their processing paths.  The possible value are:
+<br><br>
+<b>'actions'</b> The `actions` property names an array of {@link /guide/action Action Object}s.  Refer there to the meaning of the fields within the `actions` property.
+It is used to add 'actions' to the {@link /api/tri.controller:ctrlCommList List Controller} display.
+<br><br>
+Typically the `showEdit:false` accompanies this value.  The `addDefault:false` prevents **Triangular** from adding the default 'edit' and 'drop' actions.
+<br><br>
+<b>'field'</b> The `col` property references a field in the {@link /guide/data Data Object}.  If not defined, the `type` property is set to 'field' when `col` is a literal.
+<br><br>
+<b>'list'</b> The editor will show a sub-list of fields using the `col` referenced field as the array of sub-objects to list.  The `schema` property points at another
+array of `Col` definitions that define the sub-objects.  Typically `showEdit:true` and `showList:false` accompany this `type` value.
+<br><br>
+<b>'panel'</b> The editor will show display an internal panel used to edit a sub-object identified in the a sub-list of fields using the `col` referenced field as the array of sub-objects to list.  The `schema` property points at another
+array of `Col` definitions that define the sub-objects.
+<br><br>
+Typically `showEdit:true` and `showList:false` accompany this `type` value and `showEdit` names a function
+called at the initiation of the sub-edit.  In addition the properties `htmlCSS`, `cssid` and `legend` are inspected for values.
+<br><br>
+<b>'property'</b> The named `col` is a collection of properties such as those used in the {@link /guide/user User} record.
+<br><br>
+<b>'virt'</b> The `col` property references a local function that computes the column value.  If not defined, the `type` property is set to 'virt' when `col` is a function reference.
+</span>
+

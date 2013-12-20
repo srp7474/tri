@@ -1,0 +1,18 @@
+@ngdoc overview
+@name Guide: Macros
+@description
+### Overview
+The {@link /api/tri.directive:macro macro} directive of **Triangular** is key to the
+design and implementation of the {@link /guide/templates templates} that allow for the
+reuse of many HTML fragments stored either in the standard template library "AppBase.htm" of in the custom template section
+of an application such as "deps.htm".
+
+The {@link /api/tri.directive:macro macro} directive allows for multilevel insertion of HTML.  That is,
+a template being inserted can use the {@link /api/tri.directive:macro macro} facility to insert another level of HTML.
+
+The simple 'alter' capability allows for the easy reuse of templates with the ability to modify values that must be unique or reference other components.
+
+In addition the special $MODOBJ$ and $MODEL$ keywords allow for a convenient way to insert the current model object and model name
+into the inserted HTML.
+
+Refer also to {@link /guide/templates templates}.

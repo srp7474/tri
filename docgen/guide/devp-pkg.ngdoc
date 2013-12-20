@@ -1,0 +1,82 @@
+@ngdoc overview
+@name Guide: Development Package
+@description
+### Overview
+
+<span id="gaevariant"></span>
+The Development Package is a zip file called `tri-devp-pkg.zip` that once unzipped and installed provides a working **Triangular** environment to which new Applications can be added.
+This provides both the {@link /guide/variants GAE Variant} and the {@link /guide/variants Node.js Variant} support.
+
+<span id="nodejsvariant"></span>
+An alternative Development Package is a zip file called `tri-devp-pkg-node.zip` that once unzipped and installed provides a working **Triangular** environment
+to which new Applications can be added. This alternative supports only the {@link /guide/variants Node.js Variant}.
+
+The detailed steps for downloading and preparing the development environment are found at {@link /tutorial/step-01 01 Prepare Environment}
+
+### Downloading the zip file
+Both variants can be be downloaded from {@link /apps/zip-files Zip Files}.
+
+### Installing the Zip File
+Unzip the file `tri-devp-pkg.zip` or `tri-devp-pkg-node.zip` into a directory of your choice making sure the internal directory structure is maintained.  We will refer to it as `X:\tri-devp`
+
+### Testing the Zip File Install
+This description is relevant for Windows systems.  For alternate platforms the `.bat` will have to be ported to that platforms equivalent script.
+
+##### {@link /guide/variants GAE Variant}
+
+Position a command window at `X:\tri-devp\bats` and enter `run-ws`
+
+This should start the webserver on port 8882.
+
+Start the Chrome browser and goto URL `http://localhost:8882`
+
+The port can be changed by changing `run-ws.bat`.  Adjust other references to port 8882 in the Chrome browser URL and in the
+{@link /guide/waks#waksbaturls WAKS Utility}
+
+##### {@link /guide/variants Node.js Variant}
+
+Position a command window at `X:\tri-devp\bats` and enter `run-tri`
+
+This should start the webserver on port 8888.
+
+Start the Chrome browser and goto URL `http://localhost:8888`
+
+The port can be changed by changing `run-tri.bat`.  Adjust other references to port 8888 in the Chrome browser URL and in the
+{@link /guide/waks#waksbaturls WAKS Utility}
+
+##### {@link /guide/variants Both Variants}
+
+The window
+
+<img class=screen src=/img/hello-app50.JPG>
+
+should appear
+
+The testing of the Development Package is covered in greater detail in {@link /tutorial/step-02  02 Validate Environment}
+
+### Utility Folder
+
+The `bats` folder contains utility programs used in the development system.
+They will have to be adjusted in a non-windows platform. As other platform versions are contributed they will be added to this folder.
+Until the contribution happens it will be necessary at their usage points to adjust them to your platform.
+
+* `waks.bat` - See {@link /guide/waks WAKS Utility}
+
+##### {@link /guide/variants GAE Variant}
+
+* `run-ws.bat` - see {@link /tutorial/step-02#startingthelocalwebServer Starting the Local WebServer}
+* `appcfg.bat` - see {@link /tutorial/step-08 08 Upload to GAE Site}
+
+##### {@link /guide/variants Node.js Variant}
+* `run-tri.bat` - see {@link /tutorial/step-02#startingthelocalwebServer Starting the Local WebServer}
+
+### Demonstration Data
+
+Directory `X:\tri-devp\data` contains the raw data used to demo the apps.  It is included here to allow for learning through inspection
+and also to allow for re-uploads should it be necessary to reset the application data.  It is used with the {@link /guide/waks WAKS Utility}.
+
+### Icons
+Directory `X:\tri-devp\icons` contains the raw data used to build some of the icons used in **Triangular**
+
+
+

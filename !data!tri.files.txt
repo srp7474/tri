@@ -1,0 +1,3720 @@
+
+ Volume in drive H is HP03-H         Serial number is BF6F:B604
+ Directory of  H:\data\tri\*
+
+12/02/2013  10:25         <DIR>    bats
+10/20/2013  19:53         <DIR>    data
+12/20/2013   6:39         <DIR>    docgen
+11/01/2013   5:24         <DIR>    icons
+11/15/2013  18:28         <DIR>    keep
+11/01/2013   8:11         <DIR>    lib
+11/16/2013   7:30         <DIR>    node
+10/19/2013   7:57         <DIR>    prod
+10/17/2013   6:01         <DIR>    src
+12/02/2013  10:26         <DIR>    temp
+11/27/2013  16:57         <DIR>    variants
+12/02/2013   9:37         <DIR>    war
+12/20/2013   6:43               0  !data!tri.files.txt
+
+ Directory of  H:\data\tri\bats\*
+
+10/31/2013  18:05             945  appcfg.bat
+ 6/13/2013  17:28             558  appcfg.sh
+ 6/13/2013  17:28             636  dev_appserver.sh
+10/02/2013  18:09             170  get.bat
+12/11/2013   5:16               6  node-flag.txt
+12/02/2013   9:40             237  run-tri.bat
+11/28/2013  11:06           1,650  run-ws.bat
+10/17/2013  17:49              74  ugly.bat
+12/02/2013  10:25           3,920  waks.bat
+
+ Directory of  H:\data\tri\data\*
+
+10/14/2013  20:51              85  $-chqs-guest.json.txt
+10/14/2013   6:44          37,589  chqs-chqs-2013-demo.json.txt
+10/05/2013   3:57          14,255  chqs-coa-cit.json.txt
+10/14/2013   6:44           6,612  chqs-suppliers-cit.json.txt
+10/14/2013   9:07             147  deps-dep-2013-06-30.ES1.CND.dp1.json.txt
+10/14/2013   9:07             649  deps-dep-2013-06-30.ES1.CND.dp2.json.txt
+10/14/2013   9:07           3,783  deps-dep-2013-06-30.ES1.CND.dp3.json.txt
+10/14/2013   9:07           2,874  deps-dep-2013-07-07.ES1.CND.dp3.json.txt
+10/14/2013   9:07             646  deps-dep-2013-07-07.TST.CND.dp1.json.txt
+10/14/2013   9:07             950  deps-dep-2013-07-07.TST.CND.dp2.json.txt
+10/14/2013   9:07           4,972  deps-dep-2013-07-14.ES1.CND.dp1.json.txt
+10/14/2013   9:07           3,432  deps-dep-2013-07-21.ES1.CND.dp1.json.txt
+10/14/2013   9:07             975  deps-dep-2013-07-25.TST.CND.dp1.json.txt
+10/14/2013   9:07           4,310  deps-dep-2013-07-28.ES1.CND.dp1.json.txt
+10/14/2013   9:07           6,334  deps-dep-2013-08-04.ES1.CND.dp1.json.txt
+10/14/2013   9:07           6,308  deps-dep-2013-08-11.CSC.CND.dp3.json.txt
+10/14/2013   9:07           5,810  deps-dep-2013-08-11.ES1.CND.dp1.json.txt
+10/14/2013   9:07             412  deps-dep-2013-08-11.ES1.CND.dp2.json.txt
+10/14/2013   9:07             434  deps-dep-2013-08-17.ES1.USD.dp1.json.txt
+10/14/2013   9:07             461  deps-dep-2013-08-18.CSC.BKS.dp3.json.txt
+10/14/2013   9:07           7,201  deps-dep-2013-08-18.CSC.CND.dp2.json.txt
+10/14/2013   9:07           4,351  deps-dep-2013-08-18.ES1.CND.dp1.json.txt
+10/14/2013   9:07           5,786  deps-dep-2013-08-25.CSC.CND.dp1.json.txt
+10/14/2013   9:07           2,648  deps-dep-2013-08-25.CSC.CND.dp2.json.txt
+10/14/2013   9:07           4,190  deps-dep-2013-09-01.CSC.CND.dp2.json.txt
+10/14/2013   9:07           5,086  deps-dep-2013-09-01.ES1.CND.dp1.json.txt
+10/14/2013   9:07           2,822  deps-dep-2013-09-08.CSC.CND.dp1.json.txt
+10/14/2013   9:07           6,276  deps-dep-2013-09-15.CSC.CND.dp2.json.txt
+10/14/2013   9:07           5,128  deps-dep-2013-09-15.ES1.CND.dp1.json.txt
+10/14/2013   9:07           7,639  deps-dep-2013-09-22.CSC.CND.dp1.json.txt
+10/14/2013   9:07             467  deps-dep-2013-09-29.CSC.BKS.dp4.json.txt
+10/14/2013   9:07           5,268  deps-dep-2013-09-29.CSC.CND.dp3.json.txt
+10/14/2013   9:07           3,627  deps-dep-2013-09-29.ES1.CND.dp1.json.txt
+10/14/2013   9:07           9,610  deps-dep-2013-09-29.ES1.CND.dp2.json.txt
+10/14/2013   6:33          64,048  deps-donor-donor0.json.txt
+10/14/2013   6:33          65,788  deps-donor-donor1.json.txt
+10/14/2013   6:33          17,402  deps-donor-donor2.json.txt
+10/14/2013   6:53             403  deps-env-envs.json.txt
+10/30/2013   6:29          21,230  msgs-msg-messages.json.txt
+
+ Directory of  H:\data\tri\docgen\*
+
+12/20/2013   6:29         <DIR>    api
+12/20/2013   6:29         <DIR>    apps
+12/20/2013   6:41         <DIR>    docs
+12/20/2013   6:29         <DIR>    guide
+12/20/2013   6:28         <DIR>    node_modules
+12/20/2013   6:28         <DIR>    overview
+12/20/2013   6:28         <DIR>    tutorial
+ 8/24/2013  18:27              10  autorun.cmd
+ 9/12/2013  14:38              26  FpCheckLog.txt
+12/20/2013   6:39           2,516  GruntFile.js
+ 8/24/2013  14:55             111  index.html
+10/08/2013  17:17           2,006  navTemplate.html
+ 8/22/2013  21:18             377  package.json
+ 8/24/2013  19:41              49  run-ws-obsolete.bat
+12/20/2013   6:39              10  VerStr.txt
+ 9/28/2013  19:53           6,799  web-server.js
+
+ Directory of  H:\data\tri\docgen\api\*
+
+ 9/29/2013   5:11             410  index.ngdoc
+
+ Directory of  H:\data\tri\docgen\apps\*
+
+11/01/2013   5:35           1,787  browser.ngdoc
+11/04/2013   6:32          71,521  chqs-app.ngdoc
+11/04/2013   6:32         124,712  deps-app.ngdoc
+11/27/2013   8:50          36,049  hello-app.ngdoc
+11/27/2013  20:13          24,632  helloui-app.ngdoc
+11/04/2013   6:32           1,586  index.ngdoc
+10/24/2013  16:08           2,353  src-files.ngdoc
+11/29/2013   9:56           4,899  zip-files.ngdoc
+
+ Directory of  H:\data\tri\docgen\docs\*
+
+12/20/2013   6:29         <DIR>    apps
+12/20/2013   6:29         <DIR>    css
+12/20/2013   6:29         <DIR>    font
+12/20/2013   6:29         <DIR>    grunt-scripts
+12/20/2013   6:41         <DIR>    img
+12/20/2013   6:29         <DIR>    js
+12/20/2013   6:29         <DIR>    partials
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/12/2013  21:27           1,150  favicon.ico
+12/20/2013   6:39          11,688  index.html
+10/29/2013  15:40          11,688  index0.html
+ 8/24/2013  19:41              49  run-ws.bat
+10/13/2013   5:36             968  SrcDisplay.html
+ 8/23/2013  16:35           6,797  web-server.js
+
+ Directory of  H:\data\tri\docgen\docs\apps\*
+
+10/21/2013  16:34           2,107  FormHello.htm
+10/21/2013  15:37           2,145  FormHello.js
+10/21/2013  16:29           2,872  Hello.htm
+10/21/2013  16:02           6,733  Hello.js
+
+ Directory of  H:\data\tri\docgen\docs\css\*
+
+10/19/2013   4:19           1,651  animations.css
+10/19/2013   4:19         127,352  bootstrap.min.css
+10/30/2013   4:31           4,627  docs-3a30.css
+10/22/2013   3:29           3,737  docs-save.css
+11/04/2013   5:53           4,687  docs.css
+10/19/2013   4:19           2,702  doc_widgets.css
+10/19/2013   4:19          23,644  font-awesome.css
+
+ Directory of  H:\data\tri\docgen\docs\font\*
+
+10/19/2013   4:19          29,360  fontawesome-webfont.eot
+10/19/2013   4:19         162,047  fontawesome-webfont.svg
+10/19/2013   4:19          64,960  fontawesome-webfont.ttf
+10/19/2013   4:19          34,420  fontawesome-webfont.woff
+10/19/2013   4:19          50,204  FontAwesome.otf
+
+ Directory of  H:\data\tri\docgen\docs\grunt-scripts\*
+
+12/20/2013   6:39          80,816  TRI.min.js
+12/20/2013   6:39           7,785  ut.js
+
+ Directory of  H:\data\tri\docgen\docs\img\*
+
+10/17/2013   8:20          36,509  add-admin-user50.JPG
+10/30/2013  17:37          24,543  admin-page50.JPG
+10/30/2013  17:35          25,552  admin-user-login50.JPG
+10/17/2013  19:27          26,940  deps-app50.JPG
+11/01/2013   5:19           1,150  fav-t1w.ico
+10/30/2013  10:21          25,635  hello-app50.JPG
+10/17/2013   8:21          36,659  needs-prime50.JPG
+10/30/2013  17:44          40,932  super-page50.JPG
+10/17/2013   8:22          28,944  super-user-login50.JPG
+
+ Directory of  H:\data\tri\docgen\docs\js\*
+
+10/19/2013   4:19          19,508  angular-bootstrap-prettify.min.js
+10/19/2013   4:19           2,704  angular-bootstrap.min.js
+10/19/2013   4:19          88,802  angular.min.js
+10/19/2013   5:42          22,801  docs-save.js
+10/24/2013   5:53          24,772  docs-save2.js
+12/20/2013   6:39         112,309  docs-setup.js
+11/28/2013   6:54          28,266  docs.js
+10/12/2013   8:12             959  src-display.js
+
+ Directory of  H:\data\tri\docgen\docs\partials\*
+
+12/20/2013   6:29         <DIR>    api
+12/20/2013   6:29         <DIR>    apps
+12/20/2013   6:29         <DIR>    guide
+12/20/2013   6:29         <DIR>    overview
+12/20/2013   6:29         <DIR>    tutorial
+
+ Directory of  H:\data\tri\docgen\docs\partials\api\*
+
+12/20/2013   6:39             470  index.html
+12/20/2013   6:39          20,140  tri.controller.ctrlCommEdit.html
+12/20/2013   6:39          14,443  tri.controller.ctrlCommList.html
+12/20/2013   6:39           7,936  tri.controller.ctrlMenu.html
+12/20/2013   6:39           6,408  tri.controller.ctrlSect.html
+12/20/2013   6:39           4,463  tri.controller.ctrlSess.html
+12/20/2013   6:39           3,318  tri.directive.autocomplete.html
+12/20/2013   6:39           2,137  tri.directive.autotab.html
+12/20/2013   6:39           1,779  tri.directive.blurEvent.html
+12/20/2013   6:39           1,573  tri.directive.focusClear.html
+12/20/2013   6:39           4,101  tri.directive.macro.html
+12/20/2013   6:39           1,694  tri.directive.scopeVar.html
+12/20/2013   6:39           1,761  tri.directive.whenActive.html
+12/20/2013   6:39             168  tri.html
+12/20/2013   6:39           2,393  tri.method.hookMsgListener.html
+12/20/2013   6:39           6,879  tri.object.Col.html
+12/20/2013   6:39           2,191  tri.object.Filter.html
+12/20/2013   6:39           5,128  tri.object.Table.html
+12/20/2013   6:39           7,241  tri.object.Tri.html
+12/20/2013   6:39           1,171  tri.property.oGBL.html
+12/20/2013   6:39           2,082  tri.servConfig.html
+12/20/2013   6:39          16,846  tri.servCRUD.html
+12/20/2013   6:39          18,742  tri.servGAE.html
+12/20/2013   6:39          17,063  tri.servREC.html
+12/20/2013   6:39           1,554  tri.servREG.html
+12/20/2013   6:39          24,726  tri.servSess.html
+12/20/2013   6:39           2,658  tri.servTBL.html
+
+ Directory of  H:\data\tri\docgen\docs\partials\apps\*
+
+12/20/2013   6:39           1,840  browser.html
+12/20/2013   6:39          76,329  chqs-app.html
+12/20/2013   6:39         130,983  deps-app.html
+12/20/2013   6:39          43,318  hello-app.html
+12/20/2013   6:39          26,386  helloui-app.html
+12/20/2013   6:39           1,945  index.html
+12/20/2013   6:39           2,438  src-files.html
+12/20/2013   6:39           5,101  zip-files.html
+
+ Directory of  H:\data\tri\docgen\docs\partials\guide\*
+
+12/20/2013   6:39           3,623  action.html
+12/20/2013   6:39           2,812  admin.html
+12/20/2013   6:39           4,301  appname-html.html
+12/20/2013   6:39           3,756  appname-js.html
+12/20/2013   6:39           2,052  appsconfig.html
+12/20/2013   6:39           1,832  bootstrap.html
+12/20/2013   6:39          12,636  col.html
+12/20/2013   6:39          31,774  construct.html
+12/20/2013   6:39           1,301  data.html
+12/20/2013   6:39           4,296  dataprime.html
+12/20/2013   6:39           3,062  datastore-node.html
+12/20/2013   6:39           1,588  datastore.html
+12/20/2013   6:39           5,965  develop.html
+12/20/2013   6:39           4,559  devp-pkg.html
+12/20/2013   6:39           1,029  directives.html
+12/20/2013   6:39           1,611  disp-page-design.html
+12/20/2013   6:39           4,192  filter.html
+12/20/2013   6:39           1,670  form-page-design.html
+12/20/2013   6:39             515  gaesite.html
+12/20/2013   6:39           1,295  ganalytics.html
+12/20/2013   6:39          10,883  hints-tech.html
+12/20/2013   6:39           3,151  index.html
+12/20/2013   6:39           1,112  macros.html
+12/20/2013   6:39           1,798  multi-window-apps.html
+12/20/2013   6:39             788  node-server.html
+12/20/2013   6:39             679  nodesite.html
+12/20/2013   6:39             680  outstanding.html
+12/20/2013   6:39           9,805  records.html
+12/20/2013   6:39           1,673  sandbox.html
+12/20/2013   6:39          17,822  server-inter.html
+12/20/2013   6:39          22,322  table.html
+12/20/2013   6:39           3,340  templates.html
+12/20/2013   6:39           4,558  user.html
+12/20/2013   6:39           3,904  userid-rec.html
+12/20/2013   6:39           1,147  variants.html
+12/20/2013   6:39           7,721  waks.html
+
+ Directory of  H:\data\tri\docgen\docs\partials\overview\*
+
+12/20/2013   6:39           1,240  history.html
+12/20/2013   6:39           9,298  index.html
+12/20/2013   6:39           4,224  landmarks.html
+
+ Directory of  H:\data\tri\docgen\docs\partials\tutorial\*
+
+12/20/2013   6:39           4,582  index.html
+12/20/2013   6:39           3,871  step-01.html
+12/20/2013   6:39           4,835  step-02.html
+12/20/2013   6:39           5,426  step-03.html
+12/20/2013   6:39           2,663  step-04.html
+12/20/2013   6:39           2,957  step-05.html
+12/20/2013   6:39           5,432  step-06.html
+12/20/2013   6:39           1,662  step-07.html
+12/20/2013   6:39           3,375  step-08.html
+12/20/2013   6:39           2,111  step-09.html
+12/20/2013   6:39           3,496  step-10.html
+
+ Directory of  H:\data\tri\docgen\guide\*
+
+ 9/28/2013  19:53           3,300  action.ngdoc
+10/16/2013   4:58           2,542  admin.ngdoc
+10/19/2013   4:13           3,599  appname-html.ngdoc
+11/04/2013   6:32           3,255  appname-js.ngdoc
+10/17/2013  18:10           1,849  appsconfig.ngdoc
+11/02/2013   8:36           1,603  bootstrap.ngdoc
+11/04/2013   6:32          11,203  col.ngdoc
+11/30/2013   9:14          31,204  construct.ngdoc
+11/04/2013   6:32           1,156  data.ngdoc
+11/17/2013  18:24           3,758  dataprime.ngdoc
+12/01/2013  18:04           2,659  datastore-node.ngdoc
+11/17/2013  17:39           1,425  datastore.ngdoc
+12/03/2013   7:44           5,363  develop.ngdoc
+12/01/2013  18:12           3,652  devp-pkg.ngdoc
+11/04/2013   6:32             898  directives.ngdoc
+10/17/2013  18:17           1,477  disp-page-design.ngdoc
+10/16/2013   4:58           3,708  filter.ngdoc
+11/04/2013   6:32           1,492  form-page-design.ngdoc
+11/17/2013  17:47             433  gaesite.ngdoc
+10/27/2013  16:38           1,131  ganalytics.ngdoc
+11/29/2013  18:39           8,932  hints-tech.ngdoc
+11/05/2013   6:57           2,973  index.ngdoc
+10/16/2013   4:58           1,000  macros.ngdoc
+11/04/2013   6:32           1,627  multi-window-apps.ngdoc
+ 8/29/2013   8:45             142  new-template.bat
+11/26/2013  16:42             644  node-server.ngdoc
+11/15/2013  16:25             610  nodesite.ngdoc
+10/30/2013   5:30             583  outstanding.ngdoc
+11/07/2013  17:26           8,656  records.ngdoc
+10/15/2013  16:31           1,412  sandbox.ngdoc
+11/26/2013  16:44          16,277  server-inter.ngdoc
+11/28/2013   9:20          20,088  table.ngdoc
+10/23/2013   6:21           2,731  templates.ngdoc
+11/02/2013   6:04           4,240  user.ngdoc
+11/27/2013   6:04           3,338  userid-rec.ngdoc
+12/01/2013  18:18             992  variants.ngdoc
+11/29/2013  10:23           6,288  waks.ngdoc
+
+ Directory of  H:\data\tri\docgen\node_modules\*
+
+12/20/2013   6:29         <DIR>    grunt
+12/20/2013   6:28         <DIR>    grunt-ngdocs
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\*
+
+12/20/2013   6:29         <DIR>    docs
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    node_modules
+12/20/2013   6:28         <DIR>    test
+ 8/22/2013  21:11              32  .npmignore
+ 8/22/2013  21:11              79  .travis.yml
+ 8/22/2013  21:11             162  AUTHORS
+ 8/22/2013  21:11           1,392  CHANGELOG
+ 8/22/2013  21:11             127  CONTRIBUTING.md
+ 8/22/2013  21:11             387  custom-gruntfile.js
+ 8/22/2013  21:11           2,259  Gruntfile.js
+ 8/22/2013  21:11           1,062  LICENSE-MIT
+ 8/22/2013  21:11           2,487  package.json
+ 8/22/2013  21:11             516  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\docs\*
+
+ 8/22/2013  21:11              72  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\lib\*
+
+12/20/2013   6:29         <DIR>    grunt
+12/20/2013   6:29         <DIR>    util
+ 8/22/2013  21:11           4,674  grunt.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\lib\grunt\*
+
+ 8/22/2013  21:11           3,461  cli.js
+ 8/22/2013  21:11           3,771  config.js
+ 8/22/2013  21:11             338  event.js
+ 8/22/2013  21:11           2,137  fail.js
+ 8/22/2013  21:11          14,150  file.js
+ 8/22/2013  21:11           3,362  help.js
+ 8/22/2013  21:11           9,929  log.js
+ 8/22/2013  21:11             977  option.js
+ 8/22/2013  21:11          15,558  task.js
+ 8/22/2013  21:11           3,342  template.js
+ 8/22/2013  21:11           5,850  util.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\lib\util\*
+
+ 8/22/2013  21:11             627  exit.js
+ 8/22/2013  21:11           1,639  namespace.js
+ 8/22/2013  21:11          10,809  task.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\*
+
+12/20/2013   6:29         <DIR>    .bin
+12/20/2013   6:29         <DIR>    async
+12/20/2013   6:29         <DIR>    coffee-script
+12/20/2013   6:29         <DIR>    colors
+12/20/2013   6:29         <DIR>    dateformat
+12/20/2013   6:29         <DIR>    eventemitter2
+12/20/2013   6:29         <DIR>    findup-sync
+12/20/2013   6:29         <DIR>    glob
+12/20/2013   6:29         <DIR>    hooker
+12/20/2013   6:29         <DIR>    iconv-lite
+12/20/2013   6:29         <DIR>    js-yaml
+12/20/2013   6:29         <DIR>    lodash
+12/20/2013   6:29         <DIR>    minimatch
+12/20/2013   6:29         <DIR>    nopt
+12/20/2013   6:29         <DIR>    rimraf
+12/20/2013   6:28         <DIR>    underscore.string
+12/20/2013   6:28         <DIR>    which
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\.bin\*
+
+ 8/22/2013  21:11             284  cake
+ 8/22/2013  21:11             145  cake.cmd
+ 8/22/2013  21:11             288  coffee
+ 8/22/2013  21:11             149  coffee.cmd
+ 8/22/2013  21:11             284  js-yaml
+ 8/22/2013  21:11             145  js-yaml.cmd
+ 8/22/2013  21:11             270  lodash
+ 8/22/2013  21:11             131  lodash.cmd
+ 8/22/2013  21:11             272  nopt
+ 8/22/2013  21:11             133  nopt.cmd
+ 8/22/2013  21:11             270  which
+ 8/22/2013  21:11             131  which.cmd
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\async\*
+
+12/20/2013   6:29         <DIR>    lib
+ 8/22/2013  21:11             283  .gitmodules
+ 8/22/2013  21:11              27  .npmignore
+ 8/22/2013  21:11             163  index.js
+ 8/22/2013  21:11           1,058  LICENSE
+ 8/22/2013  21:11             542  Makefile
+ 8/22/2013  21:11          33,994  package.json
+ 8/22/2013  21:11          32,218  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\async\lib\*
+
+ 8/22/2013  21:11          21,183  async.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\coffee-script\*
+
+12/20/2013   6:29         <DIR>    bin
+12/20/2013   6:29         <DIR>    extras
+12/20/2013   6:29         <DIR>    lib
+ 8/22/2013  21:11             106  .npmignore
+ 8/22/2013  21:11              16  CNAME
+ 8/22/2013  21:11           1,063  LICENSE
+ 8/22/2013  21:11           2,919  package.json
+ 8/22/2013  21:11           2,252  Rakefile
+ 8/22/2013  21:11           1,864  README
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\coffee-script\bin\*
+
+ 8/22/2013  21:11             195  cake
+ 8/22/2013  21:11             198  coffee
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\coffee-script\extras\*
+
+ 8/22/2013  21:11           3,532  jsl.conf
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\coffee-script\lib\*
+
+12/20/2013   6:29         <DIR>    coffee-script
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\coffee-script\lib\coffee-script\*
+
+ 8/22/2013  21:11           2,336  browser.js
+ 8/22/2013  21:11           2,970  cake.js
+ 8/22/2013  21:11           4,831  coffee-script.js
+ 8/22/2013  21:11          15,442  command.js
+ 8/22/2013  21:11          18,271  grammar.js
+ 8/22/2013  21:11           1,752  helpers.js
+ 8/22/2013  21:11             196  index.js
+ 8/22/2013  21:11          25,508  lexer.js
+ 8/22/2013  21:11          92,328  nodes.js
+ 8/22/2013  21:11           4,100  optparse.js
+ 8/22/2013  21:11         110,524  parser.js
+ 8/22/2013  21:11           6,874  repl.js
+ 8/22/2013  21:11          13,224  rewriter.js
+ 8/22/2013  21:11           3,736  scope.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\colors\*
+
+12/20/2013   6:29         <DIR>    themes
+ 8/22/2013  21:11          10,646  colors.js
+ 8/22/2013  21:11           2,551  example.html
+ 8/22/2013  21:11           2,423  example.js
+ 8/22/2013  21:11           1,085  MIT-LICENSE.txt
+ 8/22/2013  21:11           1,987  package.json
+ 8/22/2013  21:11           1,299  ReadMe.md
+ 8/22/2013  21:11           2,138  test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\colors\themes\*
+
+ 8/22/2013  21:11             198  winston-dark.js
+ 8/22/2013  21:11             197  winston-light.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\dateformat\*
+
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11           2,795  package.json
+ 8/22/2013  21:11           2,151  Readme.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\dateformat\lib\*
+
+ 8/22/2013  21:11           5,180  dateformat.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\dateformat\test\*
+
+ 8/22/2013  21:11             127  test_weekofyear.js
+ 8/22/2013  21:11             757  test_weekofyear.sh
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\eventemitter2\*
+
+12/20/2013   6:29         <DIR>    lib
+ 8/22/2013  21:11              49  index.js
+ 8/22/2013  21:11           8,851  package.json
+ 8/22/2013  21:11           7,285  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\eventemitter2\lib\*
+
+ 8/22/2013  21:11          16,214  eventemitter2.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\*
+
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    node_modules
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11             244  .jshintrc
+ 8/22/2013  21:11               0  .npmignore
+ 8/22/2013  21:11             495  Gruntfile.js
+ 8/22/2013  21:11           1,062  LICENSE-MIT
+ 8/22/2013  21:11           2,511  package.json
+ 8/22/2013  21:11           1,339  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\lib\*
+
+ 8/22/2013  21:11           1,330  findup-sync.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\*
+
+12/20/2013   6:29         <DIR>    .bin
+12/20/2013   6:29         <DIR>    lodash
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\.bin\*
+
+ 8/22/2013  21:11             270  lodash
+ 8/22/2013  21:11             131  lodash.cmd
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\*
+
+12/20/2013   6:29         <DIR>    build
+12/20/2013   6:29         <DIR>    dist
+12/20/2013   6:29         <DIR>    doc
+12/20/2013   6:29         <DIR>    perf
+12/20/2013   6:29         <DIR>    test
+12/20/2013   6:29         <DIR>    vendor
+ 8/22/2013  21:11          89,822  build.js
+ 8/22/2013  21:11              37  index.js
+ 8/22/2013  21:11           1,205  LICENSE.txt
+ 8/22/2013  21:11         166,671  lodash.js
+ 8/22/2013  21:11          14,412  package.json
+ 8/22/2013  21:11          12,873  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\build\*
+
+ 8/22/2013  21:11          23,436  minify.js
+ 8/22/2013  21:11           2,597  post-compile.js
+ 8/22/2013  21:11          10,360  pre-compile.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\dist\*
+
+ 8/22/2013  21:11         165,560  lodash.compat.js
+ 8/22/2013  21:11          20,921  lodash.compat.min.js
+ 8/22/2013  21:11         159,211  lodash.js
+ 8/22/2013  21:11          19,265  lodash.min.js
+ 8/22/2013  21:11         135,207  lodash.underscore.js
+ 8/22/2013  21:11          15,201  lodash.underscore.min.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\doc\*
+
+ 8/22/2013  21:11         109,311  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\perf\*
+
+ 8/22/2013  21:11          47,750  perf.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\test\*
+
+12/20/2013   6:29         <DIR>    template
+ 8/22/2013  21:11          39,749  test-build.js
+ 8/22/2013  21:11          81,652  test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\test\template\*
+
+ 8/22/2013  21:11              80  a.jst
+ 8/22/2013  21:11              33  b.jst
+ 8/22/2013  21:11              16  c.jst
+ 8/22/2013  21:11              17  d.tpl
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\*
+
+12/20/2013   6:29         <DIR>    benchmark.js
+12/20/2013   6:29         <DIR>    platform.js
+12/20/2013   6:29         <DIR>    qunit
+12/20/2013   6:29         <DIR>    qunit-clib
+12/20/2013   6:29         <DIR>    tar
+12/20/2013   6:29         <DIR>    underscore
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\benchmark.js\*
+
+ 8/22/2013  21:11         114,950  benchmark.js
+ 8/22/2013  21:11           1,211  LICENSE.txt
+ 8/22/2013  21:11           3,918  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\platform.js\*
+
+ 8/22/2013  21:11           1,089  LICENSE.txt
+ 8/22/2013  21:11          31,814  platform.js
+ 8/22/2013  21:11           2,992  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\qunit\*
+
+12/20/2013   6:29         <DIR>    qunit
+ 8/22/2013  21:11           2,639  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\qunit\qunit\*
+
+ 8/22/2013  21:11          56,908  qunit.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\qunit-clib\*
+
+ 8/22/2013  21:11           1,089  LICENSE.txt
+ 8/22/2013  21:11           8,338  qunit-clib.js
+ 8/22/2013  21:11           1,757  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\*
+
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    vendor
+ 8/22/2013  21:11           1,488  README.md
+ 8/22/2013  21:11           4,098  tar.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\lib\*
+
+ 8/22/2013  21:11             826  buffer-entry.js
+ 8/22/2013  21:11           3,796  entry-writer.js
+ 8/22/2013  21:11           5,252  entry.js
+ 8/22/2013  21:11           5,408  extended-header-writer.js
+ 8/22/2013  21:11           3,564  extended-header.js
+ 8/22/2013  21:11           2,141  extract.js
+ 8/22/2013  21:11             410  global-header-writer.js
+ 8/22/2013  21:11          11,034  header.js
+ 8/22/2013  21:11           5,547  pack.js
+ 8/22/2013  21:11           6,858  parse.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\*
+
+12/20/2013   6:29         <DIR>    block-stream
+12/20/2013   6:29         <DIR>    fstream
+12/20/2013   6:29         <DIR>    graceful-fs
+12/20/2013   6:29         <DIR>    inherits
+12/20/2013   6:29         <DIR>    mkdirp
+12/20/2013   6:29         <DIR>    rimraf
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\block-stream\*
+
+ 8/22/2013  21:11           6,570  block-stream.js
+ 8/22/2013  21:11           1,318  LICENCE
+ 8/22/2013  21:11             369  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\fstream\*
+
+12/20/2013   6:29         <DIR>    lib
+ 8/22/2013  21:11           1,120  fstream.js
+ 8/22/2013  21:11           1,318  LICENCE
+ 8/22/2013  21:11           2,345  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\fstream\lib\*
+
+ 8/22/2013  21:11           2,228  abstract.js
+ 8/22/2013  21:11           1,652  collect.js
+ 8/22/2013  21:11           6,439  dir-reader.js
+ 8/22/2013  21:11           4,549  dir-writer.js
+ 8/22/2013  21:11           3,906  file-reader.js
+ 8/22/2013  21:11           2,218  file-writer.js
+ 8/22/2013  21:11             632  get-type.js
+ 8/22/2013  21:11           1,587  link-reader.js
+ 8/22/2013  21:11           2,843  link-writer.js
+ 8/22/2013  21:11           2,005  proxy-reader.js
+ 8/22/2013  21:11           2,424  proxy-writer.js
+ 8/22/2013  21:11           6,983  reader.js
+ 8/22/2013  21:11           1,037  socket-reader.js
+ 8/22/2013  21:11          10,732  writer.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\graceful-fs\*
+
+ 8/22/2013  21:11           7,834  graceful-fs.js
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11             184  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\inherits\*
+
+ 8/22/2013  21:11             862  inherits.js
+ 8/22/2013  21:11           1,109  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\mkdirp\*
+
+ 8/22/2013  21:11           2,371  index.js
+ 8/22/2013  21:11           1,141  LICENSE
+ 8/22/2013  21:11           1,190  README.markdown
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\tar\vendor\rimraf\*
+
+ 8/22/2013  21:11             235  AUTHORS
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11             540  README.md
+ 8/22/2013  21:11           3,533  rimraf.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\node_modules\lodash\vendor\underscore\*
+
+ 8/22/2013  21:11           1,079  LICENSE
+ 8/22/2013  21:11           1,137  README.md
+ 8/22/2013  21:11          41,417  underscore.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\test\*
+
+12/20/2013   6:29         <DIR>    fixtures
+ 8/22/2013  21:11           2,509  findup-sync_test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\test\fixtures\*
+
+12/20/2013   6:29         <DIR>    a 
+ 8/22/2013  21:11               0  a.txt
+ 8/22/2013  21:11               0  aaa.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\test\fixtures\a\*
+
+12/20/2013   6:29         <DIR>    b 
+ 8/22/2013  21:11               0  foo.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\findup-sync\test\fixtures\a\b\*
+
+ 8/22/2013  21:11               0  bar.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\*
+
+12/20/2013   6:29         <DIR>    examples
+12/20/2013   6:29         <DIR>    node_modules
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11              15  .npmignore
+ 8/22/2013  21:11              35  .travis.yml
+ 8/22/2013  21:11          17,492  glob.js
+ 8/22/2013  21:11           1,310  LICENSE
+ 8/22/2013  21:11          10,081  package.json
+ 8/22/2013  21:11           9,042  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\examples\*
+
+ 8/22/2013  21:11             228  g.js
+ 8/22/2013  21:11             218  usr-local.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\node_modules\*
+
+12/20/2013   6:29         <DIR>    graceful-fs
+12/20/2013   6:29         <DIR>    inherits
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\node_modules\graceful-fs\*
+
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11              14  .npmignore
+ 8/22/2013  21:11          10,864  graceful-fs.js
+ 8/22/2013  21:11           1,310  LICENSE
+ 8/22/2013  21:11           2,186  package.json
+ 8/22/2013  21:11           1,228  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\node_modules\graceful-fs\test\*
+
+ 8/22/2013  21:11           1,110  open.js
+ 8/22/2013  21:11           3,699  ulimit.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\node_modules\inherits\*
+
+ 8/22/2013  21:11             862  inherits.js
+ 8/22/2013  21:11           1,791  package.json
+ 8/22/2013  21:11           1,109  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\glob\test\*
+
+ 8/22/2013  21:11           4,298  00-setup.js
+ 8/22/2013  21:11           1,746  bash-comparison.js
+ 8/22/2013  21:11          30,162  bash-results.json
+ 8/22/2013  21:11           1,187  cwd-test.js
+ 8/22/2013  21:11           1,744  mark.js
+ 8/22/2013  21:11           2,412  nocase-nomagic.js
+ 8/22/2013  21:11           1,950  pause-resume.js
+ 8/22/2013  21:11           1,028  root-nomount.js
+ 8/22/2013  21:11           1,119  root.js
+ 8/22/2013  21:11             251  zz-cleanup.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\hooker\*
+
+12/20/2013   6:29         <DIR>    dist
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11           3,175  child.js
+ 8/22/2013  21:11           1,143  grunt.js
+ 8/22/2013  21:11           1,062  LICENSE-MIT
+ 8/22/2013  21:11           7,065  package.json
+ 8/22/2013  21:11             438  parent.js
+ 8/22/2013  21:11           5,875  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\hooker\dist\*
+
+ 8/22/2013  21:11           6,490  ba-hooker.js
+ 8/22/2013  21:11           1,292  ba-hooker.min.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\hooker\lib\*
+
+ 8/22/2013  21:11           6,536  hooker.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\hooker\test\*
+
+ 8/22/2013  21:11          20,177  hooker_test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\iconv-lite\*
+
+12/20/2013   6:29         <DIR>    encodings
+12/20/2013   6:29         <DIR>    generation
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11              27  .npmignore
+ 8/22/2013  21:11              56  .travis.yml
+ 8/22/2013  21:11           7,573  index.js
+ 8/22/2013  21:11           1,064  LICENSE
+ 8/22/2013  21:11           4,229  package.json
+ 8/22/2013  21:11           2,477  README.md
+ 8/22/2013  21:11           1,678  README.md~
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\iconv-lite\encodings\*
+
+12/20/2013   6:29         <DIR>    table
+ 8/22/2013  21:11             156  big5.js
+ 8/22/2013  21:11             151  gbk.js
+ 8/22/2013  21:11          21,389  singlebyte.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\iconv-lite\encodings\table\*
+
+ 8/22/2013  21:11         276,086  big5.js
+ 8/22/2013  21:11         286,756  gbk.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\iconv-lite\generation\*
+
+ 8/22/2013  21:11             787  generate-big5-table.js
+ 8/22/2013  21:11           3,745  generate-singlebyte.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\iconv-lite\test\*
+
+ 8/22/2013  21:11           2,076  big5-test.js
+ 8/22/2013  21:11             255  big5File.txt
+ 8/22/2013  21:11           5,407  cyrillic-test.js
+ 8/22/2013  21:11           2,075  gbk-test.js
+ 8/22/2013  21:11           6,878  gbkFile.txt
+ 8/22/2013  21:11           4,165  greek-test.js
+ 8/22/2013  21:11           3,077  main-test.js
+ 8/22/2013  21:11           2,001  performance.js
+ 8/22/2013  21:11           4,587  turkish-test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\*
+
+12/20/2013   6:29         <DIR>    bin
+12/20/2013   6:29         <DIR>    examples
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    node_modules
+ 8/22/2013  21:11           3,415  HISTORY.md
+ 8/22/2013  21:11              46  index.js
+ 8/22/2013  21:11           1,085  LICENSE
+ 8/22/2013  21:11           8,180  package.json
+ 8/22/2013  21:11           6,602  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\bin\*
+
+ 8/22/2013  21:11           2,410  js-yaml.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\examples\*
+
+ 8/22/2013  21:11           2,695  custom_types.js
+ 8/22/2013  21:11             295  custom_types.yaml
+ 8/22/2013  21:11             600  dumper.js
+ 8/22/2013  21:11             422  dumper.json
+ 8/22/2013  21:11             274  sample_document.js
+ 8/22/2013  21:11           5,469  sample_document.yaml
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\lib\*
+
+12/20/2013   6:29         <DIR>    js-yaml
+ 8/22/2013  21:11           1,172  js-yaml.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\lib\js-yaml\*
+
+12/20/2013   6:29         <DIR>    schema
+12/20/2013   6:29         <DIR>    type
+ 8/22/2013  21:11           1,071  common.js
+ 8/22/2013  21:11          12,105  dumper.js
+ 8/22/2013  21:11             454  exception.js
+ 8/22/2013  21:11          44,792  loader.js
+ 8/22/2013  21:11           1,572  mark.js
+ 8/22/2013  21:11             524  require.js
+ 8/22/2013  21:11           2,542  schema.js
+ 8/22/2013  21:11           2,044  type.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\lib\js-yaml\schema\*
+
+ 8/22/2013  21:11             268  default.js
+ 8/22/2013  21:11             188  minimal.js
+ 8/22/2013  21:11             463  safe.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\lib\js-yaml\type\*
+
+12/20/2013   6:29         <DIR>    js
+ 8/22/2013  21:11           3,499  binary.js
+ 8/22/2013  21:11           1,496  bool.js
+ 8/22/2013  21:11           2,074  float.js
+ 8/22/2013  21:11           1,888  int.js
+ 8/22/2013  21:11             141  map.js
+ 8/22/2013  21:11             308  merge.js
+ 8/22/2013  21:11             690  null.js
+ 8/22/2013  21:11           1,019  omap.js
+ 8/22/2013  21:11             724  pairs.js
+ 8/22/2013  21:11             140  seq.js
+ 8/22/2013  21:11             489  set.js
+ 8/22/2013  21:11             141  str.js
+ 8/22/2013  21:11           2,204  timestamp.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\lib\js-yaml\type\js\*
+
+ 8/22/2013  21:11           1,301  function.js
+ 8/22/2013  21:11           1,034  regexp.js
+ 8/22/2013  21:11             454  undefined.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\*
+
+12/20/2013   6:29         <DIR>    .bin
+12/20/2013   6:29         <DIR>    argparse
+12/20/2013   6:29         <DIR>    esprima
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\.bin\*
+
+ 8/22/2013  21:11             284  esparse
+ 8/22/2013  21:11             145  esparse.cmd
+ 8/22/2013  21:11             290  esvalidate
+ 8/22/2013  21:11             151  esvalidate.cmd
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\*
+
+12/20/2013   6:29         <DIR>    examples
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    node_modules
+ 8/22/2013  21:11           2,157  HISTORY.md
+ 8/22/2013  21:11              44  index.js
+ 8/22/2013  21:11           1,079  LICENSE
+ 8/22/2013  21:11           8,961  package.json
+ 8/22/2013  21:11           7,682  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\examples\*
+
+ 8/22/2013  21:11             721  arguments.js
+ 8/22/2013  21:11             449  choice.js
+ 8/22/2013  21:11           1,029  constants.js
+ 8/22/2013  21:11             323  help.js
+ 8/22/2013  21:11             632  nargs.js
+ 8/22/2013  21:11             721  parents.js
+ 8/22/2013  21:11             576  prefix_chars.js
+ 8/22/2013  21:11           1,060  sub_commands.js
+ 8/22/2013  21:11             779  sum.js
+ 8/22/2013  21:11           5,718  testformatters.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\lib\*
+
+12/20/2013   6:29         <DIR>    action
+12/20/2013   6:29         <DIR>    argument
+12/20/2013   6:29         <DIR>    help
+ 8/22/2013  21:11           4,579  action.js
+ 8/22/2013  21:11          14,839  action_container.js
+ 8/22/2013  21:11             618  argparse.js
+ 8/22/2013  21:11          34,900  argument_parser.js
+ 8/22/2013  21:11             324  const.js
+ 8/22/2013  21:11           1,835  namespace.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\lib\action\*
+
+12/20/2013   6:29         <DIR>    append
+12/20/2013   6:29         <DIR>    store
+ 8/22/2013  21:11           1,584  append.js
+ 8/22/2013  21:11           1,036  count.js
+ 8/22/2013  21:11           1,124  help.js
+ 8/22/2013  21:11           1,343  store.js
+ 8/22/2013  21:11           3,633  subparsers.js
+ 8/22/2013  21:11           1,251  version.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\lib\action\append\*
+
+ 8/22/2013  21:11           1,421  constant.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\lib\action\store\*
+
+ 8/22/2013  21:11           1,323  constant.js
+ 8/22/2013  21:11             703  false.js
+ 8/22/2013  21:11             692  true.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\lib\argument\*
+
+ 8/22/2013  21:11           1,183  error.js
+ 8/22/2013  21:11           1,589  exclusive.js
+ 8/22/2013  21:11           2,330  group.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\lib\help\*
+
+ 8/22/2013  21:11           2,793  added_formatters.js
+ 8/22/2013  21:11          22,077  formatter.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\*
+
+12/20/2013   6:29         <DIR>    underscore
+12/20/2013   6:29         <DIR>    underscore.string
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore\*
+
+ 8/22/2013  21:11              26  .npmignore
+ 8/22/2013  21:11              65  .travis.yml
+ 8/22/2013  21:11              17  CNAME
+ 8/22/2013  21:11             640  CONTRIBUTING.md
+ 8/22/2013  21:11           1,406  favicon.ico
+ 8/22/2013  21:11          89,997  index.html
+ 8/22/2013  21:11              42  index.js
+ 8/22/2013  21:11           1,079  LICENSE
+ 8/22/2013  21:11           2,080  package.json
+ 8/22/2013  21:11           1,137  README.md
+ 8/22/2013  21:11          13,450  underscore-min.js
+ 8/22/2013  21:11          41,417  underscore.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore.string\*
+
+12/20/2013   6:29         <DIR>    dist
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11             119  .travis.yml
+ 8/22/2013  21:11             345  component.json
+ 8/22/2013  21:11              57  Gemfile
+ 8/22/2013  21:11             263  Gemfile.lock
+ 8/22/2013  21:11               0  libpeerconnection.log
+ 8/22/2013  21:11          21,266  package.json
+ 8/22/2013  21:11             831  Rakefile
+ 8/22/2013  21:11          18,591  README.markdown
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore.string\dist\*
+
+ 8/22/2013  21:11           9,515  underscore.string.min.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore.string\lib\*
+
+ 8/22/2013  21:11          20,875  underscore.string.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore.string\test\*
+
+12/20/2013   6:29         <DIR>    test_underscore
+ 8/22/2013  21:11           1,207  run-qunit.js
+ 8/22/2013  21:11           3,334  speed.js
+ 8/22/2013  21:11          30,153  strings.js
+ 8/22/2013  21:11             273  strings_standalone.js
+ 8/22/2013  21:11           1,368  test.html
+ 8/22/2013  21:11             669  test_standalone.html
+ 8/22/2013  21:11          40,988  underscore.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore.string\test\test_underscore\*
+
+12/20/2013   6:29         <DIR>    vendor
+ 8/22/2013  21:11           9,925  arrays.js
+ 8/22/2013  21:11           1,734  chaining.js
+ 8/22/2013  21:11          16,148  collections.js
+ 8/22/2013  21:11           9,957  functions.js
+ 8/22/2013  21:11           1,403  index.html
+ 8/22/2013  21:11          26,223  objects.js
+ 8/22/2013  21:11           1,880  speed.js
+ 8/22/2013  21:11           9,553  utility.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\argparse\node_modules\underscore.string\test\test_underscore\vendor\*
+
+ 8/22/2013  21:11         252,881  jquery.js
+ 8/22/2013  21:11          20,196  jslitmus.js
+ 8/22/2013  21:11           4,578  qunit.css
+ 8/22/2013  21:11          51,709  qunit.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\esprima\*
+
+12/20/2013   6:29         <DIR>    bin
+12/20/2013   6:29         <DIR>    doc
+12/20/2013   6:29         <DIR>    examples
+ 8/22/2013  21:11              74  .npmignore
+ 8/22/2013  21:11             829  ChangeLog
+ 8/22/2013  21:11             327  component.json
+ 8/22/2013  21:11         124,818  esprima.js
+ 8/22/2013  21:11           4,889  index.html
+ 8/22/2013  21:11           1,231  LICENSE.BSD
+ 8/22/2013  21:11           5,442  package.json
+ 8/22/2013  21:11           4,358  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\esprima\bin\*
+
+ 8/22/2013  21:11           4,248  esparse.js
+ 8/22/2013  21:11           6,106  esvalidate.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\esprima\doc\*
+
+ 8/22/2013  21:11          17,790  index.html
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\js-yaml\node_modules\esprima\examples\*
+
+ 8/22/2013  21:11           3,096  detectnestedternary.js
+ 8/22/2013  21:11           5,139  findbooleantrap.js
+ 8/22/2013  21:11             684  tokendist.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\*
+
+12/20/2013   6:29         <DIR>    build
+12/20/2013   6:29         <DIR>    vendor
+ 8/22/2013  21:11          62,642  build.js
+ 8/22/2013  21:11              37  index.js
+ 8/22/2013  21:11           1,215  LICENSE.txt
+ 8/22/2013  21:11         133,940  lodash.js
+ 8/22/2013  21:11          17,817  lodash.min.js
+ 8/22/2013  21:11         112,814  lodash.underscore.js
+ 8/22/2013  21:11          13,291  lodash.underscore.min.js
+ 8/22/2013  21:11          13,420  package.json
+ 8/22/2013  21:11          12,231  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\build\*
+
+ 8/22/2013  21:11          18,164  minify.js
+ 8/22/2013  21:11           2,938  post-compile.js
+ 8/22/2013  21:11          10,660  pre-compile.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\*
+
+12/20/2013   6:29         <DIR>    tar
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\*
+
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    vendor
+ 8/22/2013  21:11           1,318  LICENCE
+ 8/22/2013  21:11           1,488  README.md
+ 8/22/2013  21:11           4,116  tar.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\lib\*
+
+ 8/22/2013  21:11             826  buffer-entry.js
+ 8/22/2013  21:11           3,796  entry-writer.js
+ 8/22/2013  21:11           5,272  entry.js
+ 8/22/2013  21:11           5,408  extended-header-writer.js
+ 8/22/2013  21:11           3,564  extended-header.js
+ 8/22/2013  21:11           2,141  extract.js
+ 8/22/2013  21:11             410  global-header-writer.js
+ 8/22/2013  21:11          11,034  header.js
+ 8/22/2013  21:11           5,612  pack.js
+ 8/22/2013  21:11           6,858  parse.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\*
+
+12/20/2013   6:29         <DIR>    block-stream
+12/20/2013   6:29         <DIR>    fstream
+12/20/2013   6:29         <DIR>    graceful-fs
+12/20/2013   6:29         <DIR>    inherits
+12/20/2013   6:29         <DIR>    mkdirp
+12/20/2013   6:29         <DIR>    rimraf
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\block-stream\*
+
+ 8/22/2013  21:11           6,570  block-stream.js
+ 8/22/2013  21:11           1,318  LICENCE
+ 8/22/2013  21:11             369  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\fstream\*
+
+12/20/2013   6:29         <DIR>    lib
+ 8/22/2013  21:11           1,120  fstream.js
+ 8/22/2013  21:11           1,310  LICENSE
+ 8/22/2013  21:11           2,345  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\fstream\lib\*
+
+ 8/22/2013  21:11           2,228  abstract.js
+ 8/22/2013  21:11           1,652  collect.js
+ 8/22/2013  21:11           6,439  dir-reader.js
+ 8/22/2013  21:11           4,549  dir-writer.js
+ 8/22/2013  21:11           3,906  file-reader.js
+ 8/22/2013  21:11           2,441  file-writer.js
+ 8/22/2013  21:11             632  get-type.js
+ 8/22/2013  21:11           1,587  link-reader.js
+ 8/22/2013  21:11           2,843  link-writer.js
+ 8/22/2013  21:11           2,005  proxy-reader.js
+ 8/22/2013  21:11           2,427  proxy-writer.js
+ 8/22/2013  21:11           6,984  reader.js
+ 8/22/2013  21:11           1,037  socket-reader.js
+ 8/22/2013  21:11          10,735  writer.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\graceful-fs\*
+
+ 8/22/2013  21:11           7,942  graceful-fs.js
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11             184  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\inherits\*
+
+ 8/22/2013  21:11             862  inherits.js
+ 8/22/2013  21:11           1,109  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\mkdirp\*
+
+ 8/22/2013  21:11           2,371  index.js
+ 8/22/2013  21:11           1,141  LICENSE
+ 8/22/2013  21:11           1,124  readme.markdown
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\lodash\vendor\tar\vendor\rimraf\*
+
+ 8/22/2013  21:11             235  AUTHORS
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11             540  README.md
+ 8/22/2013  21:11           3,325  rimraf.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\*
+
+12/20/2013   6:29         <DIR>    node_modules
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11          28,950  minimatch.js
+ 8/22/2013  21:11           7,720  package.json
+ 8/22/2013  21:11           6,652  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\node_modules\*
+
+12/20/2013   6:29         <DIR>    lru-cache
+12/20/2013   6:29         <DIR>    sigmund
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\node_modules\lru-cache\*
+
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11              14  .npmignore
+ 8/22/2013  21:11             310  AUTHORS
+ 8/22/2013  21:11             460  bench.js
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11           4,651  package.json
+ 8/22/2013  21:11           3,209  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\node_modules\lru-cache\lib\*
+
+ 8/22/2013  21:11           5,935  lru-cache.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\node_modules\lru-cache\test\*
+
+ 8/22/2013  21:11           7,105  basic.js
+ 8/22/2013  21:11           1,064  foreach.js
+ 8/22/2013  21:11             879  memory-leak.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\node_modules\sigmund\*
+
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11           6,918  bench.js
+ 8/22/2013  21:11           1,310  LICENSE
+ 8/22/2013  21:11           2,716  package.json
+ 8/22/2013  21:11           1,853  README.md
+ 8/22/2013  21:11           1,146  sigmund.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\node_modules\sigmund\test\*
+
+ 8/22/2013  21:11             684  basic.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\minimatch\test\*
+
+ 8/22/2013  21:11          14,889  basic.js
+ 8/22/2013  21:11             647  brace-expand.js
+ 8/22/2013  21:11             436  caching.js
+ 8/22/2013  21:11           9,727  defaults.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\*
+
+12/20/2013   6:29         <DIR>    bin
+12/20/2013   6:29         <DIR>    examples
+12/20/2013   6:29         <DIR>    lib
+12/20/2013   6:29         <DIR>    node_modules
+ 8/22/2013  21:11               0  .npmignore
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11           8,576  package.json
+ 8/22/2013  21:11           7,476  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\bin\*
+
+ 8/22/2013  21:11           1,277  nopt.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\examples\*
+
+ 8/22/2013  21:11           1,032  my-program.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\lib\*
+
+ 8/22/2013  21:11          15,345  nopt.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\node_modules\*
+
+12/20/2013   6:29         <DIR>    abbrev
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\node_modules\abbrev\*
+
+12/20/2013   6:29         <DIR>    lib
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11           1,160  package.json
+ 8/22/2013  21:11             499  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\nopt\node_modules\abbrev\lib\*
+
+ 8/22/2013  21:11           2,769  abbrev.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\rimraf\*
+
+12/20/2013   6:29         <DIR>    node_modules
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11             235  AUTHORS
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11           1,790  package.json
+ 8/22/2013  21:11             540  README.md
+ 8/22/2013  21:11           3,512  rimraf.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\rimraf\node_modules\*
+
+12/20/2013   6:29         <DIR>    graceful-fs
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\rimraf\node_modules\graceful-fs\*
+
+12/20/2013   6:29         <DIR>    test
+ 8/22/2013  21:11              14  .npmignore
+ 8/22/2013  21:11           7,834  graceful-fs.js
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11             988  package.json
+ 8/22/2013  21:11             184  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\rimraf\node_modules\graceful-fs\test\*
+
+ 8/22/2013  21:11           1,019  open.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\rimraf\test\*
+
+ 8/22/2013  21:11             136  run.sh
+ 8/22/2013  21:11             602  setup.sh
+ 8/22/2013  21:11             138  test-async.js
+ 8/22/2013  21:11               0  test-fiber.js
+ 8/22/2013  21:11             105  test-sync.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\underscore.string\*
+
+12/20/2013   6:28         <DIR>    dist
+12/20/2013   6:28         <DIR>    lib
+12/20/2013   6:28         <DIR>    test
+ 8/22/2013  21:11             119  .travis.yml
+ 8/22/2013  21:11              55  Gemfile
+ 8/22/2013  21:11             583  Gemfile.lock
+ 8/22/2013  21:11          17,867  package.json
+ 8/22/2013  21:11             946  Rakefile
+ 8/22/2013  21:11          15,422  README.markdown
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\underscore.string\dist\*
+
+ 8/22/2013  21:11           7,367  underscore.string.min.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\underscore.string\lib\*
+
+ 8/22/2013  21:11          16,076  underscore.string.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\underscore.string\test\*
+
+12/20/2013   6:28         <DIR>    test_underscore
+ 8/22/2013  21:11           1,108  run-qunit.js
+ 8/22/2013  21:11           3,026  speed.js
+ 8/22/2013  21:11          19,043  strings.js
+ 8/22/2013  21:11             274  strings_standalone.js
+ 8/22/2013  21:11           1,368  test.html
+ 8/22/2013  21:11             669  test_standalone.html
+ 8/22/2013  21:11          35,167  underscore.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\underscore.string\test\test_underscore\*
+
+12/20/2013   6:28         <DIR>    vendor
+ 8/22/2013  21:11           8,720  arrays.js
+ 8/22/2013  21:11           1,777  chaining.js
+ 8/22/2013  21:11          11,400  collections.js
+ 8/22/2013  21:11           8,003  functions.js
+ 8/22/2013  21:11          26,174  objects.js
+ 8/22/2013  21:11           1,722  speed.js
+ 8/22/2013  21:11             636  temp.js
+ 8/22/2013  21:11             669  temp_tests.html
+ 8/22/2013  21:11           1,737  test.html
+ 8/22/2013  21:11           6,719  utility.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\underscore.string\test\test_underscore\vendor\*
+
+ 8/22/2013  21:11          57,254  jquery.js
+ 8/22/2013  21:11          20,196  jslitmus.js
+ 8/22/2013  21:11           3,958  qunit.css
+ 8/22/2013  21:11          62,809  qunit.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\which\*
+
+12/20/2013   6:28         <DIR>    bin
+ 8/22/2013  21:11           1,092  LICENSE
+ 8/22/2013  21:11             878  package.json
+ 8/22/2013  21:11             199  README.md
+ 8/22/2013  21:11           3,002  which.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\node_modules\which\bin\*
+
+ 8/22/2013  21:11             289  which
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\*
+
+12/20/2013   6:28         <DIR>    fixtures
+12/20/2013   6:28         <DIR>    grunt
+12/20/2013   6:28         <DIR>    gruntfile
+12/20/2013   6:28         <DIR>    util
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\*
+
+12/20/2013   6:28         <DIR>    expand
+12/20/2013   6:28         <DIR>    expand-mapping-ext
+12/20/2013   6:28         <DIR>    files
+ 8/22/2013  21:11              11  a.js
+ 8/22/2013  21:11              11  b.js
+ 8/22/2013  21:11              72  banner.js
+ 8/22/2013  21:11              52  banner2.js
+ 8/22/2013  21:11              85  banner3.js
+ 8/22/2013  21:11               6  BOM.txt
+ 8/22/2013  21:11              11  exec.cmd
+ 8/22/2013  21:11              24  exec.sh
+ 8/22/2013  21:11             193  Gruntfile-print-text.js
+ 8/22/2013  21:11              58  iso-8859-1.json
+ 8/22/2013  21:11              15  iso-8859-1.txt
+ 8/22/2013  21:11              44  iso-8859-1.yaml
+ 8/22/2013  21:11             180  lint.txt
+ 8/22/2013  21:11               3  no_BOM.txt
+ 8/22/2013  21:11           3,987  octocat.png
+ 8/22/2013  21:11             645  spawn-multibyte.js
+ 8/22/2013  21:11             273  spawn.js
+ 8/22/2013  21:11              80  template.txt
+ 8/22/2013  21:11              39  test.json
+ 8/22/2013  21:11              64  utf8.json
+ 8/22/2013  21:11              19  utf8.txt
+ 8/22/2013  21:11              50  utf8.yaml
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand\*
+
+12/20/2013   6:28         <DIR>    css
+12/20/2013   6:28         <DIR>    deep
+12/20/2013   6:28         <DIR>    js
+ 8/22/2013  21:11               0  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand\css\*
+
+ 8/22/2013  21:11               0  baz.css
+ 8/22/2013  21:11               0  qux.css
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand\deep\*
+
+12/20/2013   6:28         <DIR>    deeper
+ 8/22/2013  21:11               0  deep.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand\deep\deeper\*
+
+12/20/2013   6:28         <DIR>    deepest
+ 8/22/2013  21:11               0  deeper.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand\deep\deeper\deepest\*
+
+ 8/22/2013  21:11               0  deepest.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand\js\*
+
+ 8/22/2013  21:11               0  bar.js
+ 8/22/2013  21:11               0  foo.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand-mapping-ext\*
+
+12/20/2013   6:28         <DIR>    dir.ectory
+ 8/22/2013  21:11               0  file.ext.ension
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand-mapping-ext\dir.ectory\*
+
+12/20/2013   6:28         <DIR>    sub.dir.ectory
+ 8/22/2013  21:11               0  file-no-extension
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\expand-mapping-ext\dir.ectory\sub.dir.ectory\*
+
+ 8/22/2013  21:11               0  file.ext.ension
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\files\*
+
+12/20/2013   6:28         <DIR>    dist
+12/20/2013   6:28         <DIR>    src
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\files\dist\*
+
+ 8/22/2013  21:11               0  built-123-a.js
+ 8/22/2013  21:11               0  built-123-b.js
+ 8/22/2013  21:11               0  built-a.js
+ 8/22/2013  21:11               0  built-b.js
+ 8/22/2013  21:11               0  built.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\fixtures\files\src\*
+
+ 8/22/2013  21:11               0  file1-123.js
+ 8/22/2013  21:11               0  file1.js
+ 8/22/2013  21:11               0  file2-123.js
+ 8/22/2013  21:11               0  file2.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\grunt\*
+
+ 8/22/2013  21:11           6,334  config_test.js
+ 8/22/2013  21:11             616  event_test.js
+ 8/22/2013  21:11          38,134  file_test.js
+ 8/22/2013  21:11           6,894  log_test.js
+ 8/22/2013  21:11           1,052  option_test.js
+ 8/22/2013  21:11           7,231  task_test.js
+ 8/22/2013  21:11           1,745  template_test.js
+ 8/22/2013  21:11          10,150  util_test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\gruntfile\*
+
+ 8/22/2013  21:11           9,896  multi-task-files.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt\test\util\*
+
+ 8/22/2013  21:11           2,876  namespace_test.js
+ 8/22/2013  21:11          19,426  task_test.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\*
+
+12/20/2013   6:28         <DIR>    node_modules
+12/20/2013   6:28         <DIR>    src
+12/20/2013   6:28         <DIR>    tasks
+ 8/22/2013  21:18              13  .npmignore
+ 8/22/2013  21:18           3,623  CHANGELOG.md
+ 8/22/2013  21:18             246  Gruntfile.js
+ 8/22/2013  21:18           5,932  package.json
+ 8/22/2013  21:18           5,013  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\*
+
+12/20/2013   6:28         <DIR>    showdown
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\*
+
+12/20/2013   6:28         <DIR>    compressed
+12/20/2013   6:28         <DIR>    example
+12/20/2013   6:28         <DIR>    perlMarkdown
+12/20/2013   6:28         <DIR>    src
+12/20/2013   6:28         <DIR>    test
+ 8/22/2013  21:18             149  .gitattributes
+ 8/22/2013  21:18              36  .npmignore
+ 8/22/2013  21:18              42  .travis.yml
+ 8/22/2013  21:18             540  grunt.js
+ 8/22/2013  21:18           1,646  license.txt
+ 8/22/2013  21:18          13,483  package.json
+ 8/22/2013  21:18          11,373  README.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\compressed\*
+
+12/20/2013   6:28         <DIR>    extensions
+ 8/22/2013  21:18          11,293  showdown.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\compressed\extensions\*
+
+ 8/22/2013  21:18             385  github.js
+ 8/22/2013  21:18             566  google-prettify.js
+ 8/22/2013  21:18             704  twitter.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\example\*
+
+ 8/22/2013  21:18          17,413  showdown-gui.html
+ 8/22/2013  21:18           9,069  showdown-gui.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\perlMarkdown\*
+
+ 8/22/2013  21:18           1,508  Markdown License.txt
+ 8/22/2013  21:18          39,986  Markdown-1.0.2b2.pl
+ 8/22/2013  21:18          40,857  Markdown-1.0.2b7.pl
+ 8/22/2013  21:18             504  readme.txt
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\src\*
+
+12/20/2013   6:28         <DIR>    extensions
+ 8/22/2013  21:18          37,933  showdown.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\src\extensions\*
+
+ 8/22/2013  21:18             812  github.js
+ 8/22/2013  21:18             936  prettify.js
+ 8/22/2013  21:18           3,261  table.js
+ 8/22/2013  21:18           1,548  twitter.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\*
+
+12/20/2013   6:28         <DIR>    cases
+12/20/2013   6:28         <DIR>    extensions
+ 8/22/2013  21:18           2,732  run.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\cases\*
+
+ 8/22/2013  21:18             411  anchors-by-reference.html
+ 8/22/2013  21:18             393  anchors-by-reference.md
+ 8/22/2013  21:18              61  automatic-anchors.html
+ 8/22/2013  21:18              22  automatic-anchors.md
+ 8/22/2013  21:18             315  blockquote-nested-markdown.html
+ 8/22/2013  21:18             188  blockquote-nested-markdown.md
+ 8/22/2013  21:18             105  blockquote.html
+ 8/22/2013  21:18              76  blockquote.md
+ 8/22/2013  21:18              81  code-block-html-escape.html
+ 8/22/2013  21:18              41  code-block-html-escape.md
+ 8/22/2013  21:18              83  code-block.html
+ 8/22/2013  21:18              55  code-block.md
+ 8/22/2013  21:18              62  doubline-list.html
+ 8/22/2013  21:18              20  doubline-list.md
+ 8/22/2013  21:18             120  emphasis.html
+ 8/22/2013  21:18              73  emphasis.md
+ 8/22/2013  21:18              49  escaped-number-period.html
+ 8/22/2013  21:18              43  escaped-number-period.md
+ 8/22/2013  21:18             186  escaping.html
+ 8/22/2013  21:18              89  escaping.md
+ 8/22/2013  21:18              86  github-style-at-start.html
+ 8/22/2013  21:18              61  github-style-at-start.md
+ 8/22/2013  21:18             197  github-style-codeblock.html
+ 8/22/2013  21:18             127  github-style-codeblock.md
+ 8/22/2013  21:18              76  github-style-linebreaks.html
+ 8/22/2013  21:18              58  github-style-linebreaks.md
+ 8/22/2013  21:18              38  h1-with-double-hash.html
+ 8/22/2013  21:18              17  h1-with-double-hash.md
+ 8/22/2013  21:18              38  h1-with-equals.html
+ 8/22/2013  21:18              27  h1-with-equals.md
+ 8/22/2013  21:18              38  h1-with-single-hash.html
+ 8/22/2013  21:18              15  h1-with-single-hash.md
+ 8/22/2013  21:18              38  h2-with-dashes.html
+ 8/22/2013  21:18              27  h2-with-dashes.md
+ 8/22/2013  21:18              38  h2-with-double-hash.html
+ 8/22/2013  21:18              19  h2-with-double-hash.md
+ 8/22/2013  21:18              38  h2-with-single-hash.html
+ 8/22/2013  21:18              16  h2-with-single-hash.md
+ 8/22/2013  21:18              38  h3-with-double-hash.html
+ 8/22/2013  21:18              21  h3-with-double-hash.md
+ 8/22/2013  21:18              38  h3-with-single-hash.html
+ 8/22/2013  21:18              17  h3-with-single-hash.md
+ 8/22/2013  21:18              38  h4-with-single-hash.html
+ 8/22/2013  21:18              18  h4-with-single-hash.md
+ 8/22/2013  21:18              38  h5-with-single-hash.html
+ 8/22/2013  21:18              19  h5-with-single-hash.md
+ 8/22/2013  21:18              38  h6-with-single-hash.html
+ 8/22/2013  21:18              20  h6-with-single-hash.md
+ 8/22/2013  21:18              39  horizontal-rules.html
+ 8/22/2013  21:18              67  horizontal-rules.md
+ 8/22/2013  21:18             280  html5-strutural-tags.html
+ 8/22/2013  21:18             259  html5-strutural-tags.md
+ 8/22/2013  21:18             222  images.html
+ 8/22/2013  21:18             145  images.md
+ 8/22/2013  21:18             126  implicit-anchors.html
+ 8/22/2013  21:18             133  implicit-anchors.md
+ 8/22/2013  21:18             163  inline-anchors.html
+ 8/22/2013  21:18             121  inline-anchors.md
+ 8/22/2013  21:18             414  inline-code.html
+ 8/22/2013  21:18             291  inline-code.md
+ 8/22/2013  21:18              56  inline-escaped-chars.html
+ 8/22/2013  21:18              52  inline-escaped-chars.md
+ 8/22/2013  21:18              76  inline-style-tag.html
+ 8/22/2013  21:18              69  inline-style-tag.md
+ 8/22/2013  21:18             105  lazy-blockquote.html
+ 8/22/2013  21:18              71  lazy-blockquote.md
+ 8/22/2013  21:18             161  list-with-blockquote.html
+ 8/22/2013  21:18              88  list-with-blockquote.md
+ 8/22/2013  21:18             110  list-with-code.html
+ 8/22/2013  21:18              58  list-with-code.md
+ 8/22/2013  21:18             144  multi-paragraph-list.html
+ 8/22/2013  21:18              98  multi-paragraph-list.md
+ 8/22/2013  21:18             105  multiline-unordered-list.html
+ 8/22/2013  21:18              75  multiline-unordered-list.md
+ 8/22/2013  21:18             169  nested-blockquote.html
+ 8/22/2013  21:18              97  nested-blockquote.md
+ 8/22/2013  21:18              64  ordered-list-same-number.html
+ 8/22/2013  21:18              30  ordered-list-same-number.md
+ 8/22/2013  21:18              64  ordered-list-wrong-numbers.html
+ 8/22/2013  21:18              30  ordered-list-wrong-numbers.md
+ 8/22/2013  21:18              64  ordered-list.html
+ 8/22/2013  21:18              30  ordered-list.md
+ 8/22/2013  21:18              60  relative-anchors.html
+ 8/22/2013  21:18              42  relative-anchors.md
+ 8/22/2013  21:18              20  simple-paragraph.html
+ 8/22/2013  21:18              14  simple-paragraph.md
+ 8/22/2013  21:18             116  strong.html
+ 8/22/2013  21:18              56  strong.md
+ 8/22/2013  21:18              64  unordered-list-asterisk.html
+ 8/22/2013  21:18              24  unordered-list-asterisk.md
+ 8/22/2013  21:18              64  unordered-list-minus.html
+ 8/22/2013  21:18              24  unordered-list-minus.md
+ 8/22/2013  21:18              64  unordered-list-plus.html
+ 8/22/2013  21:18              24  unordered-list-plus.md
+ 8/22/2013  21:18             123  url-with-parenthesis.html
+ 8/22/2013  21:18             105  url-with-parenthesis.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\extensions\*
+
+12/20/2013   6:28         <DIR>    github
+12/20/2013   6:28         <DIR>    prettify
+12/20/2013   6:28         <DIR>    table
+12/20/2013   6:28         <DIR>    twitter
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\extensions\github\*
+
+ 8/22/2013  21:18             168  basic.html
+ 8/22/2013  21:18             126  basic.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\extensions\prettify\*
+
+ 8/22/2013  21:18             283  basic.html
+ 8/22/2013  21:18             129  basic.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\extensions\table\*
+
+ 8/22/2013  21:18             448  basic.html
+ 8/22/2013  21:18             136  basic.md
+ 8/22/2013  21:18           1,517  large.html
+ 8/22/2013  21:18             462  large.md
+ 8/22/2013  21:18             448  with-equals.html
+ 8/22/2013  21:18             136  with-equals.md
+ 8/22/2013  21:18           1,174  with-surroundings.html
+ 8/22/2013  21:18             847  with-surroundings.md
+ 8/22/2013  21:18             200  without-body.html
+ 8/22/2013  21:18              68  without-body.md
+ 8/22/2013  21:18              41  without-header-delimiter.html
+ 8/22/2013  21:18              34  without-header-delimiter.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\node_modules\showdown\test\extensions\twitter\*
+
+ 8/22/2013  21:18             266  basic.html
+ 8/22/2013  21:18             150  basic.md
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\src\*
+
+12/20/2013   6:28         <DIR>    templates
+ 8/22/2013  21:18           3,172  dom.js
+ 8/22/2013  21:18           4,094  example.js
+ 8/22/2013  10:06           4,383  ignore.words
+ 8/22/2013  21:18          31,831  ngdoc.js
+ 8/22/2013  21:18           1,438  reader.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\src\templates\*
+
+12/20/2013   6:28         <DIR>    css
+12/20/2013   6:28         <DIR>    font
+12/20/2013   6:28         <DIR>    js
+ 8/22/2013  21:18           1,150  favicon.ico
+ 8/22/2013  21:18           9,568  index.tmpl
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\src\templates\css\*
+
+ 8/22/2013  21:18           1,651  animations.css
+ 8/22/2013  21:18         127,352  bootstrap.min.css
+ 8/22/2013  21:18           3,697  docs.css
+ 8/22/2013  21:18           2,702  doc_widgets.css
+ 8/22/2013  21:18          23,644  font-awesome.css
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\src\templates\font\*
+
+ 8/22/2013  21:18          29,360  fontawesome-webfont.eot
+ 8/22/2013  21:18         162,047  fontawesome-webfont.svg
+ 8/22/2013  21:18          64,960  fontawesome-webfont.ttf
+ 8/22/2013  21:18          34,420  fontawesome-webfont.woff
+ 8/22/2013  21:18          50,204  FontAwesome.otf
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\src\templates\js\*
+
+ 8/22/2013  21:18          19,508  angular-bootstrap-prettify.min.js
+ 8/22/2013  21:18           2,704  angular-bootstrap.min.js
+ 8/22/2013  21:18          88,802  angular.min.js
+ 8/22/2013  21:18          17,824  docs.js
+
+ Directory of  H:\data\tri\docgen\node_modules\grunt-ngdocs\tasks\*
+
+ 8/22/2013  21:18           6,003  grunt-ngdocs.js
+
+ Directory of  H:\data\tri\docgen\overview\*
+
+12/01/2013  20:51           1,023  history.ngdoc
+12/03/2013  10:32           8,531  index.ngdoc
+12/03/2013   7:41           4,352  landmarks.ngdoc
+
+ Directory of  H:\data\tri\docgen\tutorial\*
+
+11/30/2013  10:50           3,846  index.ngdoc
+11/30/2013  10:56           3,007  step-01.ngdoc
+11/30/2013  11:13           3,854  step-02.ngdoc
+11/30/2013  11:32           4,044  step-03.ngdoc
+10/31/2013   6:51           2,187  step-04.ngdoc
+11/02/2013   6:25           2,322  step-05.ngdoc
+11/30/2013  18:48           4,436  step-06.ngdoc
+11/30/2013  18:48           1,349  step-07.ngdoc
+11/30/2013  18:48           2,656  step-08.ngdoc
+11/30/2013  18:49           1,682  step-09.ngdoc
+12/02/2013  16:58           2,806  step-10.ngdoc
+
+ Directory of  H:\data\tri\icons\*
+
+10/12/2013  21:20           1,150  fav-admin0.ico
+10/12/2013  21:21           1,150  fav-boot0.ico
+10/12/2013  21:22           1,150  fav-chqs0.ico
+10/17/2013   4:01           1,150  fav-chqs1.ico
+10/12/2013  21:03           1,150  fav-deps0.ico
+10/17/2013   4:04           1,150  fav-deps1.ico
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/20/2013   5:07           1,150  fav-msgs0.ico
+10/20/2013   5:08           1,150  fav-msgs1.ico
+10/13/2013   5:29           1,150  fav-src0.ico
+11/01/2013   5:19           1,150  fav-t1b.ico
+11/01/2013   5:19           1,150  fav-t1w.ico
+11/01/2013   5:21           1,150  fav-t2b.ico
+11/01/2013   5:20           1,150  fav-t2w.ico
+11/01/2013   5:22           1,150  fav-t3b.ico
+11/01/2013   5:21           1,150  fav-t3w.ico
+11/01/2013   5:08           7,652  tri-base-1-0.PNG
+11/01/2013   5:06           7,596  tri-base-1-1.PNG
+11/01/2013   5:12          15,027  tri-base-2-0.PNG
+11/01/2013   5:13          14,265  tri-base-2-1.PNG
+11/01/2013   5:16          17,010  tri-base-3-0.PNG
+11/01/2013   5:17          16,158  tri-base-3-1.PNG
+10/12/2013  21:19          15,002  tri-base-admin.PNG
+10/12/2013  21:09          14,136  tri-base-boot.PNG
+10/12/2013  21:15          17,134  tri-base-chqs.PNG
+10/17/2013   4:00          16,467  tri-base-chqs1.PNG
+10/12/2013  21:01          14,320  tri-base-deps.PNG
+10/17/2013   4:03          13,353  tri-base-deps1.PNG
+10/12/2013  21:12           6,726  tri-base-docs.PNG
+10/20/2013   5:04          13,714  tri-base-msgs.PNG
+10/20/2013   5:05          11,545  tri-base-msgs1.PNG
+10/13/2013   5:28          18,286  tri-base-src.PNG
+10/12/2013  18:56          24,783  tri-base2.PNG
+10/12/2013  20:54          34,454  tri-base2.xcf
+
+ Directory of  H:\data\tri\keep\*
+
+11/15/2013   9:21         <DIR>    TRI-DBx
+
+ Directory of  H:\data\tri\keep\TRI-DBx\*
+
+11/13/2013  19:09         <DIR>    deps
+11/14/2013  15:52         <DIR>    msgs
+11/15/2013   9:21              53  $super.guest.json.txt
+11/15/2013   7:42              24  xsuper.guest.json.txt
+
+ Directory of  H:\data\tri\keep\TRI-DBx\deps\*
+
+11/13/2013  18:56             147  $data.dep.2013-06-30.ES1.CND.dp1.json.txt
+11/13/2013  18:56             649  $data.dep.2013-06-30.ES1.CND.dp2.json.txt
+11/13/2013  18:56           3,783  $data.dep.2013-06-30.ES1.CND.dp3.json.txt
+11/13/2013  18:56           2,874  $data.dep.2013-07-07.ES1.CND.dp3.json.txt
+11/13/2013  18:56             646  $data.dep.2013-07-07.TST.CND.dp1.json.txt
+11/13/2013  18:56             950  $data.dep.2013-07-07.TST.CND.dp2.json.txt
+11/13/2013  18:56           4,972  $data.dep.2013-07-14.ES1.CND.dp1.json.txt
+11/13/2013  18:56           3,432  $data.dep.2013-07-21.ES1.CND.dp1.json.txt
+11/13/2013  18:56             975  $data.dep.2013-07-25.TST.CND.dp1.json.txt
+11/13/2013  18:56           4,310  $data.dep.2013-07-28.ES1.CND.dp1.json.txt
+11/13/2013  18:56           6,334  $data.dep.2013-08-04.ES1.CND.dp1.json.txt
+11/13/2013  18:56           6,308  $data.dep.2013-08-11.CSC.CND.dp3.json.txt
+11/13/2013  18:56           5,810  $data.dep.2013-08-11.ES1.CND.dp1.json.txt
+11/13/2013  18:56             412  $data.dep.2013-08-11.ES1.CND.dp2.json.txt
+11/13/2013  18:56             434  $data.dep.2013-08-17.ES1.USD.dp1.json.txt
+11/13/2013  18:56             461  $data.dep.2013-08-18.CSC.BKS.dp3.json.txt
+11/13/2013  18:56           7,201  $data.dep.2013-08-18.CSC.CND.dp2.json.txt
+11/13/2013  18:56           4,351  $data.dep.2013-08-18.ES1.CND.dp1.json.txt
+11/13/2013  18:56           5,786  $data.dep.2013-08-25.CSC.CND.dp1.json.txt
+11/13/2013  18:56           2,648  $data.dep.2013-08-25.CSC.CND.dp2.json.txt
+11/13/2013  18:56           4,190  $data.dep.2013-09-01.CSC.CND.dp2.json.txt
+11/13/2013  18:56           5,086  $data.dep.2013-09-01.ES1.CND.dp1.json.txt
+11/13/2013  18:56           2,822  $data.dep.2013-09-08.CSC.CND.dp1.json.txt
+11/13/2013  18:56           6,276  $data.dep.2013-09-15.CSC.CND.dp2.json.txt
+11/13/2013  18:56           5,128  $data.dep.2013-09-15.ES1.CND.dp1.json.txt
+11/13/2013  18:56           7,639  $data.dep.2013-09-22.CSC.CND.dp1.json.txt
+11/13/2013  18:56             467  $data.dep.2013-09-29.CSC.BKS.dp4.json.txt
+11/13/2013  18:56           5,268  $data.dep.2013-09-29.CSC.CND.dp3.json.txt
+11/13/2013  18:56           3,627  $data.dep.2013-09-29.ES1.CND.dp1.json.txt
+11/13/2013  18:56           9,610  $data.dep.2013-09-29.ES1.CND.dp2.json.txt
+11/13/2013  22:05             799  $data.dep.2013-11-14.DEM.CND.dp1.json.txt
+11/13/2013  18:57          64,048  $data.donor.donor0.json.txt
+11/13/2013  18:57          65,788  $data.donor.donor1.json.txt
+11/13/2013  18:57          17,402  $data.donor.donor2.json.txt
+11/13/2013  18:57             403  $data.env.envs.json.txt
+11/13/2013   5:50              40  $user.aa.json.txt
+11/13/2013   5:50              61  $user.admin.json.txt
+11/14/2013   2:16              63  $user.guest.json.txt
+
+ Directory of  H:\data\tri\keep\TRI-DBx\msgs\*
+
+11/13/2013   5:51          21,185  $data.msg.m2.json.txt
+11/14/2013   9:50          21,265  $data.msg.messages.json.txt
+11/14/2013  15:52              17  $user.a9.json.txt
+11/13/2013   5:50              61  $user.admin.json.txt
+11/14/2013  15:59              78  $user.guest.json.txt
+11/14/2013   2:55              43  $user.new.json.txt
+
+ Directory of  H:\data\tri\lib\*
+
+ 3/25/2013   9:52         249,575  gemscore.jar
+10/05/2013   3:28          35,947  gemstool.jar
+10/31/2013   7:47         126,297  waks.jar
+
+ Directory of  H:\data\tri\node\*
+
+12/03/2013   8:53         <DIR>    apps
+11/14/2013  17:10         <DIR>    css
+11/14/2013  17:17         <DIR>    font
+11/14/2013  17:17         <DIR>    grunt-scripts
+11/14/2013  17:17         <DIR>    img
+11/14/2013  17:17         <DIR>    js
+11/14/2013  17:31         <DIR>    node-js
+11/14/2013  17:17         <DIR>    partials
+11/17/2013   7:28         <DIR>    seo
+11/16/2013   6:12         <DIR>    TRI-DB
+12/03/2013  10:30           7,419  appspage.html
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/19/2013   6:28           1,150  favicon.ico
+11/16/2013   7:30              53  google138ba77474eb0310.html
+11/15/2013  15:26          11,625  index.html
+12/03/2013  10:37             174  package.json
+11/03/2013   7:35              56  robots.txt
+10/13/2013   5:36             968  SrcDisplay.html
+10/13/2013   5:29           1,150  tri-doc.ico
+
+ Directory of  H:\data\tri\node\apps\*
+
+12/03/2013   8:53         <DIR>    images
+11/14/2013  17:17         <DIR>    tri
+11/15/2013  15:32           2,941  AppsConfig.js
+11/27/2013   9:18          12,549  Chqs.htm
+10/25/2013   4:05          27,785  Chqs.js
+10/16/2013  12:40           4,941  Deps.css
+10/26/2013  14:20          17,913  Deps.htm
+10/26/2013   9:30          27,094  Deps.js
+10/24/2013  17:53           7,761  FormCheque.htm
+10/25/2013   9:32           5,178  FormCheque.js
+10/26/2013  10:35          15,336  FormDeposit.htm
+10/26/2013  10:56           6,403  FormDeposit.js
+10/26/2013  11:08           4,556  FormDepSum.htm
+10/26/2013  11:37           8,324  FormDepSum.js
+10/26/2013  11:37           3,100  FormEnvelope.htm
+10/26/2013  11:37           2,635  FormEnvelope.js
+10/23/2013  22:31           2,113  FormHello.htm
+10/21/2013  15:37           2,145  FormHello.js
+11/27/2013   9:18           2,878  Hello.htm
+10/23/2013  16:02           6,360  Hello.js
+11/27/2013   7:21           2,718  HelloUI.css
+11/27/2013   9:16           3,961  HelloUI.htm
+11/27/2013   7:09          10,380  HelloUI.js
+11/23/2013   5:53          93,107  jquery-1.10.2.min.js
+11/24/2013  13:42          26,298  jquery-ui-1.10.3.custom.css
+11/24/2013  13:42         108,995  jquery-ui-1.10.3.custom.min.js
+10/16/2013  10:19           6,066  TableDonors.js
+10/26/2013   8:58           3,873  TableEnvelopes.js
+
+ Directory of  H:\data\tri\node\apps\images\*
+
+11/23/2013   3:02             312  ui-bg_diagonals-thick_20_666666_40x40.png
+11/23/2013   3:02             207  ui-bg_glass_65_ffffff_1x400.png
+11/23/2013   3:02             262  ui-bg_glass_100_f6f6f6_1x400.png
+11/23/2013   3:02             348  ui-bg_glass_100_fdf5ce_1x400.png
+11/23/2013   3:02           5,815  ui-bg_gloss-wave_35_f6a828_500x100.png
+11/24/2013  13:42             328  ui-bg_highlight-soft_75_ffe45c_1x100.png
+11/23/2013   3:02             278  ui-bg_highlight-soft_100_eeeeee_1x100.png
+11/24/2013  13:42           4,549  ui-icons_ef8c08_256x240.png
+11/24/2013  13:42           6,299  ui-icons_ffffff_256x240.png
+
+ Directory of  H:\data\tri\node\apps\tri\*
+
+11/14/2013  17:17         <DIR>    img
+10/20/2013  19:46           2,596  Admin.htm
+10/18/2013   6:42           2,193  Admin.js
+ 2/20/2013  11:55          82,497  angular.min.js
+10/16/2013  12:43           4,748  Apps.css
+11/25/2013   7:03          27,269  AppsBase.htm
+10/16/2013  12:43           5,230  AppStd.css
+ 7/04/2013  16:57           5,170  beep-02.wav
+ 9/28/2013  19:53           5,491  LAB.js
+10/16/2013  12:41           2,674  Prime.htm
+10/19/2013   6:49           1,736  Prime.js
+ 6/08/2013  11:58           3,576  script.js
+10/16/2013  12:43             732  TablesUser.css
+10/18/2013   6:02           2,853  TablesUser.js
+12/02/2013   5:05         260,063  TRI.js
+12/02/2013   5:06          80,816  TRI.min.js
+10/27/2013  15:47           9,733  TriBoot.htm
+10/18/2013   7:57           6,165  TriBoot.js
+10/16/2013  12:45           7,785  ut.js
+
+ Directory of  H:\data\tri\node\apps\tri\img\*
+
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:20           1,150  fav-admin0.ico
+10/12/2013  21:21           1,150  fav-boot0.ico
+10/12/2013  21:22           1,150  fav-chqs0.ico
+10/17/2013   4:01           1,150  fav-chqs1.ico
+10/12/2013  21:03           1,150  fav-deps0.ico
+10/17/2013   4:04           1,150  fav-deps1.ico
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/20/2013   5:07           1,150  fav-msgs0.ico
+10/20/2013   5:08           1,150  fav-msgs1.ico
+11/01/2013   5:19           1,150  fav-t1b.ico
+11/01/2013   5:19           1,150  fav-t1w.ico
+11/01/2013   5:21           1,150  fav-t2b.ico
+11/01/2013   5:20           1,150  fav-t2w.ico
+11/01/2013   5:22           1,150  fav-t3b.ico
+11/01/2013   5:21           1,150  fav-t3w.ico
+ 6/29/2003  17:14             139  transparent.gif
+
+ Directory of  H:\data\tri\node\css\*
+
+10/19/2013   4:19           1,651  animations.css
+10/19/2013   4:19         127,352  bootstrap.min.css
+10/30/2013   4:31           4,627  docs-3a30.css
+10/22/2013   3:29           3,737  docs-save.css
+11/04/2013   5:53           4,687  docs.css
+10/19/2013   4:19           2,702  doc_widgets.css
+10/19/2013   4:19          23,644  font-awesome.css
+
+ Directory of  H:\data\tri\node\font\*
+
+10/19/2013   4:19          29,360  fontawesome-webfont.eot
+10/19/2013   4:19         162,047  fontawesome-webfont.svg
+10/19/2013   4:19          64,960  fontawesome-webfont.ttf
+10/19/2013   4:19          34,420  fontawesome-webfont.woff
+10/19/2013   4:19          50,204  FontAwesome.otf
+
+ Directory of  H:\data\tri\node\grunt-scripts\*
+
+12/03/2013  10:33          80,816  TRI.min.js
+12/03/2013  10:33           7,508  ut.js
+
+ Directory of  H:\data\tri\node\img\*
+
+10/17/2013   8:20          36,509  add-admin-user50.JPG
+10/30/2013  17:37          24,543  admin-page50.JPG
+10/30/2013  17:35          25,552  admin-user-login50.JPG
+10/17/2013  19:27          26,940  deps-app50.JPG
+11/01/2013   5:19           1,150  fav-t1w.ico
+10/30/2013  10:21          25,635  hello-app50.JPG
+10/17/2013   8:21          36,659  needs-prime50.JPG
+10/30/2013  17:44          40,932  super-page50.JPG
+10/17/2013   8:22          28,944  super-user-login50.JPG
+
+ Directory of  H:\data\tri\node\js\*
+
+10/19/2013   4:19          19,508  angular-bootstrap-prettify.min.js
+10/19/2013   4:19           2,704  angular-bootstrap.min.js
+10/19/2013   4:19          88,802  angular.min.js
+10/19/2013   5:42          22,801  docs-save.js
+10/24/2013   5:53          24,772  docs-save2.js
+12/03/2013  10:33         112,309  docs-setup.js
+11/28/2013   6:54          28,266  docs.js
+10/12/2013   8:12             959  src-display.js
+
+ Directory of  H:\data\tri\node\node-js\*
+
+11/29/2013  10:11           3,578  parms.js
+12/03/2013  10:36          37,287  tri-server.js
+
+ Directory of  H:\data\tri\node\partials\*
+
+11/14/2013  17:17         <DIR>    api
+12/03/2013   8:53         <DIR>    apps
+12/03/2013   8:53         <DIR>    guide
+11/16/2013   6:11         <DIR>    overview
+12/03/2013   8:53         <DIR>    tutorial
+
+ Directory of  H:\data\tri\node\partials\api\*
+
+12/03/2013  10:33             470  index.html
+12/03/2013  10:33          20,140  tri.controller.ctrlCommEdit.html
+12/03/2013  10:33          14,443  tri.controller.ctrlCommList.html
+12/03/2013  10:33           7,936  tri.controller.ctrlMenu.html
+12/03/2013  10:33           6,408  tri.controller.ctrlSect.html
+12/03/2013  10:33           4,463  tri.controller.ctrlSess.html
+12/03/2013  10:33           3,318  tri.directive.autocomplete.html
+12/03/2013  10:33           2,137  tri.directive.autotab.html
+12/03/2013  10:33           1,779  tri.directive.blurEvent.html
+12/03/2013  10:33           1,573  tri.directive.focusClear.html
+12/03/2013  10:33           4,101  tri.directive.macro.html
+12/03/2013  10:33           1,694  tri.directive.scopeVar.html
+12/03/2013  10:33           1,761  tri.directive.whenActive.html
+12/03/2013  10:33             168  tri.html
+12/03/2013  10:33           2,393  tri.method.hookMsgListener.html
+12/03/2013  10:33           6,879  tri.object.Col.html
+12/03/2013  10:33           2,191  tri.object.Filter.html
+12/03/2013  10:33           5,128  tri.object.Table.html
+12/03/2013  10:33           7,241  tri.object.Tri.html
+12/03/2013  10:33           1,171  tri.property.oGBL.html
+12/03/2013  10:33           2,082  tri.servConfig.html
+12/03/2013  10:33          16,846  tri.servCRUD.html
+12/03/2013  10:33          18,742  tri.servGAE.html
+12/03/2013  10:33          17,063  tri.servREC.html
+12/03/2013  10:33           1,554  tri.servREG.html
+12/03/2013  10:33          24,726  tri.servSess.html
+12/03/2013  10:33           2,658  tri.servTBL.html
+
+ Directory of  H:\data\tri\node\partials\apps\*
+
+12/03/2013  10:33           1,840  browser.html
+12/03/2013  10:33          76,329  chqs-app.html
+12/03/2013  10:33         130,983  deps-app.html
+12/03/2013  10:33          43,318  hello-app.html
+12/03/2013  10:33          26,386  helloui-app.html
+12/03/2013  10:33           1,945  index.html
+12/03/2013  10:33           2,438  src-files.html
+12/03/2013  10:33           5,101  zip-files.html
+
+ Directory of  H:\data\tri\node\partials\guide\*
+
+12/03/2013  10:33           3,623  action.html
+12/03/2013  10:33           2,812  admin.html
+12/03/2013  10:33           4,301  appname-html.html
+12/03/2013  10:33           3,756  appname-js.html
+12/03/2013  10:33           2,052  appsconfig.html
+12/03/2013  10:33           1,832  bootstrap.html
+12/03/2013  10:33          12,636  col.html
+12/03/2013  10:33          31,774  construct.html
+12/03/2013  10:33           1,301  data.html
+12/03/2013  10:33           4,296  dataprime.html
+12/03/2013  10:33           3,062  datastore-node.html
+12/03/2013  10:33           1,588  datastore.html
+12/03/2013  10:33           5,965  develop.html
+12/03/2013  10:33           4,559  devp-pkg.html
+12/03/2013  10:33           1,029  directives.html
+12/03/2013  10:33           1,611  disp-page-design.html
+12/03/2013  10:33           4,192  filter.html
+12/03/2013  10:33           1,670  form-page-design.html
+12/03/2013  10:33             515  gaesite.html
+12/03/2013  10:33           1,295  ganalytics.html
+12/03/2013  10:33          10,883  hints-tech.html
+12/03/2013  10:33           3,151  index.html
+12/03/2013  10:33           1,112  macros.html
+12/03/2013  10:33           1,798  multi-window-apps.html
+12/03/2013  10:33             788  node-server.html
+12/03/2013  10:33             679  nodesite.html
+12/03/2013  10:33             680  outstanding.html
+12/03/2013  10:33           9,805  records.html
+12/03/2013  10:33           1,673  sandbox.html
+12/03/2013  10:33          17,822  server-inter.html
+12/03/2013  10:33          22,322  table.html
+12/03/2013  10:33           3,340  templates.html
+12/03/2013  10:33           4,558  user.html
+12/03/2013  10:33           3,904  userid-rec.html
+12/03/2013  10:33           1,147  variants.html
+12/03/2013  10:33           7,721  waks.html
+
+ Directory of  H:\data\tri\node\partials\overview\*
+
+12/03/2013  10:33           1,240  history.html
+12/03/2013  10:33           9,298  index.html
+12/03/2013  10:33           4,224  landmarks.html
+
+ Directory of  H:\data\tri\node\partials\tutorial\*
+
+12/03/2013  10:33           4,582  index.html
+12/03/2013  10:33           3,871  step-01.html
+12/03/2013  10:33           4,835  step-02.html
+12/03/2013  10:33           5,426  step-03.html
+12/03/2013  10:33           2,663  step-04.html
+12/03/2013  10:33           2,957  step-05.html
+12/03/2013  10:33           5,432  step-06.html
+12/03/2013  10:33           1,662  step-07.html
+12/03/2013  10:33           3,375  step-08.html
+12/03/2013  10:33           2,111  step-09.html
+12/03/2013  10:33           3,496  step-10.html
+
+ Directory of  H:\data\tri\node\seo\*
+
+11/14/2013  17:17         <DIR>    api
+11/30/2013  20:03         <DIR>    apps
+11/30/2013  20:03         <DIR>    guide
+11/16/2013   6:11         <DIR>    overview
+11/30/2013  20:03         <DIR>    tutorial
+11/02/2013  15:51           1,170  render.js
+11/02/2013  17:07             933  render2.js
+11/17/2013   7:28             702  seo-appspage.htm
+11/17/2013   7:28             568  seo-template.htm
+11/02/2013  10:15           2,527  seo-test.htm
+
+ Directory of  H:\data\tri\node\seo\api\*
+
+12/03/2013  10:30           1,074  index.htm
+12/03/2013  10:30          21,217  tri.controller.ctrlCommEdit.htm
+12/03/2013  10:30          15,472  tri.controller.ctrlCommList.htm
+12/03/2013  10:30           8,737  tri.controller.ctrlMenu.htm
+12/03/2013  10:30           7,145  tri.controller.ctrlSect.htm
+12/03/2013  10:30           5,152  tri.controller.ctrlSess.htm
+12/03/2013  10:30           3,899  tri.directive.autocomplete.htm
+12/03/2013  10:30           2,713  tri.directive.autotab.htm
+12/03/2013  10:30           2,377  tri.directive.blurEvent.htm
+12/03/2013  10:30           2,152  tri.directive.focusClear.htm
+12/03/2013  10:30           4,699  tri.directive.macro.htm
+12/03/2013  10:30           2,271  tri.directive.scopeVar.htm
+12/03/2013  10:30           2,340  tri.directive.whenActive.htm
+12/03/2013  10:30             740  tri.htm
+12/03/2013  10:30           2,993  tri.method.hookMsgListener.htm
+12/03/2013  10:30           7,483  tri.object.Col.htm
+12/03/2013  10:30           2,782  tri.object.Filter.htm
+12/03/2013  10:30           5,750  tri.object.Table.htm
+12/03/2013  10:30           7,933  tri.object.Tri.htm
+12/03/2013  10:30           1,768  tri.property.oGBL.htm
+12/03/2013  10:30           2,677  tri.servConfig.htm
+12/03/2013  10:30          17,854  tri.servCRUD.htm
+12/03/2013  10:30          19,566  tri.servGAE.htm
+12/03/2013  10:30          17,991  tri.servREC.htm
+12/03/2013  10:30           2,130  tri.servREG.htm
+12/03/2013  10:30          25,751  tri.servSess.htm
+12/03/2013  10:30           3,298  tri.servTBL.htm
+
+ Directory of  H:\data\tri\node\seo\apps\*
+
+12/03/2013  10:30           2,433  browser.htm
+12/03/2013  10:30          77,179  chqs-app.htm
+12/03/2013  10:30         131,969  deps-app.htm
+12/03/2013  10:30          44,321  hello-app.htm
+12/03/2013  10:30          27,015  helloui-app.htm
+12/03/2013  10:30           2,597  index.htm
+12/03/2013  10:30           3,020  src-files.htm
+12/03/2013  10:30           5,788  zip-files.htm
+
+ Directory of  H:\data\tri\node\seo\guide\*
+
+12/03/2013  10:30           4,223  action.htm
+12/03/2013  10:30           3,432  admin.htm
+12/03/2013  10:30           4,951  appname-html.htm
+12/03/2013  10:30           4,430  appname-js.htm
+12/03/2013  10:30           2,673  appsconfig.htm
+12/03/2013  10:30           2,465  bootstrap.htm
+12/03/2013  10:30          13,434  col.htm
+12/03/2013  10:30          33,392  construct.htm
+12/03/2013  10:30           1,906  data.htm
+12/03/2013  10:30           5,002  dataprime.htm
+12/03/2013  10:30           3,721  datastore-node.htm
+12/03/2013  10:30           2,236  datastore.htm
+12/03/2013  10:30           6,741  develop.htm
+12/03/2013  10:30           5,293  devp-pkg.htm
+12/03/2013  10:30           1,650  directives.htm
+12/03/2013  10:30           2,257  disp-page-design.htm
+12/03/2013  10:30           4,842  filter.htm
+12/03/2013  10:30           2,281  form-page-design.htm
+12/03/2013  10:30           1,110  gaesite.htm
+12/03/2013  10:30           1,898  ganalytics.htm
+12/03/2013  10:30          11,554  hints-tech.htm
+12/03/2013  10:30           4,006  index.htm
+12/03/2013  10:30           1,729  macros.htm
+12/03/2013  10:30           2,450  multi-window-apps.htm
+12/03/2013  10:30           1,404  node-server.htm
+12/03/2013  10:30           1,297  nodesite.htm
+12/03/2013  10:30           1,262  outstanding.htm
+12/03/2013  10:30          10,734  records.htm
+12/03/2013  10:30           2,264  sandbox.htm
+12/03/2013  10:30          18,811  server-inter.htm
+12/03/2013  10:30          23,291  table.htm
+12/03/2013  10:30           4,004  templates.htm
+12/03/2013  10:30           5,269  user.htm
+12/03/2013  10:30           4,514  userid-rec.htm
+12/03/2013  10:30           1,758  variants.htm
+12/03/2013  10:30           8,432  waks.htm
+
+ Directory of  H:\data\tri\node\seo\overview\*
+
+12/03/2013  10:30           1,837  history.htm
+12/03/2013  10:30           9,952  index.htm
+12/03/2013  10:30           4,860  landmarks.htm
+
+ Directory of  H:\data\tri\node\seo\tutorial\*
+
+12/03/2013  10:30           5,348  index.htm
+12/03/2013  10:30           4,547  step-01.htm
+12/03/2013  10:30           5,552  step-02.htm
+12/03/2013  10:30           6,114  step-03.htm
+12/03/2013  10:30           3,354  step-04.htm
+12/03/2013  10:30           3,592  step-05.htm
+12/03/2013  10:30           6,192  step-06.htm
+12/03/2013  10:30           2,315  step-07.htm
+12/03/2013  10:30           4,106  step-08.htm
+12/03/2013  10:30           2,769  step-09.htm
+12/03/2013  10:30           4,141  step-10.htm
+
+ Directory of  H:\data\tri\node\TRI-DB\*
+
+11/16/2013   6:12         <DIR>    chqs
+11/16/2013   6:12         <DIR>    deps
+11/16/2013   6:12         <DIR>    msgs
+11/15/2013  16:57              52  $super.srp.json.txt
+
+ Directory of  H:\data\tri\node\TRI-DB\chqs\*
+
+11/15/2013  17:13          37,589  $data.chqs.2013-demo.json.txt
+11/15/2013  17:13          14,255  $data.coa.cit.json.txt
+11/15/2013  17:13           6,612  $data.suppliers.cit.json.txt
+11/16/2013   6:15              84  $user.guest.json.txt
+11/15/2013  18:23              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\node\TRI-DB\deps\*
+
+11/15/2013  17:18             147  $data.dep.2013-06-30.ES1.CND.dp1.json.txt
+11/15/2013  17:18             649  $data.dep.2013-06-30.ES1.CND.dp2.json.txt
+11/15/2013  17:18           3,783  $data.dep.2013-06-30.ES1.CND.dp3.json.txt
+11/15/2013  17:18           2,874  $data.dep.2013-07-07.ES1.CND.dp3.json.txt
+11/15/2013  17:18             646  $data.dep.2013-07-07.TST.CND.dp1.json.txt
+11/15/2013  17:18             950  $data.dep.2013-07-07.TST.CND.dp2.json.txt
+11/15/2013  17:18           4,972  $data.dep.2013-07-14.ES1.CND.dp1.json.txt
+11/15/2013  17:18           3,432  $data.dep.2013-07-21.ES1.CND.dp1.json.txt
+11/15/2013  17:18             975  $data.dep.2013-07-25.TST.CND.dp1.json.txt
+11/15/2013  17:18           4,310  $data.dep.2013-07-28.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,334  $data.dep.2013-08-04.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,308  $data.dep.2013-08-11.CSC.CND.dp3.json.txt
+11/15/2013  17:18           5,810  $data.dep.2013-08-11.ES1.CND.dp1.json.txt
+11/15/2013  17:18             412  $data.dep.2013-08-11.ES1.CND.dp2.json.txt
+11/15/2013  17:18             434  $data.dep.2013-08-17.ES1.USD.dp1.json.txt
+11/15/2013  17:18             461  $data.dep.2013-08-18.CSC.BKS.dp3.json.txt
+11/15/2013  17:18           7,201  $data.dep.2013-08-18.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,351  $data.dep.2013-08-18.ES1.CND.dp1.json.txt
+11/15/2013  17:18           5,786  $data.dep.2013-08-25.CSC.CND.dp1.json.txt
+11/15/2013  17:18           2,648  $data.dep.2013-08-25.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,190  $data.dep.2013-09-01.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,086  $data.dep.2013-09-01.ES1.CND.dp1.json.txt
+11/15/2013  17:18           2,822  $data.dep.2013-09-08.CSC.CND.dp1.json.txt
+11/15/2013  17:18           6,276  $data.dep.2013-09-15.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,128  $data.dep.2013-09-15.ES1.CND.dp1.json.txt
+11/15/2013  17:18           7,639  $data.dep.2013-09-22.CSC.CND.dp1.json.txt
+11/15/2013  17:18             467  $data.dep.2013-09-29.CSC.BKS.dp4.json.txt
+11/15/2013  17:18           5,268  $data.dep.2013-09-29.CSC.CND.dp3.json.txt
+11/15/2013  17:18           3,627  $data.dep.2013-09-29.ES1.CND.dp1.json.txt
+11/15/2013  17:18           9,610  $data.dep.2013-09-29.ES1.CND.dp2.json.txt
+11/15/2013  17:18          64,048  $data.donor.donor0.json.txt
+11/15/2013  17:18          65,788  $data.donor.donor1.json.txt
+11/15/2013  17:18          17,402  $data.donor.donor2.json.txt
+11/15/2013  17:18             403  $data.env.envs.json.txt
+11/15/2013  17:22              62  $user.guest.json.txt
+11/15/2013  17:00              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\node\TRI-DB\msgs\*
+
+11/15/2013  17:15          21,242  $data.msg.messages.json.txt
+12/02/2013   9:40              62  $user.guest.json.txt
+11/15/2013  17:04              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\prod\*
+
+12/02/2013  17:05         <DIR>    war
+
+ Directory of  H:\data\tri\prod\war\*
+
+10/18/2013  16:22         <DIR>    app-bbb
+10/18/2013  16:22         <DIR>    app-cita
+12/02/2013  17:05         <DIR>    apps
+10/31/2013  20:39         <DIR>    css
+10/18/2013  16:22         <DIR>    font
+11/08/2013   6:48         <DIR>    grunt-scripts
+11/01/2013   9:38         <DIR>    img
+10/27/2013   6:42         <DIR>    js
+12/02/2013  17:05         <DIR>    node-js
+11/07/2013  17:35         <DIR>    partials
+11/07/2013  17:35         <DIR>    seo
+12/02/2013  17:05         <DIR>    TRI-DB
+10/18/2013  16:22         <DIR>    web-gems
+10/19/2013   6:12         <DIR>    WEB-INF
+12/02/2013  17:05         <DIR>    zips
+12/03/2013  10:30           7,428  appspage.html
+11/07/2013  17:35           6,834  appsuspendpage.html
+12/02/2013   6:37              82  def-app.htm
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/19/2013   6:28           1,150  favicon.ico
+11/02/2013   5:21              53  google138ba77474eb0310.html
+11/15/2013  15:24          11,632  index.html
+10/29/2013  15:40          11,688  index0.html
+11/03/2013   7:35              56  robots.txt
+10/13/2013   5:36             968  SrcDisplay.html
+10/13/2013   5:29           1,150  tri-doc.ico
+
+ Directory of  H:\data\tri\prod\war\app-bbb\*
+
+10/18/2013  16:22         <DIR>    css
+10/18/2013  16:22         <DIR>    ENPage
+10/18/2013  16:22         <DIR>    ENSnip
+10/18/2013  16:22         <DIR>    img
+10/18/2013  16:22         <DIR>    js
+10/03/2013   2:13           4,991  bbb.ace
+
+ Directory of  H:\data\tri\prod\war\app-bbb\ENSnip\*
+
+ 9/29/2007  17:06             953  Home.htm
+10/02/2006  13:28             585  HomeLocked.htm
+10/03/2006   8:39             720  LeftSnip.htm
+
+ Directory of  H:\data\tri\prod\war\app-cita\*
+
+10/18/2013  16:22         <DIR>    css
+10/18/2013  16:22         <DIR>    img
+10/18/2013  16:22         <DIR>    js
+10/03/2013   8:37           2,152  cita.ace
+
+ Directory of  H:\data\tri\prod\war\apps\*
+
+12/02/2013  17:05         <DIR>    images
+10/18/2013  16:22         <DIR>    tri
+11/15/2013  15:32           2,941  AppsConfig.js
+11/27/2013   9:18          12,549  Chqs.htm
+10/25/2013   4:05          27,785  Chqs.js
+10/16/2013  12:40           4,941  Deps.css
+10/26/2013  14:20          17,913  Deps.htm
+10/26/2013   9:30          27,094  Deps.js
+10/24/2013  17:53           7,761  FormCheque.htm
+10/25/2013   9:32           5,178  FormCheque.js
+10/26/2013  10:35          15,336  FormDeposit.htm
+10/26/2013  10:56           6,403  FormDeposit.js
+10/26/2013  11:08           4,556  FormDepSum.htm
+10/26/2013  11:37           8,324  FormDepSum.js
+10/26/2013  11:37           3,100  FormEnvelope.htm
+10/26/2013  11:37           2,635  FormEnvelope.js
+10/23/2013  22:31           2,113  FormHello.htm
+10/21/2013  15:37           2,145  FormHello.js
+11/27/2013   9:18           2,878  Hello.htm
+10/23/2013  16:02           6,360  Hello.js
+11/27/2013   7:21           2,718  HelloUI.css
+11/27/2013   9:16           3,961  HelloUI.htm
+11/27/2013   7:09          10,380  HelloUI.js
+11/23/2013   5:53          93,107  jquery-1.10.2.min.js
+11/24/2013  13:42          26,298  jquery-ui-1.10.3.custom.css
+11/24/2013  13:42         108,995  jquery-ui-1.10.3.custom.min.js
+10/16/2013  10:19           6,066  TableDonors.js
+10/26/2013   8:58           3,873  TableEnvelopes.js
+
+ Directory of  H:\data\tri\prod\war\apps\images\*
+
+11/23/2013   3:02             312  ui-bg_diagonals-thick_20_666666_40x40.png
+11/23/2013   3:02             207  ui-bg_glass_65_ffffff_1x400.png
+11/23/2013   3:02             262  ui-bg_glass_100_f6f6f6_1x400.png
+11/23/2013   3:02             348  ui-bg_glass_100_fdf5ce_1x400.png
+11/23/2013   3:02           5,815  ui-bg_gloss-wave_35_f6a828_500x100.png
+11/24/2013  13:42             328  ui-bg_highlight-soft_75_ffe45c_1x100.png
+11/23/2013   3:02             278  ui-bg_highlight-soft_100_eeeeee_1x100.png
+11/24/2013  13:42           4,549  ui-icons_ef8c08_256x240.png
+11/24/2013  13:42           6,299  ui-icons_ffffff_256x240.png
+
+ Directory of  H:\data\tri\prod\war\apps\tri\*
+
+11/01/2013   8:45         <DIR>    img
+10/20/2013  19:46           2,596  Admin.htm
+10/18/2013   6:42           2,193  Admin.js
+ 2/20/2013  11:55          82,497  angular.min.js
+10/16/2013  12:43           4,748  Apps.css
+11/25/2013   7:03          27,269  AppsBase.htm
+10/16/2013  12:43           5,230  AppStd.css
+ 7/04/2013  16:57           5,170  beep-02.wav
+ 9/28/2013  19:53           5,491  LAB.js
+10/16/2013  12:41           2,674  Prime.htm
+10/19/2013   6:49           1,736  Prime.js
+ 6/08/2013  11:58           3,576  script.js
+10/16/2013  12:43             732  TablesUser.css
+10/18/2013   6:02           2,853  TablesUser.js
+12/02/2013   5:05         260,063  TRI.js
+12/02/2013   5:06          80,816  TRI.min.js
+10/27/2013  15:47           9,733  TriBoot.htm
+10/18/2013   7:57           6,165  TriBoot.js
+10/16/2013  12:45           7,785  ut.js
+
+ Directory of  H:\data\tri\prod\war\apps\tri\img\*
+
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:20           1,150  fav-admin0.ico
+10/12/2013  21:21           1,150  fav-boot0.ico
+10/12/2013  21:22           1,150  fav-chqs0.ico
+10/17/2013   4:01           1,150  fav-chqs1.ico
+10/12/2013  21:03           1,150  fav-deps0.ico
+10/17/2013   4:04           1,150  fav-deps1.ico
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/20/2013   5:07           1,150  fav-msgs0.ico
+10/20/2013   5:08           1,150  fav-msgs1.ico
+11/01/2013   5:19           1,150  fav-t1b.ico
+11/01/2013   5:19           1,150  fav-t1w.ico
+11/01/2013   5:21           1,150  fav-t2b.ico
+11/01/2013   5:20           1,150  fav-t2w.ico
+11/01/2013   5:22           1,150  fav-t3b.ico
+11/01/2013   5:21           1,150  fav-t3w.ico
+ 6/29/2003  17:14             139  transparent.gif
+
+ Directory of  H:\data\tri\prod\war\css\*
+
+10/19/2013   4:19           1,651  animations.css
+10/19/2013   4:19         127,352  bootstrap.min.css
+10/30/2013   4:31           4,627  docs-3a30.css
+10/22/2013   3:29           3,737  docs-save.css
+11/04/2013   5:53           4,687  docs.css
+10/19/2013   4:19           2,702  doc_widgets.css
+10/19/2013   4:19          23,644  font-awesome.css
+
+ Directory of  H:\data\tri\prod\war\font\*
+
+10/19/2013   4:19          29,360  fontawesome-webfont.eot
+10/19/2013   4:19         162,047  fontawesome-webfont.svg
+10/19/2013   4:19          64,960  fontawesome-webfont.ttf
+10/19/2013   4:19          34,420  fontawesome-webfont.woff
+10/19/2013   4:19          50,204  FontAwesome.otf
+
+ Directory of  H:\data\tri\prod\war\grunt-scripts\*
+
+12/03/2013  10:33          80,816  TRI.min.js
+12/03/2013  10:33           7,508  ut.js
+
+ Directory of  H:\data\tri\prod\war\img\*
+
+10/17/2013   8:20          36,509  add-admin-user50.JPG
+10/30/2013  17:37          24,543  admin-page50.JPG
+10/30/2013  17:35          25,552  admin-user-login50.JPG
+10/17/2013  19:27          26,940  deps-app50.JPG
+11/01/2013   5:19           1,150  fav-t1w.ico
+10/30/2013  10:21          25,635  hello-app50.JPG
+10/17/2013   8:21          36,659  needs-prime50.JPG
+10/30/2013  17:44          40,932  super-page50.JPG
+10/17/2013   8:22          28,944  super-user-login50.JPG
+
+ Directory of  H:\data\tri\prod\war\js\*
+
+10/19/2013   4:19          19,508  angular-bootstrap-prettify.min.js
+10/19/2013   4:19           2,704  angular-bootstrap.min.js
+10/19/2013   4:19          88,802  angular.min.js
+10/19/2013   5:42          22,801  docs-save.js
+10/24/2013   5:53          24,772  docs-save2.js
+12/03/2013  10:33         112,309  docs-setup.js
+11/28/2013   6:54          28,266  docs.js
+10/12/2013   8:12             959  src-display.js
+
+ Directory of  H:\data\tri\prod\war\node-js\*
+
+11/29/2013  10:11           3,578  parms.js
+12/02/2013   9:39          37,285  tri-server.js
+11/29/2013  10:21           8,910  waks.js
+
+ Directory of  H:\data\tri\prod\war\partials\*
+
+11/07/2013  17:35         <DIR>    api
+12/02/2013  17:05         <DIR>    apps
+12/02/2013  17:05         <DIR>    guide
+12/02/2013  17:05         <DIR>    overview
+12/02/2013  17:05         <DIR>    tutorial
+
+ Directory of  H:\data\tri\prod\war\partials\api\*
+
+12/03/2013  10:33             470  index.html
+12/03/2013  10:33          20,140  tri.controller.ctrlCommEdit.html
+12/03/2013  10:33          14,443  tri.controller.ctrlCommList.html
+12/03/2013  10:33           7,936  tri.controller.ctrlMenu.html
+12/03/2013  10:33           6,408  tri.controller.ctrlSect.html
+12/03/2013  10:33           4,463  tri.controller.ctrlSess.html
+12/03/2013  10:33           3,318  tri.directive.autocomplete.html
+12/03/2013  10:33           2,137  tri.directive.autotab.html
+12/03/2013  10:33           1,779  tri.directive.blurEvent.html
+12/03/2013  10:33           1,573  tri.directive.focusClear.html
+12/03/2013  10:33           4,101  tri.directive.macro.html
+12/03/2013  10:33           1,694  tri.directive.scopeVar.html
+12/03/2013  10:33           1,761  tri.directive.whenActive.html
+12/03/2013  10:33             168  tri.html
+12/03/2013  10:33           2,393  tri.method.hookMsgListener.html
+12/03/2013  10:33           6,879  tri.object.Col.html
+12/03/2013  10:33           2,191  tri.object.Filter.html
+12/03/2013  10:33           5,128  tri.object.Table.html
+12/03/2013  10:33           7,241  tri.object.Tri.html
+12/03/2013  10:33           1,171  tri.property.oGBL.html
+12/03/2013  10:33           2,082  tri.servConfig.html
+12/03/2013  10:33          16,846  tri.servCRUD.html
+12/03/2013  10:33          18,742  tri.servGAE.html
+12/03/2013  10:33          17,063  tri.servREC.html
+12/03/2013  10:33           1,554  tri.servREG.html
+12/03/2013  10:33          24,726  tri.servSess.html
+12/03/2013  10:33           2,658  tri.servTBL.html
+
+ Directory of  H:\data\tri\prod\war\partials\apps\*
+
+12/03/2013  10:33           1,840  browser.html
+12/03/2013  10:33          76,329  chqs-app.html
+12/03/2013  10:33         130,983  deps-app.html
+12/03/2013  10:33          43,318  hello-app.html
+12/03/2013  10:33          26,386  helloui-app.html
+12/03/2013  10:33           1,945  index.html
+12/03/2013  10:33           2,438  src-files.html
+12/03/2013  10:33           5,101  zip-files.html
+
+ Directory of  H:\data\tri\prod\war\partials\guide\*
+
+12/03/2013  10:33           3,623  action.html
+12/03/2013  10:33           2,812  admin.html
+12/03/2013  10:33           4,301  appname-html.html
+12/03/2013  10:33           3,756  appname-js.html
+12/03/2013  10:33           2,052  appsconfig.html
+12/03/2013  10:33           1,832  bootstrap.html
+12/03/2013  10:33          12,636  col.html
+12/03/2013  10:33          31,774  construct.html
+12/03/2013  10:33           1,301  data.html
+12/03/2013  10:33           4,296  dataprime.html
+12/03/2013  10:33           3,062  datastore-node.html
+12/03/2013  10:33           1,588  datastore.html
+12/03/2013  10:33           5,965  develop.html
+12/03/2013  10:33           4,559  devp-pkg.html
+12/03/2013  10:33           1,029  directives.html
+12/03/2013  10:33           1,611  disp-page-design.html
+12/03/2013  10:33           4,192  filter.html
+12/03/2013  10:33           1,670  form-page-design.html
+12/03/2013  10:33             515  gaesite.html
+12/03/2013  10:33           1,295  ganalytics.html
+12/03/2013  10:33          10,883  hints-tech.html
+12/03/2013  10:33           3,151  index.html
+12/03/2013  10:33           1,112  macros.html
+12/03/2013  10:33           1,798  multi-window-apps.html
+12/03/2013  10:33             788  node-server.html
+12/03/2013  10:33             679  nodesite.html
+12/03/2013  10:33             680  outstanding.html
+12/03/2013  10:33           9,805  records.html
+12/03/2013  10:33           1,673  sandbox.html
+12/03/2013  10:33          17,822  server-inter.html
+12/03/2013  10:33          22,322  table.html
+12/03/2013  10:33           3,340  templates.html
+12/03/2013  10:33           4,558  user.html
+12/03/2013  10:33           3,904  userid-rec.html
+12/03/2013  10:33           1,147  variants.html
+12/03/2013  10:33           7,721  waks.html
+
+ Directory of  H:\data\tri\prod\war\partials\overview\*
+
+12/03/2013  10:33           1,240  history.html
+12/03/2013  10:33           9,298  index.html
+12/03/2013  10:33           4,224  landmarks.html
+
+ Directory of  H:\data\tri\prod\war\partials\tutorial\*
+
+12/03/2013  10:33           4,582  index.html
+12/03/2013  10:33           3,871  step-01.html
+12/03/2013  10:33           4,835  step-02.html
+12/03/2013  10:33           5,426  step-03.html
+12/03/2013  10:33           2,663  step-04.html
+12/03/2013  10:33           2,957  step-05.html
+12/03/2013  10:33           5,432  step-06.html
+12/03/2013  10:33           1,662  step-07.html
+12/03/2013  10:33           3,375  step-08.html
+12/03/2013  10:33           2,111  step-09.html
+12/03/2013  10:33           3,496  step-10.html
+
+ Directory of  H:\data\tri\prod\war\seo\*
+
+11/07/2013  17:35         <DIR>    api
+12/02/2013  17:05         <DIR>    apps
+12/02/2013  17:05         <DIR>    guide
+12/02/2013  17:05         <DIR>    overview
+12/02/2013  17:05         <DIR>    tutorial
+11/02/2013  15:51           1,170  render.js
+11/02/2013  17:07             933  render2.js
+11/17/2013   7:24             711  seo-appspage.htm
+11/17/2013   7:24             577  seo-template.htm
+11/02/2013  10:15           2,527  seo-test.htm
+
+ Directory of  H:\data\tri\prod\war\seo\api\*
+
+12/03/2013  10:30           1,083  index.htm
+12/03/2013  10:30          21,226  tri.controller.ctrlCommEdit.htm
+12/03/2013  10:30          15,481  tri.controller.ctrlCommList.htm
+12/03/2013  10:30           8,746  tri.controller.ctrlMenu.htm
+12/03/2013  10:30           7,154  tri.controller.ctrlSect.htm
+12/03/2013  10:30           5,161  tri.controller.ctrlSess.htm
+12/03/2013  10:30           3,908  tri.directive.autocomplete.htm
+12/03/2013  10:30           2,722  tri.directive.autotab.htm
+12/03/2013  10:30           2,386  tri.directive.blurEvent.htm
+12/03/2013  10:30           2,161  tri.directive.focusClear.htm
+12/03/2013  10:30           4,708  tri.directive.macro.htm
+12/03/2013  10:30           2,280  tri.directive.scopeVar.htm
+12/03/2013  10:30           2,349  tri.directive.whenActive.htm
+12/03/2013  10:30             749  tri.htm
+12/03/2013  10:30           3,002  tri.method.hookMsgListener.htm
+12/03/2013  10:30           7,492  tri.object.Col.htm
+12/03/2013  10:30           2,791  tri.object.Filter.htm
+12/03/2013  10:30           5,759  tri.object.Table.htm
+12/03/2013  10:30           7,942  tri.object.Tri.htm
+12/03/2013  10:30           1,777  tri.property.oGBL.htm
+12/03/2013  10:30           2,686  tri.servConfig.htm
+12/03/2013  10:30          17,863  tri.servCRUD.htm
+12/03/2013  10:30          19,575  tri.servGAE.htm
+12/03/2013  10:30          18,000  tri.servREC.htm
+12/03/2013  10:30           2,139  tri.servREG.htm
+12/03/2013  10:30          25,760  tri.servSess.htm
+12/03/2013  10:30           3,307  tri.servTBL.htm
+
+ Directory of  H:\data\tri\prod\war\seo\apps\*
+
+12/03/2013  10:30           2,442  browser.htm
+12/03/2013  10:30          77,188  chqs-app.htm
+12/03/2013  10:30         131,978  deps-app.htm
+12/03/2013  10:30          44,330  hello-app.htm
+12/03/2013  10:30          27,024  helloui-app.htm
+12/03/2013  10:30           2,606  index.htm
+12/03/2013  10:30           3,029  src-files.htm
+12/03/2013  10:30           5,797  zip-files.htm
+
+ Directory of  H:\data\tri\prod\war\seo\guide\*
+
+12/03/2013  10:30           4,232  action.htm
+12/03/2013  10:30           3,441  admin.htm
+12/03/2013  10:30           4,960  appname-html.htm
+12/03/2013  10:30           4,439  appname-js.htm
+12/03/2013  10:30           2,682  appsconfig.htm
+12/03/2013  10:30           2,474  bootstrap.htm
+12/03/2013  10:30          13,443  col.htm
+12/03/2013  10:30          33,401  construct.htm
+12/03/2013  10:30           1,915  data.htm
+12/03/2013  10:30           5,011  dataprime.htm
+12/03/2013  10:30           3,730  datastore-node.htm
+12/03/2013  10:30           2,245  datastore.htm
+12/03/2013  10:30           6,750  develop.htm
+12/03/2013  10:30           5,302  devp-pkg.htm
+12/03/2013  10:30           1,659  directives.htm
+12/03/2013  10:30           2,266  disp-page-design.htm
+12/03/2013  10:30           4,851  filter.htm
+12/03/2013  10:30           2,290  form-page-design.htm
+12/03/2013  10:30           1,119  gaesite.htm
+12/03/2013  10:30           1,907  ganalytics.htm
+12/03/2013  10:30          11,563  hints-tech.htm
+12/03/2013  10:30           4,015  index.htm
+12/03/2013  10:30           1,738  macros.htm
+12/03/2013  10:30           2,459  multi-window-apps.htm
+12/03/2013  10:30           1,413  node-server.htm
+12/03/2013  10:30           1,306  nodesite.htm
+12/03/2013  10:30           1,271  outstanding.htm
+12/03/2013  10:30          10,743  records.htm
+12/03/2013  10:30           2,273  sandbox.htm
+12/03/2013  10:30          18,820  server-inter.htm
+12/03/2013  10:30          23,300  table.htm
+12/03/2013  10:30           4,013  templates.htm
+12/03/2013  10:30           5,278  user.htm
+12/03/2013  10:30           4,523  userid-rec.htm
+12/03/2013  10:30           1,767  variants.htm
+12/03/2013  10:30           8,441  waks.htm
+
+ Directory of  H:\data\tri\prod\war\seo\overview\*
+
+12/03/2013  10:30           1,846  history.htm
+12/03/2013  10:30           9,961  index.htm
+12/03/2013  10:30           4,869  landmarks.htm
+
+ Directory of  H:\data\tri\prod\war\seo\tutorial\*
+
+12/03/2013  10:30           5,357  index.htm
+12/03/2013  10:30           4,556  step-01.htm
+12/03/2013  10:30           5,561  step-02.htm
+12/03/2013  10:30           6,123  step-03.htm
+12/03/2013  10:30           3,363  step-04.htm
+12/03/2013  10:30           3,601  step-05.htm
+12/03/2013  10:30           6,201  step-06.htm
+12/03/2013  10:30           2,324  step-07.htm
+12/03/2013  10:30           4,115  step-08.htm
+12/03/2013  10:30           2,778  step-09.htm
+12/03/2013  10:30           4,150  step-10.htm
+
+ Directory of  H:\data\tri\prod\war\TRI-DB\*
+
+12/02/2013  17:05         <DIR>    chqs
+12/02/2013  17:05         <DIR>    deps
+12/02/2013  17:05         <DIR>    msgs
+11/11/2013   5:50              26  $super.guest.json.txt
+11/15/2013  16:57              52  $super.srp.json.txt
+
+ Directory of  H:\data\tri\prod\war\TRI-DB\chqs\*
+
+11/15/2013  17:13          37,589  $data.chqs.2013-demo.json.txt
+11/15/2013  17:13          14,255  $data.coa.cit.json.txt
+11/15/2013  17:13           6,612  $data.suppliers.cit.json.txt
+11/15/2013  18:26              84  $user.guest.json.txt
+11/15/2013  18:23              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\prod\war\TRI-DB\deps\*
+
+11/15/2013  17:18             147  $data.dep.2013-06-30.ES1.CND.dp1.json.txt
+11/15/2013  17:18             649  $data.dep.2013-06-30.ES1.CND.dp2.json.txt
+11/15/2013  17:18           3,783  $data.dep.2013-06-30.ES1.CND.dp3.json.txt
+11/15/2013  17:18           2,874  $data.dep.2013-07-07.ES1.CND.dp3.json.txt
+11/15/2013  17:18             646  $data.dep.2013-07-07.TST.CND.dp1.json.txt
+11/15/2013  17:18             950  $data.dep.2013-07-07.TST.CND.dp2.json.txt
+11/15/2013  17:18           4,972  $data.dep.2013-07-14.ES1.CND.dp1.json.txt
+11/15/2013  17:18           3,432  $data.dep.2013-07-21.ES1.CND.dp1.json.txt
+11/15/2013  17:18             975  $data.dep.2013-07-25.TST.CND.dp1.json.txt
+11/15/2013  17:18           4,310  $data.dep.2013-07-28.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,334  $data.dep.2013-08-04.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,308  $data.dep.2013-08-11.CSC.CND.dp3.json.txt
+11/15/2013  17:18           5,810  $data.dep.2013-08-11.ES1.CND.dp1.json.txt
+11/15/2013  17:18             412  $data.dep.2013-08-11.ES1.CND.dp2.json.txt
+11/15/2013  17:18             434  $data.dep.2013-08-17.ES1.USD.dp1.json.txt
+11/15/2013  17:18             461  $data.dep.2013-08-18.CSC.BKS.dp3.json.txt
+11/15/2013  17:18           7,201  $data.dep.2013-08-18.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,351  $data.dep.2013-08-18.ES1.CND.dp1.json.txt
+11/15/2013  17:18           5,786  $data.dep.2013-08-25.CSC.CND.dp1.json.txt
+11/15/2013  17:18           2,648  $data.dep.2013-08-25.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,190  $data.dep.2013-09-01.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,086  $data.dep.2013-09-01.ES1.CND.dp1.json.txt
+11/15/2013  17:18           2,822  $data.dep.2013-09-08.CSC.CND.dp1.json.txt
+11/15/2013  17:18           6,276  $data.dep.2013-09-15.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,128  $data.dep.2013-09-15.ES1.CND.dp1.json.txt
+11/15/2013  17:18           7,639  $data.dep.2013-09-22.CSC.CND.dp1.json.txt
+11/15/2013  17:18             467  $data.dep.2013-09-29.CSC.BKS.dp4.json.txt
+11/15/2013  17:18           5,268  $data.dep.2013-09-29.CSC.CND.dp3.json.txt
+11/15/2013  17:18           3,627  $data.dep.2013-09-29.ES1.CND.dp1.json.txt
+11/15/2013  17:18           9,610  $data.dep.2013-09-29.ES1.CND.dp2.json.txt
+11/13/2013  22:05             799  $data.dep.2013-11-14.DEM.CND.dp1.json.txt
+11/15/2013  17:18          64,048  $data.donor.donor0.json.txt
+11/15/2013  17:18          65,788  $data.donor.donor1.json.txt
+11/15/2013  17:18          17,402  $data.donor.donor2.json.txt
+11/15/2013  17:18             403  $data.env.envs.json.txt
+11/13/2013   5:50              40  $user.aa.json.txt
+11/13/2013   5:50              61  $user.admin.json.txt
+11/15/2013  17:22              62  $user.guest.json.txt
+11/15/2013  17:00              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\prod\war\TRI-DB\msgs\*
+
+11/13/2013   5:51          21,185  $data.msg.m2.json.txt
+11/15/2013  17:15          21,242  $data.msg.messages.json.txt
+11/14/2013  15:52              17  $user.a9.json.txt
+11/13/2013   5:50              61  $user.admin.json.txt
+12/02/2013   9:40              62  $user.guest.json.txt
+11/14/2013   2:55              43  $user.new.json.txt
+11/15/2013  17:04              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\prod\war\web-gems\*
+
+10/18/2013  16:22         <DIR>    css
+10/18/2013  16:22         <DIR>    ENPage
+10/18/2013  16:22         <DIR>    ENSnip
+10/18/2013  16:22         <DIR>    img
+10/18/2013  16:22         <DIR>    js
+10/03/2013   2:10             836  core.ace
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\*
+
+10/18/2013  16:22         <DIR>    appengine-generated
+10/18/2013  16:22         <DIR>    classes
+10/18/2013  16:22         <DIR>    lib
+10/18/2013   9:05             523  appengine-web.xml
+ 4/08/2010   6:29             987  logging.properties
+10/19/2013   6:12           1,272  web.xml
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\appengine-generated\*
+
+11/27/2013  10:40              81  datastore-indexes-auto.xml
+11/27/2013  10:41         859,841  local_db.bin
+10/18/2013   7:55              81  xdatastore-indexes-auto.xml
+10/18/2013   8:14         395,587  xlocal_db.bin
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\*
+
+10/18/2013  16:22         <DIR>    com
+10/18/2013  16:22         <DIR>    META-INF
+ 4/08/2010   6:29           1,063  log4j.properties
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\*
+
+10/18/2013  16:22         <DIR>    rsi
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\rsi\*
+
+10/18/2013  16:22         <DIR>    cita
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\rsi\cita\*
+
+10/18/2013  16:22         <DIR>    gdo
+10/18/2013  16:22         <DIR>    jsp
+10/18/2013   5:29          27,043  CitaMethods.class
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\rsi\cita\gdo\*
+
+ 7/13/2013   5:36           6,923  GdoCitaData.class
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\rsi\cita\jsp\*
+
+10/18/2013  16:22         <DIR>    snip
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\rsi\cita\jsp\snip\*
+
+10/18/2013  16:22         <DIR>    cita
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\com\rsi\cita\jsp\snip\cita\*
+
+ 7/13/2013   5:36           3,742  Home.class
+ 7/13/2013   5:36           3,893  LeftSnipCita.class
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\classes\META-INF\*
+
+ 4/08/2010   6:29             887  jdoconfig.xml
+
+ Directory of  H:\data\tri\prod\war\WEB-INF\lib\*
+
+ 3/05/2010  17:15         131,819  ace.jar
+ 5/06/2010   5:20          74,258  ACT.jar
+ 6/13/2013  17:28      12,227,093  appengine-api-1.0-sdk-1.8.1.1.jar
+ 6/13/2013  17:28      11,624,116  appengine-api-labs-1.8.1.1.jar
+ 6/13/2013  17:28           7,068  appengine-jsr107cache-1.8.1.1.jar
+ 4/20/2013  10:52         146,289  bbb.jar
+ 4/22/2013   7:39         457,988  bbbrun.jar
+ 6/06/2013  16:15         249,746  gemscore.jar
+ 3/16/2010  15:17         131,367  gemstool.jar
+ 6/13/2013  17:28           8,082  jsr107cache-1.1.jar
+
+ Directory of  H:\data\tri\prod\war\zips\*
+
+11/01/2013   9:12      28,295,430  gae-local-stripped-1.zip
+11/01/2013   9:13      24,787,831  gae-local-stripped-2.zip
+12/02/2013  10:26         682,562  tri-devp-pkg-node.bin
+12/02/2013  10:26      24,425,088  tri-devp-pkg.bin
+
+ Directory of  H:\data\tri\src\*
+
+12/03/2013   9:03         <DIR>    4nt
+10/07/2013   8:03         <DIR>    data
+
+ Directory of  H:\data\tri\src\4nt\*
+
+10/14/2013  10:12         <DIR>    waks-in
+10/16/2013  10:07         <DIR>    waks-rdy
+12/03/2013   9:03           1,266  asnode.bat
+12/01/2013  18:02             380  botize.bat
+12/01/2013  17:57          10,678  botize.js
+10/14/2013   6:45             181  chqs.bat
+10/14/2013   9:07             171  deps.bat
+11/15/2013  18:32              93  docs.bat
+10/14/2013   6:32             151  donors.bat
+10/14/2013   9:06          13,171  masker.js
+10/04/2013  16:44             269  mjar.bat
+10/05/2013  16:37           7,122  names.txt
+12/02/2013   8:50           2,240  nawk.js
+11/29/2013  10:11           3,578  parms.js
+11/15/2013  15:23             935  prod.bat
+10/05/2013  10:45           7,705  seedrandom-master.zip
+ 9/05/2013   1:42          11,542  seedrandom.js
+12/02/2013  10:19             785  trizip.bat
+12/02/2013  10:19             436  trizipx.txt
+11/27/2013  18:38             125  trizipxn.txt
+
+ Directory of  H:\data\tri\src\4nt\waks-in\*
+
+10/14/2013  10:12              85  $-chqs-guest.json.txt
+10/14/2013  10:12              83  $-chqs-srp.json.txt
+10/14/2013  10:11              63  $-deps-guest.json.txt
+10/14/2013  10:11              61  $-deps-srp.json.txt
+10/05/2013   3:57          38,612  chqs-chqs-2013-demo.json.txt
+10/05/2013   3:57          14,255  chqs-coa-cit.json.txt
+10/05/2013   3:57           7,238  chqs-suppliers-cit.json.txt
+10/05/2013   3:56             147  deps-dep-2013-06-30.ES1.CND.dp1.json.txt
+10/05/2013   3:56             661  deps-dep-2013-06-30.ES1.CND.dp2.json.txt
+10/05/2013   3:56           3,955  deps-dep-2013-06-30.ES1.CND.dp3.json.txt
+10/05/2013   3:56           2,925  deps-dep-2013-07-07.ES1.CND.dp3.json.txt
+10/05/2013   3:56             647  deps-dep-2013-07-07.TST.CND.dp1.json.txt
+10/05/2013   3:56             962  deps-dep-2013-07-07.TST.CND.dp2.json.txt
+10/05/2013   3:56           5,019  deps-dep-2013-07-14.ES1.CND.dp1.json.txt
+10/05/2013   3:56           3,471  deps-dep-2013-07-21.ES1.CND.dp1.json.txt
+10/05/2013   3:56             992  deps-dep-2013-07-25.TST.CND.dp1.json.txt
+10/05/2013   3:56           4,423  deps-dep-2013-07-28.ES1.CND.dp1.json.txt
+10/05/2013   3:56           6,326  deps-dep-2013-08-04.ES1.CND.dp1.json.txt
+10/05/2013   3:56           6,330  deps-dep-2013-08-11.CSC.CND.dp3.json.txt
+10/05/2013   3:56           5,898  deps-dep-2013-08-11.ES1.CND.dp1.json.txt
+10/05/2013   3:56             412  deps-dep-2013-08-11.ES1.CND.dp2.json.txt
+10/05/2013   3:56             434  deps-dep-2013-08-17.ES1.USD.dp1.json.txt
+10/05/2013   3:56             467  deps-dep-2013-08-18.CSC.BKS.dp3.json.txt
+10/05/2013   3:56           7,248  deps-dep-2013-08-18.CSC.CND.dp2.json.txt
+10/05/2013   3:56           4,370  deps-dep-2013-08-18.ES1.CND.dp1.json.txt
+10/05/2013   3:56           5,844  deps-dep-2013-08-25.CSC.CND.dp1.json.txt
+10/05/2013   3:56           2,645  deps-dep-2013-08-25.CSC.CND.dp2.json.txt
+10/05/2013   3:56           4,216  deps-dep-2013-09-01.CSC.CND.dp2.json.txt
+10/05/2013   3:56           5,102  deps-dep-2013-09-01.ES1.CND.dp1.json.txt
+10/05/2013   3:56           2,835  deps-dep-2013-09-08.CSC.CND.dp1.json.txt
+10/05/2013   3:56           6,307  deps-dep-2013-09-15.CSC.CND.dp2.json.txt
+10/05/2013   3:56           5,164  deps-dep-2013-09-15.ES1.CND.dp1.json.txt
+10/05/2013   3:56           7,681  deps-dep-2013-09-22.CSC.CND.dp1.json.txt
+10/05/2013   3:56             472  deps-dep-2013-09-29.CSC.BKS.dp4.json.txt
+10/05/2013   3:56           5,306  deps-dep-2013-09-29.CSC.CND.dp3.json.txt
+10/05/2013   3:56           3,615  deps-dep-2013-09-29.ES1.CND.dp1.json.txt
+10/05/2013   3:56           9,610  deps-dep-2013-09-29.ES1.CND.dp2.json.txt
+10/05/2013  17:33          64,462  deps-donor-donor0.json.txt
+10/05/2013  17:33          64,475  deps-donor-donor1.json.txt
+10/05/2013  17:33          17,201  deps-donor-donor2.json.txt
+10/05/2013   3:56           1,072  deps-env-envs.json.txt
+10/14/2013  10:23              62  trap.txt
+
+ Directory of  H:\data\tri\src\4nt\waks-rdy\*
+
+10/14/2013  20:51              85  $-chqs-guest.json.txt
+10/14/2013   6:44          37,589  chqs-chqs-2013-demo.json.txt
+10/05/2013   3:57          14,255  chqs-coa-cit.json.txt
+10/14/2013   6:44           6,612  chqs-suppliers-cit.json.txt
+10/14/2013   9:07             147  deps-dep-2013-06-30.ES1.CND.dp1.json.txt
+10/14/2013   9:07             649  deps-dep-2013-06-30.ES1.CND.dp2.json.txt
+10/14/2013   9:07           3,783  deps-dep-2013-06-30.ES1.CND.dp3.json.txt
+10/14/2013   9:07           2,874  deps-dep-2013-07-07.ES1.CND.dp3.json.txt
+10/14/2013   9:07             646  deps-dep-2013-07-07.TST.CND.dp1.json.txt
+10/14/2013   9:07             950  deps-dep-2013-07-07.TST.CND.dp2.json.txt
+10/14/2013   9:07           4,972  deps-dep-2013-07-14.ES1.CND.dp1.json.txt
+10/14/2013   9:07           3,432  deps-dep-2013-07-21.ES1.CND.dp1.json.txt
+10/14/2013   9:07             975  deps-dep-2013-07-25.TST.CND.dp1.json.txt
+10/14/2013   9:07           4,310  deps-dep-2013-07-28.ES1.CND.dp1.json.txt
+10/14/2013   9:07           6,334  deps-dep-2013-08-04.ES1.CND.dp1.json.txt
+10/14/2013   9:07           6,308  deps-dep-2013-08-11.CSC.CND.dp3.json.txt
+10/14/2013   9:07           5,810  deps-dep-2013-08-11.ES1.CND.dp1.json.txt
+10/14/2013   9:07             412  deps-dep-2013-08-11.ES1.CND.dp2.json.txt
+10/14/2013   9:07             434  deps-dep-2013-08-17.ES1.USD.dp1.json.txt
+10/14/2013   9:07             461  deps-dep-2013-08-18.CSC.BKS.dp3.json.txt
+10/14/2013   9:07           7,201  deps-dep-2013-08-18.CSC.CND.dp2.json.txt
+10/14/2013   9:07           4,351  deps-dep-2013-08-18.ES1.CND.dp1.json.txt
+10/14/2013   9:07           5,786  deps-dep-2013-08-25.CSC.CND.dp1.json.txt
+10/14/2013   9:07           2,648  deps-dep-2013-08-25.CSC.CND.dp2.json.txt
+10/14/2013   9:07           4,190  deps-dep-2013-09-01.CSC.CND.dp2.json.txt
+10/14/2013   9:07           5,086  deps-dep-2013-09-01.ES1.CND.dp1.json.txt
+10/14/2013   9:07           2,822  deps-dep-2013-09-08.CSC.CND.dp1.json.txt
+10/14/2013   9:07           6,276  deps-dep-2013-09-15.CSC.CND.dp2.json.txt
+10/14/2013   9:07           5,128  deps-dep-2013-09-15.ES1.CND.dp1.json.txt
+10/14/2013   9:07           7,639  deps-dep-2013-09-22.CSC.CND.dp1.json.txt
+10/14/2013   9:07             467  deps-dep-2013-09-29.CSC.BKS.dp4.json.txt
+10/14/2013   9:07           5,268  deps-dep-2013-09-29.CSC.CND.dp3.json.txt
+10/14/2013   9:07           3,627  deps-dep-2013-09-29.ES1.CND.dp1.json.txt
+10/14/2013   9:07           9,610  deps-dep-2013-09-29.ES1.CND.dp2.json.txt
+10/14/2013   6:33          64,048  deps-donor-donor0.json.txt
+10/14/2013   6:33          65,788  deps-donor-donor1.json.txt
+10/14/2013   6:33          17,402  deps-donor-donor2.json.txt
+10/14/2013   6:53             403  deps-env-envs.json.txt
+
+ Directory of  H:\data\tri\src\data\*
+
+10/07/2013   7:54          37,589  chqs-chqs-2013-demo.json.txt
+10/05/2013   3:57          14,255  chqs-coa-cit.json.txt
+10/07/2013   7:54           6,612  chqs-suppliers-cit.json.txt
+10/05/2013   3:56             147  deps-dep-2013-06-30.ES1.CND.dp1.json.txt
+10/05/2013   3:56             661  deps-dep-2013-06-30.ES1.CND.dp2.json.txt
+10/05/2013   3:56           3,955  deps-dep-2013-06-30.ES1.CND.dp3.json.txt
+10/05/2013   3:56           2,925  deps-dep-2013-07-07.ES1.CND.dp3.json.txt
+10/05/2013   3:56             647  deps-dep-2013-07-07.TST.CND.dp1.json.txt
+10/05/2013   3:56             962  deps-dep-2013-07-07.TST.CND.dp2.json.txt
+10/05/2013   3:56           5,019  deps-dep-2013-07-14.ES1.CND.dp1.json.txt
+10/05/2013   3:56           3,471  deps-dep-2013-07-21.ES1.CND.dp1.json.txt
+10/05/2013   3:56             992  deps-dep-2013-07-25.TST.CND.dp1.json.txt
+10/05/2013   3:56           4,423  deps-dep-2013-07-28.ES1.CND.dp1.json.txt
+10/05/2013   3:56           6,326  deps-dep-2013-08-04.ES1.CND.dp1.json.txt
+10/05/2013   3:56           6,330  deps-dep-2013-08-11.CSC.CND.dp3.json.txt
+10/05/2013   3:56           5,898  deps-dep-2013-08-11.ES1.CND.dp1.json.txt
+10/05/2013   3:56             412  deps-dep-2013-08-11.ES1.CND.dp2.json.txt
+10/05/2013   3:56             434  deps-dep-2013-08-17.ES1.USD.dp1.json.txt
+10/05/2013   3:56             467  deps-dep-2013-08-18.CSC.BKS.dp3.json.txt
+10/05/2013   3:56           7,248  deps-dep-2013-08-18.CSC.CND.dp2.json.txt
+10/05/2013   3:56           4,370  deps-dep-2013-08-18.ES1.CND.dp1.json.txt
+10/05/2013   3:56           5,844  deps-dep-2013-08-25.CSC.CND.dp1.json.txt
+10/05/2013   3:56           2,645  deps-dep-2013-08-25.CSC.CND.dp2.json.txt
+10/05/2013   3:56           4,216  deps-dep-2013-09-01.CSC.CND.dp2.json.txt
+10/05/2013   3:56           5,102  deps-dep-2013-09-01.ES1.CND.dp1.json.txt
+10/05/2013   3:56           2,835  deps-dep-2013-09-08.CSC.CND.dp1.json.txt
+10/05/2013   3:56           6,307  deps-dep-2013-09-15.CSC.CND.dp2.json.txt
+10/05/2013   3:56           5,164  deps-dep-2013-09-15.ES1.CND.dp1.json.txt
+10/05/2013   3:56           7,681  deps-dep-2013-09-22.CSC.CND.dp1.json.txt
+10/05/2013   3:56             472  deps-dep-2013-09-29.CSC.BKS.dp4.json.txt
+10/05/2013   3:56           5,306  deps-dep-2013-09-29.CSC.CND.dp3.json.txt
+10/05/2013   3:56           3,615  deps-dep-2013-09-29.ES1.CND.dp1.json.txt
+10/05/2013   3:56           9,610  deps-dep-2013-09-29.ES1.CND.dp2.json.txt
+10/05/2013  17:33          64,048  deps-donor-donor0.json.txt
+10/05/2013  17:33          65,788  deps-donor-donor1.json.txt
+10/05/2013  17:33          17,402  deps-donor-donor2.json.txt
+10/05/2013   3:56           1,072  deps-env-envs.json.txt
+
+ Directory of  H:\data\tri\temp\*
+
+12/02/2013  10:26         682,562  tri-devp-pkg-node.zip
+12/02/2013  10:26      24,425,088  tri-devp-pkg.zip
+
+ Directory of  H:\data\tri\variants\*
+
+11/27/2013  17:01         <DIR>    gae
+12/02/2013  10:14         <DIR>    node
+11/15/2013  15:24          11,632  index-gae.html
+11/15/2013  15:26          11,625  index-node.html
+
+ Directory of  H:\data\tri\variants\gae\*
+
+11/27/2013  17:01         <DIR>    war
+
+ Directory of  H:\data\tri\variants\gae\war\*
+
+11/27/2013  17:01         <DIR>    WEB-INF
+
+ Directory of  H:\data\tri\variants\gae\war\WEB-INF\*
+
+11/27/2013  17:01         <DIR>    appengine-generated
+
+ Directory of  H:\data\tri\variants\gae\war\WEB-INF\appengine-generated\*
+
+10/30/2013  18:36              81  datastore-indexes-auto.xml
+10/30/2013  18:36         759,567  local_db.bin
+
+ Directory of  H:\data\tri\variants\node\*
+
+12/02/2013  10:15         <DIR>    bats
+11/27/2013  18:18         <DIR>    war
+
+ Directory of  H:\data\tri\variants\node\bats\*
+
+12/02/2013  10:15             217  run-tri.bat
+
+ Directory of  H:\data\tri\variants\node\war\*
+
+11/27/2013  18:18         <DIR>    TRI-DB
+
+ Directory of  H:\data\tri\variants\node\war\TRI-DB\*
+
+11/27/2013  18:18         <DIR>    chqs
+11/27/2013  18:18         <DIR>    deps
+11/27/2013  18:18         <DIR>    msgs
+11/27/2013  18:07              52  $super.super.json.txt
+
+ Directory of  H:\data\tri\variants\node\war\TRI-DB\chqs\*
+
+11/15/2013  17:13          37,589  $data.chqs.2013-demo.json.txt
+11/15/2013  17:13          14,255  $data.coa.cit.json.txt
+11/15/2013  17:13           6,612  $data.suppliers.cit.json.txt
+11/27/2013  18:17              60  $user.admin.json.txt
+11/27/2013  18:11              67  $user.guest.json.txt
+
+ Directory of  H:\data\tri\variants\node\war\TRI-DB\deps\*
+
+11/15/2013  17:18             147  $data.dep.2013-06-30.ES1.CND.dp1.json.txt
+11/15/2013  17:18             649  $data.dep.2013-06-30.ES1.CND.dp2.json.txt
+11/15/2013  17:18           3,783  $data.dep.2013-06-30.ES1.CND.dp3.json.txt
+11/15/2013  17:18           2,874  $data.dep.2013-07-07.ES1.CND.dp3.json.txt
+11/15/2013  17:18             646  $data.dep.2013-07-07.TST.CND.dp1.json.txt
+11/15/2013  17:18             950  $data.dep.2013-07-07.TST.CND.dp2.json.txt
+11/15/2013  17:18           4,972  $data.dep.2013-07-14.ES1.CND.dp1.json.txt
+11/15/2013  17:18           3,432  $data.dep.2013-07-21.ES1.CND.dp1.json.txt
+11/15/2013  17:18             975  $data.dep.2013-07-25.TST.CND.dp1.json.txt
+11/15/2013  17:18           4,310  $data.dep.2013-07-28.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,334  $data.dep.2013-08-04.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,308  $data.dep.2013-08-11.CSC.CND.dp3.json.txt
+11/15/2013  17:18           5,810  $data.dep.2013-08-11.ES1.CND.dp1.json.txt
+11/15/2013  17:18             412  $data.dep.2013-08-11.ES1.CND.dp2.json.txt
+11/15/2013  17:18             434  $data.dep.2013-08-17.ES1.USD.dp1.json.txt
+11/15/2013  17:18             461  $data.dep.2013-08-18.CSC.BKS.dp3.json.txt
+11/15/2013  17:18           7,201  $data.dep.2013-08-18.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,351  $data.dep.2013-08-18.ES1.CND.dp1.json.txt
+11/15/2013  17:18           5,786  $data.dep.2013-08-25.CSC.CND.dp1.json.txt
+11/15/2013  17:18           2,648  $data.dep.2013-08-25.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,190  $data.dep.2013-09-01.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,086  $data.dep.2013-09-01.ES1.CND.dp1.json.txt
+11/15/2013  17:18           2,822  $data.dep.2013-09-08.CSC.CND.dp1.json.txt
+11/15/2013  17:18           6,276  $data.dep.2013-09-15.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,128  $data.dep.2013-09-15.ES1.CND.dp1.json.txt
+11/15/2013  17:18           7,639  $data.dep.2013-09-22.CSC.CND.dp1.json.txt
+11/15/2013  17:18             467  $data.dep.2013-09-29.CSC.BKS.dp4.json.txt
+11/15/2013  17:18           5,268  $data.dep.2013-09-29.CSC.CND.dp3.json.txt
+11/15/2013  17:18           3,627  $data.dep.2013-09-29.ES1.CND.dp1.json.txt
+11/15/2013  17:18           9,610  $data.dep.2013-09-29.ES1.CND.dp2.json.txt
+11/15/2013  17:18          64,048  $data.donor.donor0.json.txt
+11/15/2013  17:18          65,788  $data.donor.donor1.json.txt
+11/15/2013  17:18          17,402  $data.donor.donor2.json.txt
+11/15/2013  17:18             403  $data.env.envs.json.txt
+11/27/2013  18:18              60  $user.admin.json.txt
+11/27/2013  18:10              45  $user.guest.json.txt
+
+ Directory of  H:\data\tri\variants\node\war\TRI-DB\msgs\*
+
+11/15/2013  17:15          21,242  $data.msg.messages.json.txt
+11/27/2013  18:17              60  $user.admin.json.txt
+11/27/2013  18:10              45  $user.guest.json.txt
+
+ Directory of  H:\data\tri\war\*
+
+10/18/2013  16:45         <DIR>    app-bbb
+10/18/2013  16:44         <DIR>    app-cita
+11/27/2013   9:18         <DIR>    apps
+10/31/2013  20:39         <DIR>    css
+10/16/2013  10:03         <DIR>    font
+11/02/2013  16:03         <DIR>    grunt-scripts
+11/01/2013   9:23         <DIR>    img
+10/24/2013   8:31         <DIR>    js
+12/10/2013  18:42         <DIR>    node-js
+11/07/2013  17:35         <DIR>    partials
+11/07/2013  17:35         <DIR>    seo
+11/15/2013  16:59         <DIR>    TRI-DB
+10/03/2013   2:10         <DIR>    web-gems
+11/02/2013  17:22         <DIR>    WEB-INF
+12/02/2013   5:57         <DIR>    zips
+12/03/2013  10:30           7,428  appspage.html
+12/02/2013   6:37              82  def-app.htm
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/19/2013   6:28           1,150  favicon.ico
+12/03/2013  10:33          11,688  index.html
+10/29/2013  15:40          11,688  index0.html
+11/03/2013   7:35              56  robots.txt
+10/13/2013   5:36             968  SrcDisplay.html
+10/13/2013   5:29           1,150  tri-doc.ico
+
+ Directory of  H:\data\tri\war\app-bbb\*
+
+10/17/2013   5:19         <DIR>    css
+10/17/2013   5:20         <DIR>    ENPage
+10/02/2013  10:16         <DIR>    ENSnip
+10/17/2013   5:19         <DIR>    img
+10/17/2013   5:19         <DIR>    js
+10/18/2013  16:45           4,996  bbb.ace
+
+ Directory of  H:\data\tri\war\app-bbb\ENSnip\*
+
+ 9/29/2007  17:06             953  Home.htm
+10/02/2006  13:28             585  HomeLocked.htm
+10/03/2006   8:39             720  LeftSnip.htm
+
+ Directory of  H:\data\tri\war\app-cita\*
+
+10/17/2013   5:14         <DIR>    css
+10/17/2013   5:14         <DIR>    img
+10/17/2013   5:14         <DIR>    js
+10/18/2013  16:44           2,180  cita.ace
+
+ Directory of  H:\data\tri\war\apps\*
+
+11/24/2013  18:18         <DIR>    images
+12/02/2013   5:05         <DIR>    tri
+11/15/2013  15:32           2,941  AppsConfig.js
+11/27/2013   9:18          12,549  Chqs.htm
+10/25/2013   4:05          27,785  Chqs.js
+10/16/2013  12:40           4,941  Deps.css
+10/26/2013  14:20          17,913  Deps.htm
+10/26/2013   9:30          27,094  Deps.js
+10/24/2013  17:53           7,761  FormCheque.htm
+10/25/2013   9:32           5,178  FormCheque.js
+10/26/2013  10:35          15,336  FormDeposit.htm
+10/26/2013  10:56           6,403  FormDeposit.js
+10/26/2013  11:08           4,556  FormDepSum.htm
+10/26/2013  11:37           8,324  FormDepSum.js
+10/26/2013  11:37           3,100  FormEnvelope.htm
+10/26/2013  11:37           2,635  FormEnvelope.js
+10/23/2013  22:31           2,113  FormHello.htm
+10/21/2013  15:37           2,145  FormHello.js
+11/27/2013   9:18           2,878  Hello.htm
+10/23/2013  16:02           6,360  Hello.js
+11/27/2013   7:21           2,718  HelloUI.css
+11/27/2013   9:16           3,961  HelloUI.htm
+11/27/2013   7:09          10,380  HelloUI.js
+11/23/2013   5:53          93,107  jquery-1.10.2.min.js
+11/24/2013  13:42          26,298  jquery-ui-1.10.3.custom.css
+11/24/2013  13:42         108,995  jquery-ui-1.10.3.custom.min.js
+10/16/2013  10:19           6,066  TableDonors.js
+10/26/2013   8:58           3,873  TableEnvelopes.js
+
+ Directory of  H:\data\tri\war\apps\images\*
+
+11/23/2013   3:02             312  ui-bg_diagonals-thick_20_666666_40x40.png
+11/23/2013   3:02             207  ui-bg_glass_65_ffffff_1x400.png
+11/23/2013   3:02             262  ui-bg_glass_100_f6f6f6_1x400.png
+11/23/2013   3:02             348  ui-bg_glass_100_fdf5ce_1x400.png
+11/23/2013   3:02           5,815  ui-bg_gloss-wave_35_f6a828_500x100.png
+11/24/2013  13:42             328  ui-bg_highlight-soft_75_ffe45c_1x100.png
+11/23/2013   3:02             278  ui-bg_highlight-soft_100_eeeeee_1x100.png
+11/24/2013  13:42           4,549  ui-icons_ef8c08_256x240.png
+11/24/2013  13:42           6,299  ui-icons_ffffff_256x240.png
+
+ Directory of  H:\data\tri\war\apps\tri\*
+
+11/01/2013   5:25         <DIR>    img
+10/20/2013  19:46           2,596  Admin.htm
+10/18/2013   6:42           2,193  Admin.js
+ 2/20/2013  11:55          82,497  angular.min.js
+10/16/2013  12:43           4,748  Apps.css
+11/25/2013   7:03          27,269  AppsBase.htm
+10/16/2013  12:43           5,230  AppStd.css
+ 7/04/2013  16:57           5,170  beep-02.wav
+ 9/28/2013  19:53           5,491  LAB.js
+10/16/2013  12:41           2,674  Prime.htm
+10/19/2013   6:49           1,736  Prime.js
+ 6/08/2013  11:58           3,576  script.js
+10/16/2013  12:43             732  TablesUser.css
+10/18/2013   6:02           2,853  TablesUser.js
+12/02/2013   5:05         260,063  TRI.js
+12/02/2013   5:06          80,816  TRI.min.js
+10/27/2013  15:47           9,733  TriBoot.htm
+10/18/2013   7:57           6,165  TriBoot.js
+10/16/2013  12:45           7,785  ut.js
+
+ Directory of  H:\data\tri\war\apps\tri\img\*
+
+10/09/2013   5:49           1,724  email-addr.jpg
+10/12/2013  21:20           1,150  fav-admin0.ico
+10/12/2013  21:21           1,150  fav-boot0.ico
+10/12/2013  21:22           1,150  fav-chqs0.ico
+10/17/2013   4:01           1,150  fav-chqs1.ico
+10/12/2013  21:03           1,150  fav-deps0.ico
+10/17/2013   4:04           1,150  fav-deps1.ico
+10/12/2013  21:27           1,150  fav-docs0.ico
+10/20/2013   5:07           1,150  fav-msgs0.ico
+10/20/2013   5:08           1,150  fav-msgs1.ico
+11/01/2013   5:19           1,150  fav-t1b.ico
+11/01/2013   5:19           1,150  fav-t1w.ico
+11/01/2013   5:21           1,150  fav-t2b.ico
+11/01/2013   5:20           1,150  fav-t2w.ico
+11/01/2013   5:22           1,150  fav-t3b.ico
+11/01/2013   5:21           1,150  fav-t3w.ico
+ 6/29/2003  17:14             139  transparent.gif
+
+ Directory of  H:\data\tri\war\css\*
+
+10/19/2013   4:19           1,651  animations.css
+10/19/2013   4:19         127,352  bootstrap.min.css
+10/30/2013   4:31           4,627  docs-3a30.css
+10/22/2013   3:29           3,737  docs-save.css
+11/04/2013   5:53           4,687  docs.css
+10/19/2013   4:19           2,702  doc_widgets.css
+10/19/2013   4:19          23,644  font-awesome.css
+
+ Directory of  H:\data\tri\war\font\*
+
+10/19/2013   4:19          29,360  fontawesome-webfont.eot
+10/19/2013   4:19         162,047  fontawesome-webfont.svg
+10/19/2013   4:19          64,960  fontawesome-webfont.ttf
+10/19/2013   4:19          34,420  fontawesome-webfont.woff
+10/19/2013   4:19          50,204  FontAwesome.otf
+
+ Directory of  H:\data\tri\war\grunt-scripts\*
+
+12/03/2013  10:33          80,816  TRI.min.js
+12/03/2013  10:33           7,508  ut.js
+
+ Directory of  H:\data\tri\war\img\*
+
+10/17/2013   8:20          36,509  add-admin-user50.JPG
+10/30/2013  17:37          24,543  admin-page50.JPG
+10/30/2013  17:35          25,552  admin-user-login50.JPG
+10/17/2013  19:27          26,940  deps-app50.JPG
+11/01/2013   5:19           1,150  fav-t1w.ico
+10/30/2013  10:21          25,635  hello-app50.JPG
+10/17/2013   8:21          36,659  needs-prime50.JPG
+10/30/2013  17:44          40,932  super-page50.JPG
+10/17/2013   8:22          28,944  super-user-login50.JPG
+
+ Directory of  H:\data\tri\war\js\*
+
+10/19/2013   4:19          19,508  angular-bootstrap-prettify.min.js
+10/19/2013   4:19           2,704  angular-bootstrap.min.js
+10/19/2013   4:19          88,802  angular.min.js
+10/19/2013   5:42          22,801  docs-save.js
+10/24/2013   5:53          24,772  docs-save2.js
+12/03/2013  10:33         112,309  docs-setup.js
+11/28/2013   6:54          28,266  docs.js
+10/12/2013   8:12             959  src-display.js
+
+ Directory of  H:\data\tri\war\node-js\*
+
+11/29/2013  10:11           3,578  parms.js
+12/10/2013  18:42          37,285  tri-server.js
+11/29/2013  10:21           8,910  waks.js
+
+ Directory of  H:\data\tri\war\partials\*
+
+11/07/2013  17:35         <DIR>    api
+11/27/2013  18:40         <DIR>    apps
+11/27/2013  18:40         <DIR>    guide
+11/15/2013  18:31         <DIR>    overview
+11/30/2013  20:03         <DIR>    tutorial
+
+ Directory of  H:\data\tri\war\partials\api\*
+
+12/03/2013  10:33             470  index.html
+12/03/2013  10:33          20,140  tri.controller.ctrlCommEdit.html
+12/03/2013  10:33          14,443  tri.controller.ctrlCommList.html
+12/03/2013  10:33           7,936  tri.controller.ctrlMenu.html
+12/03/2013  10:33           6,408  tri.controller.ctrlSect.html
+12/03/2013  10:33           4,463  tri.controller.ctrlSess.html
+12/03/2013  10:33           3,318  tri.directive.autocomplete.html
+12/03/2013  10:33           2,137  tri.directive.autotab.html
+12/03/2013  10:33           1,779  tri.directive.blurEvent.html
+12/03/2013  10:33           1,573  tri.directive.focusClear.html
+12/03/2013  10:33           4,101  tri.directive.macro.html
+12/03/2013  10:33           1,694  tri.directive.scopeVar.html
+12/03/2013  10:33           1,761  tri.directive.whenActive.html
+12/03/2013  10:33             168  tri.html
+12/03/2013  10:33           2,393  tri.method.hookMsgListener.html
+12/03/2013  10:33           6,879  tri.object.Col.html
+12/03/2013  10:33           2,191  tri.object.Filter.html
+12/03/2013  10:33           5,128  tri.object.Table.html
+12/03/2013  10:33           7,241  tri.object.Tri.html
+12/03/2013  10:33           1,171  tri.property.oGBL.html
+12/03/2013  10:33           2,082  tri.servConfig.html
+12/03/2013  10:33          16,846  tri.servCRUD.html
+12/03/2013  10:33          18,742  tri.servGAE.html
+12/03/2013  10:33          17,063  tri.servREC.html
+12/03/2013  10:33           1,554  tri.servREG.html
+12/03/2013  10:33          24,726  tri.servSess.html
+12/03/2013  10:33           2,658  tri.servTBL.html
+
+ Directory of  H:\data\tri\war\partials\apps\*
+
+12/03/2013  10:33           1,840  browser.html
+12/03/2013  10:33          76,329  chqs-app.html
+12/03/2013  10:33         130,983  deps-app.html
+12/03/2013  10:33          43,318  hello-app.html
+12/03/2013  10:33          26,386  helloui-app.html
+12/03/2013  10:33           1,945  index.html
+12/03/2013  10:33           2,438  src-files.html
+12/03/2013  10:33           5,101  zip-files.html
+
+ Directory of  H:\data\tri\war\partials\guide\*
+
+12/03/2013  10:33           3,623  action.html
+12/03/2013  10:33           2,812  admin.html
+12/03/2013  10:33           4,301  appname-html.html
+12/03/2013  10:33           3,756  appname-js.html
+12/03/2013  10:33           2,052  appsconfig.html
+12/03/2013  10:33           1,832  bootstrap.html
+12/03/2013  10:33          12,636  col.html
+12/03/2013  10:33          31,774  construct.html
+12/03/2013  10:33           1,301  data.html
+12/03/2013  10:33           4,296  dataprime.html
+12/03/2013  10:33           3,062  datastore-node.html
+12/03/2013  10:33           1,588  datastore.html
+12/03/2013  10:33           5,965  develop.html
+12/03/2013  10:33           4,559  devp-pkg.html
+12/03/2013  10:33           1,029  directives.html
+12/03/2013  10:33           1,611  disp-page-design.html
+12/03/2013  10:33           4,192  filter.html
+12/03/2013  10:33           1,670  form-page-design.html
+12/03/2013  10:33             515  gaesite.html
+12/03/2013  10:33           1,295  ganalytics.html
+12/03/2013  10:33          10,883  hints-tech.html
+12/03/2013  10:33           3,151  index.html
+12/03/2013  10:33           1,112  macros.html
+12/03/2013  10:33           1,798  multi-window-apps.html
+12/03/2013  10:33             788  node-server.html
+12/03/2013  10:33             679  nodesite.html
+12/03/2013  10:33             680  outstanding.html
+12/03/2013  10:33           9,805  records.html
+12/03/2013  10:33           1,673  sandbox.html
+12/03/2013  10:33          17,822  server-inter.html
+12/03/2013  10:33          22,322  table.html
+12/03/2013  10:33           3,340  templates.html
+12/03/2013  10:33           4,558  user.html
+12/03/2013  10:33           3,904  userid-rec.html
+12/03/2013  10:33           1,147  variants.html
+12/03/2013  10:33           7,721  waks.html
+
+ Directory of  H:\data\tri\war\partials\overview\*
+
+12/03/2013  10:33           1,240  history.html
+12/03/2013  10:33           9,298  index.html
+12/03/2013  10:33           4,224  landmarks.html
+
+ Directory of  H:\data\tri\war\partials\tutorial\*
+
+12/03/2013  10:33           4,582  index.html
+12/03/2013  10:33           3,871  step-01.html
+12/03/2013  10:33           4,835  step-02.html
+12/03/2013  10:33           5,426  step-03.html
+12/03/2013  10:33           2,663  step-04.html
+12/03/2013  10:33           2,957  step-05.html
+12/03/2013  10:33           5,432  step-06.html
+12/03/2013  10:33           1,662  step-07.html
+12/03/2013  10:33           3,375  step-08.html
+12/03/2013  10:33           2,111  step-09.html
+12/03/2013  10:33           3,496  step-10.html
+
+ Directory of  H:\data\tri\war\seo\*
+
+11/07/2013  17:35         <DIR>    api
+11/30/2013  20:03         <DIR>    apps
+12/01/2013  18:16         <DIR>    guide
+11/15/2013  18:34         <DIR>    overview
+11/30/2013  20:03         <DIR>    tutorial
+11/02/2013  15:51           1,170  render.js
+11/02/2013  17:07             933  render2.js
+11/17/2013   7:24             711  seo-appspage.htm
+11/17/2013   7:24             577  seo-template.htm
+11/02/2013  10:15           2,527  seo-test.htm
+
+ Directory of  H:\data\tri\war\seo\api\*
+
+12/03/2013  10:30           1,083  index.htm
+12/03/2013  10:30          21,226  tri.controller.ctrlCommEdit.htm
+12/03/2013  10:30          15,481  tri.controller.ctrlCommList.htm
+12/03/2013  10:30           8,746  tri.controller.ctrlMenu.htm
+12/03/2013  10:30           7,154  tri.controller.ctrlSect.htm
+12/03/2013  10:30           5,161  tri.controller.ctrlSess.htm
+12/03/2013  10:30           3,908  tri.directive.autocomplete.htm
+12/03/2013  10:30           2,722  tri.directive.autotab.htm
+12/03/2013  10:30           2,386  tri.directive.blurEvent.htm
+12/03/2013  10:30           2,161  tri.directive.focusClear.htm
+12/03/2013  10:30           4,708  tri.directive.macro.htm
+12/03/2013  10:30           2,280  tri.directive.scopeVar.htm
+12/03/2013  10:30           2,349  tri.directive.whenActive.htm
+12/03/2013  10:30             749  tri.htm
+12/03/2013  10:30           3,002  tri.method.hookMsgListener.htm
+12/03/2013  10:30           7,492  tri.object.Col.htm
+12/03/2013  10:30           2,791  tri.object.Filter.htm
+12/03/2013  10:30           5,759  tri.object.Table.htm
+12/03/2013  10:30           7,942  tri.object.Tri.htm
+12/03/2013  10:30           1,777  tri.property.oGBL.htm
+12/03/2013  10:30           2,686  tri.servConfig.htm
+12/03/2013  10:30          17,863  tri.servCRUD.htm
+12/03/2013  10:30          19,575  tri.servGAE.htm
+12/03/2013  10:30          18,000  tri.servREC.htm
+12/03/2013  10:30           2,139  tri.servREG.htm
+12/03/2013  10:30          25,760  tri.servSess.htm
+12/03/2013  10:30           3,307  tri.servTBL.htm
+
+ Directory of  H:\data\tri\war\seo\apps\*
+
+12/03/2013  10:30           2,442  browser.htm
+12/03/2013  10:30          77,188  chqs-app.htm
+12/03/2013  10:30         131,978  deps-app.htm
+12/03/2013  10:30          44,330  hello-app.htm
+12/03/2013  10:30          27,024  helloui-app.htm
+12/03/2013  10:30           2,606  index.htm
+12/03/2013  10:30           3,029  src-files.htm
+12/03/2013  10:30           5,797  zip-files.htm
+
+ Directory of  H:\data\tri\war\seo\guide\*
+
+12/03/2013  10:30           4,232  action.htm
+12/03/2013  10:30           3,441  admin.htm
+12/03/2013  10:30           4,960  appname-html.htm
+12/03/2013  10:30           4,439  appname-js.htm
+12/03/2013  10:30           2,682  appsconfig.htm
+12/03/2013  10:30           2,474  bootstrap.htm
+12/03/2013  10:30          13,443  col.htm
+12/03/2013  10:30          33,401  construct.htm
+12/03/2013  10:30           1,915  data.htm
+12/03/2013  10:30           5,011  dataprime.htm
+12/03/2013  10:30           3,730  datastore-node.htm
+12/03/2013  10:30           2,245  datastore.htm
+12/03/2013  10:30           6,750  develop.htm
+12/03/2013  10:30           5,302  devp-pkg.htm
+12/03/2013  10:30           1,659  directives.htm
+12/03/2013  10:30           2,266  disp-page-design.htm
+12/03/2013  10:30           4,851  filter.htm
+12/03/2013  10:30           2,290  form-page-design.htm
+12/03/2013  10:30           1,119  gaesite.htm
+12/03/2013  10:30           1,907  ganalytics.htm
+12/03/2013  10:30          11,563  hints-tech.htm
+12/03/2013  10:30           4,015  index.htm
+12/03/2013  10:30           1,738  macros.htm
+12/03/2013  10:30           2,459  multi-window-apps.htm
+12/03/2013  10:30           1,413  node-server.htm
+12/03/2013  10:30           1,306  nodesite.htm
+12/03/2013  10:30           1,271  outstanding.htm
+12/03/2013  10:30          10,743  records.htm
+12/03/2013  10:30           2,273  sandbox.htm
+12/03/2013  10:30          18,820  server-inter.htm
+12/03/2013  10:30          23,300  table.htm
+12/03/2013  10:30           4,013  templates.htm
+12/03/2013  10:30           5,278  user.htm
+12/03/2013  10:30           4,523  userid-rec.htm
+12/03/2013  10:30           1,767  variants.htm
+12/03/2013  10:30           8,441  waks.htm
+
+ Directory of  H:\data\tri\war\seo\overview\*
+
+12/03/2013  10:30           1,846  history.htm
+12/03/2013  10:30           9,961  index.htm
+12/03/2013  10:30           4,869  landmarks.htm
+
+ Directory of  H:\data\tri\war\seo\tutorial\*
+
+12/03/2013  10:30           5,357  index.htm
+12/03/2013  10:30           4,556  step-01.htm
+12/03/2013  10:30           5,561  step-02.htm
+12/03/2013  10:30           6,123  step-03.htm
+12/03/2013  10:30           3,363  step-04.htm
+12/03/2013  10:30           3,601  step-05.htm
+12/03/2013  10:30           6,201  step-06.htm
+12/03/2013  10:30           2,324  step-07.htm
+12/03/2013  10:30           4,115  step-08.htm
+12/03/2013  10:30           2,778  step-09.htm
+12/03/2013  10:30           4,150  step-10.htm
+
+ Directory of  H:\data\tri\war\TRI-DB\*
+
+11/15/2013  18:25         <DIR>    chqs
+11/15/2013  17:18         <DIR>    deps
+11/15/2013  17:15         <DIR>    msgs
+11/15/2013  16:57              52  $super.srp.json.txt
+
+ Directory of  H:\data\tri\war\TRI-DB\chqs\*
+
+11/15/2013  17:13          37,589  $data.chqs.2013-demo.json.txt
+11/15/2013  17:13          14,255  $data.coa.cit.json.txt
+11/15/2013  17:13           6,612  $data.suppliers.cit.json.txt
+11/15/2013  18:26              84  $user.guest.json.txt
+11/15/2013  18:23              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\war\TRI-DB\deps\*
+
+11/15/2013  17:18             147  $data.dep.2013-06-30.ES1.CND.dp1.json.txt
+11/15/2013  17:18             649  $data.dep.2013-06-30.ES1.CND.dp2.json.txt
+11/15/2013  17:18           3,783  $data.dep.2013-06-30.ES1.CND.dp3.json.txt
+11/15/2013  17:18           2,874  $data.dep.2013-07-07.ES1.CND.dp3.json.txt
+11/15/2013  17:18             646  $data.dep.2013-07-07.TST.CND.dp1.json.txt
+11/15/2013  17:18             950  $data.dep.2013-07-07.TST.CND.dp2.json.txt
+11/15/2013  17:18           4,972  $data.dep.2013-07-14.ES1.CND.dp1.json.txt
+11/15/2013  17:18           3,432  $data.dep.2013-07-21.ES1.CND.dp1.json.txt
+11/15/2013  17:18             975  $data.dep.2013-07-25.TST.CND.dp1.json.txt
+11/15/2013  17:18           4,310  $data.dep.2013-07-28.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,334  $data.dep.2013-08-04.ES1.CND.dp1.json.txt
+11/15/2013  17:18           6,308  $data.dep.2013-08-11.CSC.CND.dp3.json.txt
+11/15/2013  17:18           5,810  $data.dep.2013-08-11.ES1.CND.dp1.json.txt
+11/15/2013  17:18             412  $data.dep.2013-08-11.ES1.CND.dp2.json.txt
+11/15/2013  17:18             434  $data.dep.2013-08-17.ES1.USD.dp1.json.txt
+11/15/2013  17:18             461  $data.dep.2013-08-18.CSC.BKS.dp3.json.txt
+11/15/2013  17:18           7,201  $data.dep.2013-08-18.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,351  $data.dep.2013-08-18.ES1.CND.dp1.json.txt
+11/15/2013  17:18           5,786  $data.dep.2013-08-25.CSC.CND.dp1.json.txt
+11/15/2013  17:18           2,648  $data.dep.2013-08-25.CSC.CND.dp2.json.txt
+11/15/2013  17:18           4,190  $data.dep.2013-09-01.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,086  $data.dep.2013-09-01.ES1.CND.dp1.json.txt
+11/15/2013  17:18           2,822  $data.dep.2013-09-08.CSC.CND.dp1.json.txt
+11/15/2013  17:18           6,276  $data.dep.2013-09-15.CSC.CND.dp2.json.txt
+11/15/2013  17:18           5,128  $data.dep.2013-09-15.ES1.CND.dp1.json.txt
+11/15/2013  17:18           7,639  $data.dep.2013-09-22.CSC.CND.dp1.json.txt
+11/15/2013  17:18             467  $data.dep.2013-09-29.CSC.BKS.dp4.json.txt
+11/15/2013  17:18           5,268  $data.dep.2013-09-29.CSC.CND.dp3.json.txt
+11/15/2013  17:18           3,627  $data.dep.2013-09-29.ES1.CND.dp1.json.txt
+11/15/2013  17:18           9,610  $data.dep.2013-09-29.ES1.CND.dp2.json.txt
+11/15/2013  17:18          64,048  $data.donor.donor0.json.txt
+11/15/2013  17:18          65,788  $data.donor.donor1.json.txt
+11/15/2013  17:18          17,402  $data.donor.donor2.json.txt
+11/15/2013  17:18             403  $data.env.envs.json.txt
+11/15/2013  17:22              62  $user.guest.json.txt
+11/15/2013  17:00              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\war\TRI-DB\msgs\*
+
+11/15/2013  17:15          21,242  $data.msg.messages.json.txt
+12/02/2013   9:40              62  $user.guest.json.txt
+11/15/2013  17:04              59  $user.srp.json.txt
+
+ Directory of  H:\data\tri\war\web-gems\*
+
+10/17/2013   5:22         <DIR>    css
+10/17/2013   5:22         <DIR>    ENPage
+10/17/2013   5:22         <DIR>    ENSnip
+10/17/2013   5:23         <DIR>    img
+10/17/2013   5:23         <DIR>    js
+10/03/2013   2:10             836  core.ace
+
+ Directory of  H:\data\tri\war\WEB-INF\*
+
+11/10/2013   5:37         <DIR>    appengine-generated
+10/02/2013  10:16         <DIR>    classes
+10/03/2013   4:18         <DIR>    lib
+10/19/2013   6:36             522  appengine-web.xml
+ 4/08/2010   6:29             987  logging.properties
+11/02/2013  17:22           1,277  web.xml
+
+ Directory of  H:\data\tri\war\WEB-INF\appengine-generated\*
+
+11/27/2013  10:40              81  datastore-indexes-auto.xml
+11/27/2013  10:41         859,841  local_db.bin
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\*
+
+10/02/2013  10:16         <DIR>    com
+10/02/2013  10:16         <DIR>    META-INF
+ 4/08/2010   6:29           1,063  log4j.properties
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\*
+
+10/02/2013  10:16         <DIR>    rsi
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\rsi\*
+
+10/02/2013  10:16         <DIR>    cita
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\rsi\cita\*
+
+10/02/2013  10:16         <DIR>    gdo
+10/02/2013  10:16         <DIR>    jsp
+10/18/2013   5:29          27,043  CitaMethods.class
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\rsi\cita\gdo\*
+
+ 7/13/2013   5:36           6,923  GdoCitaData.class
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\rsi\cita\jsp\*
+
+10/02/2013  10:16         <DIR>    snip
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\rsi\cita\jsp\snip\*
+
+10/02/2013  10:16         <DIR>    cita
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\com\rsi\cita\jsp\snip\cita\*
+
+ 7/13/2013   5:36           3,742  Home.class
+ 7/13/2013   5:36           3,893  LeftSnipCita.class
+
+ Directory of  H:\data\tri\war\WEB-INF\classes\META-INF\*
+
+ 4/08/2010   6:29             887  jdoconfig.xml
+
+ Directory of  H:\data\tri\war\WEB-INF\lib\*
+
+ 3/05/2010  17:15         131,819  ace.jar
+ 5/06/2010   5:20          74,258  ACT.jar
+ 6/13/2013  17:28      12,227,093  appengine-api-1.0-sdk-1.8.1.1.jar
+ 6/13/2013  17:28      11,624,116  appengine-api-labs-1.8.1.1.jar
+ 6/13/2013  17:28           7,068  appengine-jsr107cache-1.8.1.1.jar
+ 4/20/2013  10:52         146,289  bbb.jar
+ 4/22/2013   7:39         457,988  bbbrun.jar
+ 6/06/2013  16:15         249,746  gemscore.jar
+ 3/16/2010  15:17         131,367  gemstool.jar
+ 6/13/2013  17:28           8,082  jsr107cache-1.1.jar
+
+ Directory of  H:\data\tri\war\zips\*
+
+11/01/2013   9:12      28,295,430  gae-local-stripped-1.zip
+11/01/2013   9:13      24,787,831  gae-local-stripped-2.zip
+12/02/2013  10:26         682,562  tri-devp-pkg-node.bin
+12/02/2013  10:26      24,425,088  tri-devp-pkg.bin

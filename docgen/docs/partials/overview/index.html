@@ -1,0 +1,160 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h2 id="introduction">Introduction</h3>
+
+<p>The software industry reports that the <strong>Dependency Injection</strong> design of <a target=_blank href="http://angularjs.org/">AngularJS</a> has resulted in considerable
+progress in reducing the programming workload for creating well behaved WEB pages.
+Furthermore, the <strong>directive</strong> capability of <a target=_blank href="http://angularjs.org/">AngularJS</a> is a powerful tool for extending the HTML capabilities used to create behavoirs
+and render these same WEB pages.</p>
+
+<p>For a typical CRUD application written in <a target=_blank href="http://angularjs.org/">AngularJS</a>, <strong>Triangular</strong> can boost the coding productivity even more by factoring
+out the common elements of such an application
+into a reusable infrastructure.  The application specifics are provided by a simple javascript definition <a href="/guide/appname-js">AppName.js File</a>
+and an HTML file <a href="/guide/appname-html">AppName.html File</a>.  Much of these two components is either boilerplate code or code that
+has easy adapted patterns.</p>
+
+<p><strong>Triangular</strong> derives its name from the fact that 3 components are required in the <strong>Triangular</strong> infrastructure:</p>
+
+<ol>
+<li>The <a target=_blank href="http://angularjs.org/">AngularJS</a> codebase</li>
+<li>The <strong>Triangular</strong> codebase</li>
+<li>The application specific codebase</li>
+</ol>
+
+<p>For simple applications junior level programmers should be able to follow the patterns and make the required changes
+with the help of this documentation.</p>
+
+<p>The <a href="/apps/hello-app">Hello App</a> demonstration was written with about 250 lines of straight forward code which you can try by clicking on the link.</p>
+
+<h2 id="problemdomain">Problem Domain</h3>
+
+<p>The typical CRUD application  (<b>C</b>reate/<b>R</b>ead/<b>U</b>pdate/<b>D</b>elete of records) requires the following capabilities:</p>
+
+<ul>
+<li>A User login capability</li>
+<li>A Menu of actions based on the login profile</li>
+<li>A filtered List capability to summarize selected records</li>
+<li>An Edit capability to create a new record or update a record selected from the list</li>
+<li>A Delete capability to remove a selected record</li>
+<li>A set of views that display/print the records according to the authorization of the User</li>
+<li>A datastore to persist the records.</li>
+</ul>
+
+<p>While essentially a single-page app, since the application HTML component uses the <a target=_blank href="http://angularjs.org/">AngularJS</a> capabilities extensively
+the infrastructure readily supports:</p>
+
+<ul>
+<li>multiple related tables per application</li>
+<li>multiple views of each table</li>
+<li>pages that use multiple related tables (See Deps application)</li>
+</ul>
+
+<p>While a level of security is provided by the server, since the bulk of the work is performed in the browser, there is a limit
+to how secure the application is.  That is, a bright person intent on thwarting the security could perhaps be able to access
+data beyond the role based restrictions.  The provided server does prevent updates to the user profiles used to control
+these roles.  Furthermore, if necessary, the server could be extended to filter out the data sent to the client based
+on role based criteria. With this in mind it is perhaps best to use other technologies for applications requiring a high level of
+security such as banking applications.</p>
+
+<p>Since the browser contains a working copy of the entire database, applications that deal in millions as opposed to
+thousands of records are probably not candidates for this methodology.  This limitation could be relaxed if the application
+was able to work with a subset of the data and the server was extended to add a filtering capability.</p>
+
+<h2 id="architecture">Architecture</h3>
+
+<p>The overall architecture could be described as thin server/fat client since the application business logic is hosted in the browser
+and the server merely provides persistance and authentication.</p>
+
+<h4 id="theserver">The Server</h5>
+
+<p>The <a href="/guide/server-inter">server</a> provides the following services:</p>
+
+<ul>
+<li>Application Login</li>
+<li>Autheticated AJAX services</li>
+<li>Key based JSON object retrieval and update</li>
+</ul>
+
+<p>The two servers provided with <strong>Triangular</strong> are designed and ready to run.  The first runs in the <a href="/guide/gaesite">Google App Engine</a> environment.
+The second, <code>tri-server.js</code> runs in the
+<a href="/guide/nodesite">Node.js</a> envronment. Others such as a PHP based one could be modeled after the <code>tri-server.js</code> implementation.</p>
+
+<h4 id="theclient">The Client</h5>
+
+<p>The client consists of several interconnected components running inside a browser:</p>
+
+<ul>
+<li>The <code>&lt;a target=_blank href="http://angularjs.org/"&gt;AngularJS&lt;/a&gt;</code> codebase</li>
+<li>The <code>tri.js</code> and other <strong>Triangular</strong> support code</li>
+<li>The application specific javascript and HTML code</li>
+</ul>
+
+<p>The localStorage service provided by HTML5 compliant browsers is used extensively to cache the server datastore.
+This design reduces bandwidth requirements and significantly improves system responsiveness.  The infrastructure provides
+dirty data detection to maintain the synchronization of the cache and the server datastore.</p>
+
+<p>For data display based pages the browser post message functionality is used to pass data from the main application page to
+the secondary pages.  This design overcomes the cross-domain restrictions of modern browsers while simplifying the cache management
+algorithms by
+maintaining a current cache only in the main page.</p>
+
+<p>By default User inactivity is detected and a User signed off after 5 minutes.  These parameters are easily customized on a user by user basis
+or changed for the entire system.</p>
+
+<h2 id="usage">Usage</h3>
+
+<p>The application developer
+adds the 2 component files, namely <a href="/guide/appname-html">AppName.html File</a> and <a href="/guide/appname-js">AppName.js File</a>, configures and optionally populates the server and the application is ready to run.</p>
+
+<p>If special reporting formats is required two more files are added following the guidelines detailed in <a href="/guide/form-page-design">Form Page Design</a></p>
+
+<h2 id="history">History</h3>
+
+<p>I have always been a proponent of schema driven applications.  That is, the business logic for each field should be
+closely tied to a single definition giving the field's location, format and constraints.
+If practiced the following benefits should be realized:</p>
+
+<ul>
+<li>The contents and meaning of a field is easily understood</li>
+<li>The application maintenance burden is reduced</li>
+</ul>
+
+<p>Over the years I have written applications using the following methodoligies and attempted to apply
+this schema driven approach to that methodology:</p>
+
+<ul>
+<li>Velocity - an early HTML templating scheme</li>
+<li>A handcrafted HTML parser and data driven templating scheme</li>
+<li>JSPs and JQuery</li>
+<li>Extended JSPs and JQuery</li>
+<li>Drupal &amp; Joomla</li>
+</ul>
+
+<p>While there was limited success, several weaknesses of the methodologies were exposed by these attempts.  In part they can be
+summarized as:</p>
+
+<ul>
+<li>All required knowledge of multiple languages (beyond HTML and CSS)</li>
+<li>The splitting of the processing between the server and client complicated the design and especially the debugging of applications</li>
+<li>The multiple layers used to render the HTML became difficult to formulate and debug (especially Drupal)</li>
+<li>Creating user friendly interfaces was a major chore</li>
+</ul>
+
+<p>I heard about <a target=_blank href="http://angularjs.org/">AngularJS</a> and it seemed to have the potential to address these weaknesses.
+After writing several applications using <a target=_blank href="http://angularjs.org/">AngularJS</a> I am
+pleased to report that for the applications within the problem domain defined above
+<a target=_blank href="http://angularjs.org/">AngularJS</a> has made great strides in eliminating the weaknesses just enumerated above.</p>
+
+<p>In order to learn <a target=_blank href="http://angularjs.org/">AngularJS</a> I began work on 3 CRUD applications simultaneously.
+I found I repeatedly had to retrofit improvements from one app into
+the others.  Obviously there had to be a better way.</p>
+
+<p>I realized that the flexibility of Javascript meant that I could define schemas using it's flexible language and
+drive the applications from these definitions.  Thus <strong>Triangular</strong> was conceived.
+The idea of dynamic tables found in Drupal and Jooma is also appealing.
+However, while possible, the effort to go this extra step was deferred in the present implementation of <strong>Triangular</strong>.</p>
+
+<p><strong>Triangular</strong> takes the common elements from the CRUD app and moves them into a reusable infrastructure.
+Design efforts were expended to maximize the customization capabilities of this reusable infrastructure.
+The application data specfics are defined in a table that references application specific methods.</p></div>

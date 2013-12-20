@@ -1,0 +1,129 @@
+<h1><code ng:non-bindable="">Col</code>
+<span class="hint">(type in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides an object rendition of the <a href="/guide/table">Static Col</a> defined in the <code>Table</code> object
+defined in the Javascript file.</p>
+
+<p>Referred to in this documentation as the dynamic instance of the <code>Col</code> object.</p>
+
+<p>The public methods attached to the <code>Col</code> object and described herein are
+accessible from the HTML code assuming a <code>Col</code> object is available.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="Col">Col(props)</h3>
+<div class="col"><p>Constructor of the the <code>Col</code> object. Performs the following functions:</p>
+
+<ul>
+<li>classifies the <code>Col</code> type into 'virt' (col property points to a function) or 'field'</li>
+<li>assigns a <code>cid</code> property that makes the each column unique in the entire system across
+all Tables.</li>
+<li>Builds a column map table based on the <code>cid</code></li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">props – {Object} – </code>
+<p>Properties array used to define the column in static object.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getActions">getActions($scope, oObj)</h3>
+<div class="getactions"><p>Builds an array of Action objects from a <code>Col</code> whose type is 'actions'. The
+following algorithm is used to build the array.</p>
+
+<ul>
+<li>returns an empty array if the type is not 'actions'</li>
+<li>Adds defualt <code>editRecord</code> and <code>dropRecord</code> actions unless the
+<code>Col</code> addDefault property is false</li>
+<li>hooks the <code>methClass</code>, <code>method</code>, <code>click</code>, <code>whatClass</code> function pointers into the $scope.</li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {scope} – </code>
+<p>of HTML caller</p></li>
+<li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>obsolete. not referenced.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>array of Action objects</p></div>
+</div>
+</li>
+<li><h3 id="getField">getField()</h3>
+<div class="getfield"><p>Returns field name in table column is related to. For type = 'virt'
+the constant '<em>field</em>' is returned.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>related field name</p></div>
+</div>
+</li>
+<li><h3 id="getHint">getHint()</h3>
+<div class="gethint"><p>Returns the hint field that is added to <a href="/api/tri.controller:ctrlCommEdit">Standard Editor</a> input fields as a 'title=' string.
+If <code>hint</code> in the column definition is a function it is called with the signature <code>this.hint(scope,this)</code>. Otherwise the string value is returned.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>computed hint.</p></div>
+</div>
+</li>
+<li><h3 id="getID">getID()</h3>
+<div class="getid"><p>Returns the <code>getTitle</code> value with blanks replaced by '-'.  Used in the HTML
+templates to create element IDs based on the column name that can be refenced in the CSS.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>title modified</p></div>
+</div>
+</li>
+<li><h3 id="getListHint">getListHint()</h3>
+<div class="getlisthint"><p>Returns the hint field that is added to the list columns of the <a href="/api/tri.controller:ctrlCommList">Lister</a>.
+The field is assumed to be a function  which is called with signature <code>this.listHint(scope,oObj,this)</code> where
+<code>oObj</code> is the row being displayed.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>computed hint.</p></div>
+</div>
+</li>
+<li><h3 id="getPlace">getPlace()</h3>
+<div class="getplace"><p>Returns the place-holder field that is added to <a href="/api/tri.controller:ctrlCommEdit">Standard Editor</a> input fields as a 'placeHolder=' string.
+If <code>place</code> in the column definition is a function it is called with the signature <code>this.place(scope,this)</code>. Otherwise the string value is returned.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>computed place-holder.</p></div>
+</div>
+</li>
+<li><h3 id="getTitle">getTitle()</h3>
+<div class="gettitle"><p>Returns the <code>Col</code> title</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p><code>Col</code> name used for public display</p></div>
+</div>
+</li>
+<li><h3 id="getValue">getValue(scope, oObj, nMax)</h3>
+<div class="getvalue"><p>Returns the value of oObj for the <code>Col</code>.  Invokes any necessary functions
+to calculate the value. If the <code>nMax</code> field is present the computed string
+is checked that is does not exceed that length.  If it does it is shortened and
+the string <code>...</code> added such that the string's length equals the <code>nMax</code> field.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>The present scope</p></li>
+<li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>the data object to extract the <code>Col</code> from.</p></li>
+<li><code ng:non-bindable="">nMax – {number} – </code>
+<p>optional max string length returned</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>the computed value</p></div>
+</div>
+</li>
+<li><h3 id="select">select(scope, oCols, sType)</h3>
+<div class="select"><p>Extends the supplied array of <code>Col</code> objects with this <code>Col</code> if it matches
+the sType parameter which can have the following values:</p>
+
+<ul>
+<li>'=list' - matches columns of type not 'list' and whose 'showList' value returns true.</li>
+<li>'=edit' - matches columns of type 'virt', 'action', 'list' and 'actions'
+and whose default 'showEdit' value returns true else those whose specified showEdit value returns 'true'</li>
+<li>'=cust' - matches columns of type '=cust' or whose specified 'showCust' value returns true.</li>
+<li>null - matches all columns</li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>caller scope</p></li>
+<li><code ng:non-bindable="">oCols – {Object[]} – </code>
+<p>array of <code>Col</code> objects to extend</p></li>
+<li><code ng:non-bindable="">sType – {string} – </code>
+<p>to match against <code>Col</code> type.  sType = null matches all.</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>

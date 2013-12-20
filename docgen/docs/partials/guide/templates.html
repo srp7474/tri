@@ -1,0 +1,65 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <strong>Triangular</strong> template system is used to enable predefined HTML snippets to be easily included in application pages.</p>
+
+<p>The fact that they can be altered during injection, either by the <a href="/api/tri.directive:macro#parameters">alter</a> keyword or by the use of predefined
+keywords such as <code>$MODOBJ$</code> adds even more flexibility to the template facility.</p>
+
+<p>It relies on the <a href="/api/tri.directive:macro">macro fetch</a> directive to inject the template into the application page.</p>
+
+<p><strong>Triangular</strong> predefined templates are stored in <code>tri/AppBase.htm</code>.  Custom templates are defined at the end of the
+<a href="/guide/appname-html">appname-html</a> file.</p>
+
+<p>The templates are loaded as described in <a href="/api/tri.method:hookMsgListener">hookMsgListener</a>.</p>
+
+<p>The Chrome browser <code>inspect</code> function is a helpful way to see the injected templates.  The comments before the
+injected code indicate their source and what process injected them.</p>
+
+<h3 id="theloadprocess">The load process</h4>
+
+<p>The templates are processed after the browser has parsed them.  This means that tags are converted to lower case and double quotes inserted
+around each HTML attribute, needed or not.</p>
+
+<p>The browser will also attempt to <code>GET</code> any <code>&lt;img&gt;</code> , <code>&lt;audio&gt;</code> or <code>&lt;script&gt;</code> tags in the file.  To prevent this from happening add a defer after the
+tag.  Thus <code>&lt;img&gt;</code> would be <code>&lt;img-defer&gt;</code>.  In the case of <code>&lt;audio&gt;</code> or <code>&lt;script&gt;</code> this also applies to the matching
+<code>&lt;/audio&gt;</code> or <code>&lt;/script&gt;</code> tags.</p>
+
+<p>The <code>img-defer</code> adjustment to <code>img</code> is done automatically by the <a href="/api/tri.directive:macro">macro fetch</a> process. For <code>script-defer</code> and <code>audio-defer</code> adjustments they
+should be added to the <a href="/api/tri.directive:macro">macro fetch.alter</a> parameter where applicable.</p>
+
+<h3 id="templatesyntax">Template Syntax</h4>
+
+<p>Each template is of the form
+<pre class="prettyprint linenums">
+  &LT;pre class=template id="name.html"&gt;
+     ...
+  &LT;/pre&gt;
+</pre>
+
+<p>where</p>
+
+<p><code>name.html</code> is the template name that is registered and used in the
+<a href="/api/tri.directive:macro">macro fetch</a></p>
+
+<p>and  the "..." is the template code that is inserted after processing as described in the
+<a href="/api/tri.directive:macro">macro</a> directive.</p>
+
+<h3 id="example">Example</h4>
+
+<p>This is an example from the "Deps.htm" file.  It is used to display the donor address information.</p>
+
+<p>The string '$MODOBJ$' is replaced during the injection process by the current object in context.</p>
+
+<pre class="prettyprint linenums">
+  &LT;pre class=template id="code.html"&gt;
+    &lt;fieldset id=fld-code&gt;
+      &lt;legend&gt;Donor {{$MODOBJ$.code}}&lt;/legend&gt;
+      &lt;div&gt;{{$MODOBJ$.donor.name}}&lt;/div&gt;
+      &LT;pre&gt;{{$MODOBJ$.donor.address}}&LT;/pre&gt;
+      &LT;pre&gt;{{$MODOBJ$.donor.phones}}&LT;/pre&gt;
+    &lt;/fieldset&gt;
+  &LT;/pre&gt;
+</pre></div>

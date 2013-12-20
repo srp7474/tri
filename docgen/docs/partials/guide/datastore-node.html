@@ -1,0 +1,41 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The Datastore is the  facility used to persist the data of the applications.</p>
+
+<p>In the <strong>Triangular</strong> Node.js variant of the development configuration this is provided by the <a href="/guide/server-inter#nodejsvariant">Server Node.js Variant</a>.
+Both the local development environment and the production
+deployed version use the same scheme.  In fact the deploying into production of a local development environment uses the local data structure as its starting point.</p>
+
+<p><strong>Triangular</strong> deploys its <a href="/guide/nodesite">NodeJS Site</a> at
+<a target=_blank href=https://www.nodejitsu.com>NodeJitsu  Node.js Hosting</a></p>
+
+<p>Both local and production use the same data structure.  The default base name is TRI-DB within the deployed structure.  Each app is stored within
+a folder of the app name.</p>
+
+<p>Each <a href="/guide/records#keystructure">Record Key/Data</a> file is stored  as one of  3 types.</p>
+
+<ul>
+<li><code>$super</code> - the <a href="/guide/user#superuser">SuperUser</a> credentials</li>
+<li><code>$user</code> - <a href="/guide/user#adminuser">AdminUsers</a> and <a href="/guide/user">Users</a> within the respective apps folder.  The <code>role:admin</code> distuinguishes them.</li>
+<li><code>$data</code> - the data records.</li>
+</ul>
+
+<p>During startup the <a href="/guide/node-server">NodeJS Server</a> loads the directory structure into an internal table.  The <code>db</code> command may be used to see this
+if the local console has been turned on with the <code>-quit</code> option.</p>
+
+<p>The <strong>Node.js</strong> single threaded architecture made the potential file contention issue a non-issue.  Whenever a record is to be physically written a copy is placed into
+the <code>rec.data</code> field of the structure and the write started. When the write completes the <code>rec.data</code> field is cleared.  If a read occurs during the time
+the <code>rec.data</code> field has a value this value is returned to the requester immediately.  Otherwise a normal read takes place and the contents returned to the requester
+when it completes.</p>
+
+<p>The <code>GekID</code> field is ignored and set to a value of <code>1</code>.</p>
+
+<p>The <code>CreateTS</code> and <code>UpdateTS</code> fields are derived from the <strong>Node.js</strong> <code>fs.stat</code> command using the
+<code>ctime</code> and <code>mtime</code> values converted to milliseconds using <code>getTime()</code>.</p>
+
+<p>The passwords on the system are encrypted using a <code>mangle</code> property in the <a href="/guide/user#superuser">SuperUser</a>  that is randomly created when the
+<a href="/guide/user#superuser">SuperUser</a> is created.  This value should not be changed without resetting all the passwords. The randomness of this string
+makes it difficult to derive the password even if the encrytped value is known. The <code>mangle</code> value should be kept secret for this reason.</p></div>

@@ -1,0 +1,103 @@
+@ngdoc overview
+@name Site Landmarks
+@description
+<table>
+  <tr>
+    <td class=c1><a class=c-action  href=overview><b>Triangular</b> Documentation</a></td>
+    <td class=c2>
+      The complete online documentation for <b>Triangular</b>
+    </td>
+  </tr>
+  <tr>
+    <td class=c1><a class=c-action  href=/guide/construct><b>Triangular</b> Construct Index</a></td>
+    <td class=c2>
+      The useful development guide to aid in locating <b>Trianguler</b> constructs
+    </td>
+  </tr>
+  <tr>
+    <td class=c1><a ng-click=appLoader($event) href=/apps/Hello.htm>Hello App Demo</a></td>
+    <td class=c2>
+      A simple Message Board to showcase the capabilities of <b>Triangular</b>:
+        <ul>
+          <li>Create, Read, Update and Delete of messages</li>
+          <li>Basic validation techniques implemented</li>
+          <li>Several filtering options shown</li>
+          <li>Print facility for selected messages</li>
+        </ul>
+      Refer to {@link /apps/hello-app Hello App} for usage guidelines, source code details and
+      an explanation of the <b>Triangular</b> features used.
+    </td>
+  </tr>
+  <tr>
+    <td class=c1><a ng-click=appLoader($event) href=/apps/HelloUI.htm>HelloUI App Demo</a></td>
+    <td class=c2>
+      A simple Message Board to showcase the capabilities of <b>Triangular</b> integrated with JQueryUI:
+        <ul>
+          <li>Create, Read, Update and Delete of messages</li>
+          <li>Basic validation techniques implemented</li>
+          <li>Several filtering options shown</li>
+          <li>JQueryUI Dialog is used to edit and display the messages</li>
+        </ul>
+      Refer to {@link /apps/helloui-app HelloUI App} for usage guidelines, source code details and
+      an explanation of the <b>Triangular</b> features used.
+    </td>
+  </tr>
+  <tr>
+    <td class=c1><a ng-click=appLoader($event) href=/apps/Chqs.htm>Cheque Writer System App Demo</a></td>
+    <td class=c2>
+      A complete multi-table system of medium complexity for writing cheques that:
+        <ul>
+          <li>Allows the creation, editing and printing of cheques</li>
+          <li>Demonstrates the auto-complete feature of <b>Triangular</b></li>
+          <li>Includes secondary tables that are referenced</li>
+        </ul>
+      Refer to {@link /apps/chqs-app Chqs App} for usage guidelines, source code details and
+      an explanation of the <b>Triangular</b> features used.
+    </td>
+  </tr>
+  <tr>
+    <td class=c1><a ng-click=appLoader($event) href=/apps/Deps.htm>Deposit System App Demo</a></td>
+    <td class=c2>
+      A complete multi-table system of higher complexity for counting donations that:
+        <ul>
+          <li>Tallys cash and cheque donations into a deposit</li>
+          <li>Side-by-side filtered tables to allow easy assignment of donor codes</li>
+          <li>Allows a donation to be split across many designations</li>
+          <li>Cash tender is counted bill by bill</li>
+          <li>Produces a bank deposit slip including cash bill counts</li>
+          <li>Produces a donation summary by designation</li>
+          <li>A secondary management application can view donation summaries</li>
+          <li>An additional application page is used to enter and print envelopes designated for individuals</li>
+        </ul>
+      Refer to {@link /apps/deps-app Deps App} for usage guidelines, source code details and
+      an explanation of the <b>Triangular</b> features used.
+    </td>
+  </tr>
+  <tr>
+    <td class=c1>{@link /apps/src-files Individual Source Files}</td>
+    <td class=c2>
+      <ul>
+        <li>Use this link for a quick view of the source files used to build the system you are now using.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class=c1>{@link /apps/zip-files Library of zip files}</td>
+    <td class=c2>
+      <ul>
+        <li>Use this link to download the a complete development environment.  This includes the source files and a preloaded Datastore.
+        <br><br>
+        Instructions for using it are at ....</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td class=c1><a ng-click=appLoader($event) href=http://localhost:8882/apps/tri/TriBoot.htm class=c-action>LocalHost SuperUser Login</a></td>
+    <td class=c2>
+      <ul>
+        <li>Use this access the Super User login page on a local development system, port 8882.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+

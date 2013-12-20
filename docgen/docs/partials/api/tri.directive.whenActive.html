@@ -1,0 +1,35 @@
+<h1><code ng:non-bindable="">whenActive</code>
+<span class="hint">(directive in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Used to disable the function of link when it is not active based on the class values not
+including 'c-quiet'.  It means the functions called never have to check if they are disabled as
+the call is never made if the link is deemed inactive.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre><code ng:non-bindable="">&lt;A ... when-active='function-to-execute'&gt;</code>
+</pre>
+</div>
+<h2 id="Example">Example</h2>
+<div class="example"><h4>Source</h4>
+<div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-5" source-edit-css="" source-edit-js="script.js-4" source-edit-unit="" source-edit-scenario=""></div>
+<div class="tabbable"><div class="tab-pane" title="index.html">
+<pre class="prettyprint linenums" ng-set-text="index.html-5" ng-html-wrap-loaded=" angular.js script.js"></pre>
+<script type="text/ng-template" id="index.html-5">
+ 
+ <div><b>Note: examples do not execute yet until TRI.js hooked in properly to doc environment</b></div>
+ <a class='c-action sz-90 adj-rgt' href="" when-active="changeCurrency();">Change to ${{getOtherCurrency()}}</a>
+</script>
+</div>
+<div class="tab-pane" title="script.js">
+<pre class="prettyprint linenums" ng-set-text="script.js-4"></pre>
+<script type="text/ng-template" id="script.js-4">
+   function Ctrl($scope) {
+     $scope.changeCurrency = function() {
+     }
+   }
+ </script>
+</div>
+</div><h4>Demo</h4>
+<div class="well doc-example-live animator-container" ng-embed-app="" ng-set-html="index.html-5" ng-eval-javascript="script.js-4"></div></div>
+</div>

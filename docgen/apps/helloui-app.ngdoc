@@ -1,0 +1,584 @@
+@ngdoc overview
+@name HelloUI App
+@description
+<div ng-show='isFireFox()' class=firewarn>
+  This page does not show correctly on FireFox.  The <code>hide/show</code> buttons do not work.
+</div>
+<span id=close-sections>{{closeSections()}}</span>
+### <a class=hider ng-click=toggleHide($event)>hide</a>Overview
+The **HelloUI** application is the message board system that uses <a target=_blank href=http://api.jqueryui.com/dialog/>JQueryUI Dialog</a>
+ and <a target=_blank href=http://api.jqueryui.com/datepicker/>JQueryUI Datepicker</a> widgets.
+
+It is written with about 320 lines of code, some of it boiler-plate and including the .CSS . (450 actual less example comments and spaced out formatting).
+
+In that amount of code it:
+
+* Maintains a single table with 7 columns and one virtual column on a safe cloud storage location.
+
+* Executes several field validations during editing
+
+* Implements the <a target=_blank href=http://api.jqueryui.com/datepicker/>JQueryUI Datepicker</a> for the Date field
+
+* Allows for various filters to quickly access records
+
+* Has a Viewer (<a target=_blank href=http://api.jqueryui.com/dialog/>JQueryUI Dialog</a>)  to scroll through the selected records and optionally edit them
+
+* Has secure access and user inactivity timeouts.
+
+The **... Explained** sections which follow the **Demonstration** section give you a line-by-line explanation of the complete set of code required
+to create this application.  It is instructive to compare these files with the {@link /apps/hello-app Hello App} equivalent files and see the differences
+required to implement the <a target=_blank href=http://jqueryui.com/>JQueryUI Interface</a>.
+
+To avoid teduim only the note worthy points are points of difference explained in reference to the <a target=_blank href=http://jqueryui.com/>JQueryUI Interface</a>.
+The reader is advised to look at
+{@link /apps/hello-app hello App Explained} which has details on the more basic constructs.
+
+To run a demonstration now click on the <a ng-click=appLoader($event) href=/apps/HelloUI.htm>HelloUI App Demo</a> link.
+It will be in a new tab so you can still refer to the instructions in the next section.
+
+
+### <a class=hider ng-click=toggleHide($event)>hide</a>Demonstration
+
+**Note 1** It runs in {@link /guide/sandbox SandBox Mode} so you cannot damage anything.
+
+**Note 2** This has been tested under **Chrome** which is the recommended browser for these demonstrations.
+
+* If not started, open up link <a ng-click=appLoader($event) href=/apps/HelloUI.htm>HelloUI Application</a>. It will be in a new tab so you can still refer to these instructions.
+
+* Press **login** button, the `UserName` and `Password` are already provided.
+
+* Click on `List Messages Records` action.  You will see some records.
+
+* Play with the filters by entering data.  Masks use regular expressions with case sensitivity turned off.
+
+* Click on `edit` to edit a record.  A <a target=_blank href=http://api.jqueryui.com/dialog/>JQueryUI Dialog</a> box will pop up.
+ Enter data and you will see the validation routines kick in. While there is an error or no changes the `Save` button is disabled.
+
+* Click on the Date input field.
+A <a target=_blank href=http://api.jqueryui.com/datepicker/>JQueryUI Datepicker</a> window will pop up.  Use this to change the Date field.
+
+* Press `Save` or `Cancel Changes` to exit edit mode.  The list will show the modified data if saved.
+
+* Click on `Create New Messages Record` to create a new record.  Enter new data. Again the validation routines will kick in
+
+* Press `Save` or `Cancel Changes` to exit edit mode. The list will show the new record if saved.
+
+* Click on `View Selected Messages`. It will create the Dialog Viewer which will let you scroll through the set of selected records.
+
+* Press `Edit` to edit one of these records.  It will create the Dialog mode Edit window as before.  Closing the editor will return to the Viewer Dialog
+with any changes made to the curent record.
+
+
+<span id='HelloUI.htm'></span>
+### <a class=hider ng-click=toggleHide($event)>hide</a>HelloUI.htm Explained
+<div class=scroll-region><pre>
+<html>
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-msgs0.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="tri/AppStd.css" title=default>
+  <link rel=stylesheet type ="text/css" href="HelloUI.css" title=default>
+  <link rel=stylesheet type ="text/css" href="jquery-ui-1.10.3.custom.css" title=default>            <!--- required for Dialog mode -->
+  <script src="tri/ut.js"></script>
+  <script src="jquery-1.10.2.min.js"></script>                                                       <!--- required for Dialog mode -->
+  <script src="jquery-ui-1.10.3.custom.min.js"></script>                                             <!--- required for Dialog mode -->
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="HelloUI.js"></script>
+  <title>HelloUI:Defined during bootstrap</title>
+  <script>gaTracking();</script>
+</head>
+
+<body id=bodyID>
+  <macro fetch='apps-body.html' alter='##TITLE##/Message Board System Login'></macro>                 <!-- standard body -->
+
+  <macro fetch='apps-copyright-notice.html'></macro>                                                  <!-- copyright notice -->
+
+  <div class=hide id="dlg-viewer">
+    <div id=ui-viewer ng-controller=ctrlCustViewer>                                                   <!-- Custom Dialog mode viewer -->
+      <div class=head>
+        <span id=age><label>Age: </label>{{calcAge()}}</span>
+        <span id=type><label>Type: </label>{{oObj.type}}</span>
+        <span id=author><label>Author: </label>{{oObj.author}}</span>
+      </div>
+      <p id=title><label>Title: </label>{{oObj.title}}</p>
+      <fieldset>
+        <p ng-repeat='sPar in getText()'>{{sPar}}</p>
+      </fieldset>
+    </div>
+  </div>
+
+
+  <object data='tri/AppsBase.htm?app=Chqs' id=apps-templates style='width:0px;height:0px;'></object>  <!-- load standard templates -->
+
+  <!---------------------------- Custom CSS ----------------------------------!>
+  <style type="text/css">
+    /* Note: this could be in a separate .css file if preferred */
+    /* messages lister */
+    table#list-messages                                    {width:980px;}
+    table#list-messages thead                              {width:980px;}
+    table#list-messages td.c0, table#list-messages th.c0   {width:100px;}
+    table#list-messages td.c1, table#list-messages th.c1   {width:120px; }
+    table#list-messages td.c2, table#list-messages th.c2   {width:100px; }
+    table#list-messages td.c3, table#list-messages th.c3   {width:80px; }
+    table#list-messages td.c4, table#list-messages th.c4   {width:580px; }
+    table#list-messages td.c4                              {text-align:left; padding-left:10px; }
+    fieldset.list-comm input#_custmask                     {width:180px;}
+
+    /* messages editor */
+    div#editor                                             {width:900px;}
+    div#chq-edit                                           {margin-left:10px;}
+    div#chq-hdr                                            {width:900px;}
+    div#flds-messages  #msg-text                           {width:500px; height:200px;}
+  </style>
+
+  <!------- Custom Templates ------!>
+  <object type='text/html' id=cust-templates style='width:0px;height:0px;'>
+    &LT;pre class=template id="textarea.html">
+       <textarea id=msg-text ng-model='oObj[oCol.col]' placeHolder='enter or paste the message text (30 chars min)'>
+         enter text here
+       </textarea>
+    &LT;/pre>
+
+    &LT;pre class=template id="select.html">
+       <select id=msg-type ng-model='oObj[oCol.col]' ng-init=technical>
+         <option>technical</option>
+         <option>sports</option>
+         <option>politics</option>
+         <option>legal</option>
+         <option>other</option>
+       </select>
+    &LT;/pre>
+  </object>
+</body>
+
+
+</html>
+
+</pre></div>
+
+* Line `7` specifies the custom **.css** file to use in addition to the standard **Trianular** one which mainly provides
+formatting instructions for the Dialog code.
+
+* Line `8` loads the `jquery-ui-1.10.3.custom.css` file used to format the <a target=_blank href=http://jqueryui.com/>JQueryUI Widgets</a>
+
+* Line `10` loads the `jquery-1.10.2.min.js` file used to provide the <a target=_blank href=http://jquery.com/>JQuery API</a>
+
+* Line `11` loads the `jquery-ui-1.10.3.custom.min.js` file used to provide the custom <a target=_blank href=http://jqueryui.com/>JQueryUI API</a>
+
+* Lines `25` thru `36` define the Dialog Viewer. It references `ctrlCustViewer` which is defined starting in lines `25` of `HelloUI.js`.
+
+<span id='HelloUI.js'></span>
+### <a class=hider ng-click=toggleHide($event)>hide</a>HelloUI.js Explained
+**Note:** Normally this code would be fewer lines because many statement would be stretched across the line.  It is formatted the way it is
+to allow for easier reading in this viewing panel.
+
+<div class=scroll-region><pre>
+/*
+ This is a sample application designed to run under the Triangular Infrastructure
+ */
+"use strict";
+
+// ---------------------------------------------------------------------------
+/* This forces angular to load the tables and their dependencies
+ *
+ * We rely on the implied dependency injection to haul in only the tables needed and
+ * thus automatically configure the system menus and available actions.
+ */
+
+function ctrlMain($scope,servSess,servGAE,servREG,tblMSGS,servCRUD,servConfig) {
+  log("Created ctrlMain for messages application");
+  servGAE.setCust("msgs");
+  servSess.setTitle("UI: Message Board System");
+
+  var oOMs = [{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'}];
+  servSess.setOptMenuItems(oOMs);
+
+  function xfrAdminFunctions() {
+    servSess.xfrAdminApp("msgs");
+  }
+}
+
+// This custom controller is used by the Dialog mode viewer
+
+function ctrlCustViewer($scope,servSess) {
+  log("Created ctrlCustViewer");
+  var nCur = 0;
+  var oObjs = null;
+
+  $scope.prepare  = prepare;
+  $scope.doneEdit = doneEdit;
+  $scope.next     = next;
+  $scope.prev     = prev;
+  $scope.getText  = getText;
+  $scope.calcAge  = function() {if (!$scope.oObj) return ''; return tri.calcAgo($scope.oObj.date,$scope.oObj.time)}
+
+  function prepare(objs) {
+    oObjs = objs;
+    log("prepare called "+oObjs.length);
+    show(0);
+  }
+
+  function prev() {  // Handle Prev button
+    if (nCur < 1) return;
+    show(nCur-1);
+    $scope.$digest();
+  }
+  function next() {  // Handle Next button
+    if (nCur >= oObjs.length) return;
+    show(nCur+1);
+    $scope.$digest();
+  }
+
+  function show(n) {
+    nCur = n;
+    $scope.oObj = oObjs[nCur];
+    log("viewing %o",$scope.oObj);
+    var oPrev = $('.ui-viewer #but-prev');
+    var oNext = $('.ui-viewer #but-next');
+    if (nCur == 0) {
+      oPrev.button('disable');
+    } else {
+      oPrev.button('enable');
+    }
+    if (nCur < oObjs.length-1) {
+      oNext.button('enable');
+    } else {
+      oNext.button('disable');
+    }
+  }
+
+  function doneEdit(oObj) {  // Replace the changed object in our list
+    log("finished edit %o",oObj);
+    for(var i=0,iMax=oObjs.length; i<iMax; i+=1) {
+      if (oObjs[i].oaa == oObj.oaa) {
+        oObjs[i] = oObj;
+      }
+    }
+    $scope.oObj = oObj;
+  }
+
+  function getText() {       // Render the text in paragraphs using ng-repeat
+    if (!$scope.oObj) return ['not-ready'];
+    var oObj = $scope.oObj;
+    if (!oObj.text) return ['no text'];
+    var sLines = oObj.text.split(/\n/);
+    return sLines;
+  }
+
+}
+
+
+//----------------------------------------------------------------------------
+//-------------------------------- Message records ------------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblMSGS',['servREG','servGAE','servREC','servSess','$rootScope',function(servREG,servGAE,servREC,servSess,$rootScope) {
+  var oFuncs = {};
+
+  var oTabProp = {
+       recTitle: 'Messages'
+      ,recName:  'messages'
+      ,recType:  'msg'
+      ,lsName:   '-msgs'
+      ,tabServ:  oFuncs    //self pointer
+      ,recServ:  servREC
+      ,order:    {col:'date', seq:'reverse'}
+      ,cols:     [{type:'actions',    title:      'Actions'
+                                     ,showEdit:   false
+                                     ,addDefault: true
+                  }
+                 ,{col: 'time',       title:      'Time'
+                                     ,showList:   false
+                                     ,readonly:   true
+                  }
+                 ,{col: 'date',       title:      'Date'
+                                     ,showList:   false
+                                     ,readonly:   isReadOnly
+                  }
+                  ,{col: 'author',    title:      'Author'
+                                     ,hint:       'str hint example'
+                                     ,place:      'str placeholder'
+                                     ,reqd:       true
+                                     ,mask:       '[A-Za-z\\s\.\-]'
+                  }
+                 ,{col: 'type',       title:      'Type'
+                                     ,type:      'cust'
+                                     ,htmlCust:  'select.html'
+                  }
+                 ,{col: calcAge,      title:      'Age'
+                                     ,listHint:   ageHint
+                  }
+                 ,{col: 'title',      title:      'Title'
+                                     ,place:      titlePlace
+                                     ,hint:       titleHint
+                                     ,reqd:       10
+                                     ,listHint:   textSum
+                                     ,listMax:    60
+                  }
+                 ,{col: 'text',       title:      'Message'
+                                     ,showList:   false
+                                     ,type:      'cust'
+                                     ,htmlCust:  'textarea.html'
+                                     ,reqd:       30
+                  }
+                ]
+      ,filters: [
+                {type: 'mask',   field:    'author'  }
+               ,{type: 'mask',   field:    'type'    }
+               ,{type: 'cust',   field:    '_custmask'
+                                ,title:    'Title/Text'
+                                ,place:    'title search or =text search'
+                                ,methCust: custMask
+                }
+                ]
+      ,createExit          : createExit
+      ,primeList           : primeList
+      ,dlgRenderExit       : dlgRenderExit
+      ,optActions          : [
+                             {   click:     'viewSelected()'
+                                ,title:     'Press to view selected messages'
+                                ,label:     'View Selected Messages'
+                                ,whatClass: 'canViewSelected()'
+                             }
+                             ]
+  };
+
+  oFuncs.getTabProp       = function()     {return oTabProp;}
+  oFuncs.viewSelected     = function()     {viewSelected();}
+  oFuncs.canViewSelected  = function()     {return canViewSelected();}
+
+  servREG.registerTable(oFuncs);
+  return oFuncs;
+
+  // -------------------------------------------------------------------------
+
+  var oViewScope = null;
+
+  function primeList(scope,oTP) {
+    oTP.oCRUD.setDlgEdit(750,800); //Activates Dialog mode for the editor
+  }
+
+
+  // Called to render the Editor.  Lets us modify the Dialog Window.  Note that
+  // AngularJS attributres inserted here will be of non-effect.
+  function dlgRenderExit(oDlgEdit,oObj,sEditType) {
+    //log("dlgRenderExit taken %o",oObj);
+    var oDlg = oDlgEdit.oDlg;
+    var sTitle = oObj.title || '** Create New Message **';
+    if (sTitle.length > 50) sTitle = sTitle.substring(0,50)+"...";
+    oDlg.dialog("option","title","EDIT:"+sTitle);
+    $('div.pair#Date input',oDlg).each(function() {
+      var oThis = this;
+      $(this).attr('id','inp-Date');
+      var sDate = oObj.date;
+      var oDP = $(this).datepicker({
+           dateFormat:'yymmdd'
+          ,defaultDate:sDate
+          ,onClose:function(sDateText,inst) {
+                     oObj.date = sDateText;         // Update the object field
+                     $rootScope.$digest();          // angularJS update
+                   }
+      });
+      var oF = function() {$(oThis).datepicker('destroy');};
+      oDlgEdit.finals.push(oF);  // we will need to close the Datepicker
+    });
+    if (oViewScope) {  //If editing from within the Dialog Viewer need to update its object cache
+      oDlgEdit.finals.push(function() {oViewScope.doneEdit(oObj);});
+    }
+  }
+
+  function viewSelected() { // Open the Dialog Viewer
+    log("view selected");
+    var oObjs = getSelectedObjs();
+    if (oObjs.length == 0) return;
+    var oDlg = $("#dlg-viewer");
+    oDlg.dialog({ autoOpen: false, modal:true, dialogClass: "ui-viewer"
+      ,title:'VIEW: '+'View Message Set'
+      ,width:700, height:750, resizable:false
+      ,buttons: [{text:'Prev',click:dlgPrev,id:'but-prev'},{text:"Next",click:dlgNext,id:'but-next'},{text:"EDIT",click:dlgEdit}]
+      ,close:function() {
+        oViewScope = null;
+        log("ViewDialog closing");
+      }
+    });
+    oDlg.dialog("open");
+    oViewScope = $('#ui-viewer',oDlg).scope();
+    log("view-scope %o",oViewScope);
+    oViewScope.prepare(oObjs);
+
+    function dlgNext() {
+      oViewScope.next(); //forward call
+    }
+
+    function dlgPrev() {
+      oViewScope.prev();  //forward call
+    }
+
+    function dlgEdit() {
+      var oObj = oViewScope.oObj;
+      log("edit record "+oObj);
+      oTabProp.oCRUD.editRecord(oObj.oaa);
+      $rootScope.$digest();  //update angular fields
+    }
+  }
+
+  function canViewSelected() {
+    var oObjs = getSelectedObjs();
+    if (oObjs.length > 0) return 'c-action';
+    return 'c-quiet';
+  }
+
+  function getSelectedObjs() {
+    var oTAB = servSess.getTabServ();
+    if (oTAB == null) return [];
+    return oTAB.getSelObjs();
+  }
+
+  function custMask(oTab,oObjs,oData,oFil) {
+    var sStr = oData[oFil.field] || '';
+    if (sStr.substring(0,1) == '=') {
+      return servSess.maskReduce(oObjs,sStr.substring(1),'text');
+    } else {
+      return servSess.maskReduce(oObjs,sStr,'title');
+    }
+  }
+
+  function isReadOnly(scope,oCol) {
+    return !servSess.isAdmin();
+  }
+
+
+  function titlePlace(scope,oCol) {
+    return 'func place:'+oCol.getTitle();
+  }
+  function titleHint(scope,oCol) {
+    return 'func hint:'+oCol.getTitle();
+  }
+
+  function ageHint(scope,oObj,oCol) {
+    return 'Date:'+oObj.date+' time:'+oObj.time;
+  }
+
+  function textSum(scope,oObj,oCol) {
+    var sStr = ""+oObj.text;
+    if (sStr.length > 80) sStr = sStr.substring(0,80)+" ...";
+    return sStr;
+  }
+
+  function calcAge(oObj,scope,oCol) {return tri.calcAgo(oObj.date,oObj.time);}
+
+  function createExit(oObj) {
+    var sNow = ""+getNowString();
+    oObj.date      = sNow.substring(0,8);
+    oObj.time      = sNow.substring(9,9+6);
+    oObj.type      = 'technical';  // matches select in select.html template
+    return true;
+  }
+
+}]);
+</pre></div>
+
+##### Code Description
+
+* Line `4` specifies `use strict`.  All **Triangular** Javascript runs under this mode as it catches
+many coding mis-names during development. Recommended.
+
+* Lines `28` thru `93` define the `ctrlCustViewer`.  This is referenced in line `26` of `HelloUI.htm`
+
+* Line `40` specifies the `prepare` function which is called from line `231` when the Dialog opens up.
+
+* Lines `46` and `51` define the `next` and `prev` functions called by lines `234` and `238` respectively.  The `$scope.$digest();`
+call within them is required because this is a JQueryUI triggered event and <a target=_blank href="http://angularjs.org/">AngularJS</a> needs to be informed of the event.
+
+* Line `75` function `doneEdit` is required when we are editing an object from within the Dialog Viewer.  It ensures the local object cache
+for the Dialog Viewer is kept in sync.
+
+* Line `181` uses the `primeList` exit to set the Dialog Edit Mode using the
+`oTP.oCRUD.setDlgEdit(750,800)` in line `182`.
+
+* Lines `186` thru `212` define the `dlgRenderExit` used to customize the Dialog Edit Window.  In this case it adds the
+<a target=_blank href=http://api.jqueryui.com/datepicker/>JQueryUI Datepicker</a>
+
+* Line `207` is used to destroy <a target=_blank href=http://api.jqueryui.com/datepicker/>JQueryUI Datepicker</a>
+when the Dialog Edit Window is closed.  It does this by registering a cleanup function in `oDlgEdit.finals`
+
+* Line `210` is used to refresh the Dialog Viewer when the Dialog Edfit is closed.
+It does this by registering a cleanup function in `oDlgEdit.finals`
+
+
+* Lines `214` thru `248` define the `viewSelected` function referenced in line `162`. It opens the Dialog Viewer which will activate the `ctrlCustViewer` defined
+in lines `28` thru `93`.
+<br><br>
+Calls from the Dialog buttons are forwarded to the controller in lines `234` and `238`
+
+<span id='HelloUI.css'></span>
+### <a class=hider ng-click=toggleHide($event)>hide</a>HelloUI.css Explained
+<div class=scroll-region><pre>
+/*
+ &#064;license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+*/
+
+/* HelloUI custom CSS*/
+
+/* Main page */
+body                           {Font: Normal 120% Verdana; margin:0px; color:black;}
+div#divHead                    {background:rgb(00,170,85); color:red; height:80px; width:1266px;}
+div#divHead span.p1            {display:none;}
+div#divHead span.p3            {display:none;}
+div#divHead span.p2            {display:inline-block; position:absolute; left:350px; top:15px;}
+div#divHead span.p6            {display:inline-block; position:absolute; left:380px; top:50px; color:yellow;}
+div#divHead table              {color:#FFFFFF;}
+div#divRgt                     {border-left:none; width:1050px;}
+div#divHead span.title         {font-size:18pt;}
+div#divRgt fieldset.list-comm  {background:rgb(132,247,166);}
+
+div#divHead,div#divBody table#tblLft, div#divBody td.atRgt, div#ui-viewer fieldset {
+   -moz-border-radius: 10px;
+   -webkit-border-radius: 10px;
+   -khtml-border-radius: 10px;
+    border-radius: 10px;
+}
+
+div#divRgt span#img-space     {display:inline-block; width:400px;}
+div#divBody table#tblLft      {background:rgb(132,247,166);}
+div#divBody td.atRgt          {background:rgb(132,247,166);}
+table#list-messages thead     {background-color:rgb(00,170,85)}
+
+div.ui-editor .ui-dialog-titlebar-close {
+  display: none;
+}
+
+/* UI Editor */
+div#ui-editor p#top-panel       {display:none;}
+div#ui-editor p#top-panel       {display:none;}
+
+div#ui-editor div.pair          {height:50px; width:750px; clear:both;}
+div#ui-editor div.name          {float:left;  width:100px; text-align:right; top:5px;}
+div#ui-editor div.field         {float:left;  top:5px;}
+
+div#ui-editor div#Date          {position:absolute; top:10px; left:360px;}
+div#ui-editor div#Type          {position:absolute; top:64px; left:360px;}
+div#ui-editor select#msg-type   {margin-left:7px; width:218px;}
+div#ui-editor input#title       {width:560px;}
+div#ui-editor textarea#msg-text {width:560px; margin-left:6px; height:400px;}
+div#ui-editor p.editerr         {position:absolute; top:550px;}
+div#ui-editor input[readonly=readonly]  {background:rgb(192,192,192);}
+div#ui-editor input#inp-Date    {background:rgb(248,248,248);}
+
+div#ui-viewer label            {color:rgb(192,192,192);font-size:10pt;}
+div#ui-viewer span#type        {position:absolute; left:500px;}
+div#ui-viewer span#author      {position:absolute; left:250px;}
+div#ui-viewer fieldset         {background:white;}
+
+</pre></div>
+
+* Lines `39` thru `54` reference id `ui-editor`. This is defined in `TRI.js` and is the standard name for the Dialog Editor.
+
+* Lines `56` thru `59` reference id `ui-viewer`. This is defined in line `219` of `HelloUI.js`.
+

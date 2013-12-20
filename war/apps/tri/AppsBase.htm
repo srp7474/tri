@@ -1,0 +1,511 @@
+<!-- AppsBase.htm - standard templates to be added to sections via <macro template= facility> -->
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<html>
+<head>
+  <script src="angular.min.js"></script>
+</head>
+
+<body id=template-body>
+
+  <pre id="apps-header.html" class=template>
+    <div id=divHead>
+      <table borders=0>
+        <tr>
+          <td class=title-line style='width:100%'>
+            <span class='title p1'>&nbsp;</span>
+            <span class='title p2'>{{getTitle()}}</span>
+            <span class='title p3'>&nbsp;</span>
+            <span class='small p4'>Version: 1.0.0</span>
+            <span class='title p5'>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class='warn  p6'>{{getSandboxMsg()}}</span>
+          </td>
+          <td>
+            &nbsp;
+          </td>
+        </tr>
+      </table>
+    </div>
+  </pre>
+
+  <pre id="apps-body.html" class=template>
+    <div ng-controller=ctrlMain>
+      <macro fetch='apps-header.html'></macro> <!-- standard title -->
+      <div id=divBody>
+         <table id=tblWrap>
+           <tr class=atTop>
+             <td class=atTop>
+               <table id=tblLft height=100%>
+                 <tr><td><img-defer src='tri/img/transparent.gif' width=200px height=1px></td></tr>
+                 <tr class=gbl-actions>
+                   <td style='width:100%;'>
+                     <macro fetch='apps-menu.html' alter='audio-defer/audio'></macro> <!-- menu -->
+                   </td>
+                 </tr>
+               </table>
+             </td>
+             <td class=atRgt>
+               <div id=divRgt>
+                 <macro fetch='apps-boiler-plate.html'></macro>                               <!-- standard messages panels -->
+                                                                                              <!-- login panel with possible switch to DOUBLE -->
+                 <macro fetch='apps-login.html' alter='System Login/##TITLE##;SINGLE/SINGLE'></macro>
+                 <macro fetch='apps-change-password.html'></macro>                            <!-- Change Password panel -->
+                 <macro fetch='apps-lister.html'></macro>                                     <!-- Common Records Lister panel -->
+                 <macro fetch='apps-editor.html' alter='ctrlCommEdit/ctrlCommEdit'></macro>   <!-- Common Editor panel with possible ctrl override -->
+               </div>
+             </td>
+           </tr>
+         </table>
+      </div>
+    </div>
+    <div class=hide id="dlg-editor">
+      <div id=ui-editor ng-controller=ctrlCommEdit scope-var='oTAB = useTable()'>
+        <macro fetch='apps-editor-form.html'></macro>
+      </div>
+    </div>
+  </pre>
+
+
+  <pre id='apps-menu.html' class=template>
+    <div id=gbl-actions ng-controller=ctrlMenu>
+       <p class=headSect>Actions<wbr>{{getUser()}}{{getUser2()}}</p>
+       <p ng-show='getIdleLeft()!=null' class='idle-warn'>Auto-logoff in {{getIdleLeft()}} secs</p>
+       <ANY ng-repeat='oTabDef in getTables()' ng-show='hasSession()'>
+         <a class='sz-90' ng-class='getActionClass()' href="" when-active='listService(oTabDef);'>&nbsp;&nbsp;&nbsp;List {{oTabDef.getTabProp().recTitle}} Records</a><br>
+       </ANY>
+       <ANY  ng-repeat='oMenu in getOptMenuItems()' ng-show='hasSession()'>
+         <br ng-show='$first'>
+         <a class='sz-90' ng-class='getActionClass()' href="" when-active='oMenu.func()'>&nbsp;&nbsp;&nbsp;{{oMenu.menu}}</a><br>
+       </ANY>
+       <br>
+       <a ng-hide='!hasSession() || !canChangePassword()' ng-class='getActionClass()' when-active='changePassword();' class='c-action sz-90' href="">&nbsp;&nbsp;&nbsp;Change Password</a><br>
+       <br>
+       <a ng-hide='!hasSession()' ng-class='getActionClass()' when-active='logoff();' class='c-action sz-90' href="">&nbsp;&nbsp;&nbsp;Logoff</a><br>
+       <audio-defer id=audio-alert src=tri/beep-02.wav type='audio/wav'></audio-defer>
+    </div>
+  </pre>
+
+  <pre id="apps-boiler-plate.html" class=template>
+    <div id=error-message class="hideable" ng-controller=ctrlSect ng-show='hasErrorMsg()' style='width:700px; border:1px solid red; margin-left:10px;'>
+       <a class=c-action style='float:right; border:1px solid red;' ng-click='closeErrorMsg()'>X</a>
+       <br>
+       &nbsp;<span class=warn>{{getErrorMsg()}}</span>
+       <br><br>
+    </div>
+
+    <div id=confirm-message class="hideable" ng-controller=ctrlSect ng-show='hasConfirmMsg()' style='width:700px; border:1px solid rgb(0,220,0); margin-left:10px;'>
+       <a class=c-action style='float:right; border:1px solid green;' ng-click='closeConfirmMsg()'>X</a>
+       <br>
+       &nbsp;<span class=confirm>{{getConfirmMsg()}}</span>
+       <br><br>
+    </div>
+
+    <div id=nothing-active class="hideable" ng-controller=ctrlSect ng-show='hasSession() && isSect(null)'  style='margin-left:10px;'>
+       <br><br><br>
+       Choose an Action
+    </div>
+  </pre>
+
+  <pre id="apps-login.html" class=template>
+    <div id=profile class="hideable" style='margin-top:40px;margin-left:40px;'  ng-controller=ctrlSess ng-hide='hasSession()'>
+      <div class=left>
+        <b>System Login</b>
+        <br><br>
+        <div id=profile ng-hide="sErrMsg.length == 0">
+          <div class=left>
+            <span class='warn'>{{sErrMsg}}</span>
+          </div>
+          <br>
+        </div>
+        <span id=NotFirstMsg>Please enter your name and password:</span>
+        <br><br>
+          <span class='darker instruct'>UserName:&nbsp;</span>
+          <input type=text id=txtUserName value='' placeholder='Enter your user name' ng-model=UserName ng-init="initUser()">
+          <span class='darker instruct'>Password:&nbsp;</span>
+          <input type=password id=txtPassword value='' placeholder='Enter your password' ng-model=Password>
+        <br><br>
+        <any ng-switch on='sDouble'>
+          <any ng-switch-when="SINGLE">         <!-- flip to DOUBLE in macro call. Note ng-switch adds a scope, hence $parent usage -->
+            <span id=NotFirstMsg>Please enter the second person's name and password:</span>
+            <br><br>
+              <span class='darker instruct'>UserName:&nbsp;</span>
+              <input type=text id=txtUserName value='' placeholder='Enter your user name' ng-model=$parent.UserName2>
+              <span class='darker instruct'>Password:&nbsp;</span>
+              <input type=password id=txtPassword value='' placeholder='Enter your password' ng-model=$parent.Password2>
+            <br><br>
+          </any>
+        </any>
+        <input type=button class=button ng-click="login('SINGLE')" id=butLogin value='       Login        '>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span id=login-processing ng-show=bDoingLogin>processing, please wait .....</span>
+        <br><br>
+      </div>
+    </div>
+  </pre>
+
+  <pre id="apps-lister.html" class=template>
+    <div class="hideable" ng-controller=ctrlCommList ng-show="(hasSession() && isSect('CommList') && !inEdit()) ||inDlgEdit()" style='margin-top:10px;margin-left:40px;' scope-var='oTAB = useTable()'>
+      <p>
+        <span class=light>{{oTAB.getTitle()}} Records List</span>
+        <span id=img-space><IMG-DEFER src='tri/img/transparent.gif?f=1' width=650px height=1px></span>
+        <span ng-repeat='oA in oTAB.getOptActions(this)'>
+           <a class='c-action sz-90' href="" ng-class='$eval(oA.whatClass)' when-active={{oA.click}} title={{oA.title}}>{{oA.label}}</a>
+           &nbsp;&nbsp;&nbsp;
+        </span>
+        <a class='c-action sz-90' href="" when-active="makeRecord(oTAB);">Create New {{oTAB.props.recTitle}} Record</a>
+        <input type=hidden ng-model=oTAB.props.cycle> <!-- force list updates on delayed objest update -->
+      </p>
+
+
+      <style type="text/css">
+        div#scroll                                {overflow:scroll;   height:250px;}
+        table.list-comm                           {width:900px; margin-top:0px;}
+        table.list-comm  thead                    {background-color:rgb(00,71,127);color:#FFFFFF;text-align:center; position:fixed; width:900px;}
+        table.list-comm  thead th                 {height:15px; border-right:1px solid rgb(250,250,255);}
+        table.list-comm  tbody                    {background-color:#cccccc;color:#000000;}
+        table.list-comm  tbody td                 {height:25px; text-align:center; vertical-align:top; border-right:1px solid rgb(240,240,240);}
+        table.list-comm  tr.tr-odd                {background-color:rgb(240,250,255);}
+        table.list-comm  tr.tr-even               {background-color:rgb(250,250,255);}
+        fieldset.list-comm                        {background-color:rgb(250,250,255); font-size:70%; border:1px solid rgb(240,240,240); margin-bottom:10px;}
+        fieldset.list-comm legend                 {font-size:120%;}
+        fieldset.list-comm input#limit            {width:40px; text-align:right;}
+        fieldset.list-comm input.mask             {width:100px;}
+        fieldset.list-comm select.state           {margin-left:20px; width:100px;}
+        fieldset.list-comm button                 {font-size:90%; background-color:white; font-weight:bold;}
+        fieldset.list-comm button.tri-but-tri     {margin-left:-24px;}
+        fieldset.list-comm button.tri-but-red     {margin-left:0px; background-color:red;}
+        fieldset.list-comm button.tri-but-grn     {margin-left:-66px; background-color:green;}
+        fieldset.list-comm option.red             {background:rgb(255,85,85);}
+        fieldset.list-comm option.green           {background:rgb(60,255,60);}
+        fieldset.list-comm option.red0            {color:red;  }
+        fieldset.list-comm option.green0          {color:green;}
+        fieldset.list-comm option.dummy           {background:rgb(240,240,240);}
+        fieldset.list-comm option.black           {color:black;}
+
+        /* defaults */
+        table.list-comm td.c0, table.list-comm th.c0      {width:1%; }
+        table.list-comm td.c1, table.list-comm th.c1      {width:1%; }
+        table.list-comm td.c2, table.list-comm th.c2      {width:1%; }
+        table.list-comm td.c3, table.list-comm th.c3      {width:1%; }
+        table.list-comm td.c4, table.list-comm th.c4      {width:1%; }
+        table.list-comm td.c5, table.list-comm th.c5      {width:1%; }
+        table.list-comm td.c6, table.list-comm th.c6      {width:1%; }
+        table.list-comm td.c7, table.list-comm th.c7      {width:1%; }
+      </style>
+
+      <macro fetch='apps-filter.html'></macro>
+      <macro fetch='apps-list-table.html' alter-action="alter-action"></macro>
+      <p class=note>Selected {{oTAB.getSelObjs().length}} {{oTAB.props.recTitle}} record(s) of possible {{oTAB.getObjs().length}}</p>
+    </div>
+  </pre>
+
+  <pre id="apps-filter.html" class=template>
+    <fieldset class=list-comm>
+      <legend>&lt;Filter for {{oTAB.props.recTitle}} Records&gt;</legend>
+      <ANY ng-repeat='oFil in oTAB.props.filters'>
+        <span ng-switch on=oFil.type>
+          <span ng-switch-when='limit'>
+             <label>{{oFil.title}}:<input type=text id=limit ng-model='oSel[oFil.name]' focus-clear></label>
+          </span>
+          <span ng-switch-when='mask'>
+             <label>&nbsp;&nbsp;Mask:<input type=text id={{oFil.field}} class=mask ng-model='oSel[oFil.field]' class=mask placeholder='{{oFil.title}} mask'></label>
+          </span>
+          <span ng-switch-when='cust'>
+            <label>&nbsp;&nbsp;Mask:<input type=text id={{oFil.field}} class=mask ng-model='oSel[oFil.field]' class=mask placeholder='{{oFil.place}}' focus-clear></label>
+          </span>
+          <span ng-switch-when='state'>
+            <select id=tri-{{oFil.field}} class=state tri-state={{oFil.field}} ng-model='oSel[oFil.field].model'>{{oFil.title}}: idle</select>
+          </span>
+          <span ng-switch-when='chkbox'>
+            <label for={{oFil.field}}>&nbsp;&nbsp;{{oFil.title}}<input type=checkbox ng-model='$parent.oSel[oFil.field]' ng-true-value='1' ng-false-value='0'></label>
+          </span>
+        </span>
+      </ANY>
+    </fieldset>
+  </pre>
+
+  <pre id="apps-list-table.html" class=template>
+    <div id=scroll>
+      <table id='list-{{oTAB.props.recTitle}}' class=list-comm cellpadding=0 cellspacing=0>
+        <thead>
+          <tr>
+            <th ng-repeat='oCol in oTAB.getTableCols("=list")' class=C{{$index}}>
+              {{oCol.title}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class=tr-even> <!-- dummy row to deal with hidden row under heading -->
+            <td class=c0 colspan=99>&nbsp;</td>
+          </tr>
+          <tr ng-repeat='oRow in oTAB.getSelObjs()' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'">
+
+            <td ng-repeat='oCol in oTAB.getTableCols("=list")' class=C{{$index}}>
+              <!-- <input type=hidden value='{{oCol.cid}} {{oCol.type}}'> -->
+              <span ng-switch on=oCol.type>
+                <span ng-switch-when='actions'>
+                   <a class='c-action sz-90' href="" ng-class='$eval(oA.whatClass)' when-active={{oA.click}} title={{oA.title}} ng-repeat='oA in oCol.getActions(this,oRow)'>
+                     <span>{{isTrue($first,' ','&nbsp;&nbsp')}}</span>
+                     {{oA.label}}
+                   </a>
+                </span>
+                <span ng-switch-default title='{{oCol.getListHint(this,oRow)}}'>
+                   {{oCol.getValue(this,oRow,oCol.listMax)}}
+                </span>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+  </pre>
+
+  <pre id="apps-change-password.html" class=template>
+    <style type="text/css">
+       div#change-password table td.c1  {text-align:right;}
+       div#change-password table input  {width:200px;}
+    </style>
+    <div id=change-password class="hideable" ng-controller=ctrlSect ng-show="hasSession() && isSect('NewPassword')" style='margin-top:10px;margin-left:40px;'>
+      <div class=left>
+        <b>Change Password</b>
+        <br><br>
+        <span id=NotFirstMsg>Please enter your existing password and the new password (twice)</span>
+        <br><br>
+        <table>
+          <tr>
+            <td class=c1><span class='darker instruct'>Existing Password:&nbsp;</span></td>
+            <td><input type=password id=txtPassword value='' placeholder='Enter your existing password' ng-model=Password></td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>New Password:&nbsp;</span></td>
+            <td>
+              <input type=password id=txtPassword value='' placeholder='Enter your new password' ng-model=NewPassword>
+              <span class=note>&nbsp;&nbsp;&nbsp;Must contain at least one alphabetic character</span>
+            </td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>Repeat New Password:&nbsp;</span></td>
+            <td><input type=password id=txtPassword value='' placeholder='Enter your new password' ng-model=ConfirmPassword></td>
+          </tr>
+        </table>
+        <br>
+        <input type=button class=button ng-click="submitNewPassword()" id=butLogin value='   Change Password  '>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type=button class=button ng-click="cancelNewPassword()" id=butLogin value='   Cancel Change Password  '>
+      </div>
+      <p ng-show='hasError()'>
+        <span class=warn>Password Error:{{sPasswordErr}}</span>
+      </p>
+    </div>
+  </pre>
+
+  <pre id="apps-copyright-notice.html" class=template>
+    <div id=srp-crn style='width:100%; text-align:center; margin-top:80px; border-top:1px solid rgb(151,208,255); font-size:50%;'>
+      <br>
+      <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Powered by <b>Triangular</b> (2013)
+      </span> <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">
+        authored by Steve Pritchard of Rexcel Systems Inc and licensed under a
+      </span>
+
+      <br>
+      <a class="c-action" rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+      <br>
+      <a class=c-action rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+        <img alt="Creative Commons License" style="border-width:0; margin-right:20px;" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" />
+        <img-defer alt="email address" style="border-width:0; margin-left:20px;" src="tri/img/email-addr.jpg" />
+      </a>
+    </div>
+  </pre>
+
+  <pre id="apps-editor.html" class=template>
+    <div id=editor class="hideable editor" ng-controller=ctrlCommEdit ng-show="hasSession() && isSect('CommList') && inEdit() && !inDlgEdit()" scope-var='oTAB = useTable()' style='margin-top:10px;margin-left:40px;'>
+      <style type="text/css">
+        div#editor {background-color:rgb(250,250,255); border:1px solid rgb(151,208,255); position:relative; left:-40px; width:700px; height:850px;}
+        div#editor td.field          {width:100px; text-align:right;}
+        div#editor input.field       {width:300px;}
+        div#editor select.field      {width:295px;}
+        div#editor input.tag         {width:50px; text-align:right;}
+        div#editor input[readonly]   {background-color:rgb(240,240,240);}
+        div#editor img#gap           {width:50px;}
+        div#editor p.editerr         {position:absolute; top:600px; left:20px;}
+
+        div#editor a.adj-rgt         {float:right; margin-right:20px;}
+
+        div#editor div.pair          {height:50px; width:750px; clear:both;}
+        div#editor div.name          {float:left;  width:100px; text-align:right; top:5px;}
+        div#editor div.field         {float:left;  top:5px;}
+
+        div#editor div.property      {margin-left:30px; margin-bottom:10px; width:550px;}
+        div#editor div.property a    {float:right; margin-right:21px;}
+        div#editor div.proppair a    {margin-left:25px;}
+      </style>
+      <macro fetch='apps-editor-form.html'></macro>
+      <div ng-include='sEditSuppName'></div>  <!-- allow supplemental list such as donors-list.html -->
+    </div>
+  </pre>
+
+  <pre id="apps-editor-form.html" class=template>
+    <form id=form-editor name=form-editor>
+      <p id=top-panel>
+        <span class=light style='margin-left:20px;'>{{getEditType()}} {{oTAB.props.recTitle}} Record</span>
+        <a class='c-action sz-90 adj-rgt' href="" when-active="editCancel();">Cancel Changes</a>
+        <a id=edit-save class='sz-90 adj-rgt' href="" when-active="editSave();" ng-class='dirtyClass()'>{{dirtyMsg()}}</a>
+        <any ng-repeat='oA in oTAB.getEditActions(this,oObj)'>
+          <a class='c-action sz-90 adj-rgt' href="" when-active='{{oA.click}}'>{{oA.text}}</a>
+        </any>
+        <!-- <a class='c-action sz-90 adj-rgt' href="" ng-click="changeCurrency();"><span class=disable>Change to ${{getOtherCurrency()}}</span></a> -->
+      </p>
+      <div id=flds-{{oTAB.props.recName}}>
+        <div id={{oCol.getID()}} class=pair ng-repeat='oCol in oTAB.getTableCols("=edit")'>
+          <div class=name ng-hide='oCol.hideLabel'><span class='note'>{{oCol.getTitle()}}:</span></div>
+          <div ng-switch on=oCol.type>
+            <div ng-switch-when='field'>
+              <div class=field>&nbsp;<input class=field id={{oCol.getTitle()}} type=text ng-model='oObj[oCol.col]' ng-trim={{getTrimOpt(oCol)}} ng-readonly={{isReadOnly(oCol)}} title='{{oCol.getHint()}}' placeholder='{{oCol.getPlace()}}'></div>
+            </div>
+            <div ng-switch-when='virt'>
+              <div class=field>&nbsp;<input class=field id={{oCol.getTitle()}} type=text value='{{oCol.getValue(this,oObj)}}' readonly></div>
+            </div>
+            <div ng-switch-when='cust' id={{oCol.cssid}}>
+              <macro col='oCol' mode='Cust' marker=mark-0></macro>
+            </div>
+            <div ng-switch-when='panel' id={{oCol.cssid}}>
+              <macro col='oCol' mode='CSS' marker=mark-1></macro>
+              <!-- ng-show failed to trigger? This work-around saved the day -->
+              <fieldset id={{oCol.getID(2)}} class='{{isTrue(call(oCol.showEdit,oObj),"show","hide")}}'>
+                <legend>{{oCol.legend}}</legend>
+                <div id=pan-{{oSubC.getID(3)}} ng-repeat='oSubC in getSubCols(oCol.schema,"=edit")' class={{getColClass($index,oSubC)}} ng-show={{showListCol(oSubC)}}>
+                  <macro col='oSubC' objref=oCol.objName mode='Edit' marker=mark-2a></macro>
+                </div>
+              </fieldset>
+            </div>
+            <div ng-switch-when='list'>
+               <a class='c-action sz-90 adj-rgt' href="" when-active='methodClick(oCol,a)' ng-repeat='a in getMethods(oCol)'>
+                 {{a.name}}
+               </a>
+               <div id=sub-scroll>
+                 <table id='sublist-{{oCol.getTitle()}}' class=list-sub cellpadding=0 cellspacing=0>
+                   <thead>
+                     <tr>
+                       <th ng-repeat='oSubC in getSubCols(oCol.schema,"=list")' class={{getColClass($index,oSubC)}} ng-show={{showListCol(oSubC)}}>
+                         {{oSubC.getTitle()}}
+                       </th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                     <tr class=tr-even> <!-- dummy row to deal with hidden row under heading -->
+                       <td class=c0>&nbsp;</td>
+                     </tr>
+                     <tr ng-repeat='oSubR in getSubRows(oObj,oCol.schema)' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'">
+                       <td ng-repeat='oSubC in getSubCols(oCol.schema,"=list")' class={{getColClass($index,oSubC)}} ng-show={{showListCol(oSubC)}}>
+                         <macro col=oSubC obj=oSubR row={{this.$parent.$index}} marker=mark-3></macro>
+                       </td>
+                     </tr>
+                   </tbody>
+                 </table>
+               </div>
+            </div>
+            <div ng-switch-when='property'>
+               <div class=property><span class='note'>&nbsp;{{oCol.title}} Properties</span>
+                 <a class='sz-90 c-action' href="" when-active="addProperty(oCol);">Add New Property</a>
+               </div>
+               <div class='proppair pair' ng-repeat='oFld in getProperties(oCol)'>
+                 <div class=name><span class='note'>{{oFld}}:</span></div>
+                 <div class=field>&nbsp;<input class=field  id=prop-inp-{{oFld}} type=text ng-model='oObj[oCol.col][oFld]'></div>
+                 <a class='sz-90 c-action prop-action' href="" when-active="removeProperty(oCol,'{{oFld}}');">Remove '{{oFld}}' property</a>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class=editerr ng-show='hasEditError()'>
+        <span class=warn>Edit Error:{{sEditErr}}</span>
+      </p>
+    </form>
+  </pre>
+
+
+  <!-- -------------------------------------------------------------------->
+  <!-- ----------------------- FORMS Messages ----------------------------->
+  <!-- -------------------------------------------------------------------->
+
+  <pre id="forms-panel.html" class=template>
+     <style type="text/css">
+       div#divPrint div.ctlpanel          {position:fixed;left:1000px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250); font-size:80%;}
+       div#divPrint div.ctlpanel p.lab    {text-align:center; width:310px; position:relative; top:auto;}
+     </style>
+     <div id=panel class=ctlpanel>
+       <p class=lab>##what## Print Control Panel</p>
+       <a id=print href='' class=c-action ng-class="isTrue(bPrinted,'c-quiet','c-action')" ng-click="printPage()">&nbsp;Submit to print dialogue</a><br><br>
+       <p class=opt-actions ng-repeat='oA in oOptActions'>
+          <a class='c-action sz-90' href="" ng-class='$eval(oA.whatClass)' when-active={{oA.click}} title={{oA.title}}>&nbsp;{{oA.label}}</a>
+       </p>
+       <p ng-include='panel_extra'></p>
+       <a id=print99 href='' class=c-action onclick='tri.closePage();'>&nbsp;Close Page</a><br><br>
+
+       <div id=srp-crn style='width:100%; text-align:center; margin-top:80px; border-top:1px solid rgb(151,208,255); font-size:50%;'>
+         <br>
+         <span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Powered by <b>Triangular</b> (2013)<br>
+         </span> <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">
+           authored by Steve Pritchard of Rexcel Systems Inc and licensed under a
+         </span>
+
+         <br>
+         <a class="c-action" rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+         <br>
+         <a class=c-action rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+           <img alt="Creative Commons License" style="border-width:0; margin-right:1px;" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /><br>
+           <img-defer alt="email address" style="border-width:0; margin-left:1px;" src="tri/img/email-addr.jpg" />
+         </a>
+       </div>
+     </div>
+  </pre>
+
+  <pre id="forms-waiting.html" class=template>
+    <!-- -----------------------Wait Messages Load ----------------------------->
+    <div id=divWaiting ng-hide='isLoaded()'>
+      <br><br><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Loading ##what## ......
+    </div>
+  </pre>
+
+
+</body>
+
+
+<script>
+  // ship the templates to the main window
+  window.onload = function() {
+    console.log("********** we have loaded object",document);
+    var oBody = document.getElementById("template-body");
+    var oPREs = angular.element(oBody).find('pre');
+    //console.log("elems "+oPREs.length,oPREs);
+    var oTMPs = [];
+    for(var i=0,iMax=oPREs.children().length; i < iMax; i+=1) {
+      var oPRE = oPREs.eq(i);
+      if (!oPRE.hasClass('template')) continue;
+      var sID = oPRE.attr('id');
+      var sHtml= oPRE.html();
+      //console.log("i="+i+" id="+sID+" pre "+oPRE.html());
+      var oTMP = {id:sID,html:sHtml};
+      oTMPs.push(oTMP);
+    }
+    console.log("***** templates created "+oTMPs.length,oTMPs);
+    var oMsg = {verb:"sys-templates",payload:oTMPs};
+    var sLocn = ""+window.location;
+    var oR = sLocn.match(/[?]app=([^&]+)/);
+    var sApp = oR[1];
+    sLocn = sLocn.replace("AppsBase",sApp);
+    console.log("sending msgs to "+sLocn+" "+sApp+" msg=%o",oMsg);
+    window.top.postMessage(oMsg,sLocn);
+  };
+  console.log("waiting for load "+window.location+" "+window,location.port);
+  //window.postMessage(oMsg,"*");
+</script>
+</html>
+

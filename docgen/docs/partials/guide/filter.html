@@ -1,0 +1,69 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <code>Filter</code> object defines the single instance of the <code>filters</code> collection property used in the <a href="/guide/table">Table Object</a> schema.</p>
+
+<h3 id="filterinstancetypes">Filter Instance Types</h4>
+
+<p>Two instance types for the <code>Filter</code> object are used internally.</p>
+
+<ol>
+<li><p>The first,
+the static object definition, refers to the static Javascript definition.</p></li>
+<li><p>The second, refers to a Javascript <code>Filter</code> object which is created as part of the static <a href="/guide/table">Table Object</a> migration process.
+This instance allows the HTML code to directly access methods defined
+for the <a href="/api/tri.object.Filter">Filter</a> object.</p></li>
+</ol>
+
+<p>The migration process copies all of the static properties to the dynamic version.</p>
+
+<h3 id="definitionsyntax">Definition Syntax</h4>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+<p>The <code>Filter</code> object definition is found in the <code>filters</code> property of the <a href="/guide/table">Table Object</a> <code>oTabProp</code> object.
+That is the <code>filters</code> property is an array of one or more <code>Filter</code> object definitions.  Each definition has one or more of the following properties.  Some property
+specifications depend on the <code>type</code> value.</p>
+
+<p>Note that the order the filters in this definition is the order they appear in both the <a href="/api/tri.controller:ctrlCommList">List Controller</a> Filter panel and, with the exception of the 'limit' type
+the order that the record selection cascades the results to the next filter (there is no 'OR' capability).  The 'limit' filter is applied last and limits
+the result set to no more than the specified number.</p>
+
+<p>If no <code>type</code> 'limit' filter is defined in the <code>filters</code> array, one is inserted with a default value of '50'.</p>
+
+<p><span class=srp-propdef><code class=srp-label>type:</code>This
+property defines the type of filter.  The internal record selection routines use this <code>type</code> to alter their logic.  The possible value are:
+<br><br>
+<b>'cust'</b> The <code>methCust</code> property references a method that will be called.
+<br><br>
+<b>'mask'</b> The default string mask search against the <code>field</code> is used.  If uses standard Regular Expression syntax to match against the contents of the <code>field</code>
+for each record still in the selection set.
+<br><br>
+<b>'chkbox'</b> A binary checkbox value.  The <code>methCust</code> property should reference a method that will be called.
+<br><br>
+<b>'state'</b> A tri-state input filter not fuilly implemented.
+<br><br>
+<b>'limit'</b> The input field specifies the maximum number of rows that will be displayed.
+<br><br>
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>place:</code>Used with <code>type</code> 'cust' and 'mask' to specify a placeholder string.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>title:</code>Used to provide a label for the filter and shown in the Filter Panel.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>methCust:</code>The reference to a local function called by a <code>type</code> 'cust' filter.
+The signature of the call is <code>func-name(oTab,oObjs,oData,oFil)</code> where
+<code>oTab</code> is the dynamic <a href="/api/tri.object.Table">Table Object</a>, <code>oObjs</code> is the cascaded array of <a href="/guide/data">Data Objects</a>,
+<code>oData</code> is the <code>oSel</code> work area and in which cached results can be stored and <code>oFil</code> is the present <code>Filter</code> object.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>field:</code>Defines the related table field that the mask works against.  For <code>type</code> 'cust' and 'chkbox' it can define an internal scope property stored in <code>$scope.oSel</code>
+that can be used to store intermediate of cached values.
+</span></p></div>

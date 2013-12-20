@@ -1,0 +1,280 @@
+@ngdoc overview
+@name Guide: Server Interface
+@description
+
+### Overview
+**Triangular** uses a server to store data and provide {@link /guide/user User} authentication services.
+
+Section {@link #googleappengineimplementation Google App Engine Implementation} describes the implementation used
+by the {@link /apps Apps Examples} and the {@link /tutorial Tutorial Examples}
+
+Should another implementation be required, section {@link #buildinganotherimplementation Building Another Implementation} gives untested
+steps for doing this.
+
+### Requirements
+At is minimum the server must provide:
+
+* Ajax support
+* Customer Notion. See {@link #customernotion Customer Notion}
+* key --> data support
+* static page support
+* The command set functionality described in {@link #commandset Command Set}
+* Support of the token security model described in {@link #token Token}
+* For security, honouring of the {@link /guide/sandbox Sandbox Mode} to prevent hackers updating the server contents with a public Userid.
+* Support of the {@link #superusernotion SuperUser Notion}.
+* The command set functionality described in {@link #superusercommandset SuperUser Command Set}
+
+### Customer Notion
+Each application has a unique alphanumeric id such as "deps" that is used to reference the application on the server.
+This is set with the {@link /api/tri.servGAE#setCust servGAE.setCust} and usually defined in the {@link /guide/appname-js appname-js} file.
+
+It is used to construct the {@link #keystructure key} used to access {@link /guide/data Data Objects} and {@link /guide/user User Records}.
+
+The result of this design is that a single server instance can host many applications each with an independent {@link /guide/admin admin} function and pool of
+{@link /guide/data Data Objects}.
+
+### SuperUser Notion
+The SuperUser is a special {@link /guide/user#superuser User Record} that controls the applications and AdminUser on the server.
+
+### Token
+The **token** is an integer created during the {@link /api/tri.servGAE#login servGAE.login} process and stored in the {@link /guide/user User Record} on the server
+and returned to the **Triangular** infrastructure during the {@link /api/tri.servGAE#login servGAE.login} process.  All commands except the
+`ajaxLogin` command that are sent to the server
+must include this **token**.
+
+It is used on the server to validate each request that there is a proper authenticated session established between the {@link /guide/user User} and the server.
+
+### Key Structure
+The key structure is a 3 part key, each part separated by the  "/" character and concatenated into a single string.
+
+The first part defines the application.
+
+The second part defines the record type allowing an application to have several record types.
+
+The third part defines the record or group of records key.
+
+This is defined in more detail in the {@link /guide/records#keystructure Record Key Structure}
+
+### Google App Engine Implementation
+The implementation uses a version of the <a target=_blank href='http://gems-bbb.appspot.com/gems/bbb/load.home'>BBB WebServer Framework</a>.
+(**Note:** This link is included for reference.  At this point there is no need to examine too closely the capabilities of the "BBB WebServer Framework").
+One application, namely the CITA application, was added to the BBB standard framework.  This CITA application provides the required functionailty
+given in {@link #requirements Requirements} and can be used unmodified to host any number of applications.
+
+The {@link /tutorial Tutorial Examples} explains how to obtain and install a version on your own Google App Engine account.
+
+This <a target=_blank href='http://gems-bbb.appspot.com/gems/bbb/load.home'>BBB WebServer Framework</a> implementation has much functionality that is not required for **Triangular**.
+However, it was there and in the interest of expediency was used
+rather than spend development time creating a streamlined version to just support the **Triangular** required functionailty.
+
+The
+<a target=_blank href='http://gems-bbb.appspot.com/gems/bbb/load.home'>BBB WebServer Framework</a> has been optimized for the {@link /guide/gaesite GAE Site} environment.
+**Triangular** exploits this design during the **Login Page Load** in doing an asynchronous request that warms up a possibly paged out server.
+This warming up is done while the user is entering the login information and will give good response to the login request.
+
+The code for the CITA application is purposely omitted from the source code provided for **Triangular**.  The reason is that it contains some code that
+if divulged would make the server less secure.  Should someone be interested in building an alternate server the author can be contacted at
+{@link mailto:public.pritchard@gmail.com?subject=BBB.WebServer.Source Steve P Pritchard}.
+
+
+### Node.js Implementation
+Included in the download is a file `tri-server.js` and `run-tri.bat`.  These implement the protocols descibed in the following sections.  The
+first strategy described in {@link #buildinganotherimplementation Building Another Implementation} was utilized.  The implementation is
+described at {@link /guide/node-server NodeJS Server}.
+The implementation of the datastore is
+described in {@link /guide/datastore-node Datastore NodeJS}.
+
+
+### Command Set
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:200px; margin-left:-200px;}
+  span.srp-propdef {display:inline-block; margin-left:200px;}
+</style>
+
+The method invoked is obtained by passing in the verb name in the `ajaxMeth` property of the request block (see {@link #requestformat Request Format}).
+Most often there is a one-to-one correspondence with a {@link /api/tri.servGAE servGAE method}.
+
+For each command (apart from `ajaxLogin`) the {@link #token token} is provided in the {@link #requestformat request block} and validated against the one stored for the
+{@link /guide/user User} on the server.  The `ajaxLogin` actually sets a new {@link #token token} value in the {@link /guide/user User} record.
+
+
+<span class=srp-propdef><code class=srp-label>ajaxLogin</code>Used to log a user into the system. See {@link /api/tri.servGAE#login servGAE.login}.
+<br><br>
+The user names(s) provided are validated against the {@link /guide/user Users} in the {@link #requestformat Request Format}
+and a good or fail {@link #responseformats response} is returned.  For a good response the new calculated {@link #token token} value is stored
+in the {@link /guide/user User} record
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxValidateToken</code>Used to validate whether a {@link #token token} is stale or not.
+See {@link /api/tri.servGAE#validateToken servGAE.validateToken}.
+A good or fail {@link #responseformats response} is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxChangePassword</code>Used by the {@link /guide/user User} to change his/her password.
+See {@link /api/tri.servGAE#changePassword servGAE.changePassword}.  The old and new passwords are included in the {@link #requestformat request block}.
+<br><br>
+<b>Note:</b> Passwords must contain at least one alphabetic character to distinguish them
+from the encrypted value stored on the server.  Internally the server checks the encrypted password stored on file against the value provided
+that is passed through the same encryption algorithm.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxSendCitaData</code>Used to update a record or block of records.  If the {@link #keystructure key} record does not exist
+a new key/data pair is created. See {@link /api/tri.servGAE#putKeyData servGAE.putKeyData}.
+A good or fail {@link #responseformats response} is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxFindCitaData</code>Used to retrieve the headers for a group of records.
+It can also be used to return the contents of a specific record.
+See {@link /api/tri.servGAE#issueFindFile servGAE.issueFindFile}.
+A good or fail {@link #responseformats response} is returned.  It can contain a group of record headers.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxFindUserData</code>Used to retrieve the headers for a group of {@link /guide/user User} records.
+It can also be used to return the contents of a specific {@link /guide/user User} record.  It requires that the {@link /guide/user User} have
+admin authority.
+See {@link /api/tri.servGAE#issueFindFile servGAE.issueFindFile}.
+A good or fail {@link #responseformats response} is returned.  It can contain a group of record headers.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxDeleteKey</code>Used to delete a specific record from the server.  See {@link /api/tri.servGAE#dropObj servGAE.dropObj}.
+The {@link #requestformat request block} contains the 'GekID' of the record to be dropped.
+A good or fail {@link #responseformats response} is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxReadCitaData</code>
+Used to retrieve the data for a record or block of records based on the {@link #keystructure key} of the record.
+See {@link /api/tri.servGAE#getKeyData servGAE.getKeyData}.
+A good or fail {@link #responseformats response} is returned.
+</span>
+
+### SuperUser Command Set
+
+Note that for this command set the SuperUser ID and password must be provided in the `auth` section of the {@link #requestformat Request}.
+
+This command set is used by the {@link /guide/waks WAKS Utility Program}.
+
+<span class=srp-propdef><code class=srp-label>ajaxWaksFindCitaData</code>Used to retrieve the headers for a group of records.
+See {@link /api/tri.servGAE#issueFindFile servGAE.issueFindFile}.
+A good or fail {@link #responseformats response} is returned.  It can contain a group of record headers.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxWaksSendCitaData</code>Used to update a record or block of records.  If the {@link #keystructure key} record does not exist
+a new key/data pair is created.
+A good or fail {@link #responseformats response} is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxWaksReadCitaData</code>
+Used to retrieve the data for a record or block of records based on the {@link #keystructure key} of the record.
+A good or fail {@link #responseformats response} is returned.
+</span>
+
+This command set requires a `gems/boot/ajax.ajax` URL request signature.  The first does not require a SuperUser ID or password.
+They are used by the `Prime.htm` system file used to initialize the server Datastore.
+
+<span class=srp-propdef><code class=srp-label>ajaxValidateStore</code>Used
+to test the presence of the Datastore control record indicating it has been primed.  If found a {@link #responseformats GOOD Response} is returned.
+Otherwise a {@link #responseformats FAIL Response}  is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxPrimeStore</code>If
+the server is not primed a control record is created and {@link /guide/user#superuser SuperUser} created using the provided
+SuperUser ID and password in the {@link #requestformat Request}.
+A {@link #responseformats GOOD Response}  is returned.
+<br><br>
+Otherwise a {@link #responseformats FAIL Response}  is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxSuperLogin</code>If the provided
+SuperUser ID and password in the {@link #requestformat Request} match the existing {@link /guide/user#superuser SuperUser} record
+a {@link #responseformats GOOD Response}  is returned.
+<br><br>
+Otherwise a {@link #responseformats FAIL Response}  is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxAddAdminUser</code>If the provided
+SuperUser ID and password in the {@link #requestformat Request} match the existing {@link /guide/user#superuser SuperUser} record
+an {@link /guide/user#AdminUser AdminUser} is created with the information in the {@link #requestformat Request}.
+A {@link #responseformats GOOD Response}  is returned.
+<br><br>
+Otherwise a {@link #responseformats FAIL Response}  is returned.
+</span>
+
+<span class=srp-propdef><code class=srp-label>ajaxListApps</code>If the provided
+SuperUser ID and password in the {@link #requestformat Request} match the existing {@link /guide/user#superuser SuperUser} record
+a {@link #responseformats GOOD Response}  is returned. In addition the response returns a list of applications and their
+{@link /guide/user#adminuser AdminUser ID}s.
+<br><br>
+Otherwise a {@link #responseformats FAIL Response}  is returned.
+</span>
+
+
+### Request Format
+The Request Object is constructed as properties within a Javascript Object and sent as a JSON stringified rendition of that object.  On the server
+a Java JSONObject is created from the JSON stringified rendition and used to process the command request.
+The browser console.log may be examined to see the fine details of each request block.  It is recognized with a 'AJAX.AJAX.AJAX' string in the browser console
+window.
+
+An example structure is:
+<pre>
+   AjaxID: "AngJS.100"              // An id used for debugging to correlate server side
+                                    // and browser side requests
+   EXEC: {                          // The 'EXEC' block
+     ajaxMeth: "ValidateToken"      // The command to invoke less the 'ajax' prefix
+     auth: {                        // The authorization block
+       cust: "deps"                 // The application (customer) the request is for.
+       token: "3104379893"          // The current token
+       user: "user_name"            // The User name
+     }
+     payload: {                     // Specific data such as the data to write
+       ...
+     }
+   }
+</pre>
+
+For the `cust:` value refer to See {@link #customernotion cust} and {@link #keystructure key}
+
+For the `token:` value refer {@link #token token}
+
+For the `user:` value refer {@link /guide/user User} name
+
+### Response Formats
+The Response Object Format is constructed on the server as properties within a Java JSONObject.  It is transmitted as a JSON stringified rendition of that object.
+In the browser the **Triangular** response handler renders this into a Javascript object.
+
+The browser console.log may be examined to see the fine details of each response block.
+It is recognized as a log output statement that follows the initiating 'AJAX.AJAX.AJAX' statement.  Since these are run asynchronously care must be taken
+to correlate the correct response.
+
+The following example give the general structure of the response:
+
+<pre>
+  RESULT: {                                    // result block
+    DataStat: {                                // Data block
+      CODE: "found"                            // indicator of command success
+      RECORD: [...]                            // The record or array of records
+      STATUS: "OK"                             // command status
+    }
+    PROFILE: {...}                             // For 'ajaxLogin' and `ajaxValidateToken'
+                                               // the user profile for local customization
+    STATUS: "OK"                               // command status
+    status: "GOOD"                             // success or failure indicator
+    status-message: "validate OK"              // processing message
+    status-ts: "2013-09-29 09:46:28 0.031ms"   // processing timestamp
+  }
+</pre>
+
+### Building Another Implementation
+
+This section presents the high level strategy that could be used to build another server implementation.  This has not been done and
+is therefore hypothetical.
+
+One of two strategies could be used.
+
+1. Direct the {@link /api/tri.servGAE servGAE} to a site that implements the same
+{@link #requestformat Request Format}/{@link #responseformats Response Formats} and
+internally implements the same {@link #commandset Command Set}.
+
+2. Replace {@link /api/tri.servGAE servGAE} with a new protocol and command structure directed at a server with
+an entirely different protocol.  This could be achieved by replacing the servGAE function call handlers with a new set.  See the oFuncs object.
+

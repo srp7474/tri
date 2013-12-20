@@ -1,0 +1,136 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>Records are stored as stringified JSON objects.  A <a href="#keystructure">Key</a> is used to access these records on the server.</p>
+
+<p>The internal record types supported is described in the <a href="#supportedrecordtypes">Supported Record Types</a> section of this page.
+The structure of each record  is described in the <a href="#recordstructure">Record Structure</a> section of this page.</p>
+
+<p>A key is used to retrieve the individual or batch or records.  This key is described in the <a href="#keystructure">Key Structure</a>
+section of this page.</p>
+
+<p>Internally records need to be referenced with an address.
+This scheme is described in <a href="#addressingrecords">Addressing Records</a> section of this page.</p>
+
+<p>The updating of these records is covered in the sections
+<a href="#persistingrecords">Persisting Records</a> and
+<a href="#dirtydatadetection">Dirty Data Detection</a> and
+<a href="#updateconflictresolution">Update Conflict Resolution</a>
+of this page.</p>
+
+<h3 id="supportedrecordtypes">Supported Record Types</h4>
+
+<p>A record is a JSON (external) or Javascript (internal) object.
+There are 2 types.</p>
+
+<ul>
+<li><p><strong>REC</strong> - individual records are grouped together under a single key. Processed by <a href="/api/tri.servREC">servREC</a> API.
+<br><br>
+Internally this is a Javascript array of
+<a href="/guide/data">Data Objects</a>.  Externally in the server this is a stringified JSON array of objects.</p></li>
+<li><p><strong>TBL</strong> - individual records. Processed by <a href="/api/tri.servTBL">servTBL</a> API.
+<br><br>
+Internally the single <a href="/guide/data">Data Object</a> is represented as a Javascript object.
+Externally in the server this <a href="/guide/data">Data Object</a> is a stringified JSON object.</p></li>
+</ul>
+
+<p>The <strong>REC</strong> can be stored as chunks when there are a large number or records.  Typically this is around 64K blocks.  This is used to
+limit the transmission size to the server at less the 100K since the Jetty server used by the Google App Engine imposes this limitation.  The <strong>Triangular</strong> system
+manages this internally using the <a href="#addressingrecords">Addressing Records</a> scheme to access the various chunks.</p>
+
+<h3 id="keystructure">Key Structure</h4>
+
+<p>The Key is used to reference a record (<a href="/api/tri.servTBL">TBL mode</a>) or group or chunk of records (<a href="/api/tri.servREC">REC mode</a>).</p>
+
+<p>The key consists or 3 parts concatenated into a string of the form <code>Part1/Part2/Part3</code> that becomes the unique key in the key/data pair.</p>
+
+<ol>
+<li><p><strong>cust</strong> - <code>Part1</code>, an alphanumeric customer or application id that separates the application records from all other application records on the server.
+<br><br>
+The <a href="/guide/user">User</a> records used to secure access to the server use a special <strong>cust</strong> id and part 2 defines the apllication id.</p></li>
+<li><p><strong>type</strong> <code>Part2</code>, the record type extracted from the <code>recType</code> property of the <a href="/guide/table">Table (static version)</a> definition.
+<br><br>
+The <a href="/guide/user">User</a> records used to secure access to the server use a <code>null</code> for the specification of <code>recType</code> which internally triggers the controlled
+access to these records.</p></li>
+<li><p><strong>key</strong> <code>Part3</code> is the key extracted from the <code>recName</code> property of the <a href="/guide/table">Table (static version)</a> definition (<a href="/api/tri.servREC">REC Mode</a>).
+<br><br>
+In the case of chunked data this <code>recName</code> property will end with a '%' which will trigger the chunked mode support of <strong>Triangular</strong>.  In this case the '%'
+is replaced with a numerically ascending number representing each unique chunk.
+<br><br>
+For <a href="/api/tri.servTBL">TBL Mode</a> access <code>Part3</code> is a unique string value used to locate the individual record.  The value is often computed based on
+user input data or time of day value (Deps.js example).  The structure of this key if designed correctly can be used to find a subset of records using the
+<a href="/api/tri.servGAE#issueFindFile">servGAE.issueFindFile</a> function.</p></li>
+</ol>
+
+<h3 id="recordstructure">Record Structure</h4>
+
+<p>The record consists of a set of 'property' keys that point at data supported by JSON. Most common are string, numeric or boolean values.</p>
+
+<p>It is possible to support sub-objects in that the JSON value can be another JSON object or array of objects.  This is used in the "Deps.js" application in the <code>donors</code> column.</p>
+
+<p>One or more fields can be marked with the <code>many:false</code> property in the <a href="/guide/col">Col (static version)</a> definition which will cause <strong>Triangular</strong>
+during the validation cycle to prevent duplicate values for this field.  This creates a 'primary' key capability for a column value.</p>
+
+<p>One or more fields can be marked with the <code>reqd:false</code> property in the <a href="/guide/col">Col (static version)</a> definition which will mean the
+field need not have some content.  The default is <code>reqd:true</code> meaning the field must be populated with a data value.</p>
+
+<p>More sophisticated validation can be invoked using the  <a href="/guide/table#validate">Table.validate</a> exit.</p>
+
+<p><strong>Triangular</strong> by default inserts a <code>tag</code> property which assigns each record a unique integer number.  This can be removed during the
+<a href="/guide/table#validate">Table.validate</a> exit if not needed.</p>
+
+<p>The server data block has a <a href="/guide/datastore">Datastore GekID</a> which is an integer primary key to the block of data.  For <a href="/api/tri.servTBL">TBL Mode</a> records
+this is used to remove a record.</p>
+
+<p>The server also maintains an update timestamp for each block which is used in sections <a href="#dirtydatadetection">Dirty Data Detection</a> and
+<a href="#updateconflictresolution">Update Conflict Resolution</a>.</p>
+
+<h3 id="addressingrecords">Addressing Records</h4>
+
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress or <code>oaa</code>  is the internal means to reference records in the internal cache.</p>
+
+<p>The value is either a numeric or a string.  For <a href="/api/tri.servTBL">TBL Mode</a> the value will be 0.  For non-chunked <a href="/api/tri.servREC">REC Mode</a>
+it is the index (relative to 0) into the array of records in the cache.</p>
+
+<p>For chunked data <code>oaa</code> is a string formatted as 'n.ix' where <code>n</code> is the chunk id and <code>ix</code> is the index into the chunk array.</p>
+
+<h3 id="persistingrecords">Persisting Records</h4>
+
+<p>For <a href="/api/tri.servTBL">TBL Mode</a> records the <a href="/api/tri.servTBL#insertRec">servTBL.insertRec</a> function is used to add (<a href="#keystructure">key</a> does not exist)
+or replace (<a href="#keystructure">key</a> does exist).</p>
+
+<p>For <a href="/api/tri.servREC">REC Mode</a> records the <a href="/api/tri.servREC#saveRecords">servREC.saveRecords</a> follows an
+<a href="/api/tri.servREC#insertRec">servREC.insertRec</a> function is used to add (<a href="#addressingrecords">oaa</a> is null)
+or replace (<a href="#addressingrecords">oaa</a> is not null).</p>
+
+<p>The <a href="/api/tri.servTBL#insertRec">servTBL.insertRec</a> <code>bInter</code> parameter allows intermediate states of  <a href="/api/tri.servTBL">TBL Mode</a> records to be saved.
+This cannot be reversed.</p>
+
+<p>With the <a href="/api/tri.servREC#insertRec">servREC.insertRec</a> mode, the <code>bInter</code> parameter allows multiple inserts to take place before a final
+<a href="/api/tri.servREC#saveRecords">servREC.saveRecords</a> persists the data into localStorage and onto the server storage.</p>
+
+<p>For <a href="/api/tri.servTBL">TBL Mode</a> the <a href="/api/tri.servGAE#dropObj">servGAE#dropObj</a> is used to remove a record from storage.</p>
+
+<p>For <a href="/api/tri.servREC">REC Mode</a> the <a href="/api/tri.servCRUD#dropRecord">servCRUD.dropRecord</a> is used to remove a record from storage.</p>
+
+<p>When a <strong>Triangular</strong> application is marked in 'demo' mode (usually from a <a href="/guide/user">User Profile</a> flag), the server storage save is
+skipped with the result that to the  <a href="/guide/user">User</a> it appears the update happens but they are never reflected to the server.  Until localStorage
+on the <a href="/guide/user">User</a> machine is cleared the updates will persist.</p>
+
+<h3 id="dirtydatadetection">Dirty Data Detection</h4>
+
+<p>Dirty Data can occur when a <a href="/guide/user">User</a> logs into the system from a different machine.  The <a href="/api/tri.servGAE#login">servGAE.login</a> validates
+the timestamps of records against those in the localStorage cache.  Any that differ cause the localStorage and memory cache to be updated with current
+values from the server.</p>
+
+<h3 id="updateconflictresolution">Update Conflict Resolution</h4>
+
+<p>The requirement for update conflict resolution occurs when 2 different <a href="/guide/user">Users</a> attempt to update the same record with different values.
+At present the
+server detects this occurence, fails to make the conflicted update and reports back the failure to the <a href="/guide/user">User</a> whose update failed.  In future versions,
+in <a href="/api/tri.servREC">REC Mode</a> the system will attempt
+to update the individual record within the array if it is not in conflict.</p>
+
+<p>This is not an issue with the 'demo' mode system since the updates are never transferred back to the server.</p></div>

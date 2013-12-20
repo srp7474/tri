@@ -1,0 +1,106 @@
+<h1><code ng:non-bindable="">Table</code>
+<span class="hint">(type in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides an object rendition of the <a href="/guide/table">Static Table</a> object
+defined in the Javascript file.</p>
+
+<p>Referred to in this documentation as the dynamic instance of the <code>Table</code> object.</p>
+
+<p>The public methods attached to the <code>Table</code> object and described herein are
+accessible form the HTML code assuming a <code>Table</code> object is available.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="Table">Table(props, $scope, servCRUD)</h3>
+<div class="table"><p>Constructor of the the <code>Table</code> object. Performs the following functions:</p>
+
+<ul>
+<li>The oTabProps are copied to props</li>
+<li>Filters are migrated and a Limit 50 is added if Limit is not specfied</li>
+<li>Dynamic <a href="/api/tri.object.Col">Col</a> objects are also created.</li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">props – {Object} – </code>
+<p>Properties array. Equivalent to oTabProps in static object.</p></li>
+<li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>under which table is connected</p></li>
+<li><code ng:non-bindable="">servCRUD – {Object} – </code>
+<p>object pointer.  Needed to prevent circular references.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="findCol">findCol(sCol)</h3>
+<div class="findcol"><p>Returns a <a href="/api/tri.object.Col">Col</a> whose col matches sCol</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sCol – {Object} – </code>
+<p>The column name to match</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p><a href="/api/tri.object.Col">Col</a> object</p></div>
+</div>
+</li>
+<li><h3 id="findCol">findCol(sType)</h3>
+<div class="findcol"><p>Returns a <a href="/api/tri.object.Col">Col</a> array whose col type sType</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sType – {Object} – </code>
+<p>The column type to match</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p><a href="/api/tri.object.Col">Col</a> object array</p></div>
+</div>
+</li>
+<li><h3 id="getEditActions">getEditActions($scope, oObj)</h3>
+<div class="geteditactions"><p>Returns an array of custom actions pertaining to the Edit operation on a data object in the table.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>Scope under which call is made. The pointer to the click function
+and whatClass function will be added to the scope.</p></li>
+<li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>The object beding edited.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>array of Action objects</p></div>
+</div>
+</li>
+<li><h3 id="getFilters">getFilters(sType)</h3>
+<div class="getfilters"><p>Builds an array of Filters that match sType</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sType – {string} – </code>
+<p>The filter type to match. Null means all filters.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>array of Filters objects</p></div>
+</div>
+</li>
+<li><h3 id="getObjs">getObjs()</h3>
+<div class="getobjs"><p>Returns an array of all the data objects for the Table.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>array of data objects</p></div>
+</div>
+</li>
+<li><h3 id="getOptActions">getOptActions($scope)</h3>
+<div class="getoptactions"><p>Returns an array of optional actions specified in the props object.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>Scope under which call is made. The pointer to the click function
+and whatClass function will be added to the scope.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>array of Action objects</p></div>
+</div>
+</li>
+<li><h3 id="getSelObjs">getSelObjs()</h3>
+<div class="getselobjs"><p>Reduces the entire sorted set by the filter logic.  The results are cached because this function is called many times during a $digest
+operation. Changes to the Filters or data contents of the <code>Table</code> automatically cleanse the cache.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>array of data objects</p></div>
+</div>
+</li>
+<li><h3 id="getTitle">getTitle()</h3>
+<div class="gettitle"><p>Returns the recTitle value</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>recTitle</p></div>
+</div>
+</li>
+</ul>
+</div>
+</div>

@@ -1,0 +1,39 @@
+@ngdoc overview
+@name Apps
+@description
+
+### Introduction
+
+For a typical CRUD application written in <a target=_blank href="http://angularjs.org/">AngularJS</a>, **Triangular** can boost the coding productivity by
+factoring out the common elements of such an application into a reusable infrastructure.
+
+This demonstration site allows you to quickly get a feel for the capabilities of <b>Triangular</b>.
+
+* For application demonstrations, the `guest` userid is prefilled.  Just press <b>login</b>
+* Applications are {@link /guide/sandbox sandboxed}.  Changes you make will only reflect in your local cache.
+* The application data is computer generated.  With the exception of the Hello application, it does not contain real names,
+  addresses or phone numbers for people or businesses.
+
+### Quick Start
+If you are using **Chrome** and want to jump right into a demonstration goto {@link /apps/hello-app Hello App Demo}
+
+This documentation package is supported by most browsers, even older IE versions.
+
+Here are some good starting points for the documentation:
+
+* {@link /overview Documentation Start Page}
+
+* {@link /apps/hello-app Hello App} Just read the documentation which shows how the {@link /apps/hello-app Hello App} is coded.
+
+* {@link /overview/landmarks Site Landmarks}
+
+* {@link /apps/browser Browser Support}
+
+To quickly experiment with a local copy you need to:
+
+1. Download, unzip and reference the {@link /apps/zip-files Stripped down GAE SDK}
+
+2. Download and unzip the {@link /apps/zip-files <b>Triangular</b> Development Package}
+
+3. Run the local copy of the demo
+

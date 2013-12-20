@@ -1,0 +1,45 @@
+<h1><code ng:non-bindable="">servTBL</code>
+<span class="hint">(service in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Specific I/O services for TBL mode tables</p>
+
+<p>Refer to <a href="/guide/records">Record Storage</a> for a description of the record modes and to
+<a href="/api/tri.servCRUD">servCRUD</a> for the API common functions.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="insertRec">insertRec(oTP, obj, oaa, bInter)</h3>
+<div class="insertrec"><p>Used internally to insert a record into the <a href="/guide/data">Data Object</a> cache.  If the <code>oaa</code> is null a new <a href="/guide/data">Data Object</a> is inserted.</p>
+
+<p>When <code>bInter</code> is <code>true</code> the display updates are not invoked.
+Used to save partial updates to a record rather than lose the whole thing should the system crash.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> cache where the object array is stored.</p></li>
+<li><code ng:non-bindable="">obj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> to insert.</p></li>
+<li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the insert point.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.
+Note that the <code>servTBL</code> mode does not support chunked data.</p></li>
+<li><code ng:non-bindable="">bInter – {Boolean} – </code>
+<p>When <code>true</code> the update is intermediate with more to follow.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="isCombined">isCombined()</h3>
+<div class="iscombined"><p>Returns whether the service type combines the individual JSON objects into an array for storage and retrieval.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>Always returns <code>false</code>.</p></div>
+</div>
+</li>
+<li><h3 id="setObjs">setObjs(oTP, objs)</h3>
+<div class="setobjs"><p>See <a href="/api/tri.servREC#setObjs">servREC.setObjs</a> since this function processes the call.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> where the object array is stored.</p></li>
+<li><code ng:non-bindable="">objs – {Object[]} – </code>
+<p>The array of <a href="/guide/data">Data Object</a>s to store.</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>

@@ -1,0 +1,48 @@
+@ngdoc overview
+@name Tutorial: 05 Code MyApp
+@description
+
+The tutorial at this point cannot give exact assistance because `MyApp` now needs to be customized.  This page does give
+some general guidelines and point to other helpful places on this site.
+
+### Modifying Code
+
+1. Make small changes incrementally.  Test them and then make more changes.  In this way when something fails the source of the failure is easier to find.
+
+2. If you need to add a {@link /guide/form-page-design Form} use the `FormHello.htm` and `FormHello.js` as models calling them `FromMyApp.htm` and
+`FormMyApp.js`.
+
+3. Use the {@link /guide/construct Construct Index} to assist in finding working examples of code snippets.
+
+4. Use the {@link /apps/src-files Source Files} as a reference.  These are located in the `x:\tri-devp\war\apps` and `x:\tri-devp\war\apps\tri` folders.
+
+5. Use the Browser log facility to help debug and track down errors.  See {@link /guide/hints-tech#browserrelated Browser Related} for more techniques
+especially {@link /guide/hints-tech#useoftrijs Use of TRI.js}.
+
+### Modifying `AppConfig.js`
+
+1. If your site will not include the demo apps you may want to simplify and adjust `AppsConfig.js`.
+
+2. Remove from `var accts = [` (about line `13`) upto but not including `oFuncs.getStartPage = ... ` (about line `63`).  This is used by the `Deps` app.
+
+3. The `getInfo` would be replaced or removed.
+
+4. The `getAutoFill` would likely be removed unless you want the UserName and Password to be prefilled.
+
+5. The `getSite` would be modified or removed.
+
+
+### Google Analytics Account
+
+1. If you intend to keep data regarding visits to the `MyApp` site then the <a target=_blank href=http://www.google.com/analytics/>Google Analytics</a> is a technology that
+is already compatible with the **Triangular** code base.
+
+2. To implement, you need a tracker code. Use <a target=_blank href=https://accounts.google.com/ServiceLogin?service=analytics>Google Analytics Login</a> to signin and create the tracker code.
+
+3. Replace the existing function body of `gaTracker` in `AppConfig.js` with this new code.  It should look similar.
+
+4. To turn off tracking make `gaTracker` an empty function.
+
+### Next Step
+
+Now with `MyApp` working we are ready to proceed to the next section {@link /tutorial/step-06 06 Get GAE Site ID}.

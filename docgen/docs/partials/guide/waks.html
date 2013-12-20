@@ -1,0 +1,144 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <strong>WAKS Utility</strong> is a program provided in the development package to transfer data files between the development computer and a server.</p>
+
+<p>It relies on special commands on the server.  To prevent illegal access the <a href="/guide/user#superuser">SuperUser</a> userid and password must be provided with each invocation.</p>
+
+<p>There are two versions of the program.  The first, written in Java, should be used to access the <a href="/guide/variants">GAE Servers</a>.  The second,
+written in Node.js, should be used to access the <a href="/guide/variants">Node.js Servers</a>.  The reason for this is that in spite of the fact the command set is
+indentical there is an underlying incompatibility in the headers sent automatically be the respective language support code that was not productive to
+troubleshoot.</p>
+
+<p>The <code>waks.bat</code> utility determines which version is being accessed and uses the appropriate version of the program.</p>
+
+<h3 id="requirements">Requirements</h4>
+
+<ul>
+<li>Java (at least version 6)  installed on the computer (<a href="/guide/variants">Java Variant</a>)</li>
+<li>Node.js  installed on the computer (<a href="/guide/variants">Node.js Variant</a>)</li>
+<li>Windows XP or more.  Could use other operating systems if the <code>WAKS.bat</code> command file was replaced with an equivalent for the host operating system.</li>
+</ul>
+
+<h3 id="waksbaturls"><code>WAKS.bat</code> URLs</h4>
+
+<p>Two URLs are coded inside the <code>WAKS.bat</code> file.  The first is the local server address used when the <code>WAKS</code> command does not contain the <strong>prod</strong> prefix.
+For the <a href="/guide/variants">Java Variant</a> this is set to <code>localhost:8882</code>.
+For the <a href="/guide/variants">Node.js Variant</a> this is set to <code>localhost:8888</code>.
+These are set inside server start files <code>run-ws.bat</code> and <code>run-tri.bat</code> for the <a href="/guide/variants">Java Variant</a> and <a href="/guide/variants">Node.js Variant</a> respectively.
+If they are changed in the server startup .bat file they should be changed in the <code>waks.bat</code> file also.</p>
+
+<p>The second is the production URL set with the <code>waks site</code> command.  This also determines which variant of the <code>WAKS</code> utility to use.
+This second URL is used when the <code>WAKS</code> command contains the <strong>prod</strong> prefix.</p>
+
+<h3 id="fileandkeyconversionprotocol">File and Key Conversion Protocol</h4>
+
+<p>Keys on the server use an '*'  as part 1 of the key for User records and the '/' character as a separator between each part.</p>
+
+<p>These are converted into a '$' and '-' respectivly when the Key is used to derive the file name on the local file system.  In addition the
+'.json.txt' string is added to the file name.</p>
+
+<p>These transformations are handled automatically by the <code>WAKS</code> utility program.</p>
+
+<h3 id="waksbatoptions"><code>WAKS.bat</code> Options</h4>
+
+<p>The very latest options can be seen by typing <code>WAKS</code> with no options.</p>
+
+<p>A number of settings needs to be established.  They are stored in environment variables.  Keywords, <strong>set</strong>, <strong>dir</strong> and <strong>site</strong>  are used to trigger
+their respective values.</p>
+
+<h5 id="setsetstheappidcustandthesuperusercredentials">set - sets the app id (cust) and the SuperUser credentials</h6>
+
+<pre class="prettyprint linenums">
+   WAKS set cust user password
+</pre>
+
+<p>This establishes the application ID and the SuperUser ID and password.  If your computer is shared set this to nulls afterwards so
+that the SuperUser credentials are not compromised.  An application ID of '$' is used to access the User records.</p>
+
+<h5 id="dirsetstheworkdirectory">dir - Sets the Work Directory</h6>
+
+<pre class="prettyprint linenums">
+  WAKS dir dirname
+</pre>
+
+<p>This establishes the working directory where files are shipped from and fetched into.</p>
+
+<h5 id="sitesetstheproductionurl">site - Sets the Production URL</h6>
+
+<pre class="prettyprint linenums">
+  WAKS site site-type site-prefix
+</pre>
+
+<p>This establishes the URL used when the <strong>prod</strong> prefix is used in the <code>fetch</code> and <code>ship</code> access commands.  The <code>site-type</code> should be <code>gae</code> to access the <a href="/guide/gaesite">GAE Site</a>
+and <code>jitsu</code> to access the <a href="/guide/nodesite">NodeJitsu Site</a>.  If you host at a different site then modify <code>waks.bat</code> by adding another <code>site-type</code>.</p>
+
+<p>The <code>site-prefix</code> is the ID you have registered with the respective hosting site used to connect to your application.</p>
+
+<h3 id="fetchingfilesfromtheserver">Fetching files from the server</h4>
+
+<pre class="prettyprint linenums">
+  WAKS [prod] type name [-r]
+</pre>
+
+<p>where</p>
+
+<p><code>prod</code> if entered causes the production URL to be used.</p>
+
+<p><code>type</code> the file type to fetch.  A % value will cause all types to be fetched.</p>
+
+<p><code>name</code>  the 3rd part of the key.  A value of % will cause all files for <code>type</code> to be fetched.</p>
+
+<p><code>-r</code>   If entered causes the local files to be replaced by the copy from the server. <b>Use with caution</b></p>
+
+<h3 id="shippingfilesontotheserver">Shipping files onto the server</h4>
+
+<pre class="prettyprint linenums">
+  WAKS [prod] ship type name [-r]
+</pre>
+
+<p>where</p>
+
+<p><code>prod</code> if entered causes the production URL to be used.</p>
+
+<p><code>ship</code> Entered as <strong>ship</strong> to trigger the shipping of files rather than the fetching of files.</p>
+
+<p><code>type</code> the file type to ship.  A % value will cause all types to be shipped.</p>
+
+<p><code>name</code>  the 3rd part of the key.  A value of % will cause all files for <code>type</code> to be shipped.</p>
+
+<p><code>-r</code>   If entered causes the local files to be replace the server versions. <b>Use with caution</b></p>
+
+<h3 id="useofintypeandnameparameters">Use of % in <code>type</code> and <code>name</code> parameters</h4>
+
+<p>A value of % causes all instances of that qualifier to be processed.</p>
+
+<p>The <code>type</code> and <code>name</code> values can be partially qualified.  That is, a <code>name</code> value of <code>xxx%</code> would match
+keys whose 3rd part begins with <code>xxx</code>.</p>
+
+<p>If <code>type</code> contains a % the name parameter is required but its value is ignored.  This is because the type qualifier
+precedes the name qualifier in the key.</p>
+
+<h3 id="waksinternaloptions"><code>WAKS</code> Internal Options</h4>
+
+<p>The very latest internal options can be seen by typing <code>WAKS</code> with no options.  The section at the end titled <code>WAKS Parameters</code> describes the internal <code>WAKS</code> program options
+used by the <code>waks.bat</code> utility.</p>
+
+<pre class="prettyprint linenums">
+WAKS Parameters:
+-h              Generate this Help Information that you are now reading
+-file dir       Work Directory (mandatory)
+-url url        URL of app server (mandatory)
+-cust cust      Cust part of key (mandatory)
+-user user      SuperUser id (mandatory)
+-pw password    SuperUser password (mandatory)
+-type type      Type part of key (2nd part) (mandatory)
+-name name      Name part of key (3rd part) (mandatory)
+-ship           Ship mode, else read
+-v              Verbose mode
+-r              Replace components. ***DANGEROUS***
+</pre>
+
+<p>These options are generated by the <code>WAKS.bat</code> command file are are included here for reference.</p></div>

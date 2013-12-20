@@ -1,0 +1,23 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The Datastore is the  facility used to persist the data of the applications.</p>
+
+<p>In the standard <strong>Triangular</strong> development configuration this is provided by the <a href="/guide/server-inter">Server (GAE version)</a>, both local and on the
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine</a>.</p>
+
+<p>Locally the data is stored as a file in directory <code>... \war\WEB-INF\appengine-generated\</code> as files <code>local_db.bin</code> and
+<code>datastore-indexes-auto.xml</code>.</p>
+
+<p>On the <a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine Site</a>.
+the BigTable technology is used to store and replicate the data.</p>
+
+<p>Data is stored on the Datastore using the <a href="/guide/records#keystructure">Key Structure</a> and using the record format defined by
+<a href="/guide/records#recordstructure">Record Structure</a>. It also maintains an internal integer key called the <code>GekID</code>.</p>
+
+<p>The administrative records for the <a href="/guide/user#superuser">SuperUser</a>, <a href="/guide/user#adminuser">AdminUsers</a> and <a href="/guide/user">Users</a> are
+also stored there using a special key structure protected by the <a href="/guide/server-inter">Server</a> from unauthorized access.</p>
+
+<p>Refer to <a href="/guide/hints-tech#datastorerelated">Datastore Related</a> to see how to access the raw records.</p></div>

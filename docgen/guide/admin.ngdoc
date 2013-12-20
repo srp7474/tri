@@ -1,0 +1,65 @@
+@ngdoc overview
+@name Guide: Admin Application
+@description
+
+### Overview
+The Admin Application performs tasks that only the system administrator can perform.
+This by default is the maintenance of the User `Table` that controls access to the system.
+
+Other tables can be specified that allow the admin functions access to the table.
+
+### Adding Access to the Menu
+
+A statement such as the next should be executed in the {@link /guide/appname-js#ctrlmainfunction ctrlMain} controller.
+
+<pre>
+  servSess.setOptMenuItems([{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'},...]);
+</pre>
+
+This will add the link "Admin Functions" to the menu when the {@link /guide/user User} has admin credentials.
+The `xfrAdminFunctions` function is a local function detailed in the next section.
+
+### Transferring Control to Admin.htm
+
+The following example snippet should be executed by the menu click action.  It modifies the
+application URL to access the "Admin.Htm" page.  It passes the application name ("Deps")
+and stores a URL in `localStorage['_admin_app_return']` so that the Admin Application
+knows how to return to the originating application.
+
+<pre>
+  function xfrAdminFunctions() {
+    if (servCRUD.inEdit()) return;
+    var sURL = ""+window.location;
+    var nIX = sURL.indexOf("Deps.htm");
+    log("XAF "+sURL);
+    localStorage['_admin_app_return'] = sURL.substring(nIX);
+    var sNewURL = sURL.substring(0,nIX)+"Admin.htm?cust=deps&tables=TableDonors";
+    window.location = sNewURL;
+  }
+</pre>
+
+### Admin.htm URL Parameters
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+Two parameters are used on the Admin.htm invoking URL
+
+<span class=srp-propdef><code class=srp-label>cust</code>This value is used in the
+{@link /api/tri.servGAE#setCust servGAE.setCust} method and defines the current application
+context used to build {@link /guide/records#keystructure keys} for to the server.
+</span>
+
+<span class=srp-propdef><code class=srp-label>tables</code>This optional value lists one or more Javascript table
+definitions (separated by a ';') that are loaded.
+<br><br>
+The `menuWhen` function in that definition limits the inclusion of
+that table in the Admin menu to situations where the User has 'admin' credentials.
+<br><br>
+The "TableDonors.js" file in the 'Deps.htm" application is loaded in this fashion by the above sample code.
+</span>
+
+
+

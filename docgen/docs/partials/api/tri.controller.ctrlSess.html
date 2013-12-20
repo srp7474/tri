@@ -1,0 +1,85 @@
+<h1><code ng:non-bindable="">ctrlSess</code>
+<span class="hint">(controller in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Standard controller referenced with ng-controller=ctrlSess on the
+appropriated HTML div statement.</p>
+
+<p>It is used to manage the authentication of the User before allowing other
+components to be used.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">ctrlSess($scope, $http, servSess, servGAE, servCRUD);</pre>
+<h3 id="Parameters">Parameters</h3>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>The scope of the controller</p></li>
+<li><code ng:non-bindable="">$http – {Object} – </code>
+<p>The angularJS $http service</p></li>
+<li><code ng:non-bindable="">servSess – {Object} – </code>
+<p>The <a href="/api/tri.servSess">servSess</a> service pointer</p></li>
+<li><code ng:non-bindable="">servGAE – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servGAE</a> service pointer</p></li>
+<li><code ng:non-bindable="">servCRUD – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servCRUD</a> service pointer</p></li>
+</ul>
+</div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="hasSession">hasSession()</h3>
+<div class="hassession"><p>Returns whether a valid session exists (ie. there is a logged in user).</p>
+
+<p>The value returned is obtained by forwarding the call to <a href="/api/tri.servSess#hasSession">servSess.hasSession</a> and returning the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasSession">servSess.hasSession</a></p></div>
+</div>
+</li>
+<li><h3 id="initUser">initUser()</h3>
+<div class="inituser"><p>Performs initialization of input from any cached localStorage values for userids(s) and the token value.</p>
+
+<p>If a token value is found it uses the <a href="/api/tri.servGAE#validateToken">servGAE.validateToken</a> method to
+see if  the token is valid.  If so the login is deemed successful and the context is prepared.
+This includes calling <a href="/api/tri.servSess#setSession">servSess.setSession</a></p>
+
+<p>If this is the very first time the user has used the system we do a dummy warm-up of the server (incase it is paged out).
+This means that when he presses the login button the <a href="/guide/gaesite">GAE Server</a> will be warmed up.  If it is not the first
+time the validate will do a warmup.</p>
+
+<p>More information concerning the token is found at <a href="/api/tri.servGAE#setToken">servGAE.setToken</a> and <a href="/guide/server-inter">Server Interface</a>.</p></div>
+</li>
+<li><h3 id="isSect">isSect(sSect)</h3>
+<div class="issect"><p>Returns whether the current section is <code>sSect</code></p>
+
+<p>The value returned is obtained by forwarding the call to <a href="/api/tri.servSess#isSect">servSess.isSect</a> and returning the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sSect – {String} – </code>
+<p>the section to test for</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#isSect">servSess.isSect</a></p></div>
+</div>
+</li>
+<li><h3 id="login">login(sDbl)</h3>
+<div class="login"><p>Performs the login functionality for a user in concert with the
+HTML sections to obtain the User information (Userid &amp; password).</p>
+
+<p>It ensures that the required fields are provided.</p>
+
+<p>When sufficient data is entered the functions <a href="/api/tri.servSess#setUser">servSess.setUser</a>
+and <a href="/api/tri.servGAE#login">servGAE.login</a> are used to perform the login and prepare the context.</p>
+
+<p>If the login fails the controller informs the user via a message.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sDbl – {string} – </code>
+<p>'DOUBLE' if double login required</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="member property"><h2 id="Properties">Properties</h2>
+<ul class="properties"><li><h3 id="sErrMsg">sErrMsg</h3>
+<div class="serrmsg"><p>Current error message or null.</p>
+
+<p>Set during a login attempt as input fields are edited.</p></div>
+</li>
+</ul>
+</div>
+</div>

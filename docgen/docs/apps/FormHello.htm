@@ -1,0 +1,48 @@
+<html>
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-msgs1.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=defualt>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="FormHello.js"></script>
+  <script src="AppsConfig.js"></script>
+  <title>Hello - Messages Printer V1.0 </title>
+  <script>gaTracking();</script>
+</head>
+<body ng-app=app>
+  <div ng-controller=ctrlForm>
+    <div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/messages'></div>
+    <!-- -------------Format Array of Messages---------------------->
+    <div ng-show='isLoaded()'>
+      <style type="text/css">
+        div#divPrint span.title         {font-size:12pt; font-weight:bold;}
+        div#divPrint span.author        {color:blue;}
+        div#divPrint p.text             {font-size:80%; margin-bottom:0px;}
+        div#divPrint div.date           {font-size:60%; color:rgb(210,210,210); text-align:right; margin-top:5px;}
+
+        div#divPrint div#forms          {width: 950px; height:1500px;}
+        div#divPrint div#msgs           {border-top:1px rgb(210,210,210) solid; padding-left:5px; padding-top:5px; margin-top:20px;}
+
+        div#divPrint  div#panel         {left:1100px; background-color:rgb(255,255,210);} /* showcase panel override */
+
+      </style>
+      <div id=divPrint style='margin-left:20px'>
+        <div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Messages'></div>
+        <div id=forms>
+          <div id=msgs ng-repeat='oObj in oPrtObjs'>
+            <div id=msg>
+              <span class=title><span class=author>{{oObj.author}}</span>: {{oObj.title}}</span>
+              <p class=text>{{oObj.text}}</p>
+              <div class=date>Type: {{oObj.type}} &nbsp;&nbsp;&nbsp;&nbsp; Date: {{getDate(oObj)}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

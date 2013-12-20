@@ -1,0 +1,187 @@
+@ngdoc overview
+@name Guide: Hints and Techniques
+@description
+### Overview
+This page contains a random collection of hints and/or techniques that were discovered during development and which are worthwhile to document.
+
+### Browser Related
+
+##### Chrome Browser
+The development environment used was Chrome under Windows XP.  The Chrome browser has server developer friendly features that may or may not be present in other browsers.
+Since at this stage of development emphasis was on functionality of the system the use of other browsers was not explored.
+
+##### Use of Chrome inspect
+The use of the `View Source` facility is worthless in the **Triangular** (or <a target=_blank href="http://angularjs.org/">AngularJS</a>) environment because it shows the source before insertion of the templates.
+The `inspect element` right click on an element
+causes Chrome to display the expanded elements as they are current in the Browser.  The **Triangular** template engine inserts markers
+for each piece of HTML generated so the source can be tracked and the place where is it manufactured/modified can be determined.
+
+##### log function
+A simple `log` function was implemented into the 'ut.js' file that forwards the calls to the browser `console.log` function.
+This design allowed for an easy on/off switch based on the presence in localStorage of a '.log' property.
+
+The extensive use of the %o in the display strings allows the display of objects.  For arrays a hidden object was sometimes created `{array:xxx}` so that
+the default action to expand the array was avoided.
+
+Note that when a display for an object thus shown is expanded, it shows the current value of the object, not the one at time of logging.
+
+This can be made visible with the shortcut key &LT:Ctl Shift J>
+
+
+##### Use of `TRi.js`
+If there is an error in the `Tri.min.js` code, replacement of the reference in the relevant `.htm` file with `TRI.js`, pressing **&LT;REFRESH>**
+and rerunning the test will pinpoint the place of error in code that is more readable and may give clues as to the cause of the problem.  Remember to
+change it back to `TRI.min.js` (performance).
+
+##### Chrome Interactive Console
+Commands can be entered into the console area.  Thus `$("div#editor")` will display the HTML string for the editor.
+
+In addition the `fmt(html string)` will format the string to make it easier to read.
+
+### <a target=_blank href="http://angularjs.org/">AngularJS</a> Related
+
+##### Use of `<input type=hidden ng-model=...>`
+In the 'Deps.htm' file a function was used to compute a value.  This was stored in a hidden field and made part of the ng-model with the result
+that the dependant fields were automatically updated by <a target=_blank href="http://angularjs.org/">AngularJS</a>.
+
+##### Delayed Scheduling of $digest cycles
+Upon occasion, especially where external events occur, it is necessary to schedule a $digest cycle at the completion of the event handler.
+The statement `setTimeout(function(){$rootScope.$digest()},0);` when executed does this against the entire page.  Use of `$scope` rather than `$rootScope` would
+limit the $digest cycle to just the current scope (if known).
+
+##### HTML Page this === $scope
+On an HTML page the **this** value is equivalent to **$scope** in the Javascript routines.  This feature is extensively used to pass in the `$scope` to
+common routines, especially the {@link /api/tri.object.Col Col} and {@link /api/tri.object.Table Table} methods.
+
+##### Use of directives
+Directives were frequent found to be a means to concisely solve user interface problems.  It is suggested that the use of directives be learned, especially
+in the  the simpler cases.  See {@link /guide/directives directives}.
+
+##### Nested alter= on fetch
+This is used in `AppsBase.htm` when template a containing `macro` directives will itself be inserted by a `macro` directive
+as is the case with `apps-body.html`.  The `alter=` attribute is used to change a value to itself. Then the outer macro
+changes the alter string to the desired value using the '!' syntax because of the intermediate '/'.
+
+This is used by `Deps.htm`  to change `SINGLE` to `DOUBLE` and `ctrlCommEdit` to `ctrlDepsEdit`
+
+##### Use of $eval
+In order to pick up a string from a definition and delay the evaluation until the HTML is parsed the `$eval` function can be used.
+For example in the 'AppsBase.htm' file the statement fragment `<a class='c-action sz-90' href="" ng-class='$eval(oA.whatClass)' ...>`
+causes the string extracted from `oA.whatClass` to be evaluated and returned as the `ng-class` value.
+
+##### Use of Objects as models
+The <a target=_blank href="http://angularjs.org/">AngularJS</a> models behave best when they are dealing with an object.
+In that way only the object reference has to be added to the $scope and the underlying HTML
+can easily reference the property fields of the object.
+This is shown clearly in the example code in {@link /apps/chqs-app#Chqs.htm Chqs.htm Line 143 ...}.
+
+### Triangular Related
+
+##### Use of leading ',' not trailing ',' in lists
+A pattern used extensively in the code when there are lists that exceed lines is to add the next one with a leading ',' as opposed to a trailing ','.
+This makes it easier to add, delete and comment out entries without having to sometimes remember to fix up the previous entry.
+
+For example:
+<pre>
+  var oTabProp = {
+       recTitle: 'Messages'
+      ,recName:  'messages'
+      ,recType:  'msg'
+      ,lsName:   '-msgs'
+      ...
+</pre>
+
+##### Minimal use of mouse for input intensive applications
+In the 'Deps.htm' and 'Deps.js' files the {@link /api/tri.directive:autotab autotab} and {@link /api/tri.directive:blurEvent blurEvent} directives are
+used to move the cursor to the most likely next input field.  As a result a standard input cycle can be completed with just one mouse click.
+
+##### Making Icons
+**Triangular** uses several Favorite Icons so, with multiple tabs open, it is easy to know which tab to select.
+
+The general pattern is the base triangle of 3 colors with a white (primary) or blue (secondary) letter displayed in the middle.  The present lettering scheme
+is:
+
+* A - Admin app
+* B - Boot page
+* C - Chqs App
+* D - Deps App
+* M - Hello app (messages)
+* S - Source Display
+* T - Triangular documentation
+
+An additional 6 are provided as a convenience for use during app development numbered 1 thru 3 in white and blue.
+
+* `fav-t1w.ico` Number 1 white
+* `fav-t1b.ico` Number 1 blue
+* `fav-t2w.ico` Number 2 white
+* `fav-t2b.ico` Number 2 blue
+* `fav-t3w.ico` Number 3 white
+* `fav-t3b.ico` Number 3 blue
+
+The free software GIMP 2 is used to make them.  The base information is in the `icons` folder distributed with the development package.
+The steps are:
+
+1. open gimp2
+2. open `tri-base2.xrf`
+3. Set to text, set font to sans-bold sz 550, white
+4. enter letter, adjust to centered position
+5. Merge layers
+6. Select portion left corner 148:135 size 714:714
+7. crop to selection
+8. export as .PNG file
+9. Use fill tool
+10. change to colour blue
+11. fill white number
+12. export as .PNG file
+13. Close view without destroying `tri-base2.xrf`
+13. goto website http://tools.dynamicdrive.com/favicon
+14. Choose file
+15. press Create Icon
+16. press DownLoad FavIcon
+
+### Datastore Related {@link /guide/variants GAE Variant}
+
+##### Accessing Data on Datastore (Local copy)
+
+On the local machine can use the <a target=_blank href=http://localhost:8882/_ah/admin>Datastore Viewer</a> to see your raw data.  Use the class
+`com.rsi.cita.gdo.GdoCitaData`.
+
+
+##### Accessing Data on Datastore via Datastore Viewer
+
+This is accessed from your Google App Signin Page.
+
+The standard GQL will access upto 20 records.
+
+ `SELECT * FROM com.rsi.cita.gdo.GdoCitaData`
+
+To restrict by application use:
+
+  `SELECT * FROM com.rsi.cita.gdo.GdoCitaData where KeyName > 'deps/' and KeyName < 'deps9'`
+
+where `deps` is the application in question
+
+
+To restrict by application and record type use:
+
+  `SELECT * FROM com.rsi.cita.gdo.GdoCitaData where KeyName > 'deps/donors/' and KeyName < 'deps/donors9'`
+
+where `deps` is the application and `donors` is the record type in question
+
+To just see the KeyName use
+
+ `SELECT KeyName FROM com.rsi.cita.gdo.GdoCitaData`
+
+
+### Datastore Related {@link /guide/variants Node.js Variant}
+
+##### Accessing Data on Datastore (Local copy)
+The data is stored in the `TRI-DB` directory within the files referenced by `run-tri.bat`. Refer to {@link /guide/datastore-node Datastore Node.js}
+to understand the naming scheme.
+
+##### Accessing Data on Datastore (Remote copy)
+You will have to have access either to the remote `TRI-DB` folder or download it so that you do.
+Again, refer to {@link /guide/datastore-node Datastore Node.js}
+to understand the naming scheme.
+
+

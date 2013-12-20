@@ -1,0 +1,21 @@
+@ngdoc overview
+@name Guide: NodeJS Server
+@description
+### Overview
+
+The {@link /guide/nodesite Node.JS Variant} comes with a Node.JS server.
+
+This is an extension of the commonly used `webserver.js` code found on the web.  It is found in the
+download zip {@link /apps/zip-files#what Download NodeJS Variant} as `tri-server.js`
+The extensions include:
+
+* Handling of more extension types
+
+* Startup params are more extensive
+
+* Handling of AJAX calls according to the {@link /guide/server-inter#commandset Server Command Set}
+
+* Handling of the data storage as defined in {@link /guide/datastore-node Datastore NodeJS}
+
+
+

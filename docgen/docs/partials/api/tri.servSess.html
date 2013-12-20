@@ -1,0 +1,433 @@
+<h1><code ng:non-bindable="">servSess</code>
+<span class="hint">(service in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides app session management based on the user login status.  It is the single service that maintains overall application context.</p>
+
+<p>Its functionality includes:</p>
+
+<ul>
+<li>User inactivity timeout functions.</li>
+<li>User authorization validation functions</li>
+<li>Current  <code>Table</code> context management</li>
+<li>Menu function utilities</li>
+<li>Miscellaneous utility functions</li>
+</ul>
+
+<p>The <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> and <a href="/api/tri.controller:ctrlCommList">List Controller</a> often reflect function calls in their
+scope to the matching calls in <code>servSess</code>.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="canChangePassword">canChangePassword()</h3>
+<div class="canchangepassword"><p>If a double login exists or we are in <a href="/guide/sandbox">Sandbox Mode</a> the password cannot be changed (false).
+Otherwise it can (true).</p>
+
+<p>Refer to <a href="/api/tri.servGAE#login">login</a> for more details about the double login.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if can change password.</p></div>
+</div>
+</li>
+<li><h3 id="createFormWindow">createFormWindow(sPref, oHandler, sPage, sForm)</h3>
+<div class="createformwindow"><ul>
+<li>Registers the <code>oHandler</code> in <a href="/api/tri.property:oGBL">oGBL</a> with a prefix of <code>sPref</code></li>
+<li>Creates the new URL substituting <code>sForm</code> for <code>sPage</code> in the current URL</li>
+<li>Opens a window with that new URL</li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sPref – {string} – </code>
+<p>message prefix for oHandler</p></li>
+<li><code ng:non-bindable="">oHandler – {string} – </code>
+<p>custom message handler</p></li>
+<li><code ng:non-bindable="">sPage – {string} – </code>
+<p>current page name</p></li>
+<li><code ng:non-bindable="">sForm – {string} – </code>
+<p>Form page name</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getBootExit">getBootExit()</h3>
+<div class="getbootexit"><p>returns the value stored with <a href="/api/tri.servSess#setBootExit">servSess.setBootExit</a></p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Function}</code>
+– <p>The value stored with <a href="/api/tri.servSess#setBootExit">servSess.setBootExit</a></p></div>
+</div>
+</li>
+<li><h3 id="getConfirmMsg">getConfirmMsg()</h3>
+<div class="getconfirmmsg"><p>Acts as a convenient way to store contextual status that confirms to the User that
+an operation has completed (such as <code>changePassword</code>)</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>Returns the current <code>sConfirmMsg</code> value</p></div>
+</div>
+</li>
+<li><h3 id="getErrorMsg">getErrorMsg()</h3>
+<div class="geterrormsg"><p>Acts as a convenient way to store contextual error conditions that can be presented to the user.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>Returns the current <code>sErrorMsg</code> value</p></div>
+</div>
+</li>
+<li><h3 id="getIdleLeft">getIdleLeft()</h3>
+<div class="getidleleft"><p>Returns the number of seconds left before a timeout occurs. This is calculated
+by subtracting <code>nIdleSecs</code> from the <code>nIdleMax</code> value (determined by the User profile)</p>
+
+<p>If the User does not timeout a <code>null</code> is returned.</p>
+
+<p>If there are no seconds left a value of 0 is returned.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{number}</code>
+– <p>number of seconds left before a timeout occurs.</p></div>
+</div>
+</li>
+<li><h3 id="getIdleSecs">getIdleSecs()</h3>
+<div class="getidlesecs"><p>This is used as part of the user inactivity timeout functionality.
+It returns the number of seconds the user has had no browser activity.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{number}</code>
+– <p>current value of <code>nIdleSecs</code></p></div>
+</div>
+</li>
+<li><h3 id="getListCtrl">getListCtrl()</h3>
+<div class="getlistctrl"><p>Gets the current <a href="/api/tri.controller:ctrlCommList">List Controller</a> for the current selected <code>Table</code> (see <a href="/api/tri.servSess#useTable">useTable</a>. In actuality this is the $scope pointer
+for the <a href="/api/tri.controller:ctrlCommList">List Controller</a> which is set with the <code>hookListListener</code> function.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The standard or replacement <a href="/api/tri.controller:ctrlCommList">List Controller</a> used to list the current <code>Table</code>.</p></div>
+</div>
+</li>
+<li><h3 id="getOptMenuItems">getOptMenuItems()</h3>
+<div class="getoptmenuitems"><p>Returns fhe array set with <a href="/api/tri.servSess#setOptMenuItems">setOptMenuItems</a>. Refer there for format details.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>The array set with <a href="/api/tri.servSess#setOptMenuItems">setOptMenuItems</a></p></div>
+</div>
+</li>
+<li><h3 id="getProfile">getProfile()</h3>
+<div class="getprofile"><p>Returns the User profile information set with the <a href="/api/tri.servSess#setSession">setSession</a> method call.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>User profile (properties object)</p></div>
+</div>
+</li>
+<li><h3 id="getSandboxMsg">getSandboxMsg()</h3>
+<div class="getsandboxmsg"><p>returns an empty string if <a href="/api/tri.servSess#isSandboxMode">servSess.isSandboxMode</a> is false or</p>
+
+<p><code>***Sandbox mode: no updates applied to server***</code></p>
+
+<p>if <a href="/api/tri.servSess#isSandboxMode">servSess.isSandboxMode</a> is true</p>
+
+<p>This is used to add to the standard application title.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{String}</code>
+– <p>The computed value</p></div>
+</div>
+</li>
+<li><h3 id="getSect">getSect()</h3>
+<div class="getsect"><p>Returns the <code>sSect</code> value set with <a href="/api/tri.servSess#setSect">setSect</a>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>The <code>sSect</code> value set with <a href="/api/tri.servSess#setSect">setSect</a></p></div>
+</div>
+</li>
+<li><h3 id="getStatus">getStatus()</h3>
+<div class="getstatus"><p>This is used during system initialization to synchronize the localStorage cache and the server
+database.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>Status value(s) previously set with <a href="/api/tri.servSess#setStatus">setStatus</a></p></div>
+</div>
+</li>
+<li><h3 id="getTabProp">getTabProp()</h3>
+<div class="gettabprop"><p>This returns the properties <code>props</code> object of current dynamic <a href="/api/tri.object.Table">Table</a> object.</p>
+
+<p>if <code>oTAB</code> is null, null is returned.</p>
+
+<p>See <a href="/api/tri.servSess#setSect">setSect</a> and <a href="/api/tri.servSess#useTable">useTable</a> for how <code>oTAB</code> receives a value.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>Properties object of current (<code>oTAB</code>) object.
+<code>oTAB</code> is set to null.</p></div>
+</div>
+</li>
+<li><h3 id="getTabServ">getTabServ()</h3>
+<div class="gettabserv"><p>Returns the <code>oTAB</code> value set with <a href="/api/tri.servSess#setSect">setSect</a>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The <code>oTAB</code> value set with <a href="/api/tri.servSess#setSect">setSect</a></p></div>
+</div>
+</li>
+<li><h3 id="getTitle">getTitle()</h3>
+<div class="gettitle"><p>Returns the <code>sTitle</code> set with <a href="/api/tri.servSess#setTitle">setTitle</a>.</p>
+
+<p>It <a href="/api/tri.servConfig#getSite">servConfig.getSite</a> returns a value this is prefixed to <code>sTitle</code> before returning the value.</p>
+
+<p>If the <code>bDevpMode</code> is set with
+<a href="/api/tri.servSess#setDevpMode">setDevpMode</a> then a 'd:' prefix is added to the returned value
+to easily differentiate between production and develepment where many broswer windows or tabs might be open.</p>
+
+<p>This call also updates the DOM title value.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p><code>sTitle</code> value plus conditional prefix.</p></div>
+</div>
+</li>
+<li><h3 id="getToken">getToken()</h3>
+<div class="gettoken"><p>Returns the value set with <code>setToken</code>. See <a href="/guide/server-inter">Server Interface</a>
+for more details on this value.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>The token value returned from the <code>login</code> function</p></div>
+</div>
+</li>
+<li><h3 id="getUser">getUser()</h3>
+<div class="getuser"><p>Returns the current <code>sUser</code> value set with <a href="/api/tri.servSess#setUser">setUser</a> method call</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p><code>sUser</code> value</p></div>
+</div>
+</li>
+<li><h3 id="getUser2">getUser2()</h3>
+<div class="getuser2"><p>Returns the current <code>sUser2</code> value set with <a href="/api/tri.servSess#setUser">setUser</a> method call</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p><code>sUser2</code> value</p></div>
+</div>
+</li>
+<li><h3 id="hasSession">hasSession()</h3>
+<div class="hassession"><p>Returns whether a valid session exists.  ie.  The User is properly logged in and validated.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>bSession status</p></div>
+</div>
+</li>
+<li><h3 id="hookIdleListener">hookIdleListener(ctrl)</h3>
+<div class="hookidlelistener"><p>Sets the <code>oIdleListener</code> to <code>ctrl</code>.
+In actuality this is the $scope pointer for the controller.</p>
+
+<p>In practice the <a href="/api/tri.controller:ctrlMenu">Menu Controller</a> is used to handle the timout functionaity.  It has to handle 2 functions that are called
+by a timer event handler.</p>
+
+<ul>
+<li><code>pulse</code> - called every second</li>
+<li><code>autoLogoff</code> - called when <code>nIdleSecs</code> exceeds <code>nIdleMax</code>.</li>
+</ul>
+
+<p>Refer also to <a href="/api/tri.servSess#getIdleSecs">getIdleSecs</a> and <a href="/api/tri.servSess#getIdleLeft">getIdleLeft</a></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ctrl – {Object} – </code>
+<p>The controller that handles the  timout functionality.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="hookListListener">hookListListener(ctrl)</h3>
+<div class="hooklistlistener"><p>Sets the <code>oListListener</code> to <code>ctrl</code>, the current <a href="/api/tri.controller:ctrlCommList">List Controller</a>.
+In actuality this is the $scope pointer for the <a href="/api/tri.controller:ctrlCommList">List Controller</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ctrl – {Object} – </code>
+<p>The standard or replacement <a href="/api/tri.controller:ctrlCommList">List Controller</a> used to list the current <code>Table</code> <a href="/guide/data">Data Object</a>s.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="hookMenuListener">hookMenuListener(ctrl)</h3>
+<div class="hookmenulistener"><p>Sets the <code>oMenuListener</code> to <code>ctrl</code>, the current <a href="/api/tri.controller:ctrlMenu">Menu Controller</a>.
+In actuality this is the $scope pointer for the <a href="/api/tri.controller:ctrlMenu">Menu Controller</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ctrl – {Object} – </code>
+<p>The standard or replacement <a href="/api/tri.controller:ctrlMenu">Menu Controller</a>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="isAdmin">isAdmin()</h3>
+<div class="isadmin"><p>Tests whether the current user is an administrator</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>whether the 'role' property of the User profile contains the string 'admin'</p></div>
+</div>
+</li>
+<li><h3 id="isDouble">isDouble()</h3>
+<div class="isdouble"><p>Tests the current <code>sDouble</code> value set with <a href="/api/tri.servSess#setUser">setUser</a> method call</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>whether <code>sDouble</code> value equals 'DOUBLE'</p></div>
+</div>
+</li>
+<li><h3 id="isPrtApp">isPrtApp()</h3>
+<div class="isprtapp"><p>appears to be obsolete</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>bPrtApp</code> setting</p></div>
+</div>
+</li>
+<li><h3 id="isRole">isRole(sRole)</h3>
+<div class="isrole"><p>Tests whether the current user has a specific role</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sRole – {string} – </code>
+<p>value to test for</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>whether the 'role' property of the User profile contains the string <code>sRole</code></p></div>
+</div>
+</li>
+<li><h3 id="isSandboxMode">isSandboxMode()</h3>
+<div class="issandboxmode"><p>returns whether we are in <a href="/guide/sandbox">SandBox Mode</a> as determined by the user profile record.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if the user profile has a property of <code>sandbox=true</code></p></div>
+</div>
+</li>
+<li><h3 id="isSect">isSect(sect)</h3>
+<div class="issect"><p>Tests whether we are in a particular section.  Used to hide/show HTML sections within the HTML code.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sect – {string} – </code>
+<p>The section value to comapre <code>sSect</code> with.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>The <code>sSect</code> value matches <code>sect</code></p></div>
+</div>
+</li>
+<li><h3 id="maskReduce">maskReduce(oObjs, sMask, sFld)</h3>
+<div class="maskreduce"><p>returns a new object set where every object in the set matches the pattern produced with <code>sMask</code></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oObjs – {Object[]} – </code>
+<p>input object set</p></li>
+<li><code ng:non-bindable="">sMask – {string} – </code>
+<p>String used as input to <code>new RegExp(sMask,'i')</code> to obtain the test pattern</p></li>
+<li><code ng:non-bindable="">sFld – {string} – </code>
+<p>Field in each <code>oObjs</code> object to test with the pattern</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>reduced object set</p></div>
+</div>
+</li>
+<li><h3 id="setBootExit">setBootExit(bootexit)</h3>
+<div class="setbootexit"><p>The <code>oBootExit</code> is called during the <strong>Triangular</strong> application startup.
+It allows modification of the system environment before too much happens.  It is used by
+<code>TriBoot.js</code> to use a special ajax API to determine whether the Datastore is primed.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">bootexit – {Function} – </code>
+<p>value to store in <code>oBootExit</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setCRUD">setCRUD(crud)</h3>
+<div class="setcrud"><p>Sets the <code>servSess</code> <code>oCRUD</code> pointer to crud so the <code>servSess</code> has access to the common <code>servCRUD</code> routines.  Required to prevent circular definitions.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">crud – {Object} – </code>
+<p>Pointer to <code>servCRUD</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setConfirmMsg">setConfirmMsg(msg)</h3>
+<div class="setconfirmmsg"><p>Works in partnership with <a href="/api/tri.servSess#getConfirmMsg">getConfirmMsg</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">msg – {string} – </code>
+<p>value to store in <code>sConfirmMsg</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setDevpMode">setDevpMode()</h3>
+<div class="setdevpmode"><p>Sets the value of <code>bDevpMode</code> to <code>true</code></p>
+
+<p>Marks the system as 'development mode' which may activate certain functions such as detailed logging.</p></div>
+</li>
+<li><h3 id="setErrorMsg">setErrorMsg(msg)</h3>
+<div class="seterrormsg"><p>Works in partnership with <a href="/api/tri.servSess#getErrorMsg">getErrorMsg</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">msg – {string} – </code>
+<p>value to store in <code>sErrorMsg</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setLogonExit">setLogonExit(logonexit)</h3>
+<div class="setlogonexit"><p>The <code>oLogonExit</code> is called at the completion of a user `login' if it is not null.
+It is used for example to add menu options based on a User's profile information.
+See Chq.js in the Apps application as an example of how this facility is used.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">logonexit – {Function} – </code>
+<p>value to store in <code>oLogonExit</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setOptMenuItems">setOptMenuItems(list)</h3>
+<div class="setoptmenuitems"><p>This function is used to insert Menu items into into the left side menu.  Each {Object} in list
+is formatted with the following properties:</p>
+
+<p><span style='display:inline-block; width:100px; margin-left:10px;'><code>menu</code></span><i>(string} Text to show in menu</i><br>
+ <span style='display:inline-block; width:100px; margin-left:10px;'><code>func</code></span><i>{Function} name to call</i><br>
+ <span style='display:inline-block; width:100px; margin-left:10px;'><code>role</code></span><i>{string} role string</i></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">list – {Object[]} – </code>
+<p>An array objcts used to insert Menu items into the left side menu.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setSect">setSect(sect, tabdef)</h3>
+<div class="setsect"><p>This is the primary means by which the HTML page sections are made visible or hidden.</p>
+
+<p>If <code>tabdef</code> is not null a new dynamic <a href="/api/tri.object.Table">Table</a> is created and assigned to the internal variable <code>oTAB</code>.</p>
+
+<p>If hooks to the <a href="/api/tri.controller:ctrlCommList">List Controller</a> and <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> exist the <code>oTAB</code> property within them is nullified.</p>
+
+<p>See the related methods <a href="/api/tri.servSess#getSect">getSect</a> and <a href="/api/tri.servSess#isSect">isSect</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sect – {string} – </code>
+<p>The section name in the HTML file that should be made active.</p></li>
+<li><code ng:non-bindable="">tabdef – {Object} – </code>
+<p>The <a href="/guide/table">Static Table</a> object or null that should be made the 'current' <code>Table</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setSession">setSession(bSess, oP)</h3>
+<div class="setsession"><p>Sets <code>bSession</code> to <code>bSess</code> and <code>oProf</code> to <code>oP</code>.  Used to signal whether a session exists or not.</p>
+
+<p>If the <code>oLogonExit</code> is non-null it is called with <code>oP</code> as the parameter.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">bSess – {Boolean} – </code>
+<p>Whether session is valid (login OK) or invalid (logoff or timeout)</p></li>
+<li><code ng:non-bindable="">oP – {Object} – </code>
+<p>User profile data (properties array from the server for the logged in User)</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setStatus">setStatus(stat)</h3>
+<div class="setstatus"><p>Sets the internal <code>oStat</code> to <code>status</code></p>
+
+<p>This is used during system initialization to synchronize the localStorage cache and the server
+database.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">stat – {Object} – </code>
+<p>Status value(s) to set</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setTitle">setTitle(title)</h3>
+<div class="settitle"><p>Sets the value of <code>sTitle</code> to <code>title</code>. Refer also to <a href="/api/tri.servSess#getTitle">servSess.getTitle</a></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">title – {string} – </code>
+<p>The value to set</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setToken">setToken(tok)</h3>
+<div class="settoken"><p>Sets the internal <code>sToken</code> value used to validate all server requests. See <a href="/guide/server-inter">Server Interface</a>
+for more details on this value.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">tok – {string} – </code>
+<p>The token value returned from the <code>login</code> function</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setUser">setUser(sDbl, user, user2)</h3>
+<div class="setuser"><p>Sets the current user(s) names environment</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sDbl – {string} – </code>
+<p>'DOUBLE' or 'SINGLE' depending on login mode. See <a href="/api/tri.servGAE#login">login</a>.</p></li>
+<li><code ng:non-bindable="">user – {string} – </code>
+<p>Userid sets <code>sUser</code></p></li>
+<li><code ng:non-bindable="">user2 – {string} – </code>
+<p>Userid2 or null sets <code>sUser2</code></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="useTable">useTable(scope, sTable, sel)</h3>
+<div class="usetable"><p>This function is pivitol in setting the Triangular current <code>Table</code> context. It sets the internal
+<code>oTAB</code> variable.</p>
+
+<p>If <code>sTable</code> is null the <code>scope</code> parameter value is assigned to the existing <code>oTAB</code> object <code>scope</code> value.</p>
+
+<p>If <code>sTable</code> is not null an attempt to match <code>sTable</code> against the <code>recTitle</code> value in the  array of registered tables (see <a href="/api/tri.servREG#registerTable">registerTable</a>) is made.
+if sucessful a new dynamic <a href="/api/tri.object.Table">Table</a> object is created from the static copy and assigned to <code>oTAB</code>.  If a match is not made <code>oTAB</code> is set to null.</p>
+
+<p>If <code>oTAB</code> at this point is null a return of <code>null</code> is made.</p>
+
+<p>The <code>scope.oSel</code> value is updated with the existing <code>oTAB.props.oSel</code> value.  A copy is preserved in the static copy so that settings and values are remembered
+across <code>Table</code> changes.</p>
+
+<p>The the <code>oTAB.props.primeList</code> function exists it is called.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>current caller scope</p></li>
+<li><code ng:non-bindable="">sTable – {string} – </code>
+<p>table name (title) to find</p></li>
+<li><code ng:non-bindable="">sel – {Object} – </code>
+<p>previous/default selection (filter) context</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The current dynamic <a href="/api/tri.object.Table">Table</a> object.</p></div>
+</div>
+</li>
+<li><h3 id="xfrAdminApp">xfrAdminApp(sApp, sTbls)</h3>
+<div class="xfradminapp"><p>Transfers to the <code>Admin.htm</code> page.  It leaves a breadcrumb so that the Admin.htm application
+can return.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sApp – {string} – </code>
+<p>Application ID to login under</p></li>
+<li><code ng:non-bindable="">sTbls – {string[]} – </code>
+<p>List of Tables the Adnin App should add to its menu.</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>

@@ -1,0 +1,74 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p><a href="/guide/variants">Node.js Variant</a> Skip this step and go to <a href="/tutorial/step-10">10 MyApp on NodeJS Site</a></p>
+
+<p>Let us assume at this point that <code>MyApp</code> is complete and working.</p>
+
+<p>Theoretically, it could be hosted via an intranet or even globally by making your internal server running this code accessible to the internet.
+This may not be ideal for the following reasons:</p>
+
+<ul>
+<li><p>The industrial strength of the development server provided by Google is questionable.  It is provided as a development tool.</p></li>
+<li><p>Limited to a single machine serving</p></li>
+<li><p>There is no built in data redundancy like that provided with the
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine Site</a>.</p></li>
+</ul>
+
+<p>To move <code>MyApp</code> to the
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine Site</a>.
+the following steps are required</p>
+
+<h3 id="getahrefguidegaesitegaesiteaid">Get <a href="/guide/gaesite">GAE Site</a> ID</h4>
+
+<ol>
+<li><p>If you do not yet have one get a Google Account from <a href=https://accounts.google.com/ServiceLogin target=_blank>Google Account Login</a></p></li>
+<li><p>Logon to your  Google Account using <a href=https://accounts.google.com/ServiceLogin target=_blank>Google Account Login</a></p></li>
+<li><p>Logon to AppEngine from this window.  Use the link <code>https://appengine.google.com/</code></p></li>
+<li><p>If you already have applications they will listed on the screen.</p></li>
+<li><p>Press the <code>Create Application</code> button.</p></li>
+<li><p>Create an <code>Application Identifier:</code> that is acceptable.  This tutorial uses <code>tri-test</code>. Change as appropriate.
+Press the <code>Create Application</code> button.  You will the see <code>Application Registered Successfully</code> meaning the name chosen has
+been registered.</p></li>
+</ol>
+
+<h3 id="insertahrefguidegaesitegaesiteaidintoyourlocalsetup">Insert <a href="/guide/gaesite">GAE Site</a> ID into your local setup</h4>
+
+<p><span style='color:red;'><strong>CAUTION</strong>:</span> The following steps will cause the local server to <strong>trash</strong> your <code>local_db.bin</code> mentioned in <a href="/guide/datastore">Datastore</a>.
+If you have data you care about use the <a href="/guide/waks">WAKS Utility</a> to preserve it now.  You can also rename <code>local_db.bin</code> and
+<code>datastore-indexes-auto.xml</code> with the intent of retrieving the data later by switching back to
+<code>&lt;application&gt;triapps&lt;/application&gt;</code> and using <a href="/guide/waks">WAKS Utility</a> at that time.</p>
+
+<ol>
+<li><p>Use <code>&lt;Ctrl-C&gt;</code> to stop the webserver started in <a href="/tutorial/step-02">Starting the Local WebServer</a></p></li>
+<li><p>Edit <code>appengine-web.xml</code> in <code>x:\tri-devp\war\WEB-INF</code> and change <code>triapps</code> in line <code>&lt;application&gt;triapps&lt;/application&gt;</code>
+to you new <a href="/guide/gaesite">GAE Site</a> ID.  In our example this would be <code>tri-test</code>.</p></li>
+<li><p>As additional security, you can modify the file <code>x:\tri-devp\war\WEB-INF\app-cita\cita.ace</code>
+<br><br>
+In about line <code>16</code> of the <code>cita.ace</code> file change the string value of <code>PasswordObfuscator=</code> to a different value.
+This string is used in converting the password into a numeric token.  A value known only to you makes the cracking
+of the computed token value much more difficult.</p></li>
+<li><p>Restart the  webserver per <a href="/tutorial/step-02">Starting the Local WebServer</a></p></li>
+</ol>
+
+<h3 id="configuringthedatastore">Configuring the Datastore</h4>
+
+<p>At this point the <a href="/guide/datastore">Datastore</a> will be unprimed and will need to be primed as detailed in <a href="/guide/dataprime">Datastore Prime</a>.</p>
+
+<ol>
+<li><p>In the Browser goto URL <code>localhost:8882</code></p></li>
+<li><p>You should see <code>The Triangular Datastore requires priming</code> screen
+<br><br>
+<img class=screen src=/img/needs-prime50.JPG></p></li>
+<li><p>Create the <a href="/guide/user#superuser">SuperUser</a> as instructed.  It is suggested you use a value different from the demo value of <code>super</code>.</p></li>
+<li><p>Login as the <a href="/guide/user#superuser">SuperUser</a> using the credentials from point 3.</p></li>
+<li><p>You will be requested to add <code>Add Application AdminUser</code>. Do this using the procedure already used in
+<a href="/tutorial/step-03#configurethedatastore">Configure the Datastore</a> starting from point 2. There will be no other apps present.</p></li>
+<li><p>Add other <a href="/guide/user">User</a> records as required by <code>MyApp</code> using the <a href="/tutorial/step-03#configurethedatastore">Configure the Datastore point 7</a>.</p></li>
+<li><p>If you have data to add to <code>MyApp</code> do so now using the <a href="/guide/waks">WAKS Utility</a> and  as previously covered in <a href="/tutorial/step-04">Prepare MyApp Data</a>.
+Remember to use the <a href="/guide/user#superuser">SuperUser</a> credentials from point 3.</p></li>
+</ol>
+
+<h3 id="nextstep">Next Step</h4>
+
+<p>You are now ready to proceed to <a href="/tutorial/step-07">07 Retest MyApp</a></p></div>

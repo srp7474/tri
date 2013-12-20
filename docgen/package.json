@@ -1,0 +1,19 @@
+{
+  "name": "Triangular",
+  "version": "0.1.0",
+  "description": "AngularJS Booster",
+  "main": "GruntFile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Triangular",
+    "AngularJS"
+  ],
+  "author": "Steve Pritchard",
+  "license": "GPL",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-ngdocs": "~0.1.6"
+  }
+}

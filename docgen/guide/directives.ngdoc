@@ -1,0 +1,14 @@
+@ngdoc overview
+@name Guide: Directives
+@description
+### Overview
+Directives are the <a target=_blank href="http://angularjs.org/">AngularJS</a> facility that allow for the easy extension of the display capabilities and behavoir of HTML pages.
+
+**Triangular** uses this facility in several places.  The {@link /guide/templates templates} along with the {@link /api/tri.directive:macro macro} facility is the most complex
+use of directives.  The {@link /api/tri.directive:blurEvent blurEvent}, {@link /api/tri.directive:focusClear focusClear} and {@link /api/tri.directive:autotab autotab} directives
+are more simple examples.
+
+
+Nothing in the design of **Triangular** prohibits the addition of custom directives to an application.  The
+`oApp.directive('directive name', function(...) {` format should be used since `oApp` is a global variable in which all directives are registered.
+

@@ -1,0 +1,7 @@
+war\WEB-INF\*.*
+war\web-gems\*.*
+war\app-bbb\*.*
+war\app-cita\*.*
+bats\appcfg.*
+bats\dev_appserver.sh
+bats\run-ws.bat

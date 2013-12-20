@@ -1,0 +1,279 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-deps0.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=defualt>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="Deps.js"></script>
+  <script src="TableDonors.js"></script>
+  <script src="TableEnvelopes.js"></script>
+  <title>Deps:Defined during bootstrap</title>
+  <script>gaTracking();</script>
+</head>
+
+<body id=bodyID>
+                                                                                                   <!-- standard body -->
+  <macro fetch='apps-body.html' alter='##TITLE##/Donation Recording System Login;!SINGLE/SINGLE!SINGLE/DOUBLE;!ctrlCommEdit/ctrlCommEdit!ctrlCommEdit/ctrlDepsEdit'></macro>
+
+  <macro fetch='apps-copyright-notice.html'></macro>                                               <!-- copyright notice -->
+
+<object data='tri/AppsBase.htm?app=Deps' id=apps-templates style='width:0px;height:0px;'></object> <!-- load standard templates -->
+
+<!------- Custom Templates ------!>
+<object type='text/html' id=cust-templates style='width:0px;height:0px;'>
+  <pre class=template id="donor-edit.css">
+    <style type="text/css">
+
+       table#list-deposit td.c0, table#list-deposit th.c0      {width:130px;}
+       table#list-deposit td.c1, table#list-deposit th.c1      {width:260px; }
+       table#list-deposit td.c2, table#list-deposit th.c2      {width:150px; }
+       table#list-deposit td.c3, table#list-deposit th.c3      {width:50px; }
+       table#list-deposit td.c4, table#list-deposit th.c4      {width:50px; }
+       table#list-deposit td.c5, table#list-deposit th.c5      {width:90px; }
+       table#list-deposit td.c6, table#list-deposit th.c6      {width:90px; }
+       table#list-deposit td.c7, table#list-deposit th.c7      {width:90px; }
+       table#list-deposit td.c5                                {text-align:right;}
+       table#list-deposit td.c6                                {text-align:right;}
+       table#list-deposit td.c7                                {text-align:right;}
+
+       table#list-Envelope                                     {width:770px;}
+       table#list-Envelope thead                               {width:770px;}
+       table#list-Envelope td.c0, table#list-Envelope th.c0    {width:150px;}
+       table#list-Envelope td.c1, table#list-Envelope th.c1    {width:170px; }
+       table#list-Envelope td.c2, table#list-Envelope th.c2    {width:250px; }
+       table#list-Envelope td.c3, table#list-Envelope th.c3    {width:200px; }
+       table#list-Envelope td.c4, table#list-Envelope th.c4    {width:100px; }
+       table#list-Envelope td.c4                               {text-align:right;}
+
+
+       div#css-edp div#fld-actions                             {width:530px;  margin-bottom:12px;}
+       div#css-edp div#fld-actions a                           {color:rgb(00,88,159); font-size:90%;}
+       div#css-edp div#fld-amount input                        {width:70px; text-align:right; position:relative; top:-15px;}
+       div#css-edp div#fld-amount label                        {position:relative; top:-15px;}
+       div#css-edp div#fld-amount                              {position:absolute;right:34px;top:85px; float:clear;}
+       div#css-edp div#fld-amount a                            {color:rgb(00,88,159); font-size:80%;}
+       div#css-edp fieldset#fld-code                           {border-width:1px; font-size:90%; width:140px; float:left;}
+       div#css-edp fieldset#fld-code input                     {width:50px;}
+       div#css-edp fieldset#fld-code a                         {color:rgb(00,88,159);}
+       div#css-edp fieldset#fld-tender                         {border-width:1px; font-size:90%; width:342px;}
+       div#css-edp fieldset#fld-tender div#tally-tot           {width:340px; text-align:right; margin-top:10px;}
+       div#css-edp fieldset#fld-tender div#tally-tot input     {width:70px; text-align:right;}
+       div#css-edp fieldset#fld-tender div#tallys              {font-size:90%;}
+       div#css-edp fieldset#fld-tender div.labels              {width:340px; text-align:right; margin-top:5px; margin-bottom:0px;}
+       div#css-edp fieldset#fld-tender div.labels span         {width:48px; text-align:center; display:inline-block;}
+       div#css-edp fieldset#fld-tender div.inputs              {width:340px; text-align:right; margin-top:10px; margin-bottom:5px;}
+       div#css-edp fieldset#fld-tender div.bills               {width:340px; text-align:right; margin-top:0px; margin-bottom:5px;}
+       div#css-edp fieldset#fld-tender div.bills  input.ctr    {width:44px; text-align:right;}
+       div#css-edp fieldset#fld-tender div.tots                {width:340px; text-align:right; margin-top:0px; margin-bottom:5px;}
+       div#css-edp fieldset#fld-tender div.tots input.tot      {width:44px; text-align:right;}
+       div#css-edp fieldset#fld-desigs                         {border-width:1px; font-size:90%;}
+       div#css-edp fieldset#fld-desigs select.justacct         {width:200px;}
+       div#css-edp fieldset#fld-desigs select.bothacct         {width:100px;}
+       div#css-edp fieldset#fld-desigs select.subacct          {width:100px;}
+       div#css-edp fieldset#fld-desigs span.acctcode           {width:40px; display:inline-block; margin-left:20px;}
+       div#css-edp fieldset#fld-desigs input.amt               {width:70px; text-align:right;}
+       div#css-edp div#fld-note                                {float:left; margin-top:5px; margin-left:2px;}
+       div#css-edp div#fld-note input                          {font-size:90%; width:533px;}
+
+       div#editor div#flds-deposit                            {height:700px; width:650px;}
+       div#editor div#flds-deposit   div#name                 {position:relative; left:0px;   top:0px;}
+       div#editor div#flds-deposit   div#Counters             {position:relative; left:400px; top:-50px;}
+       div#editor div#flds-deposit   input#Counters           {width:178px;}
+       div#editor div#flds-deposit   div#Cash                 {position:relative; left:210px; top:-50px;}
+       div#editor div#flds-deposit   div#Cheque               {position:relative; left:371px; top:-100px;}
+       div#editor div#flds-deposit   div#Total                {position:relative; left:512px; top:-150px;}
+       div#editor div#flds-deposit   div#Acct                 {position:relative; left:0px;   top:-200px;}
+       div#editor div#flds-deposit   input#Acct               {width:40px;}
+       div#editor div#flds-deposit   input#Cash               {width:65px; text-align:right;}
+       div#editor div#flds-deposit   input#Cheque             {width:65px; text-align:right;}
+       div#editor div#flds-deposit   input#Total              {width:65px; text-align:right;}
+       div#editor div#flds-deposit   div#Note                 {position:relative; left:0px;   top:-150px;}
+       div#editor div#flds-deposit   input#Note               {width:580px;}
+       div#editor div#flds-deposit   div#Donors               {position:relative; left:0px;   top:-150px; width:695px;}
+       div#editor div#flds-deposit   div#donors  a.adj-rgt    {margin-left:120px; margin-top:-25px;}
+       div#editor div#flds-deposit   div#Code                 {position:relative; left:0px;   top:-200;}
+       div#editor div#flds-deposit   div#Tender               {position:relative; left:150px; top:-250;}
+       div#editor div#flds-deposit   div#Amount               {position:relative; left:300px; top:-300;}
+       div#editor div#flds-deposit   input#Code               {width:50px;}
+       div#editor div#flds-deposit   input#Tender             {width:50px;}
+       div#editor div#flds-deposit   input#Amount             {width:50px; text-align:right;}
+
+       div#editor div#flds-deposit   div#sub-scroll           {padding-left:5px; overflow:scroll; height:200px;}
+       div#editor div#flds-deposit   div#Edit-Donor           {width:675px; position:relative; left:0px; top:-170px; height:280px; margin-right:0px;}
+       div#editor div#flds-deposit   div#Edit-Donor div.name  {margin-right:7px;}
+       div#editor div#flds-deposit   fieldset#Edit-Donor      {width:536px; height:250px; background-color:white;}
+
+       div#editor table#sublist-Donors thead                  {background-color:rgb(240,240,240); font-weight:normal; font-size:90%; color:rgb(151,208,255);text-align:center;  width:575px; position:fixed; margin-top:-150px; margin-left:-40px;}
+       div#editor table#sublist-Donors thead th               {height:15px; border-right:1px solid rgb(250,250,255);}
+       div#editor table#sublist-Donors tr.tr-odd              {background-color:rgb(240,250,255); height:25px;}
+       div#editor table#sublist-Donors tr.tr-even             {background-color:rgb(250,250,255); height:25px;}
+       table#sublist-Donors td.c1, table#sublist-Donors th.c1 {width:80px;}
+       table#sublist-Donors td.c2, table#sublist-Donors th.c2 {width:85px; }
+       table#sublist-Donors td.c3, table#sublist-Donors th.c3 {width:245px; }
+       table#sublist-Donors td.c4, table#sublist-Donors th.c4 {width:80px; }
+       table#sublist-Donors td.c5, table#sublist-Donors th.c5 {width:55px; }
+       table#sublist-Donors td.c6, table#sublist-Donors th.c6 {width:30px; }
+       table#sublist-Donors td.c1 {text-align:center;}
+       table#sublist-Donors td.c2 {text-align:center;}
+       table#sublist-Donors td.c3 {text-align:left;}
+       table#sublist-Donors td.c4 {text-align:right;}
+       table#sublist-Donors td.c5 {text-align:center;}
+       table#sublist-Donors td.c6 {text-align:center;}
+
+    </style>
+  </pre>
+
+  <pre class=template id="note.html">
+    <div id=fld-note>
+      <input type=text ng-model='$MODEL$' placeholder='Special notes on this one donation'>
+    </div>
+  </pre>
+
+  <pre class=template id="actions.html">
+    <div id=fld-actions>
+       <span style='float:left;' class=warn ng-show='oPanel.state.errorMsg!=null'>Error:{{oPanel.state.errorMsg}}</span>
+       <span style='float:right;'>
+          <a href="" id=action-add-donor class=c-action ng-class='isTrue(!oPanel.state.bNoValidate && oSubC.methCanSave(this,$MODOBJ$),"show","hide")' when-active='oSubC.methSave(this,$MODOBJ$);'>{{isTrue(oPanel.sMode=="Add","Add Donotion","Save Changes")}}</a>
+          &nbsp;&nbsp;&nbsp;
+          <a class=c-action ng-click='oSubC.methCancel(this,$MODOBJ$);'>Cancel {{oPanel.sMode}}</a>
+       </span>
+       <span style='float:clear;'>&nbsp;</span>
+    </div>
+  </pre>
+
+  <pre class=template id="editActions.html">
+    <a class='c-action sz-90 adj-rgt' href="" when-active="changeCurrency();">Change to ${{getOtherCurrency()}}</a>
+  </pre>
+
+  <pre class=template id="tender.html">
+    <fieldset id=fld-tender>
+      <legend>Payment</legend>
+      <span class=note>Tender:&nbsp;</span>
+      <input type=radio value='cheque' ng-model='$MODEL$' id=tender-chq ng-change='oSubC.methChangeTender(this,$MODOBJ$)'><label for=tender-chq>Cheque</label>
+      <input type=radio value='cash' ng-model='$MODEL$' id=tender-cash ng-change='oSubC.methChangeTender(this,$MODOBJ$)'><label for=tender-cash>Cash</label>
+      <div ng-show='$MODEL$=="cash"' id=tallys>
+         <div id=tally-tot>
+           <input type=hidden ng-model='$MODOBJ$.tallystr'>
+           <a class=c-action ng-click='oSubC.methResetTally(this,$MODOBJ$)'>Reset&nbsp;</a>
+           <span class=note>{{$MODOBJ$.tallystr}}&nbsp;&nbsp;</span>
+           <span class=note>Tally Total:&nbsp;</span>
+           <input id=tally-tot type=text value='{{oPanel.state["tally-total"]}}' readonly>
+         </div>
+         <div ng-show='isTrue(oPanel.state.showTally)'>
+           <div class=labels>
+             <span class=note>$500</span>
+             <span class=note>$100</span>
+             <span class=note>$50</span>
+             <span class=note>$20</span>
+             <span class=note>$10</span>
+             <span class=note>$5</span>
+             <span class=note>Coin</span>
+           </div>
+           <div class=bills>
+             <input class=ctr type=number ng-model='oPanel.state[500]' min=0 max=100>&nbsp;
+             <input class=ctr type=number ng-model='oPanel.state[100]' min=0 max=100>&nbsp;
+             <input class=ctr type=number ng-model='oPanel.state[50]' min=0 max=100>&nbsp;
+             <input class=ctr type=number ng-model='oPanel.state[20]' min=0 max=100>&nbsp;
+             <input class=ctr type=number ng-model='oPanel.state[10]' min=0 max=100>&nbsp;
+             <input class=ctr type=number ng-model='oPanel.state[5]' min=0 max=100>&nbsp;
+             <input class=ctr type=text focus-clear ng-model='oPanel.state["coin"]'>
+           </div>
+           <div class=tots>
+             <input class=tot type=text readonly value='{{(oPanel.state[500] || 0)*500}}'>&nbsp;
+             <input class=tot type=text readonly value='{{(oPanel.state[100] || 0)*100}}'>&nbsp;
+             <input class=tot type=text readonly value='{{(oPanel.state[50] || 0)*50}}'>&nbsp;
+             <input class=tot type=text readonly value='{{(oPanel.state[20] || 0)*20}}'>&nbsp;
+             <input class=tot type=text readonly value='{{(oPanel.state[10] || 0)*10}}'>&nbsp;
+             <input class=tot type=text readonly value='{{(oPanel.state[5] || 0)*5}}'>&nbsp;
+             <input class=tot type=text readonly value='{{(oPanel.state["coin"] || 0)}}'>
+           </div>
+         </div>
+      </div>
+    </fieldset>
+  </pre>
+
+  <pre class=template id="amount.html">
+    <div id=fld-amount>
+      <!-- grab-focus=inp-grab-focus -->
+      <a class=c-action ng-show='$MODOBJ$.tender=="cash"' ng-click='oSubC.methToggleTally(this,$MODOBJ$)'>{{isTrue(oPanel.state.showTally,'Hide Tally','See Tally')}}&nbsp;</a>
+      <label>$</label>
+      <input id=inp-grab-focus type=text ng-model='$MODEL$' ng-change='oSubC.methAmtChange(this,$MODOBJ$)' focus-clear='oSubC.methAmtFocus(this,$MODOBJ$)' blur-next=setAddFocus(oObj) blur-event='oSubC.methAmtBlur(this,$MODOBJ$)'>
+    </div>
+  </pre>
+
+  <pre class=template id="code.html">
+    <fieldset id=fld-code>
+      <legend>Donor {{$MODOBJ$.code}}</legend>
+      <div>{{$MODOBJ$.donor.name}}</div>
+      <pre>{{$MODOBJ$.donor.address}}</pre>
+      <pre>{{$MODOBJ$.donor.phones}}</pre>
+    </fieldset>
+  </pre>
+
+  <pre class=template id="donors-list.html">
+    <style type="text/css">
+
+      div#donors-list               {position:absolute; left:720px; top:0px; border:1px solid rgb(151,208,255); width:600px;height:850px;}
+      div#donors-list div#scroll    {overflow:scroll;   height:750px;}
+      div#donors-list table         {width:580px;}
+      div#donors-list input#_custmask {width:200px;}
+      div#donors-list table td.c0   {width:30px;}
+      div#donors-list table td.c1   {width:300px; text-align:left;}
+      div#donors-list table td.c2   {width:200px; text-align:left;}
+      div#donors-list table td.c3   {width:100px; text-align:center;}
+    </style>
+    <div id=donors-list ng-show="hasSession() && isSect('CommList') && inEdit()" scope-var='oDonTab = useTable("Donor","oDonSel")'>
+
+      <macro fetch="apps-filter.html" alter='oFil/oDonFil;oTAB/oDonTab;oSel/oDonSel'></macro>
+
+      <div id=scroll>
+        <table id='list-{{oDonTab.props.recTitle}}' class=list-comm cellpadding=0 cellspacing=0>
+          <tbody>
+            <tr ng-repeat='oDonRow in oDonTab.getSelObjs()' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'">
+              <td ng-repeat='oCol in oDonTab.getTableCols("=cust")' class=C{{$index}}>
+                <span ng-switch on=oCol.type>
+                  <span ng-switch-when='action'>
+                     <a class='c-action sz-90' href="" when-active="oCol.method(this,oDonRow,$index);" title={{oCol.title(oDonRow)}}>{{oCol.label}}</a>
+                  </span>
+                  <span ng-switch-default>
+                     {{oCol.getValue(this,oDonRow)}}
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+      <p class=note>Selected {{oDonTab.getSelObjs().length}} {{getTabProp().recName}} record(s) of possible {{oDonTab.getObjs().length}}</p>
+    </div>
+  </pre>
+
+  <pre class=template id="desigs.html">
+    <fieldset id=fld-desigs ng-hide='isTrue(oPanel.state.showTally)'>
+      <legend>Designations</legend>
+      <div ng-show='isTrue(nRow<$MODOBJ$.desigs.length)' ng-repeat='nRow in [0,1,2,3]'>
+        <select ng-class='isTrue(oSubC.methHasSubcodes(this,$MODOBJ$,nRow),"bothacct","justacct")' ng-change='call(oSubC.methHasAcctChange,$MODOBJ$,nRow)' ng-model='$MODEL$[nRow].acct' ng-options='oOpt.value as oOpt.name for oOpt in call(oSubC.methOptions,$MODOBJ$,nRow)'></select>
+        <span ng-show='isTrue(oSubC.methHasSubcodes(this,$MODOBJ$,nRow))'>
+          <select class=subacct ng-model='$MODEL$[nRow].subacct' ng-options='oOpt.value as oOpt.name for oOpt in call(oSubC.methGetSubcodes,$MODOBJ$,nRow)'></select>
+        </span>
+        <span class=acctcode>{{$MODEL$[nRow].acct}}</span></span>$</span>
+        <input id=desig-amt-{{nRow}} class=amt ng-model='$MODEL$[nRow].amt' type=searchText blur-event='oSubC.methDesigAmtBlur(this,$MODOBJ$,nRow)' focus-clear='oSubC.methDesigAmtFocus(this,$MODOBJ$,nRow)'>
+      </div>
+    </fieldset>
+  </pre>
+
+</object>
+</body>
+</html>

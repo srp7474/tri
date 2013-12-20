@@ -1,0 +1,145 @@
+<h1><code ng:non-bindable="">ctrlMenu</code>
+<span class="hint">(controller in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides the menu management infrastructure.</p>
+
+<p>It is also used to handle the User inactivity timeout functionality.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">ctrlMenu($scope, $rootScope, servSess, servREG, servCRUD);</pre>
+<h3 id="Parameters">Parameters</h3>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>The scope of the controller</p></li>
+<li><code ng:non-bindable="">$rootScope – {Object} – </code>
+<p>The system rootScope</p></li>
+<li><code ng:non-bindable="">servSess – {Object} – </code>
+<p>The <a href="/api/tri.servSess">servSess</a> service pointer</p></li>
+<li><code ng:non-bindable="">servREG – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servREG</a> service pointer</p></li>
+<li><code ng:non-bindable="">servCRUD – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servCRUD</a> service pointer</p></li>
+</ul>
+</div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="autoLogoff">autoLogoff()</h3>
+<div class="autologoff"><p>This is called when the <a href="/api/tri.servSess">servSess</a> timeout routines deems that a User has exceeded their idle timeout time.</p>
+
+<p>A <a href="/api/tri.controller:ctrlMenu#logoff">logoff</a> request is issued and the complete window reloaded.</p></div>
+</li>
+<li><h3 id="canChangePassword">canChangePassword()</h3>
+<div class="canchangepassword"><p>Returns whether a 2-person login is in effect.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#canChangePassword">servSess.canChangePassword</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#canChangePassword">servSess.canChangePassword</a></p></div>
+</div>
+</li>
+<li><h3 id="changePassword">changePassword()</h3>
+<div class="changepassword"><p>Activates the <code>Change Password</code> HTML page (called 'NewPassword').</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#setSect">servSess.setSect</a>
+with a section name of 'NewPassword' which performs the activation.</p></div>
+</li>
+<li><h3 id="getActionClass">getActionClass()</h3>
+<div class="getactionclass"><p>This is used to disable the menu functionality when the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active.</p>
+
+<p>If editing 'c-quiet' is returned.
+Otherwise 'c-action' is returned.</p>
+
+<p>This is used by the <a href="/api/tri.directive:whenActive">whenActive directive</a>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'c-action' or 'c-quiet'</p></div>
+</div>
+</li>
+<li><h3 id="getIdleLeft">getIdleLeft()</h3>
+<div class="getidleleft"><p>Returns the number of seconds remaining before an idle timeout.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getIdleLeft">servSess.getIdleLeft</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#getIdleLeft">servSess.getIdleLeft</a></p></div>
+</div>
+</li>
+<li><h3 id="getIdleSecs">getIdleSecs()</h3>
+<div class="getidlesecs"><p>Returns the number of seconds the user has been idle.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getIdleSecs">servSess.getIdleSecs</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#getIdleSecs">servSess.getIdleSecs</a></p></div>
+</div>
+</li>
+<li><h3 id="getOptMenuItems">getOptMenuItems()</h3>
+<div class="getoptmenuitems"><p>Returns whether a 2-person login is in effect.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getOptMenuItems">servSess.getOptMenuItems</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#getOptMenuItems">servSess.getOptMenuItems</a></p></div>
+</div>
+</li>
+<li><h3 id="getTables">getTables()</h3>
+<div class="gettables"><p>Returns a subset of the Table objects returned by <a href="/api/tri.servREG#getTables">servREG#getTables</a> that are accessible given the role
+of the logged in User.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>A collection of static <a href="/api/tri.object.Table">Table</a> objects.</p></div>
+</div>
+</li>
+<li><h3 id="getUser">getUser()</h3>
+<div class="getuser"><p>If there is not an active session <code>null</code> is returned.</p>
+
+<p>Otherwise the evaluation of 'for ' || <a href="/api/tri.servSess#getUser">servSess.getUser()</a> is returned.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>the computed value.</p></div>
+</div>
+</li>
+<li><h3 id="getUser2">getUser2()</h3>
+<div class="getuser2"><p>If there is not an active session <code>null</code> is returned.</p>
+
+<p>If there is not a double login '' is returned.</p>
+
+<p>Otherwise the evaluation of '/' || <a href="/api/tri.servSess#getUser2">servSess.getUser2()</a> is returned.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>the computed value.</p></div>
+</div>
+</li>
+<li><h3 id="hasSession">hasSession()</h3>
+<div class="hassession"><p>Returns whether a valid session exists (ie. there is a logged in user).</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#hasSession">servSess.hasSession</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasSession">servSess.hasSession</a></p></div>
+</div>
+</li>
+<li><h3 id="isAdmin">isAdmin()</h3>
+<div class="isadmin"><p>Returns whether a 2-person login is in effect.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#isAdmin">servSess.isAdmin</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#isAdmin">servSess.isAdmin</a></p></div>
+</div>
+</li>
+<li><h3 id="listService">listService(tabdef)</h3>
+<div class="listservice"><p>Activates the <a href="/api/tri.controller:ctrlCommList">List Controller</a> called 'CommList' for a table defined by <code>tabdef</code>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#setSect">servSess.setSect</a>
+with a section name of 'CommList' which performs the activation.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">tabdef – {Object} – </code>
+<p>The <a href="/guide/table">Static Table</a> object</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="logoff">logoff()</h3>
+<div class="logoff"><p>This is called when the standard 'logoff' menu action is clicked or <code>autoLogoff</code> is called.</p>
+
+<p>The system is set to the context where no user is logged on.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'c-action' or 'c-quiet'</p></div>
+</div>
+</li>
+<li><h3 id="pulse">pulse()</h3>
+<div class="pulse"><p>This is called when the <a href="/api/tri.servSess">servSess</a> timer passes an elapsed second mark.</p>
+
+<p>A <code>$scope.#digest()</code> function call is made which triggers an update of the HTML page, possibly just updating the seconds till timeout counter.</p></div>
+</li>
+</ul>
+</div>
+</div>

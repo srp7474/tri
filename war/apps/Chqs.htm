@@ -1,0 +1,209 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-chqs0.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=default>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="Chqs.js"></script>
+  <title>Chqs:Defined during bootstrap</title>
+  <script>gaTracking();</script>
+</head>
+
+<body id=bodyID>
+  <macro fetch='apps-body.html' alter='##TITLE##/CIT Cheque Writer System Login'></macro>                 <!-- standard body -->
+
+  <macro fetch='apps-copyright-notice.html'></macro>                                                      <!-- copyright notice -->
+
+  <object data='tri/AppsBase.htm?app=Chqs' id=apps-templates style='width:0px;height:0px;'></object>      <!-- load standard templates -->
+
+<!---------------------------- Custom CSS ----------------------------------!>
+<style type="text/css">
+  /* Note: this could be in a separate .css file if preferred */
+  /* cheque lister */
+  table#list-cheque                                      {width:980px;}
+  table#list-cheque thead                                {width:980px;}
+  table#list-cheque td.c0, table#list-cheque th.c0       {width:120px;}
+  table#list-cheque td.c1, table#list-cheque th.c1       {width:80px; }
+  table#list-cheque td.c2, table#list-cheque th.c2       {width:120px; }
+  table#list-cheque td.c3, table#list-cheque th.c3       {width:100px; }
+  table#list-cheque td.c4, table#list-cheque th.c4       {width:430px; }
+  table#list-cheque td.c5, table#list-cheque th.c5       {width:50px; }
+  table#list-cheque td.c6, table#list-cheque th.c6       {width:80px; }
+  table#list-cheque td.c3                                {text-align:right;}
+  table#list-cheque td.c3 span                           {display:inline-block; margin-right:5px;}
+  table#list-cheque td.c4                                {text-align:left;}
+  table#list-cheque td.c4 span                           {display:inline-block; margin-left:5px;}
+
+  fieldset.list-comm input#_custmask                     {width:200px;}
+
+  /* COA lister */
+  table#list-COA                                         {width:800px;}
+  table#list-COA thead                                   {width:800px;}
+  table#list-COA td.c0, table#list-COA th.c0             {width:120px;}
+  table#list-COA td.c1, table#list-COA th.c1             {width:100px; }
+  table#list-COA td.c2, table#list-COA th.c2             {width:480px; }
+  table#list-COA td.c3, table#list-COA th.c3             {width:100px; }
+  table#list-COA td.c2                                   {text-align:left;}
+  table#list-COA td.c2 span                              {display:inline-block; margin-left:5px;}
+
+  /* COA Repeats */
+  table#list-REPS                                        {width:900px;}
+  table#list-REPS thead                                  {width:900px;}
+  table#list-REPS td.c0, table#list-REPS th.c0           {width:120px;}
+  table#list-REPS td.c1, table#list-REPS th.c1           {width:260px; }
+  table#list-REPS td.c2, table#list-REPS th.c2           {width:120px; }
+  table#list-REPS td.c3, table#list-REPS th.c3           {width:250px; }
+  table#list-REPS td.c4, table#list-REPS th.c4           {width:250px; }
+  table#list-REPS td.c1                                  {text-align:left;}
+  table#list-REPS td.c1 span                             {display:inline-block; margin-left:5px;}
+  table#list-REPS td.c3                                  {text-align:left;}
+  table#list-REPS td.c3 span                             {display:inline-block; margin-left:5px;}
+  table#list-REPS td.c4                                  {text-align:left;}
+  table#list-REPS td.c4 span                             {display:inline-block; margin-left:5px;}
+
+
+  /* Supplier lister */
+  table#list-Suppliers                                   {width:980px;}
+  table#list-Suppliers thead                             {width:980px;}
+  table#list-Suppliers td.c0, table#list-Suppliers th.c0 {width:100px;}
+  table#list-Suppliers td.c1, table#list-Suppliers th.c1 {width:300px; }
+  table#list-Suppliers td.c2, table#list-Suppliers th.c2 {width:580px; }
+  table#list-Suppliers td.c1                             {text-align:left;}
+  table#list-Suppliers td.c1 span                        {display:inline-block; margin-left:5px;}
+  table#list-Suppliers td.c2                             {text-align:left;}
+  table#list-Suppliers td.c2 span                        {display:inline-block; margin-left:5px;}
+
+
+
+  /* cheque editor */
+  div#editor                                             {width:900px;}
+  /*div#chq-edit {background-color:rgb(250,250,255); border:1px solid rgb(151,208,255);}*/
+  div#chq-edit                                           {margin-left:10px;}
+  div#chq-hdr                                            {width:900px;}
+  div#chq-edit input#chqno                               {width:40px;}
+  div#chq-edit input#date                                {width:130px;}
+  div#chq-edit input#amt                                 {width:60px; text-align:right;}
+  div#chq-edit input#payee                               {width:270px;}
+  div#chq-edit input#note                                {width:702px;}
+  div#chq-edit input[readonly]                           {background-color:rgb(240,240,240);}
+  table#chq-lines thead                                  {color:rgb(206,206,206); font-size:70%; text-align:center;}
+  table#chq-lines td.c1 input, table#chq-lines th.c1     {width:36px;}
+  table#chq-lines td.c2 input, table#chq-lines th.c2     {width:200px;}
+  table#chq-lines td.c3 input, table#chq-lines th.c3     {width:60px;}
+  table#chq-lines td.c4 input, table#chq-lines th.c4     {width:60px;}
+  table#chq-lines td.c5 input, table#chq-lines th.c5     {width:60px;}
+  table#chq-lines td.c6 input, table#chq-lines th.c6     {width:150px;}
+  table#chq-lines td.c7 span,  table#chq-lines th.c7     {width:162px;}
+  table#chq-lines td.c8 a,     table#chq-lines th.c8     {width:100px; font-weight:normal;}
+  table#chq-lines td.c1 input                            {text-align:center;}
+  table#chq-lines td.c2 input                            {text-align:left;}
+  table#chq-lines td.c3 input                            {text-align:right;}
+  table#chq-lines td.c4 input                            {text-align:right;}
+  table#chq-lines td.c5 input                            {text-align:right;}
+  table#chq-lines td.c6 input                            {text-align:left;}
+  table#chq-lines td.c7 span                             {text-align:left; font-size:70%; display:inline-block;}
+  table#chq-lines td.c8 a                                {text-align:left; font-size:70%;}
+  div#sup-scroll                                         {overflow:scroll; height:250px; margin-left:485px; width:280px;}
+  div#sup-scroll pre                                     {margin:0px;}
+  div#sup-scroll div.div-odd                             {background-color:rgb(240,250,255);}
+  div#sup-scroll div.div-even                            {background-color:rgb(250,250,255);}
+  div#sup-scroll div.supplier                            {border:1px solid rgb(151,208,255);}
+  div#coa-scroll                                         {overflow:scroll; height:120px; margin-left:0px;}
+  div#coa-scroll pre                                     {margin:0px;}
+  div#coa-scroll div.div-odd                             {background-color:rgb(240,250,255);}
+  div#coa-scroll div.div-even                            {background-color:rgb(250,250,255);}
+  div#coa-scroll div.supplier                            {border:1px solid rgb(151,208,255);}
+</style>
+
+<!------- Custom Templates ------!>
+<object type='text/html' id=cust-templates style='width:0px;height:0px;'>
+  <pre class=template id="xxdonor-edit.css">
+     <!-- here we are -->
+  </pre>
+
+  <pre class=template id="chequeEdit.html">
+
+     <div id=chq-hdr>
+       <span class=note>ChqNo:</span><input type=text id=chqno  ng-readonly='bLocked' ng-model=oObj.chqno  value={{oObj.chqno}}>
+       &nbsp;&nbsp;&nbsp;
+       <span class=note>M-D-Y:</span><input type=date id=date   ng-readonly='bLocked' ng-model=oObj.date   value={{oObj.date}}>
+       &nbsp;&nbsp;&nbsp;
+       <span class=note>Amount:</span><input type=text id=amt   ng-readonly='true'    value={{getChqAmt(oObj)|number:2}}>
+       &nbsp;&nbsp;&nbsp;
+       <span class=note>Payee:</span><input type=text autocomplete=bShowSups next=insertLine(oObj) id=payee  ng-readonly='bLocked' ng-model=oObj.payee value={{oObj.payee}} placeholder='enter payee name (will auto-complete)'>
+       <!-- Supplier sub-list -->
+       <div id=sup-scroll ng-show='bShowSups'>
+         <div class=supplier ng-repeat='oSup in getCurSups(this,oObj.payee)' ng-class-even="'div-even'" ng-class-odd="'div-odd'" ng-click='supClick(this,oSup)'>
+           {{oSup.name}}<br>
+           <pre>{{getAddrLine(oSup)}}</pre>
+         </div>
+       </div>
+     </div>
+     <br><br>
+     <span class=note>&nbsp;&nbsp;Note:</span><input type=text id=note  ng-model=oObj.note  value={{oObj.note}}>
+     <br><br>
+     <table id=chq-lines>
+       <thead>
+         <tr>
+           <th class=c1>HST</th>
+           <th class=c2>Code</th>
+           <th class=c3>Amt</th>
+           <th class=c4>HSTAmt</th>
+           <th class=c5>TotAmt</th>
+           <th class=c6>Reference</th>
+           <th class=c7>Msg/Ref-Date(M-D-Y)</th>
+           <th class=c8><a class=c-action href=# ng-click="addNewLine(oObj);">add line</a></th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr ng-repeat='oLine in oObj.lines' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'" style='vertical-align:top;'>
+           <td class=c1><input id=HST-{{$index}}  type=checkbox ng-hide='oLine.code == "HST"' ng-model='oLine.HST' ng-true-value='H' ng-false-value=''></td>
+           <td class=c2>
+             <input id=code-{{$index}} type=text value={{oLine.code}} ng-model=oLine.code next=setAmtFocus(oObj,oLine) placeholder='enter account code (will auto-complete)' autocomplete=oLine.bShowCode>
+             <div id=coa-scroll ng-show='oLine.bShowCode'>
+               <div class=coa ng-repeat='oCoa in getCurCOAs(this,oObj,oLine)' ng-class-even="'div-even'" ng-class-odd="'div-odd'">
+                 <pre ng-click='codeClick(this,oObj,oLine,oCoa)'>{{oCoa.code}} {{oCoa.name}}</pre>
+               </div>
+             </div>
+           </td>
+           <td class=c3><input id=RawAmt-{{$index}} amount=oLine next=setRefFocus(oObj,oLine) ng-model='oLine.amt' type=text  ng-readonly='oLine.code == "HST"'></td>
+           <td class=c4><input id=HSTAmt-{{$index}} type=text readonly value={{getHSTAmt(oLine)|number:2}}></td>
+           <td class=c5><input id=TotAmt-{{$index}} type=text readonly value={{getAmtTot(oLine)|number:2}}></td>
+           <td class=c6><input id=RefFld-{{$index}} ng-model='oLine.ref' autotab=setSaveFocus(oObj,oLine)></td>
+           <td class='c7'>
+             <span class=warn ng-show='oLine.amtErr != null'>{{oLine.amtErr}}</span>
+             <span ng-show='oLine.amtErr == null'>
+               <input type=date id=refdate-{{$index}} ng-model=oLine.refdate  value={{getRefDate(oLine)}}>
+             </span>
+           </td>
+           <td class=c8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href=# ng-click='removeLine(oObj,oLine)' class=c-action>remove</a></td>
+         </tr>
+         <tr ng-show='getTotHST(oObj) > 0'>
+           <td class=c1></td>
+           <td class=c2><input id=code-hst type=text value='Total HST' readonly></td>
+           <td class=c3><input id=HstAmt-hst value={{getTotAmt(oObj)|number:2}} type=text readonly></td>
+           <td class=c4><input id=HstAmt-hst value={{getTotHST(oObj)|number:2}} type=text readonly></td>
+           <td class=c5><input id=TotAmt-hst value={{getTotTot(oObj)|number:2}} type=text readonly></td>
+           <td class=c6></td>
+           <td class='c7 warn'></td>
+           <td class=c8></td?
+         </tr>
+       </tbody>
+     </table>
+  </pre>
+
+</object>
+</body>
+</html>
+

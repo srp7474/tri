@@ -1,0 +1,26 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>A logged on user can be running in <strong>Sandbox Mode</strong>.  It means that any updates the user makes to table entries are not sent to the server
+but merely reflected into the localStorage cache.  The result is that it looks like the updates are done until the localStorage cache is cleared.</p>
+
+<p>The default title shows when the User is running in <strong>Sandbox Mode</strong>.</p>
+
+<p>This is used by the demo site to handle the <strong>guest</strong> UserID.</p>
+
+<h3 id="activatingsandboxmode">Activating Sandbox Mode</h4>
+
+<p>Whenever a property <code>sandbox=true</code> is added to a <a href="/guide/user">User Record</a> that user will run in <strong>Sandbox Mode</strong>.
+This is checked in the TRI.js code at the appropriate update points and alternate execution paths taken.</p>
+
+<p>As a security measure to thwart any potential hackers the server also monitors this setting and disables any updates for such a user.</p>
+
+<h3 id="manuallyclearingthecache">Manually Clearing the Cache</h4>
+
+<p>The cached updates are stored in the localStorage cache.  In the Chrome browser this can be viewed in debug mode (&LT;ctrl+shift+J>)
+under the <strong>Resources>Local Storage>http://..</strong> view.</p>
+
+<p>The entry of the form <code>app-table-</code><strong>cache</strong> are the records for table <code>table</code> for app id <code>app</code>.  This can be deleted to remove the updates.
+For good measure the entries of the form  <strong>status-</strong><code>app-app</code> which stores the status for app id can also be deleted.</p></div>

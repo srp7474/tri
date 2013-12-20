@@ -1,0 +1,46 @@
+<h1><code ng:non-bindable="">hookMsgListener</code>
+<span class="hint">(method in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>This function is called during the initialzation of tri.js and performs several
+housekeeping functions:</p>
+
+<ul>
+<li>Builds a windows message event listener with processing routines for standard messages and
+the abilty to recognize and schedule custom message event handlers</li>
+<li>Using this message event handler it loads and caches the templates from 'AppsBase.htm'.</li>
+<li>Using this message event handler it loads and caches the templates in the custom .HTM files tagged in section "cust-templates"</li>
+</ul>
+
+<p>The messages are routed according to a prefix which is a string separated by a <code>:</code>.  The handler is expected to be in
+<code>oGBL.msgHandler[sPref]</code> where <code>sPref</code> is the string before the <code>:</code>.</p>
+
+<p>If no prefix exists they are assumed to be system messages which are processed in the following manner.</p>
+
+<style type="text/css">
+  code.srp1-label {display:inline-block; width:150px; margin-left:-150px;}
+  span.srp1-propdef {display:inline-block; margin-left:150px;}
+</style>
+
+<p><span class=srp1-propdef><code class=srp1-label>sys-close-page</code>The
+<a href="/guide/form-page-design">Form Page</a> has closed.
+</span>
+ <br><br>
+<span class=srp1-propdef><code class=srp1-label>sys-get-template</code><a href="/guide/form-page-design">Form Page</a>
+  requires a template. This message will be received in the primary page.
+  Responds with <code>sys-put-template</code> which will be seen in secondary page. The message includes the requested template.
+</span>
+<br><br>
+<span class=srp1-propdef><code class=srp1-label>sys-put-template</code>See in the secondary page.
+  Stores the template sent into <code>$templateCache</code> where it is picked up by <code>ng-include</code> in "forms-panel.html" in <code>AppsBase.htm</code>.
+</span>
+<br><br>
+<span class=srp1-propdef><code class=srp1-label>sys-templates</code>Obsolete code.
+  Replaced <code>sys-get-template/sys-put-template</code> and by <code>ng-include</code> in "forms-panel.html" in <code>AppsBase.htm</code>.
+</span>
+<br><br></p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">hookMsgListener();</pre>
+</div>
+</div>

@@ -1,0 +1,96 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p>To download these files use the <b>&LT;Right-Click>Save link as ...</b>action on the link.</p>
+
+<p><strong>Note</strong>: The development environment in which these were used and configured was running Java 6.  This is the
+reason for the use of the <strong>GAE SDK 1.8.1.1</strong>, the last version which supported Java 6.</p>
+
+<p>Plans are made to upgrade to Java 7 at some point.  Since the use by <strong>Trianglar</strong> of the facilities of the Google App Engine is bare bones this TODO item has not
+made it to the top of the list.</p>
+
+<p>If you opt for the <a href="/guide/variants">Node.js Variant</a> you do not need Java or the <strong>GAE SDK 1.8.1.1</strong> to be installed on your machine.  You will need
+<code>Node.js</code>
+installed and in the default path on your development machine.</p>
+
+<div>
+<table>
+   <thead><tr><th>Link</th><th>Usage</th></tr></thead>
+   <tr>
+     <td class=c1>
+        <a class=c-action  href=/zips/tri-devp-pkg.bin><b>Triangular</b> Complete Development Package</a>
+     </td>
+     <td class=c2><b>Triangular</b> Complete Development Package.  The detailed installation instructions are at <a href="/tutorial">Tutorial</a>. It will also require the **GAE SDK** which can
+      be obtained with the links below.
+      <br><br>
+      To run the development package you:
+      <ol>
+        <li>Start command line processor and set CWD to <code>devp-unzip-drive:folder\bats</code></li>
+        <li>Run <code>run-ws</code> <a href="/guide/variants">GAE Variant</a>      </li>
+        <li>Run <code>run-tri</code> <a href="/guide/variants">Node.js Variant</a>  </li>
+      </ol>
+      This package contains both the <a href="/guide/variants">Node.JS & GAE Variants</a>
+      <br><br>
+      To use the <a href="/guide/variants">GAE Variant</a> you must have Java 6 or more runtime installed on your development machine.
+      <br><br>
+      To use the <a href="/guide/variants">Node.JS Variant</a> you must have <code>Node.js</code> installed and in the default path on your development machine.
+      <br><br>
+      <code>Node.js</code> can be downloaded from <a target=_blank href=http://nodejs.org/>Node.js Install</a>
+      <br><br>
+      Included in this package are <code>waks.js</code> and <code>tri-server.js</code>, the Javascript implementations for the <a href="/guide/waks">WAKS Utility</a> and
+      the <a href="/guide/node-server">Node.js Tri-WebServer</a>
+    </td>
+   </tr>
+   <tr>
+     <td class=c1>
+        <a class=c-action  href=/zips/tri-devp-pkg-node.bin><b>Triangular</b> Node.js Only Development Package</a>
+     </td>
+     <td class=c2><b>Triangular</b> Node.js Only Development Package.  The detailed installation instructions are at <a href="/tutorial">Tutorial</a>.
+      <br><br>
+      To run the development package you:
+      <ol>
+        <li>Start command line processor and set CWD to <code>devp-unzip-drive:folder\bats</code></li>
+        <li>Run <code>run-tri</code></li>
+      </ol>
+      This assumes you have <code>Node.js</code> installed and in the default path on your development machine.
+      <br><br>
+      <code>Node.js</code> can be downloaded from <a target=_blank href=http://nodejs.org/>Node.js Install</a>
+      <br><br>
+      Included in this package are <code>waks.js</code> and <code>tri-server.js</code>, the Javascript implementations for the <a href="/guide/waks">WAKS Utility</a> and
+      the <a href="/guide/node-server">Node.js Tri-WebServer</a>
+     </td>
+   </tr>
+   <tr>
+     <td class=c1>
+        <a class=c-action href=/zips/gae-local-stripped-1.zip type='application/zip'>Stripped down GAE SDK 1.8.1.1 Part 1 of 2</a>
+     </td>
+     <td class=c2>This is a stripped down version of
+        <a href="https://code.google.com/p/googleappengine/downloads/detail?name=appengine-java-sdk-1.8.1.1.zip&can=1&q=java">Original GAE SDK 1.8.1.1</a>
+     complete enough to run the <b>Triangular</b> Development Package. In order for it to fit in this sites 32m limitation it is broken into 2 parts.
+     You will need to download both parts.
+     </td>
+   </tr>
+   <tr>
+     <td class=c1>
+        <a class=c-action href=/zips/gae-local-stripped-2.zip type='application/zip'>Stripped down GAE SDK 1.8.1.1 Part 2 of 2</a>
+     </td>
+     <td class=c2>Once part 2 is downloaded, unzip them into the same base folder location and point the <code>%TRI_GAE%</code> pointer to the folder
+     <code>sdk-unzip-drive:folder\gae-stripped</code>.
+     </td>
+   </tr>
+   <tr>
+     <td class=c1>
+        <a href="https://code.google.com/p/googleappengine/downloads/detail?name=appengine-java-sdk-1.8.1.1.zip&can=1&q=java">Original GAE SDK 1.8.1.1</a>
+        <br><br>
+        <b>Just click this link</b>
+     </td>
+     <td class=c2>
+     If you prefer you may download the original complete version, unzip and point the <code>%TRI_GAE%</code> pointer to the folder at which the <code>lib</code>
+     folder is found.
+     That is: <code>sdk-unzip-drive:folder\appengine-java-sdk-1.8.1.1</code>.
+     </td>
+   </tr>
+
+
+</table>
+</div></div>

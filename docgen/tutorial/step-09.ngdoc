@@ -1,0 +1,37 @@
+@ngdoc overview
+@name Tutorial: 09 MyApp on GAE Site
+@description
+
+{@link /guide/variants Node.js Variant} Skip this step and go to {@link /tutorial/step-10 10 MyApp on NodeJS Site}
+
+At this point we are making sure the plumbing is working.  Nothing in `MyApp` should be affected by the move to the {@link /guide/gaesite GAE Site}.
+
+### Validate `MyApp`
+
+1. If `MyApp` is intended to be the default app then access it with a browser with URL `tri-test.appspot.com`
+
+2. If `MyApp` is not intended to be the default app then access it with a browser with URL `tri-test.appspot.com/apps/MyApp.htm`
+
+3. If the demo apps are removed from the `x:\tri-devp\war\apps` folder then their use will cause `Error 404` to be displayed on the browser.
+
+4. If they are not removed the signon page for each app will still be presented but it will be impossible to login.
+
+5. If the intention was to keep them then each will need an {@link /guide/user#adminuser AdminUser} and {@link /guide/user User(s)} to be created as well
+as the loading of the {@link /guide/datastore Datastore} using the {@link /guide/waks WAKS Utility} with the data provided in the
+`x:\tri-devp\data` folder.
+
+### Validate `Google Analytics`
+
+1. Exercise the `MyApp` on the {@link /guide/gaesite GAE Site}.
+
+2. Within 30 minutes logon to your
+<a target=_blank href=https://accounts.google.com/ServiceLogin?service=analytics>Google Analytics Account</a>.
+
+3. Navigate to your tracker code reporting page.
+
+3. Use the `Real-Time` left side tab to check out the expected recording of the analytics events.
+
+4. Overnight this will be recorded in the historic records which are viewed under the `Audience` and `Behavoir` tabs.
+
+
+

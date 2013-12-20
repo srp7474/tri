@@ -1,0 +1,144 @@
+@ngdoc overview
+@name Overview
+@description
+
+## Introduction
+The software industry reports that the **Dependency Injection** design of <a target=_blank href="http://angularjs.org/">AngularJS</a> has resulted in considerable
+progress in reducing the programming workload for creating well behaved WEB pages.
+Furthermore, the **directive** capability of <a target=_blank href="http://angularjs.org/">AngularJS</a> is a powerful tool for extending the HTML capabilities used to create behavoirs
+and render these same WEB pages.
+
+For a typical CRUD application written in <a target=_blank href="http://angularjs.org/">AngularJS</a>, **Triangular** can boost the coding productivity even more by factoring
+out the common elements of such an application
+into a reusable infrastructure.  The application specifics are provided by a simple javascript definition {@link /guide/appname-js AppName.js File}
+and an HTML file {@link /guide/appname-html AppName.html File}.  Much of these two components is either boilerplate code or code that
+has easy adapted patterns.
+
+**Triangular** derives its name from the fact that 3 components are required in the **Triangular** infrastructure:
+
+1. The <a target=_blank href="http://angularjs.org/">AngularJS</a> codebase
+2. The **Triangular** codebase
+3. The application specific codebase
+
+For simple applications junior level programmers should be able to follow the patterns and make the required changes
+with the help of this documentation.
+
+The {@link /apps/hello-app Hello App} demonstration was written with about 250 lines of straight forward code which you can try by clicking on the link.
+
+## Problem Domain
+
+The typical CRUD application  (<b>C</b>reate/<b>R</b>ead/<b>U</b>pdate/<b>D</b>elete of records) requires the following capabilities:
+
+* A User login capability
+* A Menu of actions based on the login profile
+* A filtered List capability to summarize selected records
+* An Edit capability to create a new record or update a record selected from the list
+* A Delete capability to remove a selected record
+* A set of views that display/print the records according to the authorization of the User
+* A datastore to persist the records.
+
+While essentially a single-page app, since the application HTML component uses the <a target=_blank href="http://angularjs.org/">AngularJS</a> capabilities extensively
+the infrastructure readily supports:
+
+* multiple related tables per application
+* multiple views of each table
+* pages that use multiple related tables (See Deps application)
+
+While a level of security is provided by the server, since the bulk of the work is performed in the browser, there is a limit
+to how secure the application is.  That is, a bright person intent on thwarting the security could perhaps be able to access
+data beyond the role based restrictions.  The provided server does prevent updates to the user profiles used to control
+these roles.  Furthermore, if necessary, the server could be extended to filter out the data sent to the client based
+on role based criteria. With this in mind it is perhaps best to use other technologies for applications requiring a high level of
+security such as banking applications.
+
+Since the browser contains a working copy of the entire database, applications that deal in millions as opposed to
+thousands of records are probably not candidates for this methodology.  This limitation could be relaxed if the application
+was able to work with a subset of the data and the server was extended to add a filtering capability.
+
+## Architecture
+
+The overall architecture could be described as thin server/fat client since the application business logic is hosted in the browser
+and the server merely provides persistance and authentication.
+
+
+#### The Server
+The {@link /guide/server-inter server} provides the following services:
+
+* Application Login
+* Autheticated AJAX services
+* Key based JSON object retrieval and update
+
+The two servers provided with **Triangular** are designed and ready to run.  The first runs in the {@link /guide/gaesite Google App Engine} environment.
+The second, `tri-server.js` runs in the
+{@link /guide/nodesite Node.js} envronment. Others such as a PHP based one could be modeled after the `tri-server.js` implementation.
+
+#### The Client
+The client consists of several interconnected components running inside a browser:
+
+* The `<a target=_blank href="http://angularjs.org/">AngularJS</a>` codebase
+* The `tri.js` and other **Triangular** support code
+* The application specific javascript and HTML code
+
+The localStorage service provided by HTML5 compliant browsers is used extensively to cache the server datastore.
+This design reduces bandwidth requirements and significantly improves system responsiveness.  The infrastructure provides
+dirty data detection to maintain the synchronization of the cache and the server datastore.
+
+For data display based pages the browser post message functionality is used to pass data from the main application page to
+the secondary pages.  This design overcomes the cross-domain restrictions of modern browsers while simplifying the cache management
+algorithms by
+maintaining a current cache only in the main page.
+
+By default User inactivity is detected and a User signed off after 5 minutes.  These parameters are easily customized on a user by user basis
+or changed for the entire system.
+
+## Usage
+The application developer
+adds the 2 component files, namely {@link /guide/appname-html AppName.html File} and {@link /guide/appname-js AppName.js File}, configures and optionally populates the server and the application is ready to run.
+
+If special reporting formats is required two more files are added following the guidelines detailed in {@link /guide/form-page-design Form Page Design}
+
+
+## History
+I have always been a proponent of schema driven applications.  That is, the business logic for each field should be
+closely tied to a single definition giving the field's location, format and constraints.
+If practiced the following benefits should be realized:
+
+* The contents and meaning of a field is easily understood
+* The application maintenance burden is reduced
+
+Over the years I have written applications using the following methodoligies and attempted to apply
+this schema driven approach to that methodology:
+
+* Velocity - an early HTML templating scheme
+* A handcrafted HTML parser and data driven templating scheme
+* JSPs and JQuery
+* Extended JSPs and JQuery
+* Drupal & Joomla
+
+While there was limited success, several weaknesses of the methodologies were exposed by these attempts.  In part they can be
+summarized as:
+
+* All required knowledge of multiple languages (beyond HTML and CSS)
+* The splitting of the processing between the server and client complicated the design and especially the debugging of applications
+* The multiple layers used to render the HTML became difficult to formulate and debug (especially Drupal)
+* Creating user friendly interfaces was a major chore
+
+I heard about <a target=_blank href="http://angularjs.org/">AngularJS</a> and it seemed to have the potential to address these weaknesses.
+After writing several applications using <a target=_blank href="http://angularjs.org/">AngularJS</a> I am
+pleased to report that for the applications within the problem domain defined above
+<a target=_blank href="http://angularjs.org/">AngularJS</a> has made great strides in eliminating the weaknesses just enumerated above.
+
+In order to learn <a target=_blank href="http://angularjs.org/">AngularJS</a> I began work on 3 CRUD applications simultaneously.
+I found I repeatedly had to retrofit improvements from one app into
+the others.  Obviously there had to be a better way.
+
+I realized that the flexibility of Javascript meant that I could define schemas using it's flexible language and
+drive the applications from these definitions.  Thus **Triangular** was conceived.
+The idea of dynamic tables found in Drupal and Jooma is also appealing.
+However, while possible, the effort to go this extra step was deferred in the present implementation of **Triangular**.
+
+**Triangular** takes the common elements from the CRUD app and moves them into a reusable infrastructure.
+Design efforts were expended to maximize the customization capabilities of this reusable infrastructure.
+The application data specfics are defined in a table that references application specific methods.
+
+

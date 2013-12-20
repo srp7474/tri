@@ -1,0 +1,59 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p><a href="/guide/variants">GAE Variant</a> Skip this step</p>
+
+<p>Let us assume at this point that <code>MyApp</code> is complete and working.</p>
+
+<p>Theoretically, it could be hosted via an intranet or even globally by making your internal server running this code accessible to the internet.
+This may not be ideal for the following reasons:</p>
+
+<ul>
+<li><p>Limited to a single machine serving</p></li>
+<li><p>There is no built in data redundancy like that provided with the Node.js hosting sites</p></li>
+</ul>
+
+<p>To move <code>MyApp</code> to the
+<a target_blank href='http://www.nodejitsu.com'>Node Jitsu Site</a>.
+the following steps are required.  It will be necessary to adjust this if you choose a hosting different site.</p>
+
+<h3 id="getahrefguidenodesitenodejssiteaid">Get <a href="/guide/nodesite">NodeJS Site</a> ID</h4>
+
+<ol>
+<li><p>If you do not yet have one get a <a target_blank href='http://www.nodejitsu.com>Node Jitsu Account</a></p></li>
+<li><p>Logon to your <a target_blank href='http://www.nodejitsu.com>Node Jitsu Account</a></p></li>
+</ol>
+
+<h3 id="uploadtoahrefguidenodesitenodejssitea">Upload to <a href="/guide/nodesite">NodeJS Site</a></h4>
+
+<ol>
+<li><p>Update def-app.htm to reflect the default application you wish to use if none is specified.</p></li>
+<li><p>Set CWD to in the<code>X:\tri-devp\war</code> folder.</p></li>
+<li><p>Follow the instructions at
+<a target_blank href='http://www.nodejitsu.com/documentation/jitsu/'>Node Jitsu CLI</a> which uses the <code>Jitsu</code> command to
+upload the website.  When asked your startup code is <code>js/tri-server.js</code>  This by default will use port 80 and
+will use <code>def-app.htm</code> as the first page which will redirct to the default application.</p></li>
+</ol>
+
+<h3 id="validatemyapp">Validate <code>MyApp</code></h4>
+
+<p>At this point we are making sure the plumbing is working.  Nothing in <code>MyApp</code> should be affected by the move to the <a href="/guide/nodesite">NodeJS Site</a>
+including the <a href="/guide/datastore-node">Datastore NodeJS</a> because it is part of the upload.</p>
+
+<ol>
+<li><p>If <code>MyApp</code> is intended to be the default app then access it with a browser with URL <code>http://tri-demo.nodejitsu.com/</code></p></li>
+<li><p>If <code>MyApp</code> is not intended to be the default app then access it with a browser with URL <code>http://tri-demo.nodejitsu.com/apps/MyApp.htm</code></p></li>
+<li><p>If the demo apps are removed from the <code>x:\tri-devp\apps</code> folder then their use will cause <code>Error 404</code> to be displayed on the browser.</p></li>
+<li><p>If they are not removed the signon page for each app will still be presented and you will be able to login.</p></li>
+</ol>
+
+<h3 id="validategoogleanalytics">Validate <code>Google Analytics</code></h4>
+
+<ol>
+<li><p>Exercise the <code>MyApp</code> on the <a href="/guide/nodesite">NodeJS Site</a>.</p></li>
+<li><p>Within 30 minutes logon to your
+<a target=_blank href=https://accounts.google.com/ServiceLogin?service=analytics>Google Analytics Account</a>.</p></li>
+<li><p>Navigate to your tracker code reporting page.</p></li>
+<li><p>Use the <code>Real-Time</code> left side tab to check out the expected recording of the analytics events.</p></li>
+<li><p>Overnight this will be recorded in the historic records which are viewed under the <code>Audience</code> and <code>Behavoir</code> tabs.</p></li>
+</ol></div>

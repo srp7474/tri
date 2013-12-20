@@ -1,0 +1,1 @@
+{"tag":1,"name":"2013-06-30.ES1.CND.dp1","counter1":"srp","counter2":"srp","cash":"0.00","cheque":"0.00","currency":"CND","donors":[],"dummy":null}

@@ -1,0 +1,87 @@
+@ngdoc overview
+@name Tutorial: 02 Validate Environment
+@description
+
+### Starting the Local WebServer {@link /guide/variants GAE Variant}
+
+This description is relevant for Windows systems. For alternate platforms the `run-ws.bat` will have to be ported to that platforms equivalent script.
+
+1. Start a command line window and make the CWD  `x:\tri-devp\bats` as defined in {@link /tutorial/step-01#developmentpackagepreparation Development Package Preparation}
+
+2. Enter `run-ws`. This should start the webserver on port 8882.  There will be some messages to confirm this like:
+<br><br>
+`INFO: Server default is running at http://localhost:8882/`<br>
+'...'<br>
+`INFO: Dev App Server is now running`
+
+1. To modify the port change the statement that begins `set start_parms=--port=8882 ...` to whatever port you wish to use.
+<br><br>
+You will need to change the `waks.bat` utility also in order to use {@link /guide/waks WAKS Utility}
+
+2. Use `<Ctrl-C>` to stop the webserver
+
+### Starting the Local WebServer {@link /guide/variants Node.js Variant}
+
+This description is relevant for Windows systems. For alternate platforms the `run-tri.bat` will have to be ported to that platforms equivalent script.
+
+1. Start a command line window and make the CWD  `x:\tri-devp\bats` as defined in {@link /tutorial/step-01#developmentpackagepreparation Development Package Preparation}
+
+2. Enter `run-tri`. This should start the webserver on port 8888.  There will be some messages to confirm this like:
+<br><br>
+`starting tri-server`<br>
+`tri-server listening for q{CR}`<br>
+`scanDB starting ./TRI-DB`<br>
+`scanDB completed`<br>
+`Http Tri-Server alive at http://localhost:8888/`<br>
+
+1. To modify the port change the statement that begins `node js\tri-server.js -port 8888 ...` to whatever port you wish to use.
+<br><br>
+You will need to change the `waks.bat` utility also in order to use {@link /guide/waks WAKS Utility}
+
+2. Use `q`  or `<Ctrl-C>` to stop the webserver
+
+3. Use `db`  to see the {@link /guide/datastore-node Datastore Directory}
+
+
+### Connecting to the Local WebServer
+
+1. Start your **Chrome** Browser (see {@link /apps/browser Browser Support}) and
+ goto URL `localhost:8882` ({@link /guide/variants GAE Variant}) or `localhost:8888` ({@link /guide/variants Node.js Variant})
+<br><br>
+Vary this if the previous step 3 modified the port.
+
+2. The window should appear
+   <br><br>
+   <img class=screen src=/img/hello-app50.JPG>
+
+3. Modify the URL from `Hello.htm` to `Chqs.htm` and you will see the `CIT Cheque Writer System Login` page
+
+4. Modify the URL from `Chqs.htm`  to `Deps.htm` and you will see the `Donation Recording System Login` page
+
+5. All these applications function as on the {@link http://tri-demo.appspot.com/apps/Hello.htm Tri-Demo Site Hello App} with similar data.
+
+6. The difference is that now you can login as the {@link /guide/user#superuser Superuser}   To do so
+goto link {@link http://localhost:8882/apps/tri/TriBoot.htm Local SuperUser Login}. You should see
+   <br><br>
+   <img class=screen src=/img/super-user-login50.JPG>
+
+7.  To login as  {@link /guide/user#superuser SuperUser} use UserName `super` and Password `super`. You should see
+   <br><br>
+   <img class=screen src=/img/super-page50.JPG>
+
+8. To login as the {@link /guide/user#adminuserr AdminUser} click on a particular link under the `User Admin` column at the foot of the page.  Try the `msgs` app.
+   You should see
+   <br><br>
+   <img class=screen src=/img/admin-user-login50.JPG>
+
+9. To login as  {@link /guide/user#adminuser AdminUser} use UserName `admin` and Password `admin`
+   You should see
+   <br><br>
+   <img class=screen src=/img/admin-page50.JPG>
+
+10. This can be repeated for the other apps.  The login fields UserName `admin` and Password `admin` apply there also.
+
+### Next Step
+
+Proceed to {@link /tutorial/step-03 03  Add MyApp Files}
+

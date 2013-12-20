@@ -1,0 +1,352 @@
+<h1><code ng:non-bindable="">ctrlCommEdit</code>
+<span class="hint">(controller in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides the edit infrastructure to edit a <a href="/guide/data">Data Object</a> using the <a href="/api/tri.object.Table">Table</a> object
+to derive the fields (columns) to edit.  The standard edit controller functionality includes:</p>
+
+<ul>
+<li>Listing and population of fields (columns) to edit using the static <a href="/api/tri.object.Table">Table</a> definition</li>
+<li>Various column types to allow custom edit behavoir</li>
+<li>Sub-edit mode to allow a record to have a sub-object (See Deps.js Apps)</li>
+<li>Standard create/remove/update actions for members of a 'property' type column</li>
+<li>Automatic change detection and Save/Cancel handling to avoid losing changes</li>
+<li>Standard and custom validation cycles are automatically run and invalid data disables the 'Save' mechanism.</li>
+<li>Intermediate changes may optionally be quietly persisted</li>
+<li>Referenced tables can be used to provide clickable values</li>
+<li>Referenced tables can be used to provide auto-completion of values</li>
+</ul>
+
+<p>Many of the function calls are forwarded to an appropriate service and where applicable the return value is returned.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">ctrlCommEdit($scope, servSess, servREC, servCRUD);</pre>
+<h3 id="Parameters">Parameters</h3>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>The scope of the controller</p></li>
+<li><code ng:non-bindable="">servSess – {Object} – </code>
+<p>The <a href="/api/tri.servSess">servSess</a> service pointer</p></li>
+<li><code ng:non-bindable="">servREC – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servREC</a> service pointer</p></li>
+<li><code ng:non-bindable="">servCRUD – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servCRUD</a> service pointer</p></li>
+</ul>
+</div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="addProperty">addProperty(oCol)</h3>
+<div class="addproperty"><p>Creates a new property key for a 'property' type column.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#addProperty">servREC.addProperty</a> with the addition of parameter current table <code>props</code> object.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p><code>undefined</code></p></div>
+</div>
+</li>
+<li><h3 id="call">call(fn, oObj, x)</h3>
+<div class="call"><p><b>deprecated</b></p>
+
+<p>This is an early version of accessing custom functions from the .HTML files.  This has been replaced for the most part
+by adding more flexibility to the column definitions and automatically linking functions contained in those definitions into the current $scope.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">fn – {Function} – </code>
+<p>function to call</p></li>
+<li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> passed to <code>fn</code></p></li>
+<li><code ng:non-bindable="">x – {Object} – </code>
+<p>a custom object passed to `fn'</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="editCancel">editCancel()</h3>
+<div class="editcancel"><p>Forwards a User initiated 'cancel' request.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#editCancel">servCRUD.editCancel</a>.</p></div>
+</li>
+<li><h3 id="editSave">editSave()</h3>
+<div class="editsave"><p>Forwards a User initiated 'save' request.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#editSave">servCRUD.editSave</a>.</p></div>
+</li>
+<li><h3 id="getColClass">getColClass(ix, oCol)</h3>
+<div class="getcolclass"><p>Used to provide a series of class types 'C1', 'C2', ... 'Cn' based on whether a column is shown in the list.</p>
+
+<p>This value is typically used with ng-class and then referenced in the .CSS style sheets.</p>
+
+<p>This provides a convenient way to format HTML table columns (<code>&lt;TD&gt;</code>) and their header (<code>&lt;TH&gt;</code>).</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ix – {number} – </code>
+<p>index of column</p></li>
+<li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getDirtyClass">getDirtyClass()</h3>
+<div class="getdirtyclass"><p>This returns either 'c-quiet' or 'c-action'.  It is used to enable/disable links used by the edit controller.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#getDirtyClass">servCRUD.getDirtyClass</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>value returned by <a href="/api/tri.servCRUD#getDirtyClass">servCRUD.getDirtyClass</a></p></div>
+</div>
+</li>
+<li><h3 id="getDirtyMsg">getDirtyMsg()</h3>
+<div class="getdirtymsg"><p>This returns the type of 'Save' message that should be displayed.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#getDirtyMsg">servCRUD.getDirtyMsg</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>value returned by <a href="/api/tri.servCRUD#getDirtyMsg">servCRUD.getDirtyMsg</a></p></div>
+</div>
+</li>
+<li><h3 id="getEditType">getEditType()</h3>
+<div class="getedittype"><p>Returns the mode of the editor ("Edit" or 'Create').</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#getEditType">servCRUD.getEditType</a> and and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{String}</code>
+– <p>value returned by <a href="/api/tri.servCRUD#getEditType">servCRUD.getEditType</a></p></div>
+</div>
+</li>
+<li><h3 id="getMethods">getMethods(oCol)</h3>
+<div class="getmethods"><p>An array of method objects used to insert into onclick attributes of dynamically built link elements.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getMethods">servREC.getMethods</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>the collection of method objects returned by <a href="/api/tri.servREC#getMethods">servREC.getMethods</a></p></div>
+</div>
+</li>
+<li><h3 id="getModFld">getModFld(oCol)</h3>
+<div class="getmodfld"><p>This returns the model name for a given column.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getModFld">servREC.getModFld</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>value returned by <a href="/api/tri.servREC#getModFld">servREC.getModFld</a></p></div>
+</div>
+</li>
+<li><h3 id="getOptions">getOptions(oCol)</h3>
+<div class="getoptions"><p>This returns an array of objects suitable for injection into a 'select' element</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getOptions">servREC.getOptions</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>value returned by <a href="/api/tri.servREC#getOptions">servREC.getOptions</a></p></div>
+</div>
+</li>
+<li><h3 id="getProperties">getProperties(oCol)</h3>
+<div class="getproperties"><p>This returns an array of key/value pairs for a column of type 'property'</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getProperties">servREC.getProperties</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>value returned by <a href="/api/tri.servREC#getProperties">servREC.getProperties</a></p></div>
+</div>
+</li>
+<li><h3 id="getSubCols">getSubCols(schema, sType)</h3>
+<div class="getsubcols"><p>Returns the array of <a href="/api/tri.object.Col">Col</a>  that belong to <code>oSchema.base</code> and match <code>sType</code>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getSubCols">servREC.getSubCols</a> with the addition of parameter <code>$scope</code> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">schema – {Object} – </code>
+<p>The related sub-schema to use.</p></li>
+<li><code ng:non-bindable="">sType – {string} – </code>
+<p>the column type to extract</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>the collection of <a href="/api/tri.object.Col">Col</a> objects returned by <a href="/api/tri.servREC#getSubCols">servREC.getSubCols</a></p></div>
+</div>
+</li>
+<li><h3 id="getSubRows">getSubRows(oObj, oSchema)</h3>
+<div class="getsubrows"><p>Returns the array of <a href="/guide/data">Data Object</a> rows within <code>oObj</code> that belong to <code>oSchema.base</code>.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getSubRows">servREC.getSubRows</a> with the addition of parameter <code>$scope</code> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> containing the rows.</p></li>
+<li><code ng:non-bindable="">oSchema – {Object} – </code>
+<p>The related sub-schema to use.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>value returned by <a href="/api/tri.servREC#getSubRows">servREC.getSubRows</a></p></div>
+</div>
+</li>
+<li><h3 id="getTabProp">getTabProp()</h3>
+<div class="gettabprop"><p>This returns the properties <code>props</code> object of current dynamic dynamic <a href="/api/tri.object.Table">Table</a> object.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#getTabProp">servCRUD.getTabProp</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>Properties object of current (oTAB) object. oTAB is set to null.</p></div>
+</div>
+</li>
+<li><h3 id="getTableCols">getTableCols(type)</h3>
+<div class="gettablecols"><p>This returns an array of <a href="/api/tri.object.Col">Col</a> objects whose <code>type</code> column match 'type'</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#getTableCols">servREC.getTableCols</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">type – {string} – </code>
+<p>The column type to retrieve</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>value returned by <a href="/api/tri.servREC#getTableCols">servREC.getTableCols</a></p></div>
+</div>
+</li>
+<li><h3 id="getTrimOpt">getTrimOpt(oCol)</h3>
+<div class="gettrimopt"><p>Used to enable/disable the trimming of input fields.  This can be used to override the
+automatic trimming that <a href="http://angularjs.org/">AngularJS</a> performs on text input fields.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'true' or 'false' depending on whether <code>oCol</code> contains the property <code>trim</code>.</p></div>
+</div>
+</li>
+<li><h3 id="hasEditError">hasEditError()</h3>
+<div class="hasediterror"><p>Returns whether an edit error message exists.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>whether <a href="/api/tri.controller:ctrlCommEdit#sEditErr">sEditErr</a> is null (<code>false</code>) else <code>true</code></p></div>
+</div>
+</li>
+<li><h3 id="hasSession">hasSession()</h3>
+<div class="hassession"><p>Returns whether a valid session exists. ie. The User is properly logged in and validated.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#hasSession">servSess.hasSession</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasSession">servSess.hasSession</a></p></div>
+</div>
+</li>
+<li><h3 id="inDlgEdit">inDlgEdit()</h3>
+<div class="indlgedit"><p>Returns whether the system edit controller is active and in Dialog mode.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#inDlgEdit">servCRUD.inDlgEdit</a> and and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if edit controller is active and in Dialog mode</p></div>
+</div>
+</li>
+<li><h3 id="inEdit">inEdit()</h3>
+<div class="inedit"><p>Returns whether the system edit controller is active.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servCRUD#inEdit">servCRUD.inEdit</a> and and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if edit controller is active</p></div>
+</div>
+</li>
+<li><h3 id="isReadOnly">isReadOnly(oCol)</h3>
+<div class="isreadonly"><p>Used to mark an <code>&lt;input&gt;</code> control as 'readonly' and prevent updates to that field.</p>
+
+<p>If <code>oCol.type</code> is 'virt' 'true' is returned</p>
+
+<p>If <code>oCol.readonly</code> evaluates to <code>true</code> 'true' is returned</p>
+
+<p>Otherwise 'false' is returned</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'true' or 'false' depending on whether <code>oCol</code> is deemed 'readonly'</p></div>
+</div>
+</li>
+<li><h3 id="isSect">isSect(sect)</h3>
+<div class="issect"><p>Returns whether <code>sect</code> section matches the current section.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#isSect">servSess.isSect</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sect – {string} – </code>
+<p>value to match against</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#isSect">servSess.isSect</a></p></div>
+</div>
+</li>
+<li><h3 id="isSelect">isSelect(oCol)</h3>
+<div class="isselect"><p>Used to provide <code>&lt;select&gt;</code> controls with potential values computed from a related `Table'</p>
+
+<p>If <code>oCol.oneof</code> exists 'true' is returned</p>
+
+<p>Otherwise 'false' is returned</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'true' or 'false' depending on whether <code>oCol</code> contains 'oneOf'</p></div>
+</div>
+</li>
+<li><h3 id="isVirt">isVirt(oCol)</h3>
+<div class="isvirt"><p>Returns whether a column contains a computed value or is marked as type 'virt'.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> if <code>oCol.type</code> == 'virt' else <code>false</code></p></div>
+</div>
+</li>
+<li><h3 id="removeProperty">removeProperty(oCol)</h3>
+<div class="removeproperty"><p>Removes a property key from a 'property' type column.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#removeProperty">servREC.removeProperty</a> with the addition of parameter current table <code>props</code> object.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p><code>undefined</code></p></div>
+</div>
+</li>
+<li><h3 id="showListCol">showListCol(oCol)</h3>
+<div class="showlistcol"><p>This is used in the sub-edit mode sub-list functionality.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servREC#showListCol">servREC.showListCol</a> and the {Boolean} result returned as a {string}.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p><a href="/api/tri.object.Col">Col</a> object to test</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>'true' if column should be shown else 'false'</p></div>
+</div>
+</li>
+<li><h3 id="useTable">useTable(table, sel)</h3>
+<div class="usetable"><p>This sets a new <code>Table</code> context for the edit controller while in sub-edit mode.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#useTable">servSess.useTable</a> with the insertion of the <code>$scope</code> variable and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">table – {Object} – </code>
+<p>table name (title) to find</p></li>
+<li><code ng:non-bindable="">sel – {string} – </code>
+<p>previous/default selection (filter) context</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#useTable">servSess.useTable</a></p></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="member property"><h2 id="Properties">Properties</h2>
+<ul class="properties"><li><h3 id="oObj">oObj</h3>
+<div class="oobj"><p>Value holding pointer to <a href="/guide/data">Data Object</a> being edited.  Allows the <a href="http://angularjs.org/">AngularJS</a> ng-model statement bi-directional access to the
+column data values</p></div>
+</li>
+<li><h3 id="oPanel">oPanel</h3>
+<div class="opanel"><p>Value holding pointer to the sub-object of <a href="/guide/data">Data Object</a> being edited.  Allows the <a href="http://angularjs.org/">AngularJS</a> ng-model statement bi-directional access to the
+column data values of the sub-object.  Refer to Deps.js as an example.</p></div>
+</li>
+<li><h3 id="sEditErr">sEditErr</h3>
+<div class="sediterr"><p>Holds the text of any error condition that may have been detected during the validation cycle.</p></div>
+</li>
+</ul>
+</div>
+</div>

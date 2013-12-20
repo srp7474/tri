@@ -1,0 +1,69 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The Datastore needs to be primed.  This involves creating the <a href="/guide/user#superuser">SuperUser ID</a>.
+Internally it also involves creating a control record used to manage the  Datastore.</p>
+
+<p>The <strong>Triangular</strong> development package comes with a preinstalled Datastore that does not need priming.  If you wish to start with an empty Datastore</p>
+
+<p><strong><a href="/guide/variants">GAE Variant</a> Only</strong></p>
+
+<ol>
+<li>Stop the webserver</li>
+<li>delete files <code>local_db.bin</code> and <code>datastore-indexes-auto.xml</code> in directory <code>war\WEB-INF\appengine-generated</code></li>
+<li>Restart the webserver</li>
+</ol>
+
+<p>When you first load your application to the production Google App Engine environment the Datastore will need to be primed.  Also the Datastore Viewer
+on the production site can be used to delete the control record and all data.  This will also trigger a Datastore prime operation.</p>
+
+<p><strong><a href="/guide/variants">Node.js Variant</a> Only</strong></p>
+
+<ol>
+<li>Stop the webserver</li>
+<li>delete folder <code>TRI-DB</code> in the root node.js folder.</li>
+<li>Restart the webserver</li>
+</ol>
+
+<p>If you do not ship your <code>TRI-DB</code> datastructure to the production Node.js server the Datastore will need to be primed.  If you delete the <code>$super</code> record
+it will also need to be primed and the <code>$user</code> passwords reset.  The data however will persist and be available once the <code>$user</code> records are re-established.
+Refer to <a href="/guide/datastore-node">Datastore NodeJS</a> for more details.</p>
+
+<h3 id="invokingtheprimingoperation">Invoking the Priming Operation.</h4>
+
+<p>The standard <code>war\WEB-INF\web.xml</code> is configured to run <code>web/tri/Prime.htm</code>.  The page checks if the Datastore is primed.  If so it transitions
+to the page defined in <code>getStartPage</code> in AppsConfig.js.  If not it transitions to <code>apps/tri/TriBoot.htm</code></p>
+
+<p>To see the actual prime page, use  <a ng-click=appLoader($event); href=http://localhost:8882/apps/tri/Prime.htm?jam=true>Prime.htm actual</a>
+(<a href="/guide/variants">GAE Variant</a>) or
+<a ng-click=appLoader($event); href=http://localhost:8888/apps/tri/Prime.htm?jam=true>Prime.htm actual</a> (<a href="/guide/variants">Node.js Variant</a>)</p>
+
+<h3 id="triboothtm">TriBoot.htm</h4>
+
+<p>The URL <a ng-click=appLoader($event); href=http://localhost:8882/apps/tri/TriBoot.htm>TriBoot.htm GAE Variant</a> or
+<a ng-click=appLoader($event); href=http://localhost:8888/apps/tri/TriBoot.htm>TriBoot.htm Node.js Variant</a>
+ is an application that checks for the status of the Datastore.
+Normally it is automatically invoked but pressing the above URL will invoke it.</p>
+
+<p>If the status is not primed a page similar to following is shown:<br>
+<img class=screen src=img/needs-prime50.JPG><br></p>
+
+<p>If the status is primed a page similar to following requesting a <a href="/guide/user#superuser">SuperUser</a> login is shown:<br>
+<img class=screen src=img/super-user-login50.JPG><br></p>
+
+<h3 id="superuserlogin">SuperUser Login</h4>
+
+<p>Once a <a href="/guide/user#superuser">SuperUser</a> login has been performed
+a page similar to following requesting the addition of <a href="/guide/user#superuser">AdminUser</a>s is shown:<br>
+<img class=screen src=img/add-admin-user50.JPG><br></p>
+
+<h3 id="loadingdataintothedatastore">Loading Data into the Datastore</h4>
+
+<p>The <a href="/guide/waks">WAKS Utility</a> is used to load data into the Datastore.  It is found in the <code>/bats</code> folder of the <a href="/guide/devp-pkg">Development Package</a>.</p>
+
+<p>Most likely you will need to build it from other sources.
+The input should be serialized JSON Array of JSON Objects for <a href="/guide/records#supportedrecordtypes">REC Mode</a> or a serialized JSON object
+<a href="/guide/records#supportedrecordtypes">TBL Mode</a>.  The name should be as defined in the <a href="/guide/waks#fileandkeyconversionprotocol">WAKS Utility</a>
+The data provided in the <code>/data</code> folder of the <a href="/guide/devp-pkg">Development Package</a> gives examples of the format and name.</p></div>

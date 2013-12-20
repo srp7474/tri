@@ -1,0 +1,140 @@
+@ngdoc overview
+@name Guide: WAKS Utility
+@description
+
+### Overview
+The **WAKS Utility** is a program provided in the development package to transfer data files between the development computer and a server.
+
+It relies on special commands on the server.  To prevent illegal access the {@link /guide/user#superuser SuperUser} userid and password must be provided with each invocation.
+
+There are two versions of the program.  The first, written in Java, should be used to access the {@link /guide/variants GAE Servers}.  The second,
+written in Node.js, should be used to access the {@link /guide/variants Node.js Servers}.  The reason for this is that in spite of the fact the command set is
+indentical there is an underlying incompatibility in the headers sent automatically be the respective language support code that was not productive to
+troubleshoot.
+
+The `waks.bat` utility determines which version is being accessed and uses the appropriate version of the program.
+
+### Requirements
+
+* Java (at least version 6)  installed on the computer ({@link /guide/variants Java Variant})
+* Node.js  installed on the computer ({@link /guide/variants Node.js Variant})
+* Windows XP or more.  Could use other operating systems if the `WAKS.bat` command file was replaced with an equivalent for the host operating system.
+
+### `WAKS.bat` URLs
+
+Two URLs are coded inside the `WAKS.bat` file.  The first is the local server address used when the `WAKS` command does not contain the **prod** prefix.
+For the {@link /guide/variants Java Variant} this is set to `localhost:8882`.
+For the {@link /guide/variants Node.js Variant} this is set to `localhost:8888`.
+These are set inside server start files `run-ws.bat` and `run-tri.bat` for the {@link /guide/variants Java Variant} and {@link /guide/variants Node.js Variant} respectively.
+If they are changed in the server startup .bat file they should be changed in the `waks.bat` file also.
+
+The second is the production URL set with the `waks site` command.  This also determines which variant of the `WAKS` utility to use.
+This second URL is used when the `WAKS` command contains the **prod** prefix.
+
+### File and Key Conversion Protocol
+Keys on the server use an '*'  as part 1 of the key for User records and the '/' character as a separator between each part.
+
+These are converted into a '$' and '-' respectivly when the Key is used to derive the file name on the local file system.  In addition the
+'.json.txt' string is added to the file name.
+
+These transformations are handled automatically by the `WAKS` utility program.
+
+
+### `WAKS.bat` Options
+
+The very latest options can be seen by typing `WAKS` with no options.
+
+A number of settings needs to be established.  They are stored in environment variables.  Keywords, **set**, **dir** and **site**  are used to trigger
+their respective values.
+
+##### set - sets the app id (cust) and the SuperUser credentials
+<pre>
+   WAKS set cust user password
+</pre>
+
+This establishes the application ID and the SuperUser ID and password.  If your computer is shared set this to nulls afterwards so
+that the SuperUser credentials are not compromised.  An application ID of '$' is used to access the User records.
+
+##### dir - Sets the Work Directory
+<pre>
+  WAKS dir dirname
+</pre>
+
+This establishes the working directory where files are shipped from and fetched into.
+
+##### site - Sets the Production URL
+<pre>
+  WAKS site site-type site-prefix
+</pre>
+
+This establishes the URL used when the **prod** prefix is used in the `fetch` and `ship` access commands.  The `site-type` should be `gae` to access the {@link /guide/gaesite GAE Site}
+and `jitsu` to access the {@link /guide/nodesite NodeJitsu Site}.  If you host at a different site then modify `waks.bat` by adding another `site-type`.
+
+The `site-prefix` is the ID you have registered with the respective hosting site used to connect to your application.
+
+### Fetching files from the server
+
+<pre>
+  WAKS [prod] type name [-r]
+</pre>
+
+where
+
+`prod` if entered causes the production URL to be used.
+
+`type` the file type to fetch.  A % value will cause all types to be fetched.
+
+`name`  the 3rd part of the key.  A value of % will cause all files for `type` to be fetched.
+
+`-r`   If entered causes the local files to be replaced by the copy from the server. <b>Use with caution</b>
+
+### Shipping files onto the server
+
+<pre>
+  WAKS [prod] ship type name [-r]
+</pre>
+
+
+where
+
+`prod` if entered causes the production URL to be used.
+
+`ship` Entered as **ship** to trigger the shipping of files rather than the fetching of files.
+
+`type` the file type to ship.  A % value will cause all types to be shipped.
+
+`name`  the 3rd part of the key.  A value of % will cause all files for `type` to be shipped.
+
+`-r`   If entered causes the local files to be replace the server versions. <b>Use with caution</b>
+
+### Use of % in `type` and `name` parameters
+
+A value of % causes all instances of that qualifier to be processed.
+
+The `type` and `name` values can be partially qualified.  That is, a `name` value of `xxx%` would match
+keys whose 3rd part begins with `xxx`.
+
+If `type` contains a % the name parameter is required but its value is ignored.  This is because the type qualifier
+precedes the name qualifier in the key.
+
+### `WAKS` Internal Options
+
+The very latest internal options can be seen by typing `WAKS` with no options.  The section at the end titled `WAKS Parameters` describes the internal `WAKS` program options
+used by the `waks.bat` utility.
+
+<pre>
+WAKS Parameters:
+-h              Generate this Help Information that you are now reading
+-file dir       Work Directory (mandatory)
+-url url        URL of app server (mandatory)
+-cust cust      Cust part of key (mandatory)
+-user user      SuperUser id (mandatory)
+-pw password    SuperUser password (mandatory)
+-type type      Type part of key (2nd part) (mandatory)
+-name name      Name part of key (3rd part) (mandatory)
+-ship           Ship mode, else read
+-v              Verbose mode
+-r              Replace components. ***DANGEROUS***
+</pre>
+
+These options are generated by the `WAKS.bat` command file are are included here for reference.

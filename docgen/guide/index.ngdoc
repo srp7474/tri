@@ -1,0 +1,90 @@
+@ngdoc overview
+@name Triangular Guide
+@description
+
+Use this Guide to understand the major concepts and building blocks of Triangular.  The index on the left of this page lists
+the various sections of this Guide.
+
+Use the {@link /api API Documentation} to learn about implementation details.
+
+To see how straight forward it is to build your own app we recommend the {@link /tutorial Tutorial}.  You could have a starter app up and running locally
+in a few minutes.  A few more and it would be hosted on the {@link /guide/gaesite GAE Site}.
+
+### Guide Page Roadmap
+<table>
+  <thead>
+    <tr><th>Topic</th><th>Page Links</th></tr>
+  </thead>
+  <tbody>
+     <tr>
+       <td>
+         The two files required to create an application
+       </td>
+       <td>
+         {@link /guide/appname-html appname-html}<br>
+         {@link /guide/appname-js appname-js}
+       </td>
+     </tr>
+     <tr>
+       <td>
+         Details on the definition syntax of the {@link /guide/appname-js appname-js} file.
+       </td>
+       <td>
+        {@link /guide/col Col (static version)}<br>
+        {@link /guide/filter Filter (static version)}<br>
+        {@link /guide/table Table (static version)}<br>
+        {@link /guide/action Action Object}
+       </td>
+     </tr>
+     <tr>
+       <td>
+         Design guidelines
+       </td>
+       <td>
+          {@link /guide/disp-page-design Display Page Design}<br>
+          {@link /guide/form-page-design Form Page Design }<br>
+          {@link /guide/multi-window-apps Multi-Window Apps}
+          {@link /guide/appsconfig AppsConfig js File}
+          {@link /guide/construct Construct Index}
+          {@link /guide/devp-pkg Development Package}
+          {@link /guide/ganalytics Google Analytics}
+          {@link /guide/hints-tech Hints and Techniques}
+       </td>
+     </tr>
+     <tr>
+       <td>
+         Development related topics
+       </td>
+       <td>
+         {@link /guide/server-inter Server Interface}<br>
+         {@link /guide/waks Waks Utility}<br>
+         {@link /guide/userid-rec UserID Recovery}<br>
+         {@link /guide/bootstrap App Boot Strap}<br>
+         {@link /guide/dataprime Datastore Prime}<br>
+         {@link /guide/sandbox Sandbox Mode}<br>
+         {@link /guide/develop Development Environment}
+       </td>
+     </tr>
+     <tr>
+       <td>
+        Details about the data storage algorithms.
+       </td>
+       <td>
+         {@link /guide/datastore Datastore}
+         {@link /guide/data Data Objects}<br>
+         {@link /guide/records Record Storage}<br>
+         {@link /guide/user Users}
+       </td>
+     </tr>
+     <tr>
+       <td>
+         Details about the internal processing of <b>Triangular</b>.
+       </td>
+       <td>
+         {@link /guide/directives Directives}<br>
+         {@link /guide/macros Macros}<br>
+         {@link /guide/templates Templates}
+       </td>
+     </tr>
+  </tbody>
+</table>

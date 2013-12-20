@@ -1,0 +1,29 @@
+@ngdoc overview
+@name Guide: Datastore GAE
+@description
+### Overview
+
+The Datastore is the  facility used to persist the data of the applications.
+
+In the standard **Triangular** development configuration this is provided by the {@link /guide/server-inter Server (GAE version)}, both local and on the
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine</a>.
+
+Locally the data is stored as a file in directory `... \war\WEB-INF\appengine-generated\` as files `local_db.bin` and
+`datastore-indexes-auto.xml`.
+
+On the <a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine Site</a>.
+the BigTable technology is used to store and replicate the data.
+
+Data is stored on the Datastore using the {@link /guide/records#keystructure Key Structure} and using the record format defined by
+{@link /guide/records#recordstructure Record Structure}. It also maintains an internal integer key called the `GekID`.
+
+The administrative records for the {@link /guide/user#superuser SuperUser}, {@link /guide/user#adminuser AdminUsers} and {@link /guide/user Users} are
+also stored there using a special key structure protected by the {@link /guide/server-inter Server} from unauthorized access.
+
+
+Refer to {@link /guide/hints-tech#datastorerelated Datastore Related} to see how to access the raw records.
+
+
+
+
+

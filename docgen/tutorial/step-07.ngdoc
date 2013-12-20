@@ -1,0 +1,26 @@
+@ngdoc overview
+@name Tutorial: 07 Retest MyApp
+@description
+
+{@link /guide/variants Node.js Variant} Skip this step and go to {@link /tutorial/step-10 10 MyApp on NodeJS Site}
+
+At this point we are making sure the plumbing is working.  Nothing in `MyApp` should be affected by the change in `application` that was
+performed in {@link /tutorial/step-06 Get GAE Site ID} point 2.
+
+### Validate `MyApp`
+
+1. If `MyApp` is intended to be the default app then access it with a browser with URL `localhost:8882`
+
+2. If `MyApp` is not intended to be the default app then access it with a browser with URL `localhost:8882/apps/MyApp.htm`
+
+3. If the demo apps are removed from the `x:\tri-devp\war\apps` folder then their use will cause `Error 404` to be displayed on the browser.
+
+4. If they are not removed the signon page for each app will still be presented but it will be impossible to login.
+
+5. If the intention was to keep them then each will need an {@link /guide/user#adminuser AdminUser} and {@link /guide/user User(s)} to be created as well
+as the loading of the {@link /guide/datastore Datastore} using the {@link /guide/waks WAKS Utility} with the data provided in the
+`x:\tri-devp\data` folder.
+
+### Next Step
+
+Once the local test has proved successful we are ready to proceed to the next step, {@link /tutorial/step-08 08 Upload to GAE Site}

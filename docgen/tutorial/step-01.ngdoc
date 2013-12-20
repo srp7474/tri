@@ -1,0 +1,55 @@
+@ngdoc overview
+@name Tutorial: 01 Prepare Environment
+@description
+
+**Note** It is suggested that working directory names do not include spaces as some batch files may encounter difficulties.
+
+### GAE SDK Preparation {@link /guide/variants GAE Variant}
+
+1. Download `Stripped down GAE SDK 1.8.1.1 Part 1 of 2` from {@link /apps/zip-files downloads}  Use the Right-click on the link `Save as...` option
+and place in a holding directory of your choice. The file will be called `gae-local-stripped-1.zip`.
+
+1. Download `Stripped down GAE SDK 1.8.1.1 Part 2 of 2` from {@link /apps/zip-files downloads}  Use the Right-click on the link `Save as...` option
+and place in a holding directory of your choice. The file will be called `gae-local-stripped-2.zip`.
+
+As indicated as an alternative you could, if preferred, download the fullblown `Original GAE SDK 1.8.1.1 1` into
+the holding directory of your choice.
+
+1. Unzip the `GAE-SDK` zips into a directory of your choice that differs from the holding directory.  Maintain the internal directory structure. Let us call it `X:\gae-sdk`
+
+### Set up TRI_GAE Pointer {@link /guide/variants GAE Variant}
+
+2. Point Environment Variable `TRI_GAE` to the unzip location ending in either `gae-stripped` or `appengine-java-sdk-1.8.1.1` (with no trailing '\').
+eg. `x:\gae_sdk\gae_stripped`
+<br><br>
+As an alternative you could set it in `run-ws.bat` described in the next section.
+<br><br>
+This differs for non-windows platforms.
+
+### Development Package Preparation {@link /guide/variants GAE Variant}
+
+1. Download `Triangular Complete Development Package` from {@link /apps/zip-files downloads}  Use the Right-click on the link `Save as...` option
+and place in a holding directory of your choice. The file will be called `tri-devp-pkg.bin`.
+
+2. Rename this from `tri-devp-pkg.bin` to `tri-devp-pkg.zip`  (this avoids the
+'"file" is not commonly downloaded and could be dangerous' message).
+
+1. Unzip this zip into a directory of your choice that differs from the holding directory and differs from the `GAE-SDK` directory.
+  Maintain the internal directory structure. Let us call it `X:\tri-devp`
+
+### Development Package Preparation {@link /guide/variants Node.js Variant}
+
+1. Download `Triangular Node.js Only Development Package` from {@link /apps/zip-files downloads}  Use the Right-click on the link `Save as...` option
+and place in a holding directory of your choice. The file will be called `tri-devp-pkg-node.bin`. **Note** You can also use the
+`Triangular Complete Development Package` as it includes support for the {@link /guide/variants Node.js Variant}.
+
+2. Rename this from `tri-devp-pkg-node.bin` to `tri-devp-pkg-node.zip`  (this avoids the
+'"file" is not commonly downloaded and could be dangerous' message).
+
+1. Unzip this zip into a directory of your choice that differs from the holding directory.
+  Maintain the internal directory structure. Let us call it `X:\tri-devp`
+
+### Next Step
+
+Proceed to {@link /tutorial/step-02 02 Validate Environment}
+

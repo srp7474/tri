@@ -1,0 +1,30 @@
+<html ng-app>
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri-doc.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="css/bootstrap.min.css">
+  <link rel=stylesheet type ="text/css" href="css/font-awesome.css">
+  <link rel=stylesheet type ="text/css" href="css/docs.css">
+  <link rel=stylesheet type ="text/css" href="css/animations.css">
+  <script src="grunt-scripts/ut.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-bootstrap.min.js"></script>
+  <script src="js/angular-bootstrap-prettify.min.js"></script>
+  <script src="js/src-display.js"></script>
+
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+
+  <title>Source display</title>
+</head>
+
+<body ng-controller=ctrlSource>
+  Source File: <b>{{sSrcName}}</b>
+  <div>
+    <pre class='prettyprint linenums'>{{source}}</pre>
+  </div>
+
+</body>
+
+</html>
+

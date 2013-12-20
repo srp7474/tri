@@ -1,0 +1,10 @@
+@ngdoc overview
+@name API Ref
+@description
+
+Use the Triangular API Reference documentation when you need more detailed information about a specific implementation.
+The index on the left of this page lists the various sections of the API Documentation
+
+Check out the {@link /guide Guide} to understand the Triangular building blocks.
+
+For step by step instructions use the {@link /tutorial Tutorial}.

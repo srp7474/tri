@@ -1,0 +1,70 @@
+@ngdoc overview
+@name Tutorial
+@description
+### Introduction
+
+**Triangular** is an infrastructure built on top of <a target=_blank href="http://angularjs.org/">AngularJS</a> that lets you build CRUD applications
+in an efficient and concise manner.
+
+The development platform supports two environments. The first is the {@link /guide/variants GAE Variant}. The second is the
+{@link /guide/variants Node.js Variant}.  Where steps differ in this `Tutorial` the above flags will serve to alert you as to which path to take.
+
+##### {@link /guide/variants GAENode.js Variant}
+This tutorial will guide you through the all the steps needed to build your own application and upload it to the {@link https://cloud.google.com/products/app-engine Google App Engine}.
+
+##### {@link /guide/variants Node.js Variant}
+
+This tutorial will guide you through the all the steps needed to build your own application and upload it to
+a `Node.js` server environment.  The `Tutorial` uses
+<a target=_blank href=https://www.nodejitsu.com>NodeJitsu  Node.js Hosting</a> as a reference point.  The steps will have to be adjusted if you choose a different
+`Node.js` hosting site.
+
+
+### Required Local Components
+
+1. This tutorial is based on Windows XP through 8. The following small .bat files will have to be adjusted in a non-windows platform.
+As they are contributed they will be added to the {@link /guide/devp-pkg Development Package}.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;`waks.bat`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{@link /guide/variants Node.js Variant}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`run-tri.bat`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{@link /guide/variants GAE Variant}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`run-ws.bat`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`appcfg.bat`
+<br><br>
+{@link /guide/variants GAE Variant} Until then it will be necessary at their usage points to adjust them to your platform. Files `dev_appserver.sh` and `appcfg.sh` obtained from
+the GAE SDK
+are provided as starting points for developing
+`run-ws.sh` and `appcfg.sh`.
+
+2. Your favorite text editor.
+The author uses <a target=_blank href='http://multiedit.com'>MultiEdit</a> mainly because of its
+excellent column edit support and its ability to save all files on a windows task switch.
+
+3. The Chrome Browser.  Others can be used but please read {@link /apps/browser Browser Support} first.
+
+4. {@link /guide/variants GAE Variant} A Java 6 or more runtime.  If not installed it can be obtained at {@link http://www.oracle.com/technetwork/java/javase/downloads/java-se-jre-7-download-432155.html Java Runtime}
+<br><br>
+If you are running a browser on the machine Java is likely already installed.  Ensuring the `...\jreX\bin` folder location is part of your standard path statement will often suffice.
+Typing `path` at a command prompt will verify this.
+
+5. {@link /guide/variants Node.js Variant} The `Node.js` package should be installed and on the default path. This can be obtained from
+<a target=_blank href=http://nodejs.org/>Node.js Home Page</a>
+
+This is covered in greater detail at {@link /guide/develop Development Environment}
+
+### After this follow the step-by-step instructions.
+
+To see how straight forward it is to build your own app just follow the step-by-step instructions.  You could have a starter app up and running locally
+in a few minutes.  A few more and it would be hosted on the {@link /guide/gaesite GAE Site} or {@link /guide/nodesite Node.js Site}.
+
+1. {@link /tutorial/step-01 01 Prepare Environment}
+1. {@link /tutorial/step-02 02 Validate Environment}
+1. {@link /tutorial/step-03 03 Add MyApp Files}
+1. {@link /tutorial/step-04 04 Prepare MyApp Data}
+1. {@link /tutorial/step-05 05 Code MyApp}
+1. {@link /tutorial/step-06 06 Get GAE Site ID}
+1. {@link /tutorial/step-07 07 Retest MyApp}
+1. {@link /tutorial/step-08 08 Upload to GAE Site}
+1. {@link /tutorial/step-09 09 Test MyApp on GAE Site}
+

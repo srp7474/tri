@@ -1,0 +1,52 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p><a href="/guide/variants">Node.js Variant</a> Skip this step and go to <a href="/tutorial/step-10">10 MyApp on NodeJS Site</a></p>
+
+<p><code>MyApp</code> is now ready to upload to the <a href="/guide/gaesite">GAE Site</a>.  These are the steps.  Modify for a non-windows platform.</p>
+
+<h3 id="ahrefguidegaesitegaesiteaupload"><a href="/guide/gaesite">GAE Site</a> Upload</h4>
+
+<ol>
+<li><p>Start a command line window and make the CWD <code>x:\tri-devp\bats</code> as defined in <a href="/tutorial/step-01#developmentpackagepreparation">Development Package Preparation</a></p></li>
+<li><p>Type <code>appcfg</code> to initiate shipping the application to the <a href="/guide/gaesite">GAE Site</a>.</p></li>
+<li><p>You will be prompted for <code>Email:</code>. Enter Google account (your email without <code>@gmail.com</code> suffix)</p></li>
+<li><p>You will be prompted for <code>Password:</code>. Enter the password associated with this gmail account.</p></li>
+<li><p>Note: On subsequent uploads you may not be prompted for this information as for a period of time it remembers.</p></li>
+<li><p>It will crunch for a few seconds until it announces<br><br>
+<code>Update for server default completed successfully</code></p></li>
+</ol>
+
+<h3 id="ahrefguidegaesitegaesiteadatastorepriming"><a href="/guide/gaesite">GAE Site</a> Datastore Priming</h4>
+
+<p><strong>Note:</strong> This will only be necessary the first time you upload <code>MyApp</code> to the <a href="/guide/gaesite">GAE Site</a>.</p>
+
+<ol>
+<li><p>As before the <a href="/guide/datastore">Datastore</a> is unprimed.</p></li>
+<li><p>Point your browser at URL <code>tri-test.appspot.com</code> (where <code>tri-test</code> is your <a href="/guide/gaesite">GAE Site</a> ID) and you should see the familiar screen.
+<br><br>
+<b>Note:</b> An intermediate <code>Prime.htm</code> screen may show for a few seconds while the site warms up.  Be patient.
+<br><br>
+<img class=screen src=/img/needs-prime50.JPG></p></li>
+<li><p>Repeat the procedure starting at point 2 in <a href="/tutorial/step-06#configuringthedDatastore">Configuring the Datastore</a> remembering to
+use URL <code>tri-test.appspot.com</code> rather than <code>localhost:8882</code></p></li>
+</ol>
+
+<h3 id="uploadappdatatoahrefguidegaesitegaesitea">Upload App data to <a href="/guide/gaesite">GAE Site</a></h4>
+
+<ol>
+<li><p>If there is data to upload proceed as described in <a href="/tutorial/step-04#uploadingdatatotheapp">Uploading data to the App</a>. But first read on.</p></li>
+<li><p>Before using the upload facilities you have to tell the <a href="/guide/waks">WAKS Utility</a> to use the production site (<a href="/guide/gaesite">GAE Site</a>).</p></li>
+<li><p>First issue the command <code>waks site tri-test</code> where <code>tri-test</code> is the <code>MyApp</code> site id.</p></li>
+<li><p>Then prefix <code>prod</code> to each <a href="/guide/waks">WAKS Command</a>. Thus the sequence
+<br><br>
+<code>waks set myapp super-userid super-password</code><br>
+<code>waks dir ..\data</code><br>
+<code>waks prod ship % %</code>
+<br><br>
+would ship the <code>myapp</code> data stored in the <code>..\data</code> folder</p></li>
+</ol>
+
+<h3 id="nextstep">Next Step</h4>
+
+<p>We are ready for the final checkout of <a href="/tutorial/step-09">09 MyApp on GAE Site</a></p></div>

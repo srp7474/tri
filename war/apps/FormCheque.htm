@@ -1,0 +1,172 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-chqs1.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=default>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="FormCheque.js"></script>
+  <title>CIT - Cheque Printer V1.0 </title>
+  <script>gaTracking();</script>
+</head>
+<body ng-app=app>
+  <div ng-controller=ctrlForm>
+    <div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/cheque'></div>
+    <!-- -------------Format 1 chq for srp's cheque book---------------------->
+    <div ng-show='isLoaded() && (nPrtFmt == 1)'>
+      <style type="text/css">
+        div#divPrint pre {font-weight:bold;}
+        div#divPrint span.faint {font-weight:normal; color:rgb(180,180,180);}
+      </style>
+      <div id=divPrint style='margin-left:20px'>
+        <div><img src='tri/img/transparent.gif' width=1px height=10px></div>
+        <pre>
+        <a href='' onClick='print();'>print</a>
+
+        {{getCurChq().date}}<img src='tri/img/transparent.gif' width=650px height=1px>  {{dateDigits6()}}
+        {{payee()}}
+
+        <span class=faint>{{chqno()}}</span> {{ref(26)}}{{payee(43)}}    ${{numAmount()}}
+
+                                       {{alphaAmount(60)}}
+
+                    ${{numAmount()}}
+
+                                     <span class=faint>{{chqno()}}</span> {{ref()}}
+
+        </pre>
+      </div>
+    </div>
+    <!-- -------------Format 0 chq for jane's cheque book---------------------->
+    <div ng-show='isLoaded() && (nPrtFmt == 0)'>
+      <style type="text/css">
+        div#divPrint                    {font-size:70%; font-weight:500;}
+        div#divPrint span.faint         {font-weight:normal; color:rgb(235,235,235); font-size:120%;}
+
+        div#divPrint div#panel          {position:fixed;left:1150px; top:10px; width:310px; border:1px solid gray; height:300px; z-index:100; background-color:rgb(250,250,250);}
+        div#divPrint div#panel p.lab    {text-align:center; width:310px; position:relative; top:auto;}
+        div#divPrint div#panel a#print  {position:relative; top:auto; left:0px; z-index:10;}
+        div#divPrint div#panel a#void   {position:relative; top:auto; left:0px; z-index:10;}
+        div#divPrint div#panel p#admin  {position:relative; top:auto; left:0px; z-index:10;}
+
+        div#divPrint span.date8         {position:fixed;left:580px;top:50px; width:200px;}
+        div#divPrint span.dateStr       {position:fixed;left:530px;top:50px;}
+        div#divPrint span.dateFmt       {position:fixed;left:580px;top:70px; font-weight:normal; font-family:courier; font-size:8pt; width:200px;}
+        div#divPrint span#num-amt       {position:fixed;left:560px;top:95px;}
+        div#divPrint span#alpha-amt     {position:fixed;left:10px;top:95px;}
+        div#divPrint p#payee            {position:fixed;left:30px;top:130px;}
+        div#divPrint span#memo          {position:fixed;left:20px;top:215px; font-size:95%; font-weight:normal;}
+        div#divPrint span#chqno1        {position:fixed;left:20px;top:245px;}
+        div#divPrint span#chqno2        {position:fixed;left:20px;top:300px;}
+        div#divPrint span#chqno3        {position:fixed;left:20px;top:615px;}
+        div#divPrint div#details1       {position:fixed;left:20px;top:320px;  font-weight:normal;}
+        div#divPrint div#details2       {position:fixed;left:20px;top:630px;  font-weight:normal;}
+        div#divPrint div.heading        {color:rgb(180,180,180);}
+        div#divPrint span.refdate       {position:fixed;left:20px;  top:auto;}
+        div#divPrint span.ref           {position:fixed;left:120px; top:auto;}
+        div#divPrint span.amt           {position:fixed;left:350px; top:auto; text-align:right; width:100px;}
+        div#divPrint span.hstamt        {position:fixed;left:450px; top:auto; text-align:right; width:100px;}
+        div#divPrint span.totamt        {position:fixed;left:550px; top:auto; text-align:right; width:100px;}
+      </style>
+      <div id=divPrint style='margin-left:20px'>
+        <div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Cheque'></div>
+
+        <span id=chqno1 class=faint>{{chqno()}}</span>
+        <span class=dateStr>Date:</span>
+        <span class=date8>{{dateDigits8()}}</span>
+        <span class=dateFmt>M M D D Y Y Y Y</span>
+
+        <span id=num-amt>***{{numAmount() | number:2}}</span>
+
+        <span id=alpha-amt>{{alphaAmount(60)}}</span>
+
+        <p id=payee>
+          {{payee()}}<br>
+          <ANY ng-repeat="sLine in addrLine().split('<br>')">
+          {{sLine}}<br>
+          </ANY>
+        </ul>
+
+        <span id=memo>{{oPrtChq.note}}</span>
+
+        <span id=chqno2 class=faint>{{chqno()}}</span>
+        <div  id=details1>
+          <div class=heading>
+            <span class=refdate>Ref Date</span>
+            <span class=ref>Reference</span>
+            <span class=amt>Amount</span>
+            <span class=hstamt>HST</span>
+            <span class=totamt>Total</span>
+            <br>
+          </div>
+          <div>
+            <span class=refdate>Pay to:</span>
+            <span class=ref>{{payee()}}</span>
+            <br>
+          </div>
+          <div ng-repeat='oLine in oPrtChq.lines'>
+            <span class=refdate>{{oLine.refdate}}</span>
+            <span class=ref>{{oLine.ref}}    </span>
+            <span class=amt>{{+oLine.amt | number:2}}    </span>
+            <span class=hstamt>{{+oLine.hstamt | number:2}} </span>
+            <span class=totamt>{{+oLine.totamt | number:2}} </span>
+            <br>
+          </div>
+          <div>
+            <span class=refdate>{{oPrtChq.date}}</span>
+            <span class=ref>Cheque Total</span>
+            <span class=totamt></span>
+            <span class=hstamt></span>
+            <span class=totamt>{{+oPrtChq.amt | number:2}} </span>
+            <br>
+          </div>
+        </div>
+
+        <span id=chqno3 class=faint>{{chqno()}}</span>
+        <div  id=details2>
+          <div class=heading>
+            <span class=refdate>Ref Date</span>
+            <span class=ref>Reference</span>
+            <span class=amt>Amount</span>
+            <span class=hstamt>HST</span>
+            <span class=totamt>Total</span>
+            <br>
+          </div>
+          <div>
+            <span class=refdate>Pay to:</span>
+            <span class=ref>{{payee()}}</span>
+            <br>
+          </div>
+          <div ng-repeat='oLine in oPrtChq.lines'>
+            <span class=refdate>{{oLine.refdate}}</span>
+            <span class=ref>{{oLine.ref}}    </span>
+            <span class=amt>{{+oLine.amt | number:2}}    </span>
+            <span class=hstamt>{{+oLine.hstamt | number:2}} </span>
+            <span class=totamt>{{+oLine.totamt | number:2}} </span>
+            <br>
+          </div>
+          <div>
+            <span class=refdate>{{oPrtChq.date}}</span>
+            <span class=ref>Cheque Total</span>
+            <span class=totamt></span>
+            <span class=hstamt></span>
+            <span class=totamt>{{+oPrtChq.amt | number:2}} </span>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

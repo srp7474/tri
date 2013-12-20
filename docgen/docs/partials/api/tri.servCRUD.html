@@ -1,0 +1,261 @@
+<h1><code ng:non-bindable="">servCRUD</code>
+<span class="hint">(service in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides Create/Read/Update/Delete services for tables.  These are the common
+functions required by both <a href="/api/tri.servREC">servREC</a> and <a href="/api/tri.servTBL">servTBL</a> services.</p>
+
+<p>To prevent circular references the <code>servCRUD</code> function pointer is forwarded to <code>servREC</code> and <code>servTBL</code> during initialization.</p>
+
+<p>Also refer to <a href="/guide/records">Record Storage</a></p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="dirtyClass">dirtyClass()</h3>
+<div class="dirtyclass"><p>The <code>canSave</code> function is called which ensures the object is deemed 'dirty' and that the validation
+returns <code>true</code> (both the standard validation looking for required fields and any optional validation specified in the <code>Table</code>
+<code>validate</code> function pointer.  if <code>true</code> the text 'c-action' is returned.
+If not the text 'c-quiet' is retuned.  This latter value typically caused the control to behave as if it is disabled.  See
+<a href="/api/tri.directive:whenActive">whenActive</a>.</p></div>
+</li>
+<li><h3 id="dirtyMsg">dirtyMsg()</h3>
+<div class="dirtymsg"><p>The <code>canSave</code> function is called which ensures the object is deemed 'dirty' and that the validation
+returns <code>true</code> (both the standard validation looking for required fields and any optional validation specified in the <code>Table</code>
+<code>validate</code> function pointer.  if <code>true</code> the text 'Save Changes' is returned.
+If not the text 'Make Changes' is retuned.</p></div>
+</li>
+<li><h3 id="dropRecord">dropRecord(oaa)</h3>
+<div class="droprecord"><p>The User is asked to confirm deletion of the <a href="/guide/data">Data Object</a> as this action is irreversible.
+The <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> provides the <code>Table</code> environment which if null causes the
+request to be ignored.</p>
+
+<p>If confirmed the <a href="/guide/data">Data Object</a> is removed from localStorage and the server storage.</p>
+
+<p>Special processing is invoked when dealing with <a href="/guide/sandbox">Sandboxed Data</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the required record.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="editCancel">editCancel()</h3>
+<div class="editcancel"><p>The current 'Edit' or 'Create' activity is canceled and the standard <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is made dormant.
+<code>oTP</code> is resolved using
+the <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> returned value. If <code>oTP</code> is still null the request is ignored.</p>
+
+<p>If the <a href="/guide/data">Data Object</a> is deemed 'dirty' the User is asked to confirm about the loss of the changes.</p>
+
+<p><b>Note:</b> For operations where intermediate results are saved the cancel operation will only revert back to the
+last intermediate save operation.</p></div>
+</li>
+<li><h3 id="editRecord">editRecord(oaa)</h3>
+<div class="editrecord"><p>'Edit' mode is entered and the standard <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is activated.
+The <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> provides the <code>Table</code> environment which if null causes the
+request to be ignored.</p>
+
+<p>If <a href="/api/tri.servCRUD#setDlgEdit">servCRUD.setDlgEdit</a> has been callled with non-null parameters the Dialog mode will be activated.</p>
+
+<p>A copy of the <a href="/guide/data">Data Object</a> to be edited is made either using the <code>angular.copy</code> function or
+by calling the <code>getEditRecordExit</code> function specified in the <code>Table</code> definition.</p>
+
+<p>If specified in the <code>Table</code> defintion the <code>primeEdit</code> function is called with the copy of the <a href="/guide/data">Data Object</a>.</p>
+
+<p>A copy of the <a href="/guide/data">Data Object</a> being edited is made for change detection.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the required record.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="editSave">editSave($scope)</h3>
+<div class="editsave"><p>The current 'Edit' or 'Create' activity is saved and the standard <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is made dormant.
+<code>oTP</code> is resolved using
+the <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> returned value. If <code>oTP</code> is still null the request is ignored.</p>
+
+<p>Before the save takes place the <code>canSave</code> function is called which ensures the object is deemed 'dirty' and that the validation
+returns <code>true</code> (both the standard validation looking for required fields and any optional validation specified in the <code>Table</code>
+<code>validate</code> function pointer.  If not the operation is ignored except for the warning fields the validation cycle might create.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {scope} – </code>
+<p>of caller, usually the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a></p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="getAppStatKey">getAppStatKey()</h3>
+<div class="getappstatkey"><p>Returns an array containing the following values.</p>
+
+<ul>
+<li>0: The localStorage key to use.</li>
+<li>1: The current application ID (See <a href="/api/tri.servGAE#getCust">servGAE.getCust</a>}</li>
+<li>2: The lowercase portion of the .htm page used to access the application.</li>
+</ul><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>A application status object array used to build localStorage unique keys.</p></div>
+</div>
+</li>
+<li><h3 id="getCtrlEdit">getCtrlEdit(bDlg)</h3>
+<div class="getctrledit"><p>Gets the current editor for the current selected <a href="/guide/data">Data Object</a>. In actuality this is the $scope pointer
+for the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a></p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">bDlg – {Boolean} – </code>
+<p>If true returns oDlgCtrlEdit else returns oCtrlEdit</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The standard or replacement <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> used to edit the current <a href="/guide/data">Data Object</a>.</p></div>
+</div>
+</li>
+<li><h3 id="getEditIX">getEditIX()</h3>
+<div class="geteditix"><p>Returns the <code>nEditIX</code> value. This value is the <code>oaa</code> value for 'Edit' mode or null for 'Create' mode.
+See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The <code>nEditIX</code> value.</p></div>
+</div>
+</li>
+<li><h3 id="getEditObj">getEditObj()</h3>
+<div class="geteditobj"><p>Returns the <a href="/guide/data">Data Object</a> being edited or null.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>Returns the <a href="/guide/data">Data Object</a> being edited or null.</p></div>
+</div>
+</li>
+<li><h3 id="getEditType">getEditType(oTP)</h3>
+<div class="getedittype"><p>Returns whether the edit mode is 'Edit' or 'Create'. This mode is set by either <code>editRecord</code> or `makeRecord' respectively.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>ignored - a left over.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>Returns whether the edit mode is 'Edit' or 'Create'</p></div>
+</div>
+</li>
+<li><h3 id="getObj">getObj(oTP, oaa)</h3>
+<div class="getobj"><p>Returns the addressed object from the <code>oTP</code> object cache. If <code>oTP</code> is null <code>oTP</code> is resolved using
+the <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> returned value. If <code>oTP</code> is still null a <code>null</code> is returned.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>oTbl</code> <code>props</code> value</p></li>
+<li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the required record.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>the <a href="/guide/data">Data Object</a> addressed by <code>oaa</code></p></div>
+</div>
+</li>
+<li><h3 id="getObjs">getObjs(oTP)</h3>
+<div class="getobjs"><p>Returns the <a href="/guide/data">Data Object</a> collection for the specified <code>Table</code>.</p>
+
+<p>Each <a href="/guide/data">Data Object</a> is assigned the <code>oaa</code> value prior to sorting but after merging all the chunked data.
+Refer to <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code> and a description of chunked data.</p>
+
+<p>If the <code>order</code>  is specified in the
+<code>Table</code> definition the rows are sorted in that sequence.</p>
+
+<p>Since this function is called many times during a $digest cycle the returned set is cached.  The $digest routines add a $$hash marker
+so that the cached value is known to be valid.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>oTbl</code> <code>props</code> value</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>the <a href="/guide/data">Data Object</a> collection.</p></div>
+</div>
+</li>
+<li><h3 id="getTabProp">getTabProp()</h3>
+<div class="gettabprop"><p>Returns the <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> returned value.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The <code>Table.props</code> value.</p></div>
+</div>
+</li>
+<li><h3 id="hookCtrlEdit">hookCtrlEdit(ctrl)</h3>
+<div class="hookctrledit"><p>Sets the current editor for the current selected <a href="/guide/data">Data Object</a>. When this is called a second time
+it assumes the second instance is the JQueryUI Dialog  instance and saves it in <code>oDlgCtrlEdit</code>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ctrl – {Object} – </code>
+<p>The standard or replacement <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> used to edit the current <a href="/guide/data">Data Object</a>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="inDlgEdit">inDlgEdit()</h3>
+<div class="indlgedit"><p>Returns whether both the system <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active and the Dialog mode is true.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>Returns the bInEdit current value</p></div>
+</div>
+</li>
+<li><h3 id="inEdit">inEdit(oTP)</h3>
+<div class="inedit"><p>Returns whether the system <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is active.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>ignored - a left over.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>Returns the bInEdit current value</p></div>
+</div>
+</li>
+<li><h3 id="makeRecord">makeRecord()</h3>
+<div class="makerecord"><p>'Create' mode is entered and the standard <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> is activated.
+The <a href="/api/tri.servSess#getTabProp">servSess.getTabProp</a> provides the <code>Table</code> environment which if null causes the
+request to be ignored.</p>
+
+<p>A new <a href="/guide/data">Data Object</a> is created and the <code>getNextTag</code> function is called to get the next <code>tag</code> property in the object.
+The <code>tag</code> assigned is the maximum found in the object collection plus 1.</p>
+
+<p>If specified in the <code>Table</code> defintion the <code>createExit</code> function is called with the new <a href="/guide/data">Data Object</a>.
+If the <code>createExit</code> function does not return a <code>true condition</code> the <code>editCancel</code> routine is called.</p>
+
+<p>If specified in the <code>Table</code> defintion the <code>primeEdit</code> function is called with the new <a href="/guide/data">Data Object</a>.</p>
+
+<p>A copy of the <a href="/guide/data">Data Object</a> being edited is made for change detection.</p></div>
+</li>
+<li><h3 id="refreshNonCachedTable">refreshNonCachedTable(oT, oTbl, oTP)</h3>
+<div class="refreshnoncachedtable"><p>The <code>servGAE</code> routines are used to synchronize the loacal cache and the server storage.  This
+is required for non-cached storage such as the <code>User</code> table.  The timestamp data in the server is used to ensure
+that the current in memory data is valid.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oT – {Object} – </code>
+<p>The <a href="/guide/table">Static Table</a> object diagnostic logging</p></li>
+<li><code ng:non-bindable="">oTbl – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Table">Table</a> object for diagnostic logging</p></li>
+<li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>oTbl</code> <code>props</code> value</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="refreshTableCache">refreshTableCache(bPartial)</h3>
+<div class="refreshtablecache"><p>This ensures the internal cache for a <code>Table</code> and the localStorage values
+are synchronized.</p>
+
+<p>Special processing takes place to preserve <a href="/guide/sandbox">Sandboxed values</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">bPartial – {Boolean} – </code>
+<p>true if doing partial refresh</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setDlgEdit">setDlgEdit(nWid, nHgt)</h3>
+<div class="setdlgedit"><p>Sets the system to use the Dialog editor when <a href="/api/tri.servCRUD#editRecord">servCRUD.editRecord</a> is called.  Assumes both JQuery and JQuery have been loaded by the
+.htm page.</p>
+
+<p>To disable the Dialog mode once set call with <code>nWid</code> and <code>nHgt</code> set to null.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">nWid – {Number} – </code>
+<p>Pixel width of Dialog window</p></li>
+<li><code ng:non-bindable="">nHgt – {Number} – </code>
+<p>Pixel height of Dialog window</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="syncLocalData">syncLocalData(scope, sToken, oData)</h3>
+<div class="synclocaldata"><p>When <code>oData</code> is null the logoff cleanup process is invoked.</p>
+
+<p>When <code>oData</code> is not null the following happens:</p>
+
+<ul>
+<li>the Boolean <code>bPartial</code> is set to <code>true</code> if <code>scope</code> is null, else <code>bPartial</code> is set to <code>false</code>.</li>
+<li>The <code>matchTable</code> routine is invoked to match the <code>oData</code> table and the current cached data for the <code>Table</code> for each <code>Table</code> or
+table chunk in the <code>oData</code> record.</li>
+<li>the application status is updated using the <a href="/api/tri.servSess#setStatus">servSess.setStatus</a> function.</li>
+<li>the display status is updated using the <code>refreshLocalCache</code> function with <code>bPartial</code> set as defined above.</li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>caller scope</p></li>
+<li><code ng:non-bindable="">sToken – {string} – </code>
+<p>The user token obtained by the logon process</p></li>
+<li><code ng:non-bindable="">oData – {Object} – </code>
+<p>A Javascript Object containing the <code>servGAE</code> response data.</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>

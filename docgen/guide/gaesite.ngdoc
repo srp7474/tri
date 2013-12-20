@@ -1,0 +1,13 @@
+@ngdoc overview
+@name Guide: GAE Site
+@description
+### Overview
+
+The references in these documents to {@link /guide/gaesite GAE Site}  refer to the
+<a target=_blank href=https://cloud.google.com/products/app-engine>Google App Engine</a>
+where the developed applications are uploaded to.
+
+Its URL would be `app-id.appspot.com` where `app-id` is the Google App ID obtained via
+{@link /tutorial/step-06 Get GAE Site ID}.
+
+

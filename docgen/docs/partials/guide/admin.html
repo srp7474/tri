@@ -1,0 +1,62 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The Admin Application performs tasks that only the system administrator can perform.
+This by default is the maintenance of the User <code>Table</code> that controls access to the system.</p>
+
+<p>Other tables can be specified that allow the admin functions access to the table.</p>
+
+<h3 id="addingaccesstothemenu">Adding Access to the Menu</h4>
+
+<p>A statement such as the next should be executed in the <a href="/guide/appname-js#ctrlmainfunction">ctrlMain</a> controller.</p>
+
+<pre class="prettyprint linenums">
+  servSess.setOptMenuItems([{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'},...]);
+</pre>
+
+<p>This will add the link "Admin Functions" to the menu when the <a href="/guide/user">User</a> has admin credentials.
+The <code>xfrAdminFunctions</code> function is a local function detailed in the next section.</p>
+
+<h3 id="transferringcontroltoadminhtm">Transferring Control to Admin.htm</h4>
+
+<p>The following example snippet should be executed by the menu click action.  It modifies the
+application URL to access the "Admin.Htm" page.  It passes the application name ("Deps")
+and stores a URL in <code>localStorage['_admin_app_return']</code> so that the Admin Application
+knows how to return to the originating application.</p>
+
+<pre class="prettyprint linenums">
+  function xfrAdminFunctions() {
+    if (servCRUD.inEdit()) return;
+    var sURL = ""+window.location;
+    var nIX = sURL.indexOf("Deps.htm");
+    log("XAF "+sURL);
+    localStorage['_admin_app_return'] = sURL.substring(nIX);
+    var sNewURL = sURL.substring(0,nIX)+"Admin.htm?cust=deps&tables=TableDonors";
+    window.location = sNewURL;
+  }
+</pre>
+
+<h3 id="adminhtmurlparameters">Admin.htm URL Parameters</h4>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+<p>Two parameters are used on the Admin.htm invoking URL</p>
+
+<p><span class=srp-propdef><code class=srp-label>cust</code>This value is used in the
+<a href="/api/tri.servGAE#setCust">servGAE.setCust</a> method and defines the current application
+context used to build <a href="/guide/records#keystructure">keys</a> for to the server.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>tables</code>This optional value lists one or more Javascript table
+definitions (separated by a ';') that are loaded.
+<br><br>
+The <code>menuWhen</code> function in that definition limits the inclusion of
+that table in the Admin menu to situations where the User has 'admin' credentials.
+<br><br>
+The "TableDonors.js" file in the 'Deps.htm" application is loaded in this fashion by the above sample code.
+</span></p></div>

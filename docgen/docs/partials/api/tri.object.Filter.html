@@ -1,0 +1,47 @@
+<h1><code ng:non-bindable="">Filter</code>
+<span class="hint">(type in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides an object rendition of the <a href="/guide/table">Static Filter</a> defined in the <code>Table</code> object
+defined in the Javascript file.</p>
+
+<p>Referred to in this documentation as the dynamic instance of the <code>Filter</code> object.</p>
+
+<p>The public methods attached to the <code>Filter</code> object and described herein are
+accessible from the HTML code assuming a <code>Filter</code> object is available.</p>
+
+<p><strong>Note</strong> The <code>Filter</code> object uses a variable <code>oSel</code> which is placed in the
+<a href="/api/tri.controller:ctrlCommList">Lister</a> scope and saved in the related <code>Table</code> at appropriate times
+as <code>Table</code> context is changed.  In this way the mask settings can be preserved across <code>Table</code> switches.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="Filter">Filter(props)</h3>
+<div class="filter"><p>Constructor of the the <code>Filter</code> object. Performs the following functions:</p>
+
+<ul>
+<li>copies the properties from the static object</li>
+</ul>
+
+<p><br>
+The <code>normalize</code> function should subsequently be called to establish other values</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">props – {Object} – </code>
+<p>Properties array used to define the filter in static object.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="normalize">normalize(oTab)</h3>
+<div class="normalize"><p>Normalizes the <code>Filter</code> object by perfroming the following functions:</p>
+
+<ul>
+<li>Sets the <code>col</code> value by finding the related <code>Col</code> value</li>
+<li>determines the <code>title</code> value</li>
+<li>determines the <code>init</code> value</li>
+</ul><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTab – {Object} – </code>
+<p><code>Table</code> in which <code>Filter</code> resides</p></li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>

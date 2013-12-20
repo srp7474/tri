@@ -1,0 +1,13 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>Directives are the <a target=_blank href="http://angularjs.org/">AngularJS</a> facility that allow for the easy extension of the display capabilities and behavoir of HTML pages.</p>
+
+<p><strong>Triangular</strong> uses this facility in several places.  The <a href="/guide/templates">templates</a> along with the <a href="/api/tri.directive:macro">macro</a> facility is the most complex
+use of directives.  The <a href="/api/tri.directive:blurEvent">blurEvent</a>, <a href="/api/tri.directive:focusClear">focusClear</a> and <a href="/api/tri.directive:autotab">autotab</a> directives
+are more simple examples.</p>
+
+<p>Nothing in the design of <strong>Triangular</strong> prohibits the addition of custom directives to an application.  The
+<code>oApp.directive('directive name', function(...) {</code> format should be used since <code>oApp</code> is a global variable in which all directives are registered.</p></div>

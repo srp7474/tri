@@ -1,0 +1,271 @@
+<h1><code ng:non-bindable="">servREC</code>
+<span class="hint">(service in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Specific I/O services for REC mode tables</p>
+
+<p>This service also contains many of the common functions with <code>servTBL</code> directly accessed by the
+support routines via the <code>servREC.</code> prefix.</p>
+
+<p>Refer to <a href="/guide/records">Record Storage</a> for a description of the record modes and to
+<a href="/api/tri.servCRUD">servCRUD</a> for the API common functions.</p></div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="addChunk">addChunk(oTP, objs, chunk)</h3>
+<div class="addchunk"><p>Used internally for the retrieval and update methods to maintain the cache of <a href="/guide/data">Data Object</a>s when they are
+organized as chunks. See <a href="/guide/records">Records Storage</a> to understand 'chunks'.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> where the object array is store.</p></li>
+<li><code ng:non-bindable="">objs – {Object[]} – </code>
+<p>The array of <a href="/guide/data">Data Object</a>s to store.</p></li>
+<li><code ng:non-bindable="">chunk – {number} – </code>
+<p>The chunk index relative to 0.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="addProperty">addProperty(oTP, oCol)</h3>
+<div class="addproperty"><p>Used internally.  The <code>oCol</code> type is assumed to be 'property'.  The user is prompted to
+name a unique property within the <code>oCol</code> properties array.  When validated a key of the returned user value is created
+of null value.  Used to create key/value pairs within a column of type 'property'.</p>
+
+<p>The validation cycle is used later to validate the value of a key/value pair.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> values where the column array is stored</p></li>
+<li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="findCol">findCol(oTP, sCol)</h3>
+<div class="findcol"><p>Used internally. Returns the  <a href="/api/tri.object.Col">Col</a> object whose <code>col</code> property
+matches the <code>sCol</code> parameter.  Null is returned if not found.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> values where the column array is stored</p></li>
+<li><code ng:non-bindable="">sCol – {string} – </code>
+<p>The column name to find</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>oCol The dynamic <a href="/api/tri.object.Col">Col</a> object if found or null if not found.</p></div>
+</div>
+</li>
+<li><h3 id="getCtrlEdit">getCtrlEdit()</h3>
+<div class="getctrledit"><p>Gets the current editor for the current selected <a href="/guide/data">Data Object</a>. In actuality this is the $scope pointer
+for the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p>The standard or replacement <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> used to edit the current <a href="/guide/data">Data Object</a>.</p></div>
+</div>
+</li>
+<li><h3 id="getMethods">getMethods(oCol)</h3>
+<div class="getmethods"><p>Used internally. An array of method objects used to insert into onclick attributes of dynamically built link elements. The
+<a href="/api/tri.object.Col">Col</a> <code>type</code> attribute must be 'list' otherwise an empty list is returned.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>An array of method objects.</p></div>
+</div>
+</li>
+<li><h3 id="getModFld">getModFld(oCol)</h3>
+<div class="getmodfld"><p>Used internally. Returns the model name for a given column.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>A 'ng-model=...' suitable for insertion into an HTML input element.</p></div>
+</div>
+</li>
+<li><h3 id="getOptions">getOptions(oCol, bShort)</h3>
+<div class="getoptions"><p>Used internally. Given the <code>oCol</code> <code>oneOf</code> property which points to a related table will return an array of objects from that related table
+that can be injected into a 'select' element.  Typically used to build a 'select' control with values from a related <code>Table</code> that is updated dynamically based
+on the values stored in that <code>Table</code>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+<li><code ng:non-bindable="">bShort – {Boolean} – </code>
+<p>If <code>true</code> the returned array will include the '--- not assigned ---' value</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>An array of objects suitable for injection into a 'select' element</p></div>
+</div>
+</li>
+<li><h3 id="getProperties">getProperties(oCol)</h3>
+<div class="getproperties"><p>Used internally. Returns an array of keys whose <a href="/api/tri.object.Col">Col</a> <code>type</code> value is 'property'
+and whose <code>hide</code> value is not <code>true</code>.  Used in the editing of <code>Table</code> data that contains columns of type 'property' such as the User <code>Table</code>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string[]}</code>
+– <p>An array of keys</p></div>
+</div>
+</li>
+<li><h3 id="getSubCols">getSubCols(scope, schema, sType)</h3>
+<div class="getsubcols"><p>Used internally. For each <a href="/api/tri.object.Col">Col</a> object whose type property matches the sType <code>col</code> property the
+related <code>select</code> method is called.  The accumulated  results are returned.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>The scope to use</p></li>
+<li><code ng:non-bindable="">schema – {Object} – </code>
+<p>The related sub-schema to use.</p></li>
+<li><code ng:non-bindable="">sType – {string} – </code>
+<p>The type to match against</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>The accumulated return values of the  <a href="/api/tri.object.Col">Col</a> object <code>select</code> method</p></div>
+</div>
+</li>
+<li><h3 id="getSubRows">getSubRows(scope, oObj, oSchema)</h3>
+<div class="getsubrows"><p>Used internally. Returns the array of <a href="/guide/data">Data Object</a> rows within <code>oObj</code> that belong to <code>oSchema.base</code>.
+Refer to the Deps.js source code as an example.  Used to allow editing of an array of <a href="/guide/data">Data Object</a> objects
+belonging to a single <a href="/guide/data">Data Object</a> object.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>The scope to use</p></li>
+<li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> containing the rows.</p></li>
+<li><code ng:non-bindable="">oSchema – {Object} – </code>
+<p>The related sub-schema to use.</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>The rows within <code>oObj</code> of property <code>oSchema.base</code></p></div>
+</div>
+</li>
+<li><h3 id="getTableCols">getTableCols(scope, oTP, sType)</h3>
+<div class="gettablecols"><p>Used internally. For each <a href="/api/tri.object.Col">Col</a> object whose type property matches the sType <code>col</code> property the
+related <code>select</code> method is called.  The accumulated  results are returned.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">scope – {Object} – </code>
+<p>The scope to use</p></li>
+<li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> values where the column array is stored</p></li>
+<li><code ng:non-bindable="">sType – {string} – </code>
+<p>The type to match against</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object[]}</code>
+– <p>The accumulated return values of the  <a href="/api/tri.object.Col">Col</a> object <code>select</code> method</p></div>
+</div>
+</li>
+<li><h3 id="hookCtrlEdit">hookCtrlEdit(ctrl)</h3>
+<div class="hookctrledit"><p>Sets the current editor for the current selected <a href="/guide/data">Data Object</a>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">ctrl – {Object} – </code>
+<p>The standard or replacement <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> used to edit the current <a href="/guide/data">Data Object</a>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="insertRec">insertRec(oTP, obj, oaa, bInter)</h3>
+<div class="insertrec"><p>Used internally to insert a record into the <a href="/guide/data">Data Object</a> cache.  If the <code>oaa</code> is null a new <a href="/guide/data">Data Object</a> is inserted.</p>
+
+<p>When <code>bInter</code> is <code>true</code> the saveRecords function is not invoked.
+Used when several objects must be updated (such as a cheque renumbering pass) before persisting.  Not supported in chunked mode.
+See <a href="/guide/records">Record Storage</a> to understand 'chunks'.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> cache where the object array is stored.</p></li>
+<li><code ng:non-bindable="">obj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> to insert.</p></li>
+<li><code ng:non-bindable="">oaa – {Object} – </code>
+<p>The <b>O</b>bject <b>A</b>ccess <b>A</b>ddress. A string or number determining the insert point.  See <a href="/guide/records">Record Storage</a> for a description of <code>oaa</code>.</p></li>
+<li><code ng:non-bindable="">bInter – {Boolean} – </code>
+<p>When <code>true</code> the update is intermediate with more to follow.  Therefore do not update invoke the saveRecords function.
+Used when several objects must be updated (such as a cheque renumbering pass) before persisting.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="isCombined">isCombined()</h3>
+<div class="iscombined"><p>Returns whether the service type combines the individual JSON objects into an array for storage and retrieval.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>Always returns <code>true</code>.</p></div>
+</div>
+</li>
+<li><h3 id="mapValue">mapValue(oObj, oCol)</h3>
+<div class="mapvalue"><p>Used internally. Returns the referenced value in <a href="/api/tri.object.Col">Col</a> <code>oneOf</code> related table based on the setting of
+the <a href="/guide/data">Data Object</a> column.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oObj – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a></p></li>
+<li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object
+oCol is assumed to have the <code>oneOf</code> property which points to another <code>Table</code></p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{string}</code>
+– <p>The mapped value</p></div>
+</div>
+</li>
+<li><h3 id="refreshSignal">refreshSignal(sig, oTP)</h3>
+<div class="refreshsignal"><p>Used internally to cause updates to show correctly on the display by resetting the cache and mapped objects as well as a hidden input
+field that display screens can create dependencies against.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sig – {string} – </code>
+<p>Caller id to aid diagnostics in the log file</p></li>
+<li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The current <code>Table.props</code> where the cache is stored.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="reload">reload(oTP)</h3>
+<div class="reload"><p>Used internally to refresh the <a href="/guide/data">Data Object</a>s cache from the server.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> cache where the object array is stored.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="removeProperty">removeProperty(oTP, oCol, sKey)</h3>
+<div class="removeproperty"><p>Used internally.  The <code>oCol</code> type is assumed to be 'property'.  After confirming with the user through a prompt
+the property within the <code>oCol</code> properties array of key <code>sKey</code> is removed.</p>
+
+<p>The validation cycle is used later to validate the requirements of having a key/value pair for <code>sKey</code>.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> values where the column array is stored</p></li>
+<li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+<li><code ng:non-bindable="">sKey – {string} – </code>
+<p>The name of the property key value.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="saveRecords">saveRecords(oTP, oRecs, sRecName, sLSName, bRfsh)</h3>
+<div class="saverecords"><p>Used internally to persist reords to the localStorage cache and the data storage on the server.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> cache where the object array is stored.</p></li>
+<li><code ng:non-bindable="">oRecs – {Object} – </code>
+<p>The <a href="/guide/data">Data Object</a> array to insert.</p></li>
+<li><code ng:non-bindable="">sRecName – {string} – </code>
+<p>The record name used as the third component of the object key.</p></li>
+<li><code ng:non-bindable="">sLSName – {string} – </code>
+<p>The localStorage name.  Null means there is no localStorage copy such as for User records.</p></li>
+<li><code ng:non-bindable="">bRfsh – {Boolean} – </code>
+<p>When <code>true</code> the update is intermediate with more to follow.  Therefore do not update invoke the saveRecords function.
+Used when several objects must be updated (such as a cheque renumbering pass) before persisting.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setCRUD">setCRUD(crud)</h3>
+<div class="setcrud"><p>Sets the <code>servREC</code> <code>oCRUD</code> pointer to crud so the <code>servREC</code> has access to the common routines.  Required to prevent circular definitions.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">crud – {Object} – </code>
+<p>Pointer to <code>servCRUD</code>.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="setObjs">setObjs(oTP, objs)</h3>
+<div class="setobjs"><p>Used internally for the retrieval and update methods to maintain the cache of <a href="/guide/data">Data Object</a>s.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oTP – {Object} – </code>
+<p>The <code>Table.props</code> where the object array is stored.</p></li>
+<li><code ng:non-bindable="">objs – {Object[]} – </code>
+<p>The array of <a href="/guide/data">Data Object</a>s to store.</p></li>
+</ul>
+</div>
+</li>
+<li><h3 id="showListCol">showListCol(oCol)</h3>
+<div class="showlistcol"><p>Used internally. If present the <code>oCol</code> showList value is returned. Otherwise <code>true</code> is returned.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">oCol – {Object} – </code>
+<p>The dynamic <a href="/api/tri.object.Col">Col</a> object</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p><code>true</code> is returned if the column should be shown in 'list' mode.</p></div>
+</div>
+</li>
+</ul>
+</div>
+</div>

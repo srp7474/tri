@@ -1,0 +1,110 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="tri/img/fav-deps1.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="Deps.css" title=defualt>
+  <script src="tri/ut.js"></script>
+  <script src="tri/angular.min.js"></script>
+  <script src="tri/TRI.min.js"></script>
+  <script src="AppsConfig.js"></script>
+  <script src="FormDepSum.js"></script>
+  <title>CIT - Deposit Summary Reports V1.0 </title>
+  <script>gaTracking();</script>
+</head>
+<body ng-app=app>
+   <style type="text/css">
+     div#divPrint table#actives      {font-size:8pt; font-weight:500;}
+     div#divPrint table#sum          {font-size:9pt; font-weight:500;}
+     div#divPrint span.tiny          {font-size:80%; color:rgb(210,210,210)}
+
+     div#divPrint table#sum td.C1    {width:200px; text-align:right;}
+     div#divPrint table#sum td.C2    {width:30px; text-align:right;}
+     div#divPrint table#sum td.C3    {width:50px; text-align:right;}
+
+     div#divPrint div#forms          {width: 950px; height:1500px; position:fixed; top:0px; left:0px;}
+     div#divPrint div#env            {border:10px rgb(210,210,210) solid; padding-left:5px; padding-top:5px;}
+     div#divPrint tr.CH              {height:30px; vertical-align:bottom;}
+
+     div#divPrint div#panel          {position:fixed;left:900px; top:10px; width:310px; border:1px solid gray; height:350px; z-index:100; background-color:rgb(250,250,250); font-size:80%;}
+     div#divPrint div#panel p.lab    {text-align:center; width:310px; position:relative; top:auto;}
+   </style>
+  <div ng-controller=ctrlForm>
+    <!-- -----------------------Wait Cheque Load ----------------------------->
+    <div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/deposit records'></div>
+    <!-- -------------Format Array of envelopes---------------------->
+    <div ng-show='isLoaded()'>
+      <div id=divPrint style='margin-left:20px'>
+
+        <div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Deposit Summary'></div>
+
+        <div id=forms-details ng-show="oObjRep.type != 'active'">
+          <table id=sum>
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th colspan=2>Cash</th>
+                <th colspan=2>Cheque</th>
+                <th colspan=2>Total</th>
+                <th colspan=2>No Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat='oRow in getRows(oObjRep.type)'>
+                <td class=C1>{{oRow.name}}</td>
+                <td class=C2>{{oRow.CshCnt}}</td>
+                <td class=C3>{{oRow.CshAmt}}</td>
+                <td class=C2>{{oRow.ChqCnt}}</td>
+                <td class=C3>{{oRow.ChqAmt}}</td>
+                <td class=C2>{{oRow.TotCnt}}</td>
+                <td class=C3>{{oRow.TotAmt}}</td>
+                <td class=C2>{{oRow.NonCnt}}</td>
+                <td class=C3>{{oRow.NonAmt}}</td>
+              </tr>
+              </tbody>
+          </table>
+        </div>
+
+        <div id=forms-active ng-show="oObjRep.type == 'active'">
+          <table id=actives>
+            <tr>
+              <th>Code</th>
+              <th>District</th>
+              <th>Name</th>
+              <th>Phones</th>
+              <th>Address</th>
+            </tr>
+            <tr ng-repeat='oRow in getRows(oObjRep.type)'>
+               <td>{{oRow.Code}}</td>
+               <td>{{oRow.District}}</td>
+               <td>{{getNames(oRow)}}</td>
+               <td>{{getPhones(oRow)}}</td>
+               <td>{{getAddress(oRow)}}</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!------- Custom Templates ------!>
+  <script type="text/ng-template" id="panel-extra.html">
+     &nbsp;Report:
+    <input type=radio ng-model='oObjRep.type' value='month' >Month
+    <input type=radio ng-model='oObjRep.type' value='day'   >Day
+    <input type=radio ng-model='oObjRep.type' value='active'>Active
+    <br><br>
+    &nbsp;District: <select class=subacct ng-model='oObjRep.district' ng-options='oOpt.value as oOpt.name for oOpt in oDistricts'></select>
+  </script>
+
+</body>
+
+</html>

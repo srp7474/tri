@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html ng-app=app>
+  <!--
+   @license
+   Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+   This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+   http://creativecommons.org/licenses/by-sa/3.0/.
+   Contact: public.pritchard@gmail.com
+ -->
+  <link rel="shortcut icon" href="img/fav-boot0.ico" type="image/x-icon" />
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <base href='/apps/tri/'>
+    <link rel=stylesheet type ="text/css" href="Apps.css" title=defualt>
+    <script src="ut.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="TRI.min.js"></script>
+    <script src="../AppsConfig.js"></script>
+    <script src="Prime.js"></script>
+    <title>Triangular: AngularJS Booster Introduction</title>
+  </head>
+  <body style='margin-left:100px;' ng-controller=ctrlMain>
+    <style type="text/css">
+      div.section          {margin-top:1px; border-top:2px solid gray;}
+      div.section table    {margin-top:10px; margin-left:20px;}
+      div.section td.c1    {width:300px; vertical-align:top; text-align: right; padding-right:20px; padding-top:30px;}
+      div.section td.c2    {width:500px; padding-top:30px;}
+    </style>
+    <h3>Triangular: AngularJS Booster Introductory Page</h3>
+    <div class=section ng-show=!bConfigured>
+      <br><br>
+      This site introduces <b>Triangular</b> , The AngularJS booster.
+      <br><br>
+      Normally this page is not seen.  Rather it transitions to <b>/apps/tri/TriBoot.htm</b><br><br>
+      Your site under development has not yet been configured.  These links are used to
+      initially configure your site.
+      <br><br>
+      Once configured press the refresh button and you will be shown links to
+      access the site.
+      <table>
+        <tr>
+          <td class=c1><a class=c-action  href=/apps/../index.html>Triangular Documentation</a></td>
+          <td class=c2>
+            The complete online documentation for <b>Triangular</b>
+          </td>
+        </tr>
+        <tr>
+          <td class=c1><a class=c-action  href=TriBoot.htm>Datastore Prime</a></td>
+          <td class=c2>
+            This will show you the SuperUser login or Datastore prime page
+          </td>
+        </tr>
+        <tr>
+          <td class=c1><a class=c-action href=/_ah/admin>Datastore Viewer</a></td>
+          <td class=c2>
+            Provides access to the raw Datastore records
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class=section  ng-show=bConfigured>
+      please wait doc is loading
+    </div>
+  </body>
+</html>

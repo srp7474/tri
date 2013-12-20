@@ -1,0 +1,24 @@
+@ngdoc overview
+@name Guide: Multi-Window Apps
+@description
+### Overview
+<a target=_blank href="http://angularjs.org/">AngularJS</a>, in their own documentation <a href=http://docs.angularjs.org/guide/introduction target=_blank>AngularJS introduction</a>,
+is purportedly best at single-page apps.
+While this is true it is easy to extend <a target=_blank href="http://angularjs.org/">AngularJS</a> to support multiple pages using a couple of patterns.
+
+### The Display/Form Pattern
+The {@link /guide/disp-page-design Display Page Design} and {@link /guide/form-page-design Form Page Design} describe how the {@link /guide/form-page-design Form Page Design}
+can be used as secondary pages in an appliocation the uses {@link /guide/disp-page-design Display Page Design} as the primary page.
+
+The "Deps.htm" and "Chqs.htm" are samples of this pattern.
+
+### The Admin Page Pattern
+With this pattern the {@link /api/tri.controller:ctrlSess logged} in User {@link /api/tri.servGAE#setToken token} is shared among several application pages so that
+{@link /api/tri.servGAE#validateToken validateToken} of secondary pages return a 'logged in' status.
+This requires that the {@link /api/tri.servGAE#setCust setCust}
+parameter is the same for all pages.
+
+In this pattern either the URL or the localStorage is used to maintain the 'breadcrumbs' so that the secondary page knows how to return to the primary page.
+
+The "Admin.htm" page is an example of a page that acts as the secondary page.  In its case the app name is passed to as a URL parameter so that
+it can be used as the secondary page for any application.

@@ -1,0 +1,94 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <strong>Triangular</strong> system can be used in whatever environment is presently used to construct <a target=_blank href="http://angularjs.org/">AngularJS</a> pages.</p>
+
+<p>To develop in the <a href="/guide/variants">GAE Variant Mode</a> the addition of <a href="#googleappengineaccess">Google App Engine Access</a>
+and a <a href="/guide/server-inter#googleappengineimplementation">Server GAE Variant</a> is required.  The latter is provided by the <a href="/guide/devp-pkg#gaevariant">Development Package GAE Variant</a>.</p>
+
+<p>To develop in the <a href="/guide/variants">Node.js Variant Mode</a> the development system requires that
+<a target=_blank href=http://nodejs.org/>Node.js Home Page</a> be installed and accessible on the development machine.
+The <a href="/guide/server-inter#modejsimplementation">Server Node.js Variant</a> is required.
+The latter is provided by the <a href="/guide/devp-pkg#nodejsvariant">Development Package Node.js Variant</a>.</p>
+
+<p>The Chrome Browser is the browser of choice because of its excellent debugging facilities.</p>
+
+<p>The author uses <a target=_blank href='http://multiedit.com'>MultiEdit</a> mainly because of its
+excellent column edit support and its ability to save all files on a windows task switch.</p>
+
+<p>The utilities provided in the <code>/bats</code> folder in the <a href="/guide/devp-pkg">Development Package</a> are designed to run in a Windows XP/Vista/7/8 environment.
+If these are adapted to another platfrom the entire system should be compabtible with the alternate platfrom.</p>
+
+<h3 id="useoffileurl">Use of "file://" URL</h4>
+
+<p>The <strong>Triangular</strong> system has been designed to allow the testing of components using the
+"file:// " URL to load the static page.  This will trigger the internal systems to access a locally defined
+server.  This server sends the request header
+ <code>Access-Control-Allow-Origin:*</code>
+to allow this to happen.</p>
+
+<p>This capability greatly speeds the development process.  Changes can be made, saved (See <a target=_blank href='http://multiedit.com'>MultiEdit TaskSwitch save feature</a>)
+the Browser refresh button pressed (Usually &LT;F5>) and a test accomplished.</p>
+
+<p>Since the <a href="/guide/server-inter#token">token</a> persists across Browser Refreshes a new <a href="/api/tri.controller:ctrlSess#login">login</a>
+is not required for the test.</p>
+
+<p>The message</p>
+
+<pre style="color:red;">
+Blocked a frame with origin "null" from accessing a frame with origin "null". Protocols, domains, and ports must match.
+</pre>
+
+<p>can be safely ignored.  It is caused by the template loading scheme and no way to eliminate it after a refresh was discovered.</p>
+
+<p><strong>Note</strong> Using <code>localhost:8882</code> (<a href="/guide/variants">GAE Variant</a>) or <code>localhost:8888</code> (<a href="/guide/variants">Node.js Variant</a>) as the host rather than the <code>file://</code> URL can also be used.  It solves the error message problem but
+occasionally the browser <REFRESH> sometimes
+fails to reload server side files and takes them from the browser cache instead.</p>
+
+<h3 id="googleappengineaccess">Google App Engine Access</h4>
+
+<p><b>Applies to <a href="/guide/variants">GAE Variant</a></b>.</p>
+
+<p>Eventually a
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine</a> account is required.</p>
+
+<p>This can be postponed by just using the locally hosted version until production mode is required. Since the need is only to run the
+provided JAR files a full blown environment is not required.</p>
+
+<h3 id="nodejshostingsite">Node.js Hosting site</h4>
+
+<p><b>Applies to <a href="/guide/variants">Node.js Variant</a></b>.</p>
+
+<p>Eventually a place to host the Node.js code is required.
+The <a href="/tutorial">Tutorial Examples</a> use
+<a target=_blank href=https://www.nodejitsu.com>NodeJitsu  Node.js Hosting</a> as a target site.  The instructions will vary if a different
+Node.JS hosting site is used.</p>
+
+<p>This can be postponed by just using the locally hosted version until production mode is required. It requires that
+<a target=_blank href=http://nodejs.org/>Node.js Home Page</a> be installed and accessible on the development machine</p>
+
+<h3 id="runningalocalgoogleappengine">Running a local Google App Engine</h4>
+
+<p><b>Applies to <a href="/guide/variants">GAE Variant</a></b>.</p>
+
+<p>The <code>run-ws.bat</code> file in the <code>/bats</code> folder in the <a href="/guide/devp-pkg">Development Package</a> can be used to start local Google App Engine web server.
+It is configured to use port 8882.  This can be changed.</p>
+
+<p>The <a href="/guide/devp-pkg">Development Package</a> comes with a populated Datastore with the sample applications which are also installed.  The
+<a href="/guide/dataprime">Datastore Prime Overview</a> gives details on how to remove the populated Datastore.</p>
+
+<p>The applications can be removed by deleting all but the <code>AppsConfig.js</code> file out of the <code>/war/apps</code> folder.</p>
+
+<h3 id="runningalocalnodejsserver">Running a local Node.js Server</h4>
+
+<p><b>Applies to <a href="/guide/variants">Node.js Variant</a></b>.</p>
+
+<p>The <code>run-tri.bat</code> file in the <code>/bats</code> folder in the <a href="/guide/devp-pkg">Development Package</a> can be used to start local Google App Engine web server.
+It is configured to use port 8888.  This can be changed.</p>
+
+<p>The <a href="/guide/devp-pkg">Development Package</a> comes with a populated Datastore with the sample applications which are also installed.  The
+<a href="/guide/dataprime">Datastore Prime Overview</a> gives details on how to remove the populated Datastore.</p>
+
+<p>The applications can be removed by deleting all but the <code>AppsConfig.js</code> file out of the <code>/apps</code> folder.</p></div>

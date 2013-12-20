@@ -1,0 +1,16 @@
+@ngdoc overview
+@name Guide: Outstanding
+@description
+### Overview
+
+This is a short, unprioritized list of areas where **Triangular** could be improved
+
+1. Provide a batch test facility for regression testing of system.  Since the local Datastore is easily restartable from a
+saved copy this makes end to end testing feasible with data validation of the results.
+<br><br>
+I have looked at Selenuim as a possible tool to accomplish this.  Please add thoughts on this to the discussion at the foot of this page.
+
+2. Upgrade to Java 7
+
+3. More complete Browser support
+

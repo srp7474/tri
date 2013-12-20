@@ -1,0 +1,66 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>In the event that a password or userid is misplaced or forgotten the following steps can be used.</p>
+
+<h3 id="recoveryofsuperuseridandpasswordahrefguidevariantsgaevarianta">Recovery of SuperUser ID and Password (<a href="/guide/variants">GAE Variant</a>)</h4>
+
+<ol>
+<li><p>Locate the SuperUser record using the Google App Datastore utility. List the records in class <strong>com.rsi.cita.gdo.GdoCitaData</strong>.
+<br><br>
+Find the actual SuperUser record. It is stored using the key ././userid and is usually the first record.
+<br><br>
+Note or copy the numeric value of the password= property in the DataFld column..
+<br><br>
+On the local system use <a target=_blank href='http://localhost:8882/_ah/admin'>Local Datastore Viewer</a> to access the viewer.
+<br><br>
+On the production system use the Datastore Viewer under the application accessible from your Google App Engine account.
+<br><br>
+If you have no access to the Datastore Viewer you have no right to be here.</p></li>
+<li><p>Go to <a ng-click=appLoader($event) href=/apps/tri/TriBoot.htm class=c-action>SuperUser Login</a></p></li>
+<li><p>Enter the UserID.</p></li>
+<li><p>For the password enter the value <b>=</b><i>password</i><b>/</b><i>new-password</i>
+<br><br>
+where <i>password</i> is the password= value noted in step 1.
+and <i>new-password</i> is the password you wish use from now on.
+and <b>=</b> triggers the password change and the <b>/</b> terminates the token value.
+<br><br>
+Note that the password field will display * for values entered so it is safest to copy and paste the token= value.</p></li>
+<li><p>If successful the system will sign you on as the SuperUser.</p></li>
+</ol>
+
+<h3 id="recoveryofsuperuseridandpasswordahrefguidevariantsnodejsvarianta">Recovery of SuperUser ID and Password (<a href="/guide/variants">Node.JS Variant</a>)</h4>
+
+<ol>
+<li><p>You will have to locate the file <code>$super.XXX.json.txt</code> (where <code>XXX</code> is the <a href="/guide/user">SuperUser Name</a>) in the <code>TRI-DB</code> folder of the Node.JS server.  This may require
+downloading the site if this is a production server.  Inspect the text and note the password value (it will be numeric).</p></li>
+<li><p>Continue with steps 2 through 5 in the previous section.</p></li>
+</ol>
+
+<h3 id="recoveryofadminuseridandpassword">Recovery of AdminUser ID and Password</h4>
+
+<ol>
+<li><p>Sign in as the SuperUser</p></li>
+<li><p>Create a new AdminUser account for the relevant application.</p></li>
+<li><p>Sign is using the new AdminUser account.</p></li>
+<li><p>Use the <strong>List Users</strong> action to list the User records.</p></li>
+<li><p>Edit the AdminUser you wish to reset the password for.</p></li>
+<li><p>Set the password property to a temp or permanent value.  It must include at least one alphabetic character.</p></li>
+<li><p>Sign off and sign on to the fixed AdminUser ID using the password.  This will cause the password to become encrypted.</p></li>
+<li><p>Use the <strong>List Users</strong> action to list the User records.</p></li>
+<li><p>Drop the temporary AdminUser created in step 2.</p></li>
+</ol>
+
+<h3 id="recoveryofuseridandpassword">Recovery of User ID and Password</h4>
+
+<ol>
+<li><p>Sign is using the AdminUser account for the application.
+This is accessed by <code>/apps/tri/Admin.htm?cust=XXX</code> on the site URL where XXX is the
+application ID.</p></li>
+<li><p>Use the <strong>List Users</strong> action to list the User records.</p></li>
+<li><p>Edit the User you wish to reset the password for.</p></li>
+<li><p>Set the password property to a temp or permanent value.  It must include at least one alphabetic character.</p></li>
+<li><p>Inform the User of the new password.  He can use the <strong>Change Password</strong> action to change the password given in 4.</p></li>
+</ol></div>

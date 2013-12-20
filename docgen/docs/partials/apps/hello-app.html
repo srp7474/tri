@@ -1,0 +1,649 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><div ng-show='isFireFox()' class=firewarn>
+This page does not show correctly on FireFox.  The <code>hide/show</code> buttons do not work.
+</div>
+
+<p><span id=close-sections>{{closeSections()}}</span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaoverview"><a class=hider ng-click=toggleHide($event)>hide</a>Overview</h4>
+
+<p>The <strong>Hello</strong> application is a simple message board system.</p>
+
+<p>It is written with about 250 lines of code, some of it boiler-plate. (324 actual less example comments and spaced out formatting).</p>
+
+<p>In that amount of code it:</p>
+
+<ul>
+<li><p>Maintains a single table with 7 columns and one virtual column on a safe cloud storage location.</p></li>
+<li><p>Executes several field validations during editing.</p></li>
+<li><p>Allows for various filters to quickly access records</p></li>
+<li><p>Allows the selected records to be printed (multiple pages supported)</p></li>
+<li><p>Has secure access and user inactivity timeouts.</p></li>
+</ul>
+
+<p>The <strong>... Explained</strong> sections which follow the <strong>Demonstration</strong> section give you a line-by-line explanation of the complete set of code required
+to create this application.</p>
+
+<p>To run a demonstration now click on the <a ng-click=appLoader($event) href=/apps/Hello.htm>Hello App Demo</a> link.
+It will be in a new tab so you can still refer to the instructions in the next section.</p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideademonstration"><a class=hider ng-click=toggleHide($event)>hide</a>Demonstration</h4>
+
+<p><strong>Note 1</strong> It runs in <a href="/guide/sandbox">SandBox Mode</a> so you cannot damage anything.</p>
+
+<p><strong>Note 2</strong> This has been tested under <strong>Chrome</strong> which is the recommended browser for these demonstrations.</p>
+
+<ul>
+<li><p>If not started, open up link <a ng-click=appLoader($event) href=/apps/Hello.htm>Hello Application</a>. It will be in a new tab so you can still refer to these instructions.</p></li>
+<li><p>Press <strong>login</strong> button, the <code>UserName</code> and <code>Password</code> are already provided.</p></li>
+<li><p>Click on <code>List Messages Records</code> action.  You will see some records.</p></li>
+<li><p>Play with the filters by entering data.  Masks use regular expressions with case sensitivity turned off.</p></li>
+<li><p>Click on <code>edit</code> to edit a record.  Enter data and you will see the validation routines kick in. While there is an error the <code>Save Changes</code> link is disabled and
+shows as <code>Make Changes</code>.</p></li>
+<li><p>Press <code>Save Changes</code> or <code>Cancel Changes</code> to exit edit mode.  The list will show the modified data if saved.</p></li>
+<li><p>Click on <code>Create New Messages Record</code> to create a new record.  Enter new data. Again the validation routines will kick in</p></li>
+<li><p>Press <code>Save Changes</code> or <code>Cancel Changes</code> to exit edit mode. The list will show the new record if saved.</p></li>
+<li><p>Click on <code>Print Selected Messages</code>. It will create a new tab with the selected records shown in the print portion of the page,</p></li>
+<li><p>Press <code>Submit to print dialogue</code> to create a print preview dialogue.  Cancel out if you do not want to actually print the page. It will consider it printed
+and will disable the <code>Submit to print dialogue</code> until the next page is generated using the <code>Prepare next page</code> button.</p></li>
+<li><p>Press <code>Prepare next page</code> to cycle through the messages if there are more than 6.</p></li>
+<li><p>Press <code>Close Page</code> to close the page.  If instead you tab back to the <code>Hello.htm</code> window and select a new set of records, press <code>Print Selected Messages</code> again
+it will update the existing <code>FormHello.htm</code> window.</p></li>
+</ul>
+
+<p><span id='Hello.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideahellohtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>Hello.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-msgs0.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="tri/AppStd.css" title=default&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="Hello.js"&gt;&lt;/script&gt;
+&lt;title&gt;Hello:Defined during bootstrap&lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body id=bodyID&gt;
+&lt;macro fetch='apps-body.html' alter='##TITLE##/Message Board System Login'&gt;&lt;/macro&gt;                 &lt;!-- standard body --&gt;
+
+&lt;macro fetch='apps-copyright-notice.html'&gt;&lt;/macro&gt;                                                  &lt;!-- copyright notice --&gt;
+
+&lt;object data='tri/AppsBase.htm?app=Chqs' id=apps-templates style='width:0px;height:0px;'&gt;&lt;/object&gt;  &lt;!-- load standard templates --&gt;
+
+&lt;!---------------------------- Custom CSS ----------------------------------!&gt;
+&LT;style type="text/css"&gt;
+  /* Note: this could be in a separate .css file if preferred */
+  /* messages lister */
+  table#list-messages                                    {width:980px;}
+  table#list-messages thead                              {width:980px;}
+  table#list-messages td.c0, table#list-messages th.c0   {width:100px;}
+  table#list-messages td.c1, table#list-messages th.c1   {width:120px; }
+  table#list-messages td.c2, table#list-messages th.c2   {width:100px; }
+  table#list-messages td.c3, table#list-messages th.c3   {width:80px; }
+  table#list-messages td.c4, table#list-messages th.c4   {width:580px; }
+  table#list-messages td.c4                              {text-align:left; padding-left:10px; }
+  fieldset.list-comm input#_custmask                     {width:180px;}
+
+  /* messages editor */
+  div#editor                                             {width:900px;}
+  div#chq-edit                                           {margin-left:10px;}
+  div#chq-hdr                                            {width:900px;}
+  div#flds-messages  #msg-text                           {width:500px; height:200px;}
+&LT;/style&gt;
+
+&lt;!------- Custom Templates ------!&gt;
+&lt;object type='text/html' id=cust-templates style='width:0px;height:0px;'&gt;
+  &LT;pre class=template id="textarea.html"&gt;
+     &lt;textarea id=msg-text ng-model='oObj[oCol.col]' placeHolder='enter or paste the message text (30 chars min)'&gt;
+       enter text here
+     &lt;/textarea&gt;
+  &LT;/pre&gt;
+
+  &LT;pre class=template id="select.html"&gt;
+     &lt;select id=msg-type ng-model='oObj[oCol.col]' ng-init=technical&gt;
+       &lt;option&gt;technical&lt;/option&gt;
+       &lt;option&gt;sports&lt;/option&gt;
+       &lt;option&gt;politics&lt;/option&gt;
+       &lt;option&gt;legal&lt;/option&gt;
+       &lt;option&gt;other&lt;/option&gt;
+     &lt;/select&gt;
+  &LT;/pre&gt;
+&lt;/object&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre></div>
+
+<ul>
+<li><p>Line <code>3</code> specifies the <strong>favicon.ico</strong> used as the icon on the browser tabs.</p></li>
+<li><p>Line <code>6</code> specifies the <strong>.css</strong> file to use, in this case the default one provided with <strong>Triangular</strong></p></li>
+<li><p>Lines <code>7</code> thru <code>10</code> are coded as is. The sequence is important.  They bootstrap the <strong>Triangular</strong> infrastructure.</p></li>
+<li><p>Line <code>10</code> loads the <code>AppConfig.js</code> file explained in <a href="/guide/appsconfig">AppsConfig.js File</a></p></li>
+<li><p>Line <code>11</code> loads the <code>Hello.js</code> file, the partner <a href="/guide/appname-js">AppName.js File</a></p></li>
+<li><p>Line <code>12</code> specifies the temporary title (recorded on Google Analytics).  It is replaced by the
+<code>servSess.setTitle</code> about line <code>16</code> of the <code>Hello.js</code> file.</p></li>
+<li><p>Line <code>13</code> initiates the Google Analytics tracking.  By default all page views and link clicks are recorded.  The
+tracking code is specified in <code>AppsConfig.js</code>.</p></li>
+<li><p>Line <code>17</code> inserts the main HTML body and sets the login title to <code>Message Board System Login</code>. See <a href="/api/tri.directive:macro">Macro.fetch</a>
+Note that this demonstrates the recursive nature of the <code>macro</code> directive.  That is, templates inserted themselves contain more <code>macro</code> directives.</p></li>
+<li><p>Line <code>19</code> inserts the optional copyright notice.  See <a href="/api/tri.directive:macro">Macro.fetch</a></p></li>
+<li><p>Line <code>21</code> loads the standard templates and is specified as shown. See <a href="/guide/templates">Templates</a>.</p></li>
+<li><p>Lines <code>23</code> thru <code>42</code> define new or replacement <strong>.css</strong> that specify the lister column widths and specific edit field characteristics.
+They could be in a separate <strong>.css</strong> file and loaded after line <code>6</code>.</p></li>
+<li><p>Lines <code>45</code> thru <code>61</code> provide additional templates referenced in the <code>Hello.js</code> file around line <code>65</code> and <code>80</code>.  These templates supplement
+the default editor fields.</p></li>
+</ul>
+
+<p><span id='Hello.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideahellojsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>Hello.js Explained</h4>
+
+<p><strong>Note:</strong> Normally this code would be fewer lines because many statement would be stretched across the line.  It is formatted the way it is
+to allow for easier reading in this viewing panel.</p>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+/*
+This is a sample application designed to run under the Triangular Infrastructure
+*/
+"use strict";
+
+// ---------------------------------------------------------------------------
+/* This forces angular to load the tables and their dependencies
+*
+* We rely on the implied dependency injection to haul in only the tables needed and
+* thus automatically configure the system menus and available actions.
+*/
+
+function ctrlMain($scope,servSess,servGAE,servREG,tblMSGS,servCRUD,servConfig) {
+log("Created ctrlMain for messages application");
+servGAE.setCust("msgs");
+servSess.setTitle("Message Board System");
+
+var oOMs = [{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'}];
+servSess.setOptMenuItems(oOMs);
+
+function xfrAdminFunctions() {
+  servSess.xfrAdminApp("msgs");
+}
+}
+
+//----------------------------------------------------------------------------
+//-------------------------------- Message records ------------------------------
+//----------------------------------------------------------------------------
+oApp.factory('tblMSGS',['servREG','servGAE','servREC','servSess',function(servREG,servGAE,servREC,servSess) {
+var oFuncs = {};
+
+var oTabProp = {
+     recTitle: 'Messages'
+    ,recName:  'messages'
+    ,recType:  'msg'
+    ,lsName:   '-msgs'
+    ,tabServ:  oFuncs    //self pointer
+    ,recServ:  servREC
+    ,order:    {col:'date', seq:'reverse'}
+    ,cols:     [{type:'actions',    title:      'Actions'
+                                   ,showEdit:   false
+                                   ,addDefault: true
+                }
+               ,{col: 'time',       title:      'Time'
+                                   ,showList:   false
+                                   ,readonly:   true
+                }
+               ,{col: 'date',       title:      'Date'
+                                   ,showList:   false
+                                   ,readonly:   isReadOnly
+                }
+                ,{col: 'author',    title:      'Author'
+                                   ,hint:       'str hint example'
+                                   ,place:      'str placeholder'
+                                   ,reqd:       true
+                                   ,mask:       '[A-Za-z\\s\.\-]'
+                }
+               ,{col: 'type',       title:      'Type'
+                                   ,type:      'cust'
+                                   ,htmlCust:  'select.html'
+                }
+               ,{col: calcAge,      title:      'Age'
+                                   ,listHint:   ageHint
+                }
+               ,{col: 'title',      title:      'Title'
+                                   ,place:      titlePlace
+                                   ,hint:       titleHint
+                                   ,reqd:       10
+                                   ,listHint:   textSum
+                                   ,listMax:    60
+                }
+               ,{col: 'text',       title:      'Message'
+                                   ,showList:   false
+                                   ,type:      'cust'
+                                   ,htmlCust:  'textarea.html'
+                                   ,reqd:       30
+                }
+              ]
+    ,filters: [
+              {type: 'mask',   field:    'author'  }
+             ,{type: 'mask',   field:    'type'    }
+             ,{type: 'cust',   field:    '_custmask'
+                              ,title:    'Title/Text'
+                              ,place:    'title search or =text search'
+                              ,methCust: custMask
+              }
+              ]
+    ,createExit          : createExit
+    ,optActions          : [
+                           {   click:     'printSelected()'
+                              ,title:     'Press to print selected messages'
+                              ,label:     'Print Selected Messages'
+                              ,whatClass: 'canPrintSelected()'
+                           }
+                           ]
+};
+
+oFuncs.getTabProp       = function()     {return oTabProp;}
+oFuncs.printSelected    = function()     {printSelected();}
+oFuncs.canPrintSelected = function()     {return canPrintSelected();}
+
+servREG.registerTable(oFuncs);
+return oFuncs;
+
+// -------------------------------------------------------------------------
+
+function printSelected() {
+  var oHandler = function(event) {
+    log("printSelected Handler called %o",event);
+    var oObjs = getSelectedObjs();
+    var oMsg = {verb:'msgs:obj-data',payload:{objs:oObjs}};
+    event.source.postMessage(oMsg,"*");
+  }
+  servSess.createFormWindow('msgs',oHandler,"Hello.htm","FormHello.htm");
+}
+
+function canPrintSelected() {
+  var oObjs = getSelectedObjs();
+  if (oObjs.length &gt; 0) return 'c-action';
+  return 'c-quiet';
+}
+
+function getSelectedObjs() {
+  var oTAB = servSess.getTabServ();
+  if (oTAB == null) return [];
+  return oTAB.getSelObjs();
+}
+
+function custMask(oTab,oObjs,oData,oFil) {
+  var sStr = oData[oFil.field] || '';
+  if (sStr.substring(0,1) == '=') {
+    return servSess.maskReduce(oObjs,sStr.substring(1),'text');
+  } else {
+    return servSess.maskReduce(oObjs,sStr,'title');
+  }
+}
+
+function isReadOnly(scope,oCol) {
+  return !servSess.isAdmin();
+}
+
+
+function titlePlace(scope,oCol) {
+  return 'func place:'+oCol.getTitle();
+}
+function titleHint(scope,oCol) {
+  return 'func hint:'+oCol.getTitle();
+}
+
+function ageHint(scope,oObj,oCol) {
+  return 'Date:'+oObj.date+' time:'+oObj.time;
+}
+
+function textSum(scope,oObj,oCol) {
+  var sStr = ""+oObj.text;
+  if (sStr.length &gt; 80) sStr = sStr.substring(0,80)+" ...";
+  return sStr;
+}
+
+function calcAge(oObj,scope,oCol) {return tri.calcAgo(oObj.date,oObj.time);}
+
+function createExit(oObj) {
+  var sNow = ""+getNowString();
+  oObj.date      = sNow.substring(0,8);
+  oObj.time      = sNow.substring(9,9+6);
+  oObj.type      = 'technical';  // matches select in select.html template
+  return true;
+}
+
+}]);
+</pre></div>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideapreamble"><a class=hider ng-click=toggleHide($event)>hide</a>Pre-amble</h6>
+
+<ul>
+<li><p>Line <code>4</code> specifies <code>use strict</code>.  All <strong>Triangular</strong> Javascript runs under this mode as it catches
+many coding mis-names during development. Recommended.</p></li>
+<li><p>Line <code>13</code> defines the <code>ctrlMain</code>. Apart from the <code>tblMSGS</code> specification, all others define referenced services
+and the <code>$scope</code> provided by <a target=_blank href="http://angularjs.org/">AngularJS</a>.  The <code>tblMSGS</code> triggers the loading of the table whose definition begins around line <code>30</code>.</p></li>
+<li><p>Line <code>15</code> specifies the application ID under which data is stored. See <a href="/api/tri.servGAE#setCust">servGAE.setCust</a>.</p></li>
+<li><p>Line <code>16</code> provides the application title a modified version of which is displayed in the standard page heading and the Browser title.
+See <a href="/api/tri.servSess#setTitle">servSess.setTitle</a> and <a href="/api/tri.servSess#getTitle">servSess.getTitle</a>.</p></li>
+<li><p>Lines <code>18</code> thru <code>19</code> define the mechanism for adding optional 'action' links to the Menu. The <code>role</code> property will restrict
+the 'action' to users that include the specified <code>role</code> in their <a href="/guide/user">User Profile</a>. See <a href="/api/tri.servSess#setOptMenuItems">servSess.setOptMenuItems</a>
+<br><br>
+If what to add depends on factors than the user's roles, the <code>logonExit</code> is a better place to add the optional menu items.
+This is seen in <a href="/apps/chqs-app">Chqs App</a>.</p></li>
+<li><p>Lines <code>18</code> and <code>21</code> thru <code>23</code> define the mechanism for 'admin' users to transfer control to the <a href="/guide/admin">Admin Application</a>.
+See <a href="/api/tri.servSess#xfrAdminApp">servSess.xfrAdminApp</a></p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideatabledefinition"><a class=hider ng-click=toggleHide($event)>hide</a>Table definition</h6>
+
+<ul>
+<li><p>Line <code>29</code> begins the definition of the <a href="/guide/table">Table(static)</a>, in this case, <code>tblMSGS</code>.  The other identifed services are required by the
+table and are specified as shown.  The right hand side references are in the same sequence as the left hand references.</p></li>
+<li><p>Line <code>30</code> is coded as shown and referenced later.</p></li>
+<li><p>Line <code>32</code> is coded as shown and begins the table properties definition as explained in <a href="/guide/table#definitionsyntax">Table Definition Syntax</a></p></li>
+<li><p>Lines <code>33</code> thru <code>36</code> define the table names.  They are explained in <a href="/guide/table#definitionsyntax">Table Definition Syntax</a></p></li>
+<li><p>Line <code>38</code> means this table will be stored in <a href="/guide/records#supportedrecordtypes">REC Mode</a> (batched together).</p></li>
+<li><p>Line <code>39</code> means the <a href="/api/tri.controller:ctrlCommList">Lister</a> will list the rows in reverse sequence sorted on the <code>date</code> column.
+Refer to <a href="/guide/table#definitionsyntax">Table Definition Syntax.order</a></p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideacolumndefinitions"><a class=hider ng-click=toggleHide($event)>hide</a>Column definitions</h6>
+
+<p>Lines <code>40</code> through <code>78</code> define the table columns.  The parameters are explained in <a href="/guide/col#definitionsyntax">col.Definition Syntax</a></p>
+
+<ul>
+<li><p><strong>Actions</strong>:  Lines <code>40</code> thru <code>43</code> adds the action items which is the left most column of the <a href="/api/tri.controller:ctrlCommList">Lister</a> list. In this case we are
+using the default values of <code>edit</code> and <code>drop</code>.</p></li>
+<li><p><strong>Time</strong>: Lines <code>44</code> thru <code>47</code> defines the <code>time</code> column.  The <code>readonly</code> property or <code>true</code> means that the value cannot be changed by the <a href="/api/tri.controller:ctrlCommEdit">Edit</a> operation.
+This usually means the
+<a href="/guide/table#exitfunctions">table.creatExit</a> will determine the value.</p></li>
+<li><p><strong>Date</strong>: Lines <code>48</code> thru <code>51</code> defines the <code>date</code> column.  The <code>readonly</code> property of <code>isReadOnly</code> points to a local function that determines the true of false value at run time.
+This is usually accompanied by the use of the
+<a href="/guide/table#exitfunctions">table.creatExit</a> to set the default value.</p></li>
+<li><p><strong>Author</strong>: Lines <code>52</code> thru <code>56</code> define the <code>author</code> column.</p></li>
+<li><p>Line <code>53</code> adds a hint string value to the input field of the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a></p></li>
+<li><p>Line <code>54</code> adds a place-holder string value to the input field of the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a></p></li>
+<li><p>Line <code>55</code> means the field is required</p></li>
+<li><p>Line <code>56</code> specifies a validation mask for the field</p></li>
+<li><p><strong>Type</strong>: Lines <code>58</code> thru <code>61</code> define the <code>type</code> column.</p></li>
+<li><p>Line <code>59</code> property <code>type</code> value <code>cust</code> means the <code>htmlCust</code> property will be used to add the edit field instead of  a default <code>&lt;input ...</code> field.</p></li>
+<li><p>Line <code>60</code> property <code>type</code> value <code>htmlCust</code> references the template that will be used for this field on the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> built page.
+In this case it is the <code>select.html</code> beginning in line <code>52</code> of <code>Hello.htm</code>.</p></li>
+<li><p><strong>Age</strong>: Lines <code>62</code> thru <code>64</code> define the <code>Age</code> virtual column.  The value for the <a href="/api/tri.controller:ctrlCommList">Lister</a> <code>Age</code> column is
+obtained by calling <code>calcAgo</code> with a signature of <code>calcAgo(oObj,scope,oCol)</code>.</p></li>
+<li><p>Line <code>63</code> adds a computed hint string <a href="/api/tri.controller:ctrlCommList">Lister</a> <code>Age</code> column</p></li>
+<li><p><strong>Title</strong>: Lines <code>65</code> thru <code>71</code> define the <code>title</code> column.</p></li>
+<li><p>Line <code>66</code> adds a computed place-holder string to the <a href="/api/tri.controller:ctrlCommEdit">Edit</a> <code>title</code> input field</p></li>
+<li><p>Line <code>67</code> adds a computed hint string to the <a href="/api/tri.controller:ctrlCommEdit">Edit</a> <code>title</code> input field</p></li>
+<li><p>Line <code>68</code> specifies the <code>title</code> field must be at least 10 characters long.  This is checked during the <a href="/api/tri.controller:ctrlCommEdit">Edit</a> validation cycle.</p></li>
+<li><p>Line <code>69</code> adds a computed hint string <a href="/api/tri.controller:ctrlCommList">Lister</a> <code>Title</code> column</p></li>
+<li><p>Line <code>70</code> restricts the <code>Title</code> column text to no more than 60 characters.</p></li>
+<li><p><strong>Text</strong>: Lines <code>72</code> thru <code>77</code> define the <code>text</code> column.</p></li>
+<li><p>Line <code>73</code> determines it is not part of the <a href="/api/tri.controller:ctrlCommList">Lister</a> list</p></li>
+<li><p>Lines <code>74</code> and <code>75</code> cause the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> to use the <code>textarea.html</code> for the input area.  This is explained
+more fully in lines <code>59</code> and <code>60</code>.</p></li>
+<li><p>Line <code>76</code> specifies the <code>title</code> field must be at least 30 characters long.  This is checked during the <a href="/api/tri.controller:ctrlCommEdit">Edit</a> validation cycle.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideafilterdefinitions"><a class=hider ng-click=toggleHide($event)>hide</a>Filter definitions</h6>
+
+<p>Lines <code>79</code> through <code>87</code> define the table filters.  The parameters are explained in <a href="/guide/filter#definitionsyntax">filter.Definition Syntax</a></p>
+
+<ul>
+<li><p>Lines <code>80</code> and <code>81</code> insert a standard filter for fields <code>author</code> and <code>type</code></p></li>
+<li><p>Lines <code>82</code> thru <code>85</code> insert a custom filter for fields <code>title</code> and <code>text</code>.  The local function <code>custMask</code> determines which field is tested based on the
+input format.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideaadditionaldefinitions"><a class=hider ng-click=toggleHide($event)>hide</a>Additional definitions</h6>
+
+<p>By convention the optional entries are coded at the end of the table definition.  The <code>Hello.js</code> file has two of them.</p>
+
+<ul>
+<li><p>Line <code>88</code> defines the local function to process the <code>createExit</code> which will be called whenever a new object is created. By convention it is called <code>createExit</code>.
+It is typically used to format the object with default values.</p></li>
+<li><p>Lines <code>89</code> thru <code>94</code> inserts an optional action link as part of the <a href="/api/tri.controller:ctrlCommList">Lister</a> page.</p></li>
+<li><p>Line <code>90</code> indicates that local function <code>printSelected()</code> will be called when the click is processed.  The $event could be passed in but is not
+required in this case.</p></li>
+<li><p>Line <code>91</code> provides a hint of <code>Press to print selected messages</code> for the action link</p></li>
+<li><p>Line <code>92</code> provides the text of <code>Print Selected Messages</code> as the anchor link text.</p></li>
+<li><p>Line <code>93</code> provides a function that will be called to determine if the link is active.  Returning <code>c-action</code> says yes and <code>q-action</code> says no.  If the link is
+inactive the <code>click</code> event is automatically ignored.  See <a href="/api/tri.directive:whenActive">whenActive</a>.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhideapostamble"><a class=hider ng-click=toggleHide($event)>hide</a>Post-amble</h6>
+
+<ul>
+<li><p>Lines <code>98</code> thru <code>103</code> perform final linkage functions.</p></li>
+<li><p>Line <code>98</code> makes the <code>oTabProp</code> object public and is coded as is.</p></li>
+<li><p>Lines <code>99</code> and <code>100</code> make <code>printSelected</code> and <code>canPrintSelected</code> public so they can be automatically linked to when the
+optional action link is created in lines <code>89</code> thru <code>94</code>.
+<br><br>
+<strong>Note:</strong> Functions that are referenced in HTML (even that manufactured) needs to be registered in the <code>$scope</code>.  This is done by <strong>Triangular</strong> automatically.
+In order for <strong>Triangular</strong> to find the function it needs to be made public in <code>oFuncs</code>.  Local functions called directly by <strong>Triangular</strong> do not
+need to be registered in this way.</p></li>
+<li><p>Line <code>102</code> registers the table and is coded as is. See <a href="/api/tri.servREG#registerTable">servREG.registerTable</a></p></li>
+<li><p>Line <code>103</code> returns the public functions to the caller.  It is required and coded as is.  Only local functions can follow
+because they are never invoked unless referenced by the preceding code.</p></li>
+</ul>
+
+<h5 id="aclasshiderngclicktogglehidedeventhidealocalfunctions"><a class=hider ng-click=toggleHide($event)>hide</a>Local Functions</h6>
+
+<ul>
+<li><p>Lines <code>107</code> thru <code>115</code> creates the <code>printSelected</code> local function referenced in line <code>90</code>.</p></li>
+<li><p>Lines <code>108</code> thru <code>113</code> creates the anonymous message handler function registered in line <code>114</code>.  It does not check the message type
+since it is only called from one place.  It returns the selected objects to the calling window with a verb of <code>msgs:obj-data</code>.</p></li>
+<li><p>Line <code>114</code> registers the handler under the <code>msgs</code> prefix and transfers control to a secondary window that uses <code>FormHello.htm</code> as its initial load page.  It uses <a href="/api/tri.servSess#createFormWindow">servSess#createFormWindow</a>
+to accomplish this task. The <code>msgs</code> prefix ties the messages sent by <code>FormHello.js</code> in line <code>22</code> to this function.</p></li>
+<li><p>Lines <code>117</code> thru <code>121</code> creates the <code>canPrintSelected</code> local function referenced in line <code>93</code>.  It determines if the link should be active or not.
+See <a href="/api/tri.directive:whenActive">whenActive</a></p></li>
+<li><p>Lines <code>117</code> thru <code>121</code> is a local function <code>getSelectedObjs</code> that uses <strong>Triangular</strong> functions to determine the current selected objects.</p></li>
+<li><p>Lines <code>129</code> thru <code>136</code> creates the <code>custMask</code> local function referenced in line <code>85</code>.  It uses a prefix of '=' to select the <code>text</code> column vs the <code>title</code> column
+as the object of the filter.  It uses the utility function <a href="/api/tri.servSess#maskReduce">servSess.maskReduce</a>
+to reduce the object set based on the given mask.</p></li>
+<li><p>Lines <code>138</code> thru <code>140</code> creates the <code>isReadOnly</code> local function referenced in line <code>50</code>.
+It allows a user with 'admin' role to change the <code>date</code> of the message.</p></li>
+<li><p>Lines <code>143</code> thru <code>158</code> creates simple local functions <code>titlePlace</code>, <code>titleHint</code>, <code>ageHint</code> and <code>textSum</code>
+to showcase the ability of creating dynamic help and place-holder strings.
+They are referenced in lines <code>66</code>,<code>67</code>, <code>63</code> and <code>69</code> respectively.</p></li>
+<li><p>Lines <code>160</code> thru <code>140</code> creates the <code>calcAge</code> local function referenced in line <code>62</code>.
+It creates a dynamic value that is the approximate age of the message using <a href="/api/tri.object.Tri#calcAgo">tri#calcAgo</a>.</p></li>
+<li><p>Lines <code>162</code> thru <code>168</code> creates the <code>createExit</code> local function referenced in line <code>88</code>.  It sets initial values for the <code>date</code>, <code>time</code> and <code>type</code> columns.
+The <code>type</code> initial value matches the string in <code>Hello.htm</code> line <code>54</code>.  It could be any of these values and <a target=_blank href="http://angularjs.org/">AngularJS</a> will correctly
+initialize the select control.</p></li>
+</ul>
+
+<p><span id='FormHello.htm'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformhellohtmexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormHello.htm Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+&lt;html&gt;
+&lt;style type="text/css"&gt;&lt;/style&gt;
+&lt;link rel="shortcut icon" href="tri/img/fav-msgs1.ico" type="image/x-icon" /&gt;
+
+&lt;head&gt;
+&lt;link rel=stylesheet type ="text/css" href="tri/AppStd.css" title=defualt&gt;
+&lt;script src="tri/ut.js"&gt;&lt;/script&gt;
+&lt;script src="tri/angular.min.js"&gt;&lt;/script&gt;
+&lt;script src="tri/TRI.min.js"&gt;&lt;/script&gt;
+&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;
+&lt;script src="FormHello.js"&gt;&lt;/script&gt;
+&lt;title&gt;Hello - Messages Printer V1.0 &lt;/title&gt;
+&lt;script&gt;gaTracking();&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=app&gt;
+&lt;div ng-controller=ctrlForm&gt;
+  &lt;div class=for-template html='forms-waiting.html' ng-include='wait_template' alter='##what##/messages'&gt;&lt;/div&gt;
+  &lt;!-- -------------Format Array of Messages----------------------&gt;
+  &lt;div ng-show='isLoaded()'&gt;
+    &lt;style type="text/css"&gt;
+      div#divPrint span.title         {font-size:12pt; font-weight:bold;}
+      div#divPrint span.author        {color:blue;}
+      div#divPrint p.text             {font-size:80%; margin-bottom:0px;}
+      div#divPrint div.date           {font-size:60%; color:rgb(210,210,210); text-align:right; margin-top:5px;}
+
+      div#divPrint div#forms          {width: 950px; height:1500px;}
+      div#divPrint div#msgs           {border-top:1px rgb(210,210,210) solid; padding-left:5px; padding-top:5px; margin-top:20px;}
+
+      div#divPrint  div#panel         {left:1100px; background-color:rgb(255,255,210);} /* showcase panel override */
+
+    &lt;/style&gt;
+    &lt;div id=divPrint style='margin-left:20px'&gt;
+      &lt;div class=for-template html='forms-panel.html' ng-include='panel_template' alter='##what##/Messages'&gt;&lt;/div&gt;
+      &lt;div id=forms&gt;
+        &lt;div id=msgs ng-repeat='oObj in oPrtObjs'&gt;
+          &lt;div id=msg&gt;
+            &lt;span class=title&gt;&lt;span class=author&gt;{{oObj.author}}&lt;/span&gt;: {{oObj.title}}&lt;/span&gt;
+            &lt;p class=text&gt;{{oObj.text}}&lt;/p&gt;
+            &lt;div class=date&gt;Type: {{oObj.type}} &nbsp;&nbsp;&nbsp;&nbsp; Date: {{getDate(oObj)}}&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre></div>
+
+<ul>
+<li><p>Line <code>3</code> specifies the <strong>favicon.ico</strong> used as the icon on the browser tabs.</p></li>
+<li><p>Line <code>6</code> specifies the <strong>.css</strong> file to use, in this case the default one provided with <strong>Triangular</strong></p></li>
+<li><p>Lines <code>7</code> thru <code>10</code> are coded as is. The sequence is important.  They bootstrap the <strong>Triangular</strong> infrastructure.</p></li>
+<li><p>Line <code>10</code> loads the <code>AppConfig.js</code> file explained in <a href="/guide/appsconfig">AppsConfig.js File</a></p></li>
+<li><p>Line <code>11</code> loads the <code>FormHello.js</code> file, the supporting .js file detailed in the next section.</p></li>
+<li><p>Line <code>12</code> specifies the title (recorded on Google Analytics) and displayed in the Browser tab.</p></li>
+<li><p>Line <code>13</code> initiates the Google Analytics tracking.  By default all page views and link clicks are recorded.  The
+tracking code is specified in <code>AppsConfig.js</code>.</p></li>
+<li><p>Line <code>15</code> inserts the main HTML &lt;body> and initiates the <a target=_blank href="http://angularjs.org/">AngularJS</a> application,</p></li>
+<li><p>Line <code>16</code> sets the <a target=_blank href="http://angularjs.org/">AngularJS</a> controller to <code>ctrlForm</code> defined in <code>FormHello.js</code></p></li>
+<li><p>Line <code>17</code> inserts the <code>forms-waiting.html</code> template from <code>AppsBase.htm</code> using the <a href="/api/tri.object.Tri#loadTemplates">tri.loadTemplates</a> utility.</p></li>
+<li><p>Lines <code>18</code> thru <code>44</code> define the 'print' area.</p></li>
+<li><p>Line <code>19</code> causes the print area to be hidden until the objects are received from the <code>Hello.htm</code> window. <code>isLoaded</code> is defined in <code>FormHello.js</code>
+line <code>12</code></p></li>
+<li><p>Lines <code>20</code> thru <code>31</code> define custom <strong>css</strong> styles for the print page.  Line <code>29</code> shows how to overide the right side control panel. (The default uses
+class references. The overides use id references which have a higher <strong>css</strong> weight).</p></li>
+<li><p>Line <code>33</code> inserts the <code>forms-panel.html</code> template from <code>AppsBase.htm</code> using the <a href="/api/tri.object.Tri#loadTemplates">tri.loadTemplates</a> utility.
+This is the panel shown on the right side of the screen (off of the 'print' area).
+<br><br>
+The <code>alter=</code> statement gives a better name of <code>Messages</code> to the print panel. The style of the panel can be changed as in line <code>29</code>.</p></li>
+<li><p>Lines <code>34</code> thru <code>42</code> layout the print area.  It uses the <code>ng-repeat</code> to get upto 6 records. The variable <code>oPrtObjs</code> is maintained in <code>FormHello.js</code> lines
+<code>8</code>, <code>32</code> and <code>60</code>.
+<br><br>
+The <a target=_blank href="http://angularjs.org/">AngularJS</a> bind operation {{bindOp}}..}} is used to extract the columns directly from the field (eg. <code>oObj.text</code>) or to call a function in
+FormHello.js (eq <code>getDate(oObj)</code>).</p></li>
+</ul>
+
+<p><span id='FormHello.js'></span></p>
+
+<h3 id="aclasshiderngclicktogglehidedeventhideaformhellojsexplained"><a class=hider ng-click=toggleHide($event)>hide</a>FormHello.js Explained</h4>
+
+<div class=scroll-region><pre class="prettyprint linenums">
+"use strict";
+
+// ---------------------------------------------------------------------------
+function ctrlForm($scope,$rootScope,$templateCache) {
+$scope.bPrinted  = false;
+$scope.oAllObjs  = null;
+$scope.nPageIX   = 0;
+$scope.oPrtObjs  = [];
+$scope.oOptActions = [{whatClass:'nextBatch();', click:'prepareNextPage();', title:'move to next batch of messages',label:'Prepare next page'}];
+if (!window.opener) return;
+
+$scope.isLoaded         = function()               {return ($scope.oAllObjs != null);}
+
+$scope.nextBatch        = function()               {return nextBatch();}
+$scope.printPage        = function()               {$scope.bPrinted = true; window.print();}
+$scope.prepareNextPage  = function()               {prepareNextPage();}
+$scope.getDate          = function(oObj)           {return getDate(oObj);}
+
+log("ctrlForm now loaded opener="+(window.opener != null));
+
+hookMsgListener();
+tri.postToOpener({verb:"msgs:send-print-info"});
+return;
+
+// local functions
+function hookMsgListener() {
+  tri.loadTemplates($rootScope,$templateCache);
+  var oHandler = function(event) {
+    if (event.data.verb) {
+      if (event.data.verb == "msgs:obj-data") {
+        $scope.oAllObjs   = event.data.payload.objs;
+        $scope.oPrtObjs   = $scope.oAllObjs.slice(0,6);
+        $scope.$digest();
+      } else {
+        console.log("spurious event msg ",event.data);
+      }
+    }
+  }
+  oGBL.msgHandler.msgs = oHandler;
+}
+
+// scoped functions
+function getDate(oObj) {
+  return oObj.date.substring(0,4)
+         +"-"+oObj.date.substring(4,6)
+         +"-"+oObj.date.substring(6,8)
+         +" "+oObj.time.substring(0,2)
+         +":"+oObj.time.substring(2,4);
+}
+
+function nextBatch() {
+  if (!$scope.oAllObjs) return 'c-quiet';
+  if ($scope.nPageIX + 6 &lt; $scope.oAllObjs.length) return 'c-action';
+  return 'c-quiet';
+}
+
+function prepareNextPage() {
+  $scope.nPageIX += 6;
+  $scope.bPrinted = false;
+  $scope.oPrtObjs   = $scope.oAllObjs.slice($scope.nPageIX,$scope.nPageIX+6);
+}
+
+}
+</pre></div>
+
+<ul>
+<li><p>Line <code>1</code> specifies <code>use strict</code>.  All <strong>Triangular</strong> Javascript runs under this mode as it catches
+many coding mis-names during development. Recommended.</p></li>
+<li><p>Line <code>4</code> defines the <code>ctrlForm</code>. All parameters define referenced services
+and the <code>$scope</code> provided by <a target=_blank href="http://angularjs.org/">AngularJS</a>. This is referenced in line <code>16</code> of <code>FormHello.htm</code></p></li>
+<li><p>Lines <code>5</code> thru <code>9</code> initialize <code>$scope</code> variables.</p></li>
+<li><p>Line  <code>9</code> defines optional actions that is used by the <code>form-panel.html</code> template loaded in line <code>33</code> of <code>FormHello.htm</code>. See also the <code>AppsBase.htm</code> source
+where the template <code>form-panel.html</code> defined.</p></li>
+<li><p>Line <code>10</code> ensures we are a secondary window loaded by a primary window.</p></li>
+<li><p>Line <code>12</code> supplies the implementation of <code>isLoaded</code> referenced in line <code>19</code> of <code>FormHello.htm</code>.</p></li>
+<li><p>Line <code>14</code> supplies the link to the local implementation of <code>nextBatch</code> referenced in line <code>9</code>.</p></li>
+<li><p>Line <code>15</code> supplies the implementation of <code>printPage</code> defined in the <code>form-panel.html</code> template.</p></li>
+<li><p>Line <code>16</code> supplies the link to the local implementation of <code>prepareNextPage</code> referenced in line <code>9</code>.</p></li>
+<li><p>Line <code>17</code> supplies the link to the local implementation of <code>getDate</code> referenced in line <code>39</code> of <code>FormHello.htm</code>.</p></li>
+<li><p>Line <code>21</code> executes the local function <code>hookMsgListener</code></p></li>
+<li><p>Line <code>22</code> uses <a href="/api/tri.object.Tri#postToOpener">tri.postToOpener</a> to request the objects.  Note that the verb prefix <code>msgs</code> matches that
+of line <code>114</code> in <code>Form.js</code> where it registered the message handler.</p></li>
+<li><p>Line <code>23</code> returns control to the caller.  <strong>Note:</strong> that only local function implementations should be coded after this statement.  Any other inline code including manipulation of <code>$scope</code> will
+be quietly ignored.</p></li>
+<li><p>Lines <code>26</code> thru <code>40</code> defines the local implementation of <code>hookMsgListener</code>.</p></li>
+<li><p>Line <code>16</code> uses <a href="/api/tri.object.Tri#loadTemplates">tri.loadTemplates</a> to scan <code>FormHello.htm</code> for
+templates requiring loading and schedules their load.  In this specific case lines <code>17</code> and <code>33</code> in <code>FormHello.htm</code> trigger such load events.</p></li>
+<li><p>Lines <code>28</code> thru <code>38</code> defines the local event handler for arriving messages from the primary window.</p></li>
+<li><p>Line <code>30</code> checks for verb <code>msgs:obj-data</code> which corresponds to the verb constructed in <code>Form.js</code> line <code>111</code>.</p></li>
+<li><p>Lines <code>31</code>  and <code>32</code> update the <code>$scope</code> variables.</p></li>
+<li><p>Line <code>33</code> triggers the updating of <a target=_blank href="http://angularjs.org/">AngularJS</a> models.  This is necessary since the arrival of the message event is otherwise
+unknown to <a target=_blank href="http://angularjs.org/">AngularJS</a>.</p></li>
+<li><p>Line <code>39</code> registers the message event handler.</p></li>
+<li><p>Lines <code>43</code> thru <code>49</code> define the local implementation of <code>getDate</code> referenced in line <code>17</code>.</p></li>
+<li><p>Lines <code>51</code> thru <code>55</code> define the local implementation of <code>nextBatch</code> referenced in line <code>14</code>.</p></li>
+<li><p>Lines <code>57</code> thru <code>61</code> define the local implementation of <code>prepareNextPage</code> referenced in line <code>16</code>.</p></li>
+</ul></div>

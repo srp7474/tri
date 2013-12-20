@@ -1,0 +1,56 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <code>Action Object</code> is an object created internally, usually as a reuilt of parsing the column data in a static <a href="/guide/table">Table</a> definition.  It is used to attach the user click interactions to a function within
+system and to which a context is passed. Most often a <a href="/guide/data">Data Object</a> is associated with this context.  The Triangular system is able to
+add the clickable function reference to the <code>$scope</code> and thereby cause the function to be successfully accessed.</p>
+
+<p>The format of the <code>Action Object</code> is defined in the next section.</p>
+
+<h3 id="format">Format</h4>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+<p>The implementation of the <code>Action Object</code> uses a dynamicaly built Javascript object.  The following properties are attached.</p>
+
+<p><span class=srp-propdef><code class=srp-label>click:</code>The
+method text to insert into the 'onclick' field of the <code>&lt;a onclick=...&gt;</code> element inserted into the browser page.  It assumes the
+method is available and hooked in via the <code>method</code> property.
+<br><br>
+An improved implementation causes the Triangular system to search for the click function and automatically hook it into the
+current $scope.  This means the <code>method</code> preoperty (apart from compile time access checking) is optional.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>label:</code>For other action definitions the <code>label</code> property is used as the link text in the <code>&lt;a ...&gt;link text&lt;/a&gt;</code>
+built with the manufactured <code>Action Object</code>.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>methClass:</code>The
+name of the method the <code>whatClass</code> propety will call.  Since the Javascript compiler will look for this method (assuming
+"use strict" is in effect), the function must be in scope.  The Triangular system will hook this into the current context so the
+click action will execute the appropriate function.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>method:</code>The
+name of the method the <code>click</code> function will call.  Since the Javascript compiler will look for this method (assuming
+"use strict" is in effect), the function must be in scope.  The Triangular system will hook this into the current context so the
+click action will execute the appropriate function.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>name:</code>For columns that specify a type of 'actions', the associated array of
+'action' definitions is used to manufacture <code>Action Object</code> objects.  The <code>name</code> property is used as the link text in the <code>&lt;a ...&gt;link text&lt;/a&gt;</code>
+built with the manufactured <code>Action Object</code>.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>whatClass:</code>The
+method text to insert into the 'ng-class' field of the <code>&lt;a onclick=...&gt;</code> element inserted into the browser page.  It assumes the
+method is available and hooked in via the <code>methClass</code> property.
+<br><br>
+An improved implementation causes the Triangular system to search for the whatClass function and automatically hook it into the
+current $scope.  This means the <code>methClass</code> property (apart from compile time access checking) is optional.
+</span></p></div>

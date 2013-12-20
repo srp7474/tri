@@ -1,0 +1,22 @@
+@ngdoc overview
+@name Guide: Variants
+@description
+### Overview
+
+**Triangular** is presently implemented under 2 server structures.
+
+The first, the
+<a target=_blank href=https://cloud.google.com/products/app-engine>Google App Engine</a>
+is referred to as the **GAE Variant**.
+Refer also to {@link /guide/datastore Datastore GAE} and {@link /guide/server-inter#googleappengineimplementation
+Google App Engine Implementation}
+
+The second, the **Node.js** implementation and hosted at
+<a target=_blank href=https://www.nodejitsu.com>NodeJitsu  Node.js Hosting</a>
+is referred to as the **Node.js Variant**.
+Refer also to {@link /guide/datastore-node Datastore NodeJS} and {@link /guide/server-inter#nodejsimplementation
+Node.js Implementation} and <a target=_blank href=http://nodejs.org/>Node.js Home Page</a>
+
+
+The **GAE Variant** or **Node.js Variant** nomenclature is used in the documentation to highlight a section of text that applies only to a particular variant.
+

@@ -1,0 +1,48 @@
+@ngdoc overview
+@name Apps:Source Files
+@description
+
+<div id=file-list style='margin-bottom:20px;'>
+<span class=radlab><b>Show All</b>:</span> <input class=radlab type=radio id=choose-all value='all'      ng-model=oCat.choose>
+<span style='display:inline-block; width:35px;'>&nbsp;</span><b>By Type:</b>
+<span class=radlab>htm:    </span>         <input class=radlab type=radio id=choose-htm value='.htm'     ng-model=oCat.choose>
+<span class=radlab>css:    </span>         <input class=radlab type=radio id=choose-css value='.css'     ng-model=oCat.choose>
+<span class=radlab>js:     </span>         <input class=radlab type=radio id=choose-js value='.js'       ng-model=oCat.choose><br>
+<span style='display:inline-block; width:110px;'>&nbsp;</span><b>By System:</b>
+<span class=radlab>Hello:  </span>        <input class=radlab type=radio id=choose-js value='msgs'      ng-model=oCat.choose>
+<span class=radlab>Deposit:</span>        <input class=radlab type=radio id=choose-js value='deps'      ng-model=oCat.choose>
+<span class=radlab>Cheques:</span>        <input class=radlab type=radio id=choose-js value='chqs'      ng-model=oCat.choose>
+<span class=radlab>System: </span>        <input class=radlab type=radio id=choose-js value='sys'       ng-model=oCat.choose>
+<span class=radlab>Admin:  </span>        <input class=radlab type=radio id=choose-js value='admin'     ng-model=oCat.choose>
+</div>
+
+**Note 1:** Hold the &LT;Control Key> while clicking the link to view the context highlighted source in a separate tab.
+
+**Note 2:** Those with an `Explained` link can be viewed with a detailed explanation of the code.
+<div class=scroll-region>
+<table>
+   <thead><tr><th>Link</th><th>Usage</th><th>Explanation</th></tr></thead>
+   <tr ng-repeat='oRow in oFiles' ng-show=showWhen(oRow)>
+     <td class=c1>
+        <a class=c-action  ng-click=srcLoader($event) href=#/{{oRow.locn}}/{{oRow.name}}>{{oRow.name}}</a>
+     </td>
+     <td class=c2>{{oRow.desc}}</td>
+     <td class=c3>
+        <span ng-show='oRow.explain != null'>
+          <a class=c-action  href=/apps/{{oRow.explain}}#{{oRow.name}}>Explained</a>
+        </span>
+    </td>
+   </tr>
+</table>
+</div>
+
+<br><b>
+{{sSrcFile}}
+</b>
+<div class=scroll-region style='height:500px;'>
+<pre class='prettyprint linenums' id=src-display-area>
+  `Click on link to view source ....'
+</pre>
+</div>
+
+

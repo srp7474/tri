@@ -1,0 +1,58 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p><strong>Note</strong> It is suggested that working directory names do not include spaces as some batch files may encounter difficulties.</p>
+
+<h3 id="gaesdkpreparationahrefguidevariantsgaevarianta">GAE SDK Preparation <a href="/guide/variants">GAE Variant</a></h4>
+
+<ol>
+<li><p>Download <code>Stripped down GAE SDK 1.8.1.1 Part 1 of 2</code> from <a href="/apps/zip-files">downloads</a>  Use the Right-click on the link <code>Save as...</code> option
+and place in a holding directory of your choice. The file will be called <code>gae-local-stripped-1.zip</code>.</p></li>
+<li><p>Download <code>Stripped down GAE SDK 1.8.1.1 Part 2 of 2</code> from <a href="/apps/zip-files">downloads</a>  Use the Right-click on the link <code>Save as...</code> option
+and place in a holding directory of your choice. The file will be called <code>gae-local-stripped-2.zip</code>.</p></li>
+</ol>
+
+<p>As indicated as an alternative you could, if preferred, download the fullblown <code>Original GAE SDK 1.8.1.1 1</code> into
+the holding directory of your choice.</p>
+
+<ol>
+<li>Unzip the <code>GAE-SDK</code> zips into a directory of your choice that differs from the holding directory.  Maintain the internal directory structure. Let us call it <code>X:\gae-sdk</code></li>
+</ol>
+
+<h3 id="setuptri_gaepointerahrefguidevariantsgaevarianta">Set up TRI_GAE Pointer <a href="/guide/variants">GAE Variant</a></h4>
+
+<ol>
+<li>Point Environment Variable <code>TRI_GAE</code> to the unzip location ending in either <code>gae-stripped</code> or <code>appengine-java-sdk-1.8.1.1</code> (with no trailing '\').
+eg. <code>x:\gae_sdk\gae_stripped</code>
+<br><br>
+As an alternative you could set it in <code>run-ws.bat</code> described in the next section.
+<br><br>
+This differs for non-windows platforms.</li>
+</ol>
+
+<h3 id="developmentpackagepreparationahrefguidevariantsgaevarianta">Development Package Preparation <a href="/guide/variants">GAE Variant</a></h4>
+
+<ol>
+<li><p>Download <code>Triangular Complete Development Package</code> from <a href="/apps/zip-files">downloads</a>  Use the Right-click on the link <code>Save as...</code> option
+and place in a holding directory of your choice. The file will be called <code>tri-devp-pkg.bin</code>.</p></li>
+<li><p>Rename this from <code>tri-devp-pkg.bin</code> to <code>tri-devp-pkg.zip</code>  (this avoids the
+'"file" is not commonly downloaded and could be dangerous' message).</p></li>
+<li><p>Unzip this zip into a directory of your choice that differs from the holding directory and differs from the <code>GAE-SDK</code> directory.
+Maintain the internal directory structure. Let us call it <code>X:\tri-devp</code></p></li>
+</ol>
+
+<h3 id="developmentpackagepreparationahrefguidevariantsnodejsvarianta">Development Package Preparation <a href="/guide/variants">Node.js Variant</a></h4>
+
+<ol>
+<li><p>Download <code>Triangular Node.js Only Development Package</code> from <a href="/apps/zip-files">downloads</a>  Use the Right-click on the link <code>Save as...</code> option
+and place in a holding directory of your choice. The file will be called <code>tri-devp-pkg-node.bin</code>. <strong>Note</strong> You can also use the
+<code>Triangular Complete Development Package</code> as it includes support for the <a href="/guide/variants">Node.js Variant</a>.</p></li>
+<li><p>Rename this from <code>tri-devp-pkg-node.bin</code> to <code>tri-devp-pkg-node.zip</code>  (this avoids the
+'"file" is not commonly downloaded and could be dangerous' message).</p></li>
+<li><p>Unzip this zip into a directory of your choice that differs from the holding directory.
+Maintain the internal directory structure. Let us call it <code>X:\tri-devp</code></p></li>
+</ol>
+
+<h3 id="nextstep">Next Step</h4>
+
+<p>Proceed to <a href="/tutorial/step-02">02 Validate Environment</a></p></div>

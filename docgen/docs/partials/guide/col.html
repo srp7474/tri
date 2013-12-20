@@ -1,0 +1,174 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>The <code>Col</code> object defines the single instance of the <code>cols</code> collection property used in the <a href="/guide/table">Table Object</a> schema.</p>
+
+<h3 id="colinstancetypes">Col Instance Types</h4>
+
+<p>Two instance types for the <code>Col</code> object are used internally.</p>
+
+<ol>
+<li><p>The first,
+the static object definition, refers to the static Javascript definition.</p></li>
+<li><p>The second, refers to a Javascript <code>Col</code> object which is created as part of the static <a href="/guide/table">Table Object</a> migration process.
+This instance allows the HTML code to directly access methods defined
+for the <a href="/api/tri.object.Col">Col</a> object.</p></li>
+</ol>
+
+<p>The migration process copies all of the static properties to the dynamic version.  In addition, each <code>Col</code> object is assigned a <code>cid</code> property that represents
+a unique system wide ID for that 'Col' object.</p>
+
+<p>It is possible to specify sub-schemas.  If one is found the static <code>col</code> objects  specified in the sub-schema are also migrated.</p>
+
+<h3 id="definitionsyntax">Definition Syntax</h4>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+<p>The <code>Col</code> object definition is found in the <code>cols</code> property of the <a href="/guide/table">Table Object</a> <code>oTabProp</code> object.
+That is the <code>cols</code> property is an array of one or more 'Col` object definitions.  Each definition has one or more of the following properties.  Some properties are
+interdependent.</p>
+
+<p>Note that the order the columns are in this definition is the order they appear in both the <a href="/api/tri.controller:ctrlCommList">List Controller</a> display and
+the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> field display.</p>
+
+<p>The 'Chqs.js' file shows an example of using <code>custHTML</code> to define a custom HTML file to define the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> fields and layout.  This will override
+the sequence of the fields in the definition.</p>
+
+<p><span class=srp-propdef><code class=srp-label>addDefault:</code>For <code>type</code> 'actions', if <code>false</code> is specified causes the default 'edit' and 'drop' actions to
+not be inserted.  If unspecified, the defualt value for <code>addDefault</code> is <code>true</code>.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>col:</code>If a literal value is specified it names a reference to a <code>Table</code> field (the key of a JSON key/value pair).
+<br><br>
+A non-literal value is assumed to name a locally defined function which makes the value a computed value. The function will be called with the signature
+<code>func-name(oObj,scope,oCol)</code> where <code>oObj</code> references the <a href="/guide/data">Data Object</a>, <code>scope</code> is the current controller scope and <code>oCol</code> references the
+dynamic <code>Col</code> instance.  It should return a string value.  If the computation is extensive the returned value should be cached using the <a target=_blank href="http://angularjs.org/">AngularJS</a> <code>$$hash</code> object for
+change detection.
+<br><br>
+The latter format will cause the <code>type</code> property to be set to 'virt' while the former will cause the type to be set to 'field'.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>cssid:</code>For <code>type</code> 'panel' and 'cust', causes the HTML element manufactured on behalf of the column to have an 'id' tag of the value specified.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>field:</code>Causes the <a href="/api/tri.object.Col">Col</a> <code>getField</code> function to return this value other than the computed value.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>hideLabel:</code>Setting this value to <code>false</code> causes the <strong>Triangular</strong> system to not generate
+the column name label in the edit panel.  This is used primarily to improve the format for the 'panel' <code>type</code> displays.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>hint:</code>Causes <a href="/api/tri.object.Col#getHint">col.getHint</a> to be invoked
+when <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> displays the column.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>html????:</code>Used to override the automatically manufactured HTML to process a field. This names a standard or custom
+template that is injected into the HTML page.  The <code>????</code> value should be substituted with the mode= HTML parameter on the <code>macro</code> statement that
+is generating the array of columns (They are nested). In most cases the mode is 'Edit' but it can also be 'List' (the default) or 'Cust'.
+<br><br>
+<code>&lt;macro col='oSubC' objref=oCol.objName mode='Edit' marker=mark-2a&gt;&lt;/macro&gt;</code>
+<br><br>
+is an example in 'AppsBase.htm' of how a sub-template is injected.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>legend:</code>For <code>type</code> 'panel', causes the HTML element manufactured on behalf of the column to insert
+this value into the <code>&lt;fieldset&gt;</code> element.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>listHint:</code>Causes <a href="/api/tri.object.Col#getListHint">col.getListHint</a> to be invoked
+when <a href="/api/tri.controller:ctrlCommList">List Controller</a> displays the column.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>many:</code>Setting this property to 'false' causes the <strong>Triangular</strong> system to
+ensure the value of a field is unique across all rows of the <code>Table</code>.  The default for this is <code>true</code>.  This property only has meaning when the <code>type</code> property is 'field'.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>mask:</code>Setting this property to a quoted Regular Expression causes the
+<a href="/api/tri.controller:ctrlCommEdit">Editor</a> to ensure the field contents matches the mask as part of its validation cycle.
+<br>
+eg. <code>,mask:       '[A-Za-z\\s\.\-]'</code>
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>meth????:</code>Used to reference a local function that is to be called by a template function.
+The <strong>Triangular</strong> system will ensure the method pointer is moved to the current scope.
+The sample syntax in the template
+to reference the function is
+<br><br>
+<code>&lt;span ng-show='isTrue(oSubC.methHasSubcodes(this,$MODOBJ$,nRow))'&gt;</code>
+<br><br>
+Refer to <a href="/api/tri.directive:macro">macro</a> to see how this is parsed.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>place:</code>Causes <a href="/api/tri.object.Col#getPlace">col.getPlace</a> to be invoked
+when <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> displays the column. The result is inserted into the &LT;input ...> field as a
+<code>placeholder</code> attrribute.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>readonly:</code>Setting this property to 'true' causes the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a>
+to prevent input into the field.  The default for this is <code>false</code>.
+<br><br>
+Setting this value to a local function name means the function will be called with a signature of
+<code>fn($scope,oCol)</code> which expects the value of <code>true</code> or <code>false</code> to be returned.  The object being edited is located at <code>$scope.oObj</code>.
+<br><br>
+This property only has meaning when the <code>type</code> property is 'field'.  Virtual fields (<code>type</code> == 'virt') automatically
+have a <code>readonly</code> status if the <code>showEdit:true</code> setting is applied to them.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>reqd:</code>Setting this value to <code>false</code> makes an input field optional.  Setting this property to <code>true</code> (the default if
+not specified) causes the <strong>Triangular</strong> system to ensure the field contains non-white space data during the validation cycle. ie.  The field is "required".
+<br><br>
+Setting this value to a numeric <code>n</code> where <code>n</code> > 0 causes <strong>Triangular</strong> to ensure the field contains at least <code>n</code> characters.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>schema:</code>Used in conjunction with <code>type</code> 'panel' or 'list', this value points at a locally referenced
+sub-schema that defines properties <code>base</code> and <code>cols</code>. The latter defines an array of columns according to this syntax specification.  Refer to 'Deps.js' as an example.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>showEdit:</code>Specify a value of <code>true</code> or <code>false</code>.  A <code>true</code> setting will cause the field to be shown on the
+<a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a> display.
+<br><br>
+If not specified only <code>Col.type</code> values of 'field' are shown.
+<br><br>
+For <code>type</code> 'panel' this property points to a routine called when a sub-object is edited.  See 'Deps.js'
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>showList:</code>Specify a value of <code>true</code> or <code>false</code>.  A <code>true</code> setting will cause the field to be shown on the
+<a href="/api/tri.controller:ctrlCommList">List Controller</a> display.
+<br><br>
+If not specified only <code>Col.type</code> values of 'field' or 'virt' or 'actions' are shown.</span>
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>title:</code>A literal containing the string to display where the field name is to be shown.
+Typically this is <a href="/api/tri.controller:ctrlCommList">List Controller</a> heading or field name in the <a href="/api/tri.controller:ctrlCommEdit">Edit Controller</a>
+<br><br>
+If not specified <strong>Triangular</strong> will insert the function name or referenced field name.
+</span></p>
+
+<p><span class=srp-propdef><code class=srp-label>type:</code>This
+property defines the type of column.  Many internal routines use this <code>type</code> to alter their processing paths.  The possible value are:
+<br><br>
+<b>'actions'</b> The <code>actions</code> property names an array of <a href="/guide/action">Action Object</a>s.  Refer there to the meaning of the fields within the <code>actions</code> property.
+It is used to add 'actions' to the <a href="/api/tri.controller:ctrlCommList">List Controller</a> display.
+<br><br>
+Typically the <code>showEdit:false</code> accompanies this value.  The <code>addDefault:false</code> prevents <strong>Triangular</strong> from adding the default 'edit' and 'drop' actions.
+<br><br>
+<b>'field'</b> The <code>col</code> property references a field in the <a href="/guide/data">Data Object</a>.  If not defined, the <code>type</code> property is set to 'field' when <code>col</code> is a literal.
+<br><br>
+<b>'list'</b> The editor will show a sub-list of fields using the <code>col</code> referenced field as the array of sub-objects to list.  The <code>schema</code> property points at another
+array of <code>Col</code> definitions that define the sub-objects.  Typically <code>showEdit:true</code> and <code>showList:false</code> accompany this <code>type</code> value.
+<br><br>
+<b>'panel'</b> The editor will show display an internal panel used to edit a sub-object identified in the a sub-list of fields using the <code>col</code> referenced field as the array of sub-objects to list.  The <code>schema</code> property points at another
+array of <code>Col</code> definitions that define the sub-objects.
+<br><br>
+Typically <code>showEdit:true</code> and <code>showList:false</code> accompany this <code>type</code> value and <code>showEdit</code> names a function
+called at the initiation of the sub-edit.  In addition the properties <code>htmlCSS</code>, <code>cssid</code> and <code>legend</code> are inspected for values.
+<br><br>
+<b>'property'</b> The named <code>col</code> is a collection of properties such as those used in the <a href="/guide/user">User</a> record.
+<br><br>
+<b>'virt'</b> The <code>col</code> property references a local function that computes the column value.  If not defined, the <code>type</code> property is set to 'virt' when <code>col</code> is a function reference.
+</span></p></div>

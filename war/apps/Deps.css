@@ -1,0 +1,129 @@
+/*
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+*/
+/* Deps.htm stylesheet */
+
+body {/*background:#D8E6D2;*/ Font: Normal 120% Verdana; margin:0px; color:black;}
+
+/*body,html              {height:100%;}*/
+
+div#divHead            {background:/*#D8E6D2;#00457F*/rgb(00,71,127); color:red;}
+div#divHead table      {color:#FFFFFF;}
+div#divHead table      {color:#FFFFFF;}
+div#divRgt             {border-left:1px solid rgb(151,208,255);/* height:100%*/}
+div#divBody table#tblLft  {width:200px;}
+.button                {background:rgb(234,241,231);}
+.textfld               {Font: Bold 80% Times;}
+.instruct              {Font: Normal 60% Verdana;}
+.hide                  {display:none;}
+.show                  {display:inline-block;}
+.atTop                 {vertical-align:top;}
+.pale                  {color:rgb(202,232,255);}
+.light                 {color:rgb(151,208,255);}
+.darker                {color:rgb(00,88,159);}
+.warn                  {color:red;}
+.confirm               {color:rgb(0,220,0);}
+.full-width            {width:100%;}
+.fix-col               {width:30%;}
+.action-col            {min-width:160px;}
+.sz-90                 {font-size:90%;}
+.sz-70                 {font-size:70%;}
+
+div.contact            {margin-bottom:10px;margin-top:0px;}
+div.contact p.addr     {margin-bottom:0px;margin-top:0px; font-size:70%;}
+div.contact p.adr1     {margin-bottom:0px;margin-top:0px; font-size:90%;}
+div.contact:hover      {background-color:rgb(202,232,255);}
+div.contact a          {text-decoration:none;}
+div.contact a:visited  {text-decoration:none; color:black;}
+div.left               {margin-left:5px}
+div#contacts div.active{border-style: solid;border-width:1px;border-color:rgb(00,88,159);}
+
+/*div.filler             {background-color:yellow; height:100%;} */
+
+div.details            {margin-bottom:0px;margin-top:10px;}
+p.top-border           {border-top-style:solid;border-top-color:rgb(151,208,255); border-top-width:1px;margin-top:40px;}
+p.headsect             {color:rgb(151,208,255);}
+p.note, span.note      {color:rgb(206,206,206); font-size:80%;}
+p.idle-warn            {color:red; font-size:80%; margin-left:16px;}
+
+div.details            {/*height: 100px;*/}
+pre.lines              {margin-bottom:0px;margin-top:0px; font-size:100%;/* color:red;*/ font-family: Verdana;}
+
+a.action               {text-decoration:none; color:black;}
+a.action:visited       {text-decoration:none; color:black;}
+a.action:hover         {background-color:rgb(202,232,255); color:red;}
+
+a.c-action             {text-decoration:none;}
+a.c-action:visited     {text-decoration:none; color:rgb(00,88,159);}
+a.c-action:hover       {background-color:rgb(202,232,255); color:black;}
+
+a.c-quiet              {text-decoration:none;}
+a.c-quiet:visited,
+a.c-quiet:hover        {text-decoration:none; color:rgb(206,206,206); background-color:rgb(250,250,255);}
+
+
+a.sort-action          {text-decoration:none;}
+a.sort-action:visited  {text-decoration:none; color:rgb(00,88,159);}
+a.sort-action:hover    {background-color:rgb(202,232,255); color:black;}
+a.sort-true            {font-weight:bold;}
+
+
+span.hide-show a       {font-size:70%}
+span.hide-show a:visited {color:rgb(00,88,159); font-size:70%}
+span.hide-show a:hover   {color:black;}
+
+p.list                 {width:200px; margin-bottom:0px;margin-top:0px;}
+tr.full-width td       {vertical-align:top;}
+table.props            {font-size:90%;}
+td.label               {color:rgb(00,88,159); text-align:right;}
+td.data                {}
+
+tr.head                {font-weight:bold;}
+td.num                 {text-align:center;}
+
+
+/* filters CSS */
+div#filters label.chkbox:hover
+                       {background-color:rgb(202,232,255);}
+div#filters label.radOn {font-weight:bold;}
+div#filters td.lab     {text-align:right;}
+div#filters select#selCats
+                       {width:230px;}
+div#filters td.lab     {width:200px;}
+
+
+/* print form */
+p.prt-head             {font-weight:bold; font-size:120%;}
+@media print {
+  div.page-break       { page-break-after: always; page-break-inside: avoid;}
+}
+@media screen {
+  div.page-break       { border-top:2px dotted red;}
+}
+
+/* Scroll-bars */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgb(202,232,255);
+    -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb {
+    background: #CCC;
+    -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #AAA;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #888;
+    -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
+}

@@ -1,0 +1,39 @@
+// This is a sample ACE File
+// alternate comment format
+
+[objects]
+$map (Cust    com.rsi.gems.run.Cust)
+$map (App     com.rsi.gems.run.App)
+$map (Calc    com.rsi.gems.run.App$Calc)
+$map (Page    com.rsi.gems.run.Page)
+$map (Emit    com.rsi.gems.run.Emit)
+$map (DBIO    com.rsi.gems.run.DBIO)
+$map (Auth    com.rsi.gems.run.Auth)
+$map (Hook    com.rsi.gems.run.Hook)
+
+[configuration]
+
+$set(HOST = "${prop.COMPUTERNAME}")
+
+[Cust.GEMS]
+  Title="GEMS System File"
+  Site=${!SITE}
+  Parms=(
+    // disable these 2 later by locn
+    logwhen="ip=10.1.1.11;10.1.1.22;10.1.1.13"
+    GEMSLink="http://www.rexcel.ca"
+    LeftSnip="LeftSnip"
+    $if (${HOST} eQ HP03)
+      //SocketLogger="10.1.1.22:6001"   //KC22
+      DevpMode=true
+    $endif
+
+  )
+  Apps=(
+     [.Bbb]
+     [.Cita]
+     [.Boot]
+  )
+[/]
+
+

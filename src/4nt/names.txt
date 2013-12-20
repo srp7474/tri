@@ -1,0 +1,888 @@
+**male
+Jacob
+Mason
+Ethan
+Noah
+William
+Liam
+Jayden
+Michael
+Alexander
+Aiden
+Daniel
+Matthew
+Elijah
+James
+Anthony
+Benjamin
+Joshua
+Andrew
+David
+Joseph
+Logan
+Jackson
+Christopher
+Gabriel
+Samuel
+Ryan
+Lucas
+John
+Nathan
+Isaac
+Dylan
+Caleb
+Christian
+Landon
+Jonathan
+Carter
+Luke
+Owen
+Brayden
+Gavin
+Wyatt
+Isaiah
+Henry
+Eli
+Hunter
+Jack
+Evan
+Jordan
+Nicholas
+Tyler
+Aaron
+Jeremiah
+Julian
+Cameron
+Levi
+Brandon
+Angel
+Austin
+Connor
+Adrian
+Robert
+Charles
+Thomas
+Sebastian
+Colton
+Jaxon
+Kevin
+Zachary
+Ayden
+Dominic
+Blake
+Jose
+Oliver
+Justin
+Bentley
+Jason
+Chase
+Ian
+Josiah
+Parker
+Xavier
+Adam
+Cooper
+Nathaniel
+Grayson
+Jace
+Carson
+Nolan
+Tristan
+Luis
+Brody
+Juan
+Hudson
+Bryson
+Carlos
+Easton
+Damian
+Alex
+Kayden
+Ryder
+**female
+Sophia
+Emma
+Isabella
+Olivia
+Ava
+Emily
+Abigail
+Mia
+Madison
+Elizabeth
+Chloe
+Ella
+Avery
+Addison
+Aubrey
+Lily
+Natalie
+Sofia
+Charlotte
+Zoey
+Grace
+Hannah
+Amelia
+Harper
+Lillian
+Samantha
+Evelyn
+Victoria
+Brooklyn
+Zoe
+Layla
+Hailey
+Leah
+Kaylee
+Anna
+Aaliyah
+Gabriella
+Allison
+Nevaeh
+Alexis
+Audrey
+Savannah
+Sarah
+Alyssa
+Claire
+Taylor
+Riley
+Camila
+Arianna
+Ashley
+Brianna
+Sophie
+Peyton
+Bella
+Khloe
+Genesis
+Alexa
+Serenity
+Kylie
+Aubree
+Scarlett
+Stella
+Maya
+Katherine
+Julia
+Lucy
+Madelyn
+Autumn
+Makayla
+Kayla
+Mackenzie
+Lauren
+Gianna
+Ariana
+Faith
+Alexandra
+Melanie
+Sydney
+Bailey
+Caroline
+Naomi
+Morgan
+Kennedy
+Ellie
+Jasmine
+Eva
+Skylar
+Kimberly
+Violet
+Molly
+Aria
+Jocelyn
+Trinity
+London
+Lydia
+Madeline
+Reagan
+Piper
+Andrea
+**surname
+Yeung
+Ba
+Bai
+Ban
+Bao
+Bau
+Bi
+Bo
+Bu
+Cai
+Cao
+Cha
+Chai
+Cham
+Chan
+Chang
+Chao
+Chau
+Che
+Cheah
+Chee
+Chen
+Cheng
+Cheong
+Chern
+Cheung
+Chew
+Chi
+Chia
+Chiang
+Chiao
+Chien
+Chim
+Chin
+Ching
+Chiong
+Chiou
+Chiu
+Cho
+Choi
+Chong
+Choo
+Chou
+Chow
+Choy
+Chu
+Chua
+Chuang
+Chui
+Chun
+Chung
+Cong
+Cui
+Dai
+Dang
+Dea
+Deng
+Ding
+Do
+Dong
+Doo
+Du
+Duan
+Dung
+Eng
+Fan
+Fang
+Fei
+Feng
+Fok
+Fong
+Foo
+Fu
+Fung
+Gan
+Gang
+Gao
+Gau
+Ge
+Geng
+Go
+Goh
+Gong
+Gu
+Guan
+Guo
+Ha
+Hai
+Han
+Hang
+Hao
+Hau
+He
+Ho
+Hoh
+Hom
+Hon
+Hong
+Hoo
+Hou
+Hsi
+Hsia
+Hsiao
+Hsieh
+Hsiung
+Hsu
+Hsueh
+Hu
+Hua
+Huang
+Hui
+Huie
+Hum
+Hung
+Huo
+Hwang
+Hy
+Ing
+Ip
+Jan
+Jang
+Jen
+Jeng
+Jeung
+Jew
+Ji
+Jia
+Jian
+Jiang
+Jiao
+Jim
+Jin
+Jing
+Jo
+Joe
+Jong
+Joo
+Jou
+Jow
+Ju
+Jue
+Jung
+Kam
+Kan
+Kang
+Kao
+Kau
+Ke
+Keng
+Kho
+Khoo
+Kiang
+King
+Ko
+Koh
+Kong
+Koo
+Kook
+Kou
+Ku
+Kuan
+Kuang
+Kuk
+Kung
+Kuo
+Kwan
+Kwock
+Kwok
+Kwon
+Kwong
+Lai
+Lam
+Lan
+Lang
+Lao
+Lau
+Lee
+Lei
+Leng
+Leong
+Leung
+Lew
+Li
+Lian
+Liang
+Liao
+Liaw
+Lien
+Liew
+Lim
+Lin
+Ling
+Liou
+Liu
+Lo
+Loh
+Lok
+Long
+Loo
+Lou
+Louie
+Lu
+Lua
+Lui
+Luk
+Lum
+Lung
+Luo
+Ma
+Mah
+Mai
+Mak
+Man
+Mao
+Mar
+Mau
+May
+Mei
+Meng
+Miao
+Min
+Ming
+Miu
+Mo
+Mok
+Mon
+Mou
+Moy
+Mu
+Mui
+Na
+Ng
+Ngai
+Ngan
+Ngo
+Ni
+Nie
+Ning
+Niu
+On
+Ong
+Ou
+Ou
+Yang
+Ow
+Owyang
+Pan
+Pang
+Pao
+Pau
+Pei
+Peng
+Pi
+Ping
+Po
+Pon
+Pong
+Poon
+Pu
+Pun
+Qi
+Qian
+Qiao
+Qin
+Qiu
+Qu
+Quan
+Que
+Rao
+Ren
+Rong
+Ruan
+Sam
+San
+Sang
+Seto
+Sha
+Sham
+Shan
+Shang
+Shao
+Shaw
+Shek
+Shen
+Sheng
+Sheu
+Shi
+Shiau
+Shieh
+Shih
+Shing
+Shiu
+Shu
+Shum
+Shy
+Shyu
+Si
+Badgett
+Baltimore
+Beishline
+Berkeley
+Berney
+Biffle
+Bingham
+Bloom
+Bloomberg
+Bloomfield
+Bloomingdale
+Bluestein
+Bluestone
+Broudy
+Browdy
+Brownfield
+Brownstein
+Burns
+Burston
+Canaan
+Canine
+Chia
+Christianson
+Colcord
+Cooperman
+Copelan
+Courtland
+Crownover
+Current
+Danoff
+Daughenbaugh
+Dimick
+Dollar
+Easterlin
+Elijah
+Emison
+Felch
+Field
+Fierstein
+Fine
+Fineberg
+Finegold
+Fireman
+Fox
+Foxman
+Francis
+Fread
+Freedman
+Freidhof
+Frieman
+Garfinkle
+Garlick
+Garlock
+Gittleman
+Gladstone
+Goldwire
+Goleman
+Governor
+Green
+Greenhouse
+Greenleaf
+Handleman
+Haney
+Harjo
+Harkleroad
+Harkrader
+Henry
+Hershey
+Hill
+Hipple
+Hirschey
+Hollingsworth
+Howe
+Hyatt
+Hyde
+Hyman
+Imler
+Kinderman
+Kitelinger
+Klish
+Kook
+Kooker
+Lakin
+Lepley
+Mackler
+Malich
+Math
+Morningstar
+Natt
+Needle
+Needleman
+Nemer
+New
+Newberg
+Newcomer
+Newfield
+Nichols
+Nick
+Norton
+Ostrow
+Palmertree
+Perr
+Pershing
+Podoll
+Polish
+Popov
+Redstone
+Ridlehoover
+Rodeheaver
+Rodenbaugh
+Romanoff
+Rub
+Salk
+Salsbury
+Samudio
+Sauerbrey
+Settlemire
+Sickafoose
+Sky
+Solloway
+Solway
+Stalls
+Strome
+Sugerman
+Tanguma
+Tannen
+Tarango
+Tarnoff
+Teaff
+Thaw
+Thobe
+Trosky
+Tyrone
+Uran
+Van
+Every
+Venzor
+Wisener
+Wolin
+Youtz
+Zaret
+Zertuche
+**Streets
+Second Ave
+Third Ave
+First Ave
+Fourth Ave
+Park Ave
+Fifth Ave
+Main Ave
+Sixth Ave
+Oak Ave
+Seventh Ave
+Pine Ave
+Maple Ave
+Cedar Ave
+Eighth Ave
+Elm Ave
+View Ave
+Washington Ave
+Ninth Ave
+Lake Ave
+Hill Ave
+Alfred Ave
+Bay Ave
+Brock Ave
+Catherine Ave
+Dalhousie Ave
+Dufferin Ave
+Duke Ave
+Dundas Ave
+Elgin Ave
+Grey Ave
+King Ave
+Peel Ave
+Queen Ave
+Regent Ave
+Simcoe Ave
+Stanley Ave
+Victoria Ave
+Wellington Ave
+York Ave
+Main St Ave
+Church St
+Main St North
+High St
+Main St South
+Elm St
+Main St West
+Washington St
+Chestnut St
+Main St East
+2nd St
+Walnut St
+Park Avenue
+Maple Avenue
+Maple St
+Broad St
+Center St
+Water St
+Pine St
+South St
+Oak St
+Market St
+Union St
+North St
+3rd St
+School St
+Court St
+Prospect St
+River Road
+Spring St
+Park St
+Central Avenue
+Cherry St
+Front St
+Washington Avenue
+Cedar St
+1st St
+Franklin St
+Jefferson St
+4th St
+Bridge St
+West St
+Highland Avenue
+Mill St
+Jackson St
+Madison Avenue
+Pleasant St
+Spruce St
+Pearl St
+5th St
+Academy St
+Adams St
+East St
+Ridge Road
+State St
+Locust St
+Madison St
+Pennsylvania Avenue
+Elizabeth St
+Green St
+Grove St
+Hill St
+Lincoln Avenue
+Park Place
+Church Road
+Dogwood Drive
+Jefferson Avenue
+River St
+Route 30
+Vine St
+Lincoln St
+Route 1
+11th St
+12th St
+4th St West
+Delaware Avenue
+Hillside Avenue
+Liberty St
+Meadow Lane
+Winding Way
+2nd Avenue
+3rd St West
+6th St
+Broadway
+New St
+Railroad St
+Route 6
+10th St
+5th Avenue
+7th St
+Cherry Lane
+Clinton St
+Hickory Lane
+Monroe St
+2nd St West
+9th St
+Beech St
+Charles St
+Colonial Drive
+Lake St
+Laurel Lane
+Oak Lane
+Summit Avenue
+Valley Road
+Williams St
+Willow St
+1st Avenue
+3rd Avenue
+Mill Road
+Poplar St
+Railroad Avenue
+Route 29
+Virginia Avenue
+Woodland Drive
+13th St
+7th Avenue
+Arch St
+Canterbury Court
+College St
+Creek Road
+Fairway Drive
+Front St North
+Heather Lane
+Highland Drive
+Holly Drive
+Mulberry St
+Myrtle Avenue
+Route 32
+Smith St
+Sunset Drive
+4th Avenue
+4th St North
+5th St North
+8th St
+Bank St
+Brookside Drive
+Cambridge Court
+Canal St
+Colonial Avenue
+Division St
+Hamilton St
+Harrison St
+John St
+King St
+**bus-names
+Stork
+Beaver
+Sheppard Plaza
+Taylors
+Victone
+New Park
+Glenforest
+Masters
+Sketchley
+Parkers
+Absolute
+Citywide
+Thistle
+Artist
+Fred's
+Steve's
+Stork
+Toronto
+Oshawa
+Pickering
+Friendly
+AAA
+Cosmic
+**bus-type
+Cleaners
+Plumbers
+Repairs
+Roofers
+Auto Repair
+Driveway
+Printers
+Pizza
+Food
+Catering
+**bus-locn
+North
+South
+East
+West
+Central
+Ltd
+Inc
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-

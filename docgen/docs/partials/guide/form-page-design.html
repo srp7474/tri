@@ -1,0 +1,22 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p>An CRUD application needs a place to display and print various views of the <code>Tables</code> that belong to the application.  The <code>FormHello.htm</code>, <code>FormCheque.htm</code> and <code>FormDeposit.htm</code>
+are examples of this type of page.  They may be considered the secondary pages of an application.  The corresponding <code>FormHello.js</code>, <code>FormCheque.js</code> and <code>FormDeposit.js</code> provide
+local functions that handle the needs of the Form Page.</p>
+
+<p>The <strong>Triangular</strong> standard design places a menu at the extreme right (off the printable area of the page) which allows for the page
+to have multiple renderings using <a target=_blank href="http://angularjs.org/">AngularJS</a> to transition the sections.</p>
+
+<p>The window <code>print</code> function is used to print the 'printable area' of the page.</p>
+
+<p>To deal with cross-domain browser limitations, the windows messaging/post system is used to move data from the primary page to the secondary page.
+This saves memory and also
+makes cache management easier (only the primary window has to be synchronized).</p>
+
+<p>The links <a href="/apps/hello-app#FormHello.htm">FormHello.htm</a> and <a href="/apps/hello-app#FormHello.js">FormHello.js</a> gives a detailed explanation
+of the interaction between the primary and secondary windows as well as other considerations in the design.</p>
+
+<p>See also the <a href="/guide/disp-page-design">Display Page Design</a> page for design guidelines on display pages (application primary page).</p></div>

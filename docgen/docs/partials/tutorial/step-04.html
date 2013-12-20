@@ -1,0 +1,40 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><p>Steps <a href="/tutorial/step-04">04 Prepare MyApp Data</a> and <a href="/tutorial/step-05">05 Code MyApp</a> go hand in hand.</p>
+
+<p>If your app will generate the data through the WebPage then you can proceed to <a href="/tutorial/step-05">05 Code MyApp</a>.</p>
+
+<p>If your app requires external data to be added then the steps on this page are required.</p>
+
+<p><strong>Note</strong> The <a href="/guide/waks">WAKS Utility</a> will have to be adjusted in a non-windows platform.</p>
+
+<h3 id="uploadingdatatotheapp">Uploading data to the App</h4>
+
+<ol>
+<li><p>The <a href="/guide/waks">WAKS Utility</a> is used to move batches of data to and from your app.</p></li>
+<li><p>Before proceeding let us experiment with uploading data to the present <code>MyApp</code> application.  We know its roots are
+the <a href="/apps/hello-app">Hello App</a> so we will use the data conveniently stored with the <a href="/guide/devp-pkg#demonstrationdata">Development Package Demonstration Data</a></p></li>
+<li><p>Start a command line window and make the CWD <code>x:\tri-devp\bats</code> as defined in <a href="/tutorial/step-01#developmentpackagepreparation">Development Package Preparation</a></p></li>
+<li><p>Issue command <code>waks set myapp super super</code> and you will see<br><br>
+<code>configured WAKS: -cust myapp -user super -pw super</code>
+<br><br>
+This sets the app id and the <a href="/guide/user#superuser">SuperUser</a> credentials.</p></li>
+<li><p>Issue command <code>waks dir ..\data</code> and you will see<br><br>
+<code>configured WAKSDIR: ..\data</code>
+<br><br>
+This sets the working directory.</p></li>
+<li><p>In folder <code>x:\tri-devp\data</code> copy and rename
+<code>msgs-msg-messages.json.txt</code> to <code>myapp-msg-messages.json.txt</code></p></li>
+<li><p>Issue command <code>waks ship % %</code> and you will see it refuses to upload the data.</p></li>
+<li><p>Issue command <code>waks ship % % -r</code> and you will see it uploads and replaces the data.</p></li>
+<li><p>Verify this by refreshing the <code>MyApp</code> app in the browser and pressing <code>List Messages Records</code>.  You will see
+your previous data deleted and the replacement messages.</p></li>
+</ol>
+
+<h3 id="preparingmyappdata">Preparing <code>MyApp</code> data</h4>
+
+<ol>
+<li>You can now prepare your own data and upload it under the required names using the <a href="/guide/waks">WAKS Utility</a>.  The names used will be
+matched by the names in your <a href="/guide/table">Table Definition(s)</a> in the next section <a href="/tutorial/step-05">05 Code MyApp</a>.</li>
+</ol></div>

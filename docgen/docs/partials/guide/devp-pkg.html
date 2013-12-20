@@ -1,0 +1,90 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p><span id="gaevariant"></span>
+The Development Package is a zip file called <code>tri-devp-pkg.zip</code> that once unzipped and installed provides a working <strong>Triangular</strong> environment to which new Applications can be added.
+This provides both the <a href="/guide/variants">GAE Variant</a> and the <a href="/guide/variants">Node.js Variant</a> support.</p>
+
+<p><span id="nodejsvariant"></span>
+An alternative Development Package is a zip file called <code>tri-devp-pkg-node.zip</code> that once unzipped and installed provides a working <strong>Triangular</strong> environment
+to which new Applications can be added. This alternative supports only the <a href="/guide/variants">Node.js Variant</a>.</p>
+
+<p>The detailed steps for downloading and preparing the development environment are found at <a href="/tutorial/step-01">01 Prepare Environment</a></p>
+
+<h3 id="downloadingthezipfile">Downloading the zip file</h4>
+
+<p>Both variants can be be downloaded from <a href="/apps/zip-files">Zip Files</a>.</p>
+
+<h3 id="installingthezipfile">Installing the Zip File</h4>
+
+<p>Unzip the file <code>tri-devp-pkg.zip</code> or <code>tri-devp-pkg-node.zip</code> into a directory of your choice making sure the internal directory structure is maintained.  We will refer to it as <code>X:\tri-devp</code></p>
+
+<h3 id="testingthezipfileinstall">Testing the Zip File Install</h4>
+
+<p>This description is relevant for Windows systems.  For alternate platforms the <code>.bat</code> will have to be ported to that platforms equivalent script.</p>
+
+<h5 id="ahrefguidevariantsgaevarianta"><a href="/guide/variants">GAE Variant</a></h6>
+
+<p>Position a command window at <code>X:\tri-devp\bats</code> and enter <code>run-ws</code></p>
+
+<p>This should start the webserver on port 8882.</p>
+
+<p>Start the Chrome browser and goto URL <code>http://localhost:8882</code></p>
+
+<p>The port can be changed by changing <code>run-ws.bat</code>.  Adjust other references to port 8882 in the Chrome browser URL and in the
+<a href="/guide/waks#waksbaturls">WAKS Utility</a></p>
+
+<h5 id="ahrefguidevariantsnodejsvarianta"><a href="/guide/variants">Node.js Variant</a></h6>
+
+<p>Position a command window at <code>X:\tri-devp\bats</code> and enter <code>run-tri</code></p>
+
+<p>This should start the webserver on port 8888.</p>
+
+<p>Start the Chrome browser and goto URL <code>http://localhost:8888</code></p>
+
+<p>The port can be changed by changing <code>run-tri.bat</code>.  Adjust other references to port 8888 in the Chrome browser URL and in the
+<a href="/guide/waks#waksbaturls">WAKS Utility</a></p>
+
+<h5 id="ahrefguidevariantsbothvariantsa"><a href="/guide/variants">Both Variants</a></h6>
+
+<p>The window</p>
+
+<p><img class=screen src=/img/hello-app50.JPG></p>
+
+<p>should appear</p>
+
+<p>The testing of the Development Package is covered in greater detail in <a href="/tutorial/step-02">02 Validate Environment</a></p>
+
+<h3 id="utilityfolder">Utility Folder</h4>
+
+<p>The <code>bats</code> folder contains utility programs used in the development system.
+They will have to be adjusted in a non-windows platform. As other platform versions are contributed they will be added to this folder.
+Until the contribution happens it will be necessary at their usage points to adjust them to your platform.</p>
+
+<ul>
+<li><code>waks.bat</code> - See <a href="/guide/waks">WAKS Utility</a></li>
+</ul>
+
+<h5 id="ahrefguidevariantsgaevarianta"><a href="/guide/variants">GAE Variant</a></h6>
+
+<ul>
+<li><code>run-ws.bat</code> - see <a href="/tutorial/step-02#startingthelocalwebServer">Starting the Local WebServer</a></li>
+<li><code>appcfg.bat</code> - see <a href="/tutorial/step-08">08 Upload to GAE Site</a></li>
+</ul>
+
+<h5 id="ahrefguidevariantsnodejsvarianta"><a href="/guide/variants">Node.js Variant</a></h6>
+
+<ul>
+<li><code>run-tri.bat</code> - see <a href="/tutorial/step-02#startingthelocalwebServer">Starting the Local WebServer</a></li>
+</ul>
+
+<h3 id="demonstrationdata">Demonstration Data</h4>
+
+<p>Directory <code>X:\tri-devp\data</code> contains the raw data used to demo the apps.  It is included here to allow for learning through inspection
+and also to allow for re-uploads should it be necessary to reset the application data.  It is used with the <a href="/guide/waks">WAKS Utility</a>.</p>
+
+<h3 id="icons">Icons</h4>
+
+<p>Directory <code>X:\tri-devp\icons</code> contains the raw data used to build some of the icons used in <strong>Triangular</strong></p></div>

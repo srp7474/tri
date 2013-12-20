@@ -1,0 +1,451 @@
+@ngdoc overview
+@name Guide: Table (static version)
+@description
+
+### Overview
+The `Table` object defines the schema(s) used by an application.
+The records within a table are stored as JSON objects.  Refer to {@link /guide/records Record Storage}
+
+The `Table` object is defined in the {@link /guide/appname-js Appname.js File} or an external file that defines the `Table`.
+
+
+### Note
+Two instance types for the `Table` object are used internally.
+
+1. The first,
+the static object definition, refers to the static Javascript definition.
+
+2. The second, refers to a Javascript `Table` object which is a migrated copy
+of the static table definition.  This instance allows the HTML code to directly access methods defined
+for the {@link /api/tri.object.Table Table}, {@link /api/tri.object.Col Col} and {@link /api/tri.object.Filter Filter} objects.
+
+During the first use of a `Table` in a scope context the dynamic version of the `Table` object is created.  This is known as
+the `Table` migration process. Dynamic versions of the `Col` and `Filter` objects are also created by the process.
+
+### Definition Syntax
+
+Below is the skeleton of a `Table` definition.  The are coded into the
+{@link /guide/appname-js Appname.js File} or an external file that defines the `Table`
+
+<pre>
+oApp.factory('tbl...',['servREG',..., function(servREG,...) {
+  var oFuncs = {};              // The public functions table
+
+  var ...                       // any variables needing static scope
+
+  var oTabProp = {              // The `Table` properties
+       recTitle: 'REPS'         // The title displayted for the User
+      ,recName:  'repeat'       // Internal name as server key (3rd part)
+      ,recType:  'repeat'       // Internal recType as server key (2nd part)
+      ,lsName:   '-repeats'     // Key for localstorage cache
+      ,tabServ:  oFuncs         // self pointer
+      ,order:    {...}          // The optional order statement
+      ,cols:    [               // The columns definition
+                ]
+      ,filters: [               // The optional fileters definition
+                ]
+      ,...                      // The optional exits reference
+      ,...                      // The optional properties definitions
+  };
+
+  oFuncs.getTabProp = function() {return oTabProp;}    // Make oTabProp properties public
+  oFuncs.getSupMap  = function() {return getSupMap();} // Make optional function public
+  servREG.registerTable(oFuncs); // register the Table defintion
+  return oFuncs;                 // return this definition to AngularJS
+
+  // code local functions here
+  function getSupMap() {
+     ...
+  }
+
+  ...
+
+}]);
+</pre>
+
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+  span.srp-link   {display:inline-block; width:150px;}
+</style>
+
+where
+
+<span class=srp-propdef><code class=srp-label>Line 1:</code>Standard factory statement to load required components and define this table. `tbl...` is the name of the
+table being defined.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 2:</code>Coded as is to provide object in which to return public functions.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 3:</code>Define optional private variables that must have static scope.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 6:</code>The `oTabProp` definition is coded as is and provides an object in which to define the table properties.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 7:</code>The `recTitle` statement defines the public visible name of the table and shows up,
+for example, in the {@link /api/tri.controller:ctrlMenu menu} displays.  This is also the name used in the {@link /api/tri.servREG#findTable servREG.findTable}
+method.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 8:</code>The `recName` statement defines the internal name used as `Part3` of the
+{@link /guide/records#keystructure Key Structure} when in {@link /guide/records#supportedrecordtypes REC Mode}
+<br><br>
+When this value ends with a "%", the {@link /guide/records#keystructure chunked mode} operation is triggered.
+<br><br>
+For {@link /guide/records#supportedrecordtypes TBL Mode}  this parameter is not specified as `Part3` of the {@link /guide/records#keystructure Key Structure}
+is determined by some computation.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 9:</code>The `recType` statement defines the internal record type
+and is used as `Part2` of {@link /guide/records#keystructure Key Structure}.  Across all the tables used by an application this
+value must be unique.
+<br><br>
+For {@link /guide/user User Records} the `recType` is not defined and triggers
+{@link /guide/admin Admin} access to the {@link /guide/user User Records}.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 10:</code>The `lsName` statement defines the application unique name under which
+local copies of records are cached.  If this value is not specified (as for {@link /guide/user User Records}) no caching occurs and access of the records
+always returns to the server.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 11:</code>The `tabServ` definition is coded as is and provides a self pointer.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 12:</code>The optional `order` property causes the table to be listed in a certain sequence
+by the {@link /api/tri.controller:ctrlCommList List Controller}.
+<br><br>
+If `order` is a literal string that names a field, the records are sorted by the specified field
+in ascending sequence. eg: `order:'name'`
+<br><br>
+If `order` is a function, each object is passed to the function as the first parameter.  The function returns a string representing the object.  The records are sorted
+in ascending sequence on the returned string. eg: `order:getName`
+<br><br>
+If `order` is a object, the `col` property of the object names a field to sort on.  If the property `seq` equals 'reverse' the records are
+sorted in descending sequence. Otherwise they are sorted in ascending sequence. eg: `order:{col:'name',seq:'reverse'}`
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 13:</code>The `cols` definition provides the definition to the table columns.  Refer to
+{@link /guide/col Cols Definition}.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 15:</code>The optional `filters` definition provides the definition to the table filters.  Refer to
+{@link /guide/filter Filters Definition}.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 17:</code>Optional exit functions references are defined at this point.  Refer to {@link #exitfunctions Exit Functions}
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 18:</code>Optional exit functions references are defined at this point.  Refer to {@link #optionalproperties Optional Properties}
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 21:</code>Coded as is to provide public access to the 'oTabProp' object.
+</span>
+
+
+<span class=srp-propdef><code class=srp-label>Line 22:</code>An example on how to provide public access to table functions that
+may be required in applications that access multiple tables simultaneously. See "Deps.js" as an example.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 23:</code>Coded as is to register the table definition.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 24:</code>Coded as is to return the public function definitions.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 26:</code>Optional local functions referenced in the {@link #exitfunctions Exit Functions} are coded here.
+</span>
+
+<span class=srp-propdef><code class=srp-label>Line 33:</code>Coded as is to end the Table definition.
+</span>
+
+### Exit Functions
+The exit definitions link an optional exit to the local implementation of that exit.  At the appropriate time as indicated in this section
+the implementation will be called.  The signature of the call is also indicated in this section.
+
+The definitions can occur in any sequence but her listed here in alphabetical sequence.  The link will jump to a detailed explanation.  The convention is
+to name the function the same as the exit name.
+
+<span class=srp-link>{@link #exitcacheloadexit cacheLoadExit}</span>Process the cache when initally loaded<br>
+<span class=srp-link>{@link #exitcreateexit createExit}</span>Modify new object before edit<br>
+<span class=srp-link>{@link #exitdlgrenderexit dlgRenderExit}</span>Modify Dialog Window before edit<br>
+<span class=srp-link>{@link #exitfilekey fileKey}</span>Compute Key Part 3<br>
+<span class=srp-link>{@link #exitfilekeyref fileKeyRef}</span>Define Key Field Reference<br>
+<span class=srp-link>{@link #exitgeteditrecordexit getEditRecordExit}</span>Process a record when initally loaded for editing<br>
+<span class=srp-link>{@link #exitmenuwhen menuWhen}</span>Provide dynamic list of menu items<br>
+<span class=srp-link>{@link #exitprimeedit primeEdit}</span>Prime the edit before displaying<br>
+<span class=srp-link>{@link #exitprimelist primeList}</span>Prime the list before displaying<br>
+<span class=srp-link>{@link #exitsaverecordexit saveRecordExit}</span>Adjust record before persisting<br>
+<span class=srp-link>{@link #exitvalidate validate}</span>Validate object changes during edit<br>
+
+
+#### Exit cacheLoadExit
+signature: `cacheLoadExit(sFile,oRec)`
+
+This exit is taken when a new object or set of objects is loaded from the server. It can be used to adjust (such as adding computed values) or remove objects.
+The adjusted object or objects are returned and this returned set is loaded into the cache.
+
+Here is a sample exit used in the "Deps.js" application
+<pre>
+function cacheLoadExit(sFile,oRec) {
+  var sParts = sFile.split(/[.]/);
+  var oObj   = {name:sFile,src:sParts[1],currency:sParts[2],counter1:""+oRec.counter1,
+               counter2:""+oRec.counter2,acct:"?",cashSum:oRec.cash,
+               chequeSum:oRec.cheque,details:oRec};
+  log("cacheLoadExit %s rec=%o obj=%o",sFile,oRec,oObj);
+  return oObj;
+}
+</pre>
+
+
+
+#### Exit createExit
+signature: `createExit(oObj)`
+
+This exit is taken when a new object is being edited by the {@link /api/tri.controller:ctrlCommEdit Edit Controller}.  It can be used
+to populate the `oObj` with default values or remove the `tag` property inserted by the {@link /api/tri.servCRUD#makeRecord servCRUD.makeRecord}.
+
+A return of `true` enables the edit to continue.  A return of `false` quietly terminates the edit.
+
+Here is a sample exit
+<pre>
+function createExit(oObj) {
+  oObj.date      = getNowYMD();
+  oObj.number    = 1;
+  oObj.enteredBy = getUserStr();
+  return true;
+}
+</pre>
+
+#### Exit dlgRenderExit
+signature: `dlgRenderExit(oDlgEdit,oObj,sEditType)`
+
+This exit is taken when a the Dialog Editor Window resulting from a {@link /api/tri.servCRUD#setDlgEdit servCRUD.setDlgEdit} call is opened by the {@link /api/tri.controller:ctrlCommEdit Edit Controller}.  It can be used
+to adjust the Dialog window (such as add a Datepicker) or set up functions to call when the Dialog Window is closed.
+
+The `oDlgEdit` parameter object contains an array called `finals` that can be used to add functions to be called when the Dialog Window closes.
+
+The `oObj` parameter is the object being edited.
+
+The `sEditType` determines the type of edit and  contains `Create` (new object) or `Edit` (existing object)
+
+Here is a sample exit from {@link /apps/helloui-app HelloUI App}
+<pre>
+function dlgRenderExit(oDlgEdit,oObj,sEditType) {
+  var oDlg = oDlgEdit.oDlg;
+  var sTitle = oObj.title || '** Create New Message **';
+  if (sTitle.length > 50) sTitle = sTitle.substring(0,50)+"...";
+  oDlg.dialog("option","title","EDIT:"+sTitle);
+  $('div.pair#Date input',oDlg).each(function() {
+    var oThis = this;
+    $(this).attr('id','inp-Date');
+    var sDate = oObj.date;
+    var oDP = $(this).datepicker({
+         dateFormat:'yymmdd'
+        ,defaultDate:sDate
+        ,onClose:function(sDateText,inst) {
+                   oObj.date = sDateText;         // Update the object field
+                   $rootScope.$digest();          // angularJS update
+                 }
+    });
+    var oF = function() {$(oThis).datepicker('destroy');};
+    oDlgEdit.finals.push(oF);  // we will need to close the Datepicker
+  });
+  if (oViewScope) {  //If editing from within the Dialog Viewer need to update its object cache
+    oDlgEdit.finals.push(function() {oViewScope.doneEdit(oObj);});
+  }
+}
+</pre>
+
+#### Exit fileKey
+signature: `fileKey()`
+
+This exit allows a table to dynamically set the {@link /guide/records#keystructure Key Part3} based on  a
+{@link /guide/user User Profile}.  It is often accompanied with the {@link #exitfilekeyref fileKeyRef}.
+
+Here is a sample exit used in the "Chqs.js" application
+<pre>
+  function fileKey() {
+    var oProf = servSess.getProfile();
+    if (!oProf) return "no-prof";
+    if (!oProf.chqfile) return "no-chq-file";
+    return oProf.chqfile;
+  }
+</pre>
+
+#### Exit fileKeyRef
+
+Strictly speaking this is not an exit in that it does not point to a function. Rather this property indicates to the underlying **Triangular** routines which {@link /guide/user User Profile} contains the name of
+{@link /guide/records#keystructure Key Part3}.
+
+Here is a sample definition used in the "Chqs.js" application
+<pre>
+   ,fileKeyRef          : 'chqfile'
+</pre>
+
+
+#### Exit getEditRecordExit
+signature: `getEditRecordExit(oaa)`
+
+This exit is taken when the {@link /api/tri.controller:ctrlCommEdit Edit Controller} wishes to load an object to be edited.  Given
+{@link /guide/records#addressingrecords oaa} this function returns the record to be edited.  In the example shown the actual record is within a
+substructure (`details`) of the record persisted to the server.  The outer structure is used to store computed control information.
+
+Here is a sample exit used in the "Deps.js" application
+<pre>
+function getEditRecordExit(oaa) {
+  var oObj = oTabProp.oObjs[oaa];
+  return oObj.details;
+}
+</pre>
+
+#### Exit menuWhen
+signature: `menuWhen()`
+
+This exit is used to populate the left side menu with action item {@link /guide/action List ... Records}.
+  By default each loaded {@link /guide/table Table} is added to the menu.  This exit if it returns
+`false` causes the {@link /guide/action Action Item} to not be added.
+Here is a sample exit taken from the "Deps.js" code.
+
+<pre>
+  function testDoubleLogin() {
+    var sUser1 = servSess.getUser();
+    var sUser2 = servSess.getUser2();
+    if (!sUser1) return false;
+    if (!sUser2) return false;
+    //log("testDoubleLogin "+sUser1+" "+sUser2);
+    if (sUser1 != sUser2) return true;
+    return false;
+  }
+</pre>
+
+referenced by
+
+<pre>
+      ,menuWhen          : testDoubleLogin
+</pre>
+
+
+#### Exit primeEdit
+signature: `primeEdit(scope,oTP,oObj)`
+
+This exit is taken before an object is displayed in the {@link /api/tri.controller:ctrlCommEdit Edit Controller}.  It can be used to
+prepare the $scope of the {@link /api/tri.controller:ctrlCommEdit Edit Controller} (`scope` parameter).  The `oTP` parameter is the
+table properties the `oObj` (the object being edited) is found in.
+
+Here is a sample exit used in the "Deps.js" application
+<pre>
+function primeEdit(scope,oTP,oObj) {
+  log("primeEdit scope=%o oTP=%o obj=%o",scope,oTP,oObj);
+  scope.setAddFocus    = setAddFocus;
+  scope.sAutoName      = '';//force autotab to take
+  return oObj;
+}
+</pre>
+
+#### Exit primeList
+signature: `primeList(scope,oTP)`
+
+This exit is taken before an object is displayed in the {@link /api/tri.controller:ctrlCommList List Controller}.  It can be used to
+prepare the $scope of the {@link /api/tri.controller:ctrlCommList List Controller} (`scope` parameter) primarily the
+{@link /api/tri.object.Filter Filter} work areas.  The `oTP` parameter is the
+table properties.
+
+Here is a sample exit used in the "Chqs.js" application
+<pre>
+function primeList(scope,oTP) {
+  log("primeList scope=%o oTP=%o",scope,oTP);
+  if ((scope.oSel) && (!('_custPrt' in scope.oSel))) {
+    scope.oSel._custprt = '0';
+    scope.oSel._custvoid = '0';
+    log("setCustPrt %o flag=%s",scope,scope.oSel._custprt);
+  }
+  nPrintChq = null;
+}
+</pre>
+
+#### Exit saveRecordExit
+signature: `saveRecordExit(oRec)`
+
+This exit is taken before an object is saved by the {@link /api/tri.controller:ctrlCommEdit Edit Controller}.  It can be used to
+adjust the contents of a record such as deleting intermediate work fields that might have been created by support routines.
+The `oRec` parameter is the record being saved.
+
+Here is a sample exit used in the "Chqs.js" application
+<pre>
+function saveRecordExit(oRec) {
+  log("saveRecordExit.1 %o",oRec);
+  for(var i=0,iMax=oRec.lines.length; i<iMax; i+=1) {
+    var oLine = oRec.lines[i];
+    delete oLine.bShowCode;
+    delete oLine.amtErr;
+  }
+  return oRec;
+}
+</pre>
+
+
+#### Exit validate
+signature: `validate(scope,oObj,oOrig,fValidateStd,fEditErr)`
+
+This is called after changes are made to object `oObj`.  The `scope` references the $scope of the  {@link /api/tri.controller:ctrlCommEdit Edit Controller}.
+`oOrig` is a copy of the object before editting began.
+
+`fValidateStd` is a callback function that can be called to indicate validation passed but to continue with the standard validation. A return of
+`true` by the `validate` function will bypass the standard validation and indicate the validation passed.
+
+`fEditErr` is a callback function to register an error and indicate the validation failed.
+
+Here is a sample exit used to validate a {@link /guide/user User Record} update.
+<pre>
+  function validate(scope,oObj,oOrig,fValidateStd,fEditErr) { // custom validation
+    if (!oObj.obj) return false;
+    if (getUserID(oObj) != '.config') {
+      if (!('password' in oObj.obj)) return fEditErr("'password' field required");
+      if (oObj.obj.password != oOrig.obj.password) {
+        if (oObj.obj.password.match(/[a-zA-Z]/) == null) {
+          return fEditErr("'password' field must contain alphabetic");
+        }
+      }
+    }
+    return fValidateStd(oTabProp);
+  }
+</pre>
+
+
+### Optional Properties
+The optional properties add properties to the table definition that are used by **Triangular** processing routines.
+
+The property definitions can occur in any sequence but her listed here in alphabetical sequence.  The link will jump to a detailed explanation.
+
+<span class=srp-link>{@link #propertyoptactions optActions}</span>Add additional actions to the {@link /api/tri.controller:ctrlCommList List Controller} header
+
+#### Property optActions
+
+This is used to add options to the {@link /api/tri.controller:ctrlCommList List Controller} header.  The value of the `optActions` keyword is an array
+of objects each with the following properties.
+
+<span class=srp-propdef><code class=srp-label>click:</code>A local function to call.
+The reference is automatically added to the {@link /api/tri.controller:ctrlCommList List Controller} scope.
+</span>
+
+<span class=srp-propdef><code class=srp-label>title:</code>A user hint string
+</span>
+
+<span class=srp-propdef><code class=srp-label>label:</code>The text shown in the action link
+</span>
+
+<span class=srp-propdef><code class=srp-label>whatClass:</code>a function called to determine if the link is enabled.
+The reference is automatically added to the {@link /api/tri.controller:ctrlCommList List Controller} scope.
+</span>
+
+Here is a sample exit used in the TableEnvelopes demo.
+<pre>
+optActions : [{click:'printBatch()',
+               title:"Print today's envelopes"
+              ,label:'Print Batch'
+              ,whatClass:'testBatch()'
+             }]
+</pre>

@@ -1,0 +1,74 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="startingthelocalwebserverahrefguidevariantsgaevarianta">Starting the Local WebServer <a href="/guide/variants">GAE Variant</a></h4>
+
+<p>This description is relevant for Windows systems. For alternate platforms the <code>run-ws.bat</code> will have to be ported to that platforms equivalent script.</p>
+
+<ol>
+<li><p>Start a command line window and make the CWD  <code>x:\tri-devp\bats</code> as defined in <a href="/tutorial/step-01#developmentpackagepreparation">Development Package Preparation</a></p></li>
+<li><p>Enter <code>run-ws</code>. This should start the webserver on port 8882.  There will be some messages to confirm this like:
+<br><br>
+<code>INFO: Server default is running at http://localhost:8882/</code><br>
+'...'<br>
+<code>INFO: Dev App Server is now running</code></p></li>
+<li><p>To modify the port change the statement that begins <code>set start_parms=--port=8882 ...</code> to whatever port you wish to use.
+<br><br>
+You will need to change the <code>waks.bat</code> utility also in order to use <a href="/guide/waks">WAKS Utility</a></p></li>
+<li><p>Use <code>&lt;Ctrl-C&gt;</code> to stop the webserver</p></li>
+</ol>
+
+<h3 id="startingthelocalwebserverahrefguidevariantsnodejsvarianta">Starting the Local WebServer <a href="/guide/variants">Node.js Variant</a></h4>
+
+<p>This description is relevant for Windows systems. For alternate platforms the <code>run-tri.bat</code> will have to be ported to that platforms equivalent script.</p>
+
+<ol>
+<li><p>Start a command line window and make the CWD  <code>x:\tri-devp\bats</code> as defined in <a href="/tutorial/step-01#developmentpackagepreparation">Development Package Preparation</a></p></li>
+<li><p>Enter <code>run-tri</code>. This should start the webserver on port 8888.  There will be some messages to confirm this like:
+<br><br>
+<code>starting tri-server</code><br>
+<code>tri-server listening for q{CR}</code><br>
+<code>scanDB starting ./TRI-DB</code><br>
+<code>scanDB completed</code><br>
+<code>Http Tri-Server alive at http://localhost:8888/</code><br></p></li>
+<li><p>To modify the port change the statement that begins <code>node js\tri-server.js -port 8888 ...</code> to whatever port you wish to use.
+<br><br>
+You will need to change the <code>waks.bat</code> utility also in order to use <a href="/guide/waks">WAKS Utility</a></p></li>
+<li><p>Use <code>q</code>  or <code>&lt;Ctrl-C&gt;</code> to stop the webserver</p></li>
+<li><p>Use <code>db</code>  to see the <a href="/guide/datastore-node">Datastore Directory</a></p></li>
+</ol>
+
+<h3 id="connectingtothelocalwebserver">Connecting to the Local WebServer</h4>
+
+<ol>
+<li><p>Start your <strong>Chrome</strong> Browser (see <a href="/apps/browser">Browser Support</a>) and
+goto URL <code>localhost:8882</code> (<a href="/guide/variants">GAE Variant</a>) or <code>localhost:8888</code> (<a href="/guide/variants">Node.js Variant</a>)
+<br><br>
+Vary this if the previous step 3 modified the port.</p></li>
+<li><p>The window should appear
+<br><br>
+<img class=screen src=/img/hello-app50.JPG></p></li>
+<li><p>Modify the URL from <code>Hello.htm</code> to <code>Chqs.htm</code> and you will see the <code>CIT Cheque Writer System Login</code> page</p></li>
+<li><p>Modify the URL from <code>Chqs.htm</code>  to <code>Deps.htm</code> and you will see the <code>Donation Recording System Login</code> page</p></li>
+<li><p>All these applications function as on the <a href="http://tri-demo.appspot.com/apps/Hello.htm">Tri-Demo Site Hello App</a> with similar data.</p></li>
+<li><p>The difference is that now you can login as the <a href="/guide/user#superuser">Superuser</a>   To do so
+goto link <a href="http://localhost:8882/apps/tri/TriBoot.htm">Local SuperUser Login</a>. You should see
+<br><br>
+<img class=screen src=/img/super-user-login50.JPG></p></li>
+<li><p>To login as  <a href="/guide/user#superuser">SuperUser</a> use UserName <code>super</code> and Password <code>super</code>. You should see
+<br><br>
+<img class=screen src=/img/super-page50.JPG></p></li>
+<li><p>To login as the <a href="/guide/user#adminuserr">AdminUser</a> click on a particular link under the <code>User Admin</code> column at the foot of the page.  Try the <code>msgs</code> app.
+You should see
+<br><br>
+<img class=screen src=/img/admin-user-login50.JPG></p></li>
+<li><p>To login as  <a href="/guide/user#adminuser">AdminUser</a> use UserName <code>admin</code> and Password <code>admin</code>
+You should see
+<br><br>
+<img class=screen src=/img/admin-page50.JPG></p></li>
+<li><p>This can be repeated for the other apps.  The login fields UserName <code>admin</code> and Password <code>admin</code> apply there also.</p></li>
+</ol>
+
+<h3 id="nextstep">Next Step</h4>
+
+<p>Proceed to <a href="/tutorial/step-03">03  Add MyApp Files</a></p></div>

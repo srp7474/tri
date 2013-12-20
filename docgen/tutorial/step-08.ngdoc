@@ -1,0 +1,58 @@
+@ngdoc overview
+@name Tutorial: 08 Upload to GAE Site
+@description
+
+{@link /guide/variants Node.js Variant} Skip this step and go to {@link /tutorial/step-10 10 MyApp on NodeJS Site}
+
+`MyApp` is now ready to upload to the {@link /guide/gaesite GAE Site}.  These are the steps.  Modify for a non-windows platform.
+
+
+### {@link /guide/gaesite GAE Site} Upload
+
+1. Start a command line window and make the CWD `x:\tri-devp\bats` as defined in {@link /tutorial/step-01#developmentpackagepreparation Development Package Preparation}
+
+2. Type `appcfg` to initiate shipping the application to the {@link /guide/gaesite GAE Site}.
+
+3. You will be prompted for `Email:`. Enter Google account (your email without `@gmail.com` suffix)
+
+3. You will be prompted for `Password:`. Enter the password associated with this gmail account.
+
+4. Note: On subsequent uploads you may not be prompted for this information as for a period of time it remembers.
+
+4. It will crunch for a few seconds until it announces<br><br>
+`Update for server default completed successfully`
+
+### {@link /guide/gaesite GAE Site} Datastore Priming
+
+**Note:** This will only be necessary the first time you upload `MyApp` to the {@link /guide/gaesite GAE Site}.
+
+1. As before the {@link /guide/datastore Datastore} is unprimed.
+
+2. Point your browser at URL `tri-test.appspot.com` (where `tri-test` is your {@link /guide/gaesite GAE Site} ID) and you should see the familiar screen.
+   <br><br>
+   <b>Note:</b> An intermediate `Prime.htm` screen may show for a few seconds while the site warms up.  Be patient.
+   <br><br>
+   <img class=screen src=/img/needs-prime50.JPG>
+
+3. Repeat the procedure starting at point 2 in {@link /tutorial/step-06#configuringthedDatastore Configuring the Datastore} remembering to
+use URL `tri-test.appspot.com` rather than `localhost:8882`
+
+### Upload App data to {@link /guide/gaesite GAE Site}
+
+1. If there is data to upload proceed as described in {@link /tutorial/step-04#uploadingdatatotheapp Uploading data to the App}. But first read on.
+
+2. Before using the upload facilities you have to tell the {@link /guide/waks WAKS Utility} to use the production site ({@link /guide/gaesite GAE Site}).
+
+3.  First issue the command `waks site tri-test` where `tri-test` is the `MyApp` site id.
+
+4.  Then prefix `prod` to each {@link /guide/waks WAKS Command}. Thus the sequence
+    <br><br>
+    `waks set myapp super-userid super-password`<br>
+    `waks dir ..\data`<br>
+    `waks prod ship % %`
+    <br><br>
+would ship the `myapp` data stored in the `..\data` folder
+
+### Next Step
+
+We are ready for the final checkout of {@link /tutorial/step-09 09 MyApp on GAE Site}

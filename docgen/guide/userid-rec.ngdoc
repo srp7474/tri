@@ -1,0 +1,74 @@
+@ngdoc overview
+@name Guide: UserID Recovery
+@description
+### Overview
+In the event that a password or userid is misplaced or forgotten the following steps can be used.
+
+### Recovery of SuperUser ID and Password ({@link /guide/variants GAE Variant})
+
+1. Locate the SuperUser record using the Google App Datastore utility. List the records in class **com.rsi.cita.gdo.GdoCitaData**.
+   <br><br>
+   Find the actual SuperUser record. It is stored using the key ././userid and is usually the first record.
+   <br><br>
+   Note or copy the numeric value of the password= property in the DataFld column..
+   <br><br>
+   On the local system use <a target=_blank href='http://localhost:8882/_ah/admin'>Local Datastore Viewer</a> to access the viewer.
+   <br><br>
+   On the production system use the Datastore Viewer under the application accessible from your Google App Engine account.
+   <br><br>
+   If you have no access to the Datastore Viewer you have no right to be here.
+
+2. Go to <a ng-click=appLoader($event) href=/apps/tri/TriBoot.htm class=c-action>SuperUser Login</a>
+
+3. Enter the UserID.
+
+4. For the password enter the value <b>=</b><i>password</i><b>/</b><i>new-password</i>
+   <br><br>
+   where <i>password</i> is the password= value noted in step 1.
+   and <i>new-password</i> is the password you wish use from now on.
+   and <b>=</b> triggers the password change and the <b>/</b> terminates the token value.
+   <br><br>
+   Note that the password field will display * for values entered so it is safest to copy and paste the token= value.
+
+5. If successful the system will sign you on as the SuperUser.
+
+### Recovery of SuperUser ID and Password ({@link /guide/variants Node.JS Variant})
+1. You will have to locate the file `$super.XXX.json.txt` (where `XXX` is the {@link /guide/user SuperUser Name}) in the `TRI-DB` folder of the Node.JS server.  This may require
+downloading the site if this is a production server.  Inspect the text and note the password value (it will be numeric).
+
+2. Continue with steps 2 through 5 in the previous section.
+
+
+### Recovery of AdminUser ID and Password
+1. Sign in as the SuperUser
+
+2. Create a new AdminUser account for the relevant application.
+
+3. Sign is using the new AdminUser account.
+
+4. Use the **List Users** action to list the User records.
+
+5. Edit the AdminUser you wish to reset the password for.
+
+6. Set the password property to a temp or permanent value.  It must include at least one alphabetic character.
+
+7. Sign off and sign on to the fixed AdminUser ID using the password.  This will cause the password to become encrypted.
+
+8. Use the **List Users** action to list the User records.
+
+9. Drop the temporary AdminUser created in step 2.
+
+
+### Recovery of User ID and Password
+1. Sign is using the AdminUser account for the application.
+   This is accessed by <code>/apps/tri/Admin.htm?cust=XXX</code> on the site URL where XXX is the
+   application ID.
+
+2. Use the **List Users** action to list the User records.
+
+3. Edit the User you wish to reset the password for.
+
+4. Set the password property to a temp or permanent value.  It must include at least one alphabetic character.
+
+5. Inform the User of the new password.  He can use the **Change Password** action to change the password given in 4.
+

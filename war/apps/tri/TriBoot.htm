@@ -1,0 +1,211 @@
+<html>
+<!--
+ @license
+ Copyright (c) 2013 by Steve Pritchard of Rexcel Systems Inc.
+ This file is made available under the terms of the Creative Commons Attribution-ShareAlike 3.0 license
+ http://creativecommons.org/licenses/by-sa/3.0/.
+ Contact: public.pritchard@gmail.com
+-->
+<style type="text/css"></style>
+<link rel="shortcut icon" href="img/fav-boot0.ico" type="image/x-icon" />
+
+<head>
+  <link rel=stylesheet type ="text/css" href="AppStd.css" title=defualt>
+  <script src="ut.js"></script>
+  <script src="angular.min.js"></script>
+  <script src="TRI.min.js"></script>
+  <script src="../AppsConfig.js"></script>
+  <script src="TriBoot.js"></script>
+  <title>TriBoot:Defined during bootstrap</title>
+  <script>gaTracking();</script>
+</head>
+
+<body id=bodyID>
+  <div ng-controller=ctrlMain>
+    <macro fetch='apps-header.html'></macro> <!-- standard title -->
+    <div id=divBody>
+       <table id=tblWrap>
+         <tr class=atTop>
+           <td class=atTop>
+             <table id=tblLft height=100%>
+               <tr><td><img src='img/transparent.gif' width=200px height=1px></td></tr>
+               <tr class=gbl-actions>
+                 <td style='width:100%;'>
+                   <macro fetch='apps-menu.html'></macro> <!-- menu -->
+                 </td>
+               </tr>
+             </table>
+           </td>
+           <td>
+             <div id=divRgt>
+               <macro fetch='apps-boiler-plate.html'></macro>                                             <!-- standard messages panels -->
+               <macro fetch='apps-prime-system.html'></macro>                                             <!-- initialize system panel -->
+               <macro fetch='apps-add-app-user.html'></macro>                                             <!-- add new applications -->
+                                                                                                          <!-- login panel -->
+               <macro fetch='apps-login.html' alter="System Login/SuperUser Login;hasSession[(][)]/isSect('PrimeSystem')||isSect('AdminSystem');login[(][^)]+[)]/superLogin(this)"></macro>
+               <macro fetch='apps-list-apps.html'></macro>                                                <!-- List applications-->
+             </div>
+             <tr ng-show=isLocalDatastore()>
+               <td>&nbsp;</td><td>
+               <br><br><br>
+               To view the raw records on the local Datastore use
+               <a class=c-action target=DataStoreViewer href=/_ah/admin>Datastore Viewer</a>.
+               <br><br>
+               The data is stored under the <b>com.ris.cita.gdo.GdoCitaData</b> Entity Kind.
+             </tr></td>
+           </td>
+         </tr>
+       </table>
+    </div>
+  </div>
+
+  <macro fetch='apps-copyright-notice.html' alter='!tri/img!../tri/img'></macro>                          <!-- copyright notice -->
+
+<object data='AppsBase.htm?app=Chqs' id=apps-templates style='width:0px;height:0px;'></object> <!-- load standard templates -->
+
+<!---------------------------- Custom CSS ----------------------------------!>
+<style type="text/css">
+  /* Note: this could be in a separate .css file if preferred */
+
+  div#lost-note                    {width:700px; margin-top:30px;}
+</style>
+
+<!------- Custom Templates ------!>
+<object type='text/html' id=cust-templates style='width:0px;height:0px;'>
+  <pre class=template id="xxdonor-edit.css">
+     <!-- here we are -->
+  </pre>
+
+  <pre id="apps-prime-system.html" class=template>
+    <style type="text/css">
+       div#prime-store table td.c1  {text-align:right;}
+       div#prime-store table input  {width:200px;}
+    </style>
+    <div id=prime-store class="hideable" ng-controller=ctrlSect ng-show="!hasSession() && isSect('PrimeSystem')" style='margin-top:10px;margin-left:40px;'>
+      <div class=left>
+        <b>The Triangular Datastore requires priming</b>
+        <br><br>
+        <span id=NotFirstMsg>Please enter a SuperUser id and the new password (twice)</span>
+        <br><br>
+        <span id=NotFirstMsg>The SuperUser administers applications on the Triangular Datastore</span>
+        <br><br>
+        <table>
+          <tr>
+            <td class=c1><span class='darker instruct'>SuperUser id:&nbsp;</span></td>
+            <td><input type=input id=txtUserid value='' placeholder='Enter the SuperUser id' ng-model=oObj.User></td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>New Password:&nbsp;</span></td>
+            <td>
+              <input type=password id=txtPassword value='' placeholder='Enter new password' ng-model=oObj.NewPassword>
+              <span class=note>&nbsp;&nbsp;&nbsp;Must contain at least one alphabetic character</span>
+            </td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>Repeat New Password:&nbsp;</span></td>
+            <td><input type=password id=txtPassword value='' placeholder='Enter new password' ng-model=oObj.ConfirmPassword></td>
+          </tr>
+        </table>
+        <br>
+        <input type=button class=button ng-click="primeStore(this)" id=butLogin value='   Prime Storage  '>
+      </div>
+      <p ng-show='hasError()'>
+        <span class=warn>Password Error:{{sPasswordErr}}</span>
+      </p>
+      <div id=lost-note>
+        <b>Note:</b>
+        <p>
+        While there are procedures documented in the <b>Triangular</b> documentation to recover a lost SuperUser ID and password it is easier to record the values in a secure place.
+        </p>
+      </div>
+    </div>
+  </pre>
+
+  <pre id="apps-add-app-user.html" class=template>
+    <style type="text/css">
+       div#add-app-user table td.c1  {text-align:right;}
+       div#add-app-user table input  {width:200px;}
+    </style>
+    <div id=add-app-user class="hideable" ng-controller=ctrlSect ng-show="!hasSession() && isSect('AdminSystem')" style='margin-top:10px;margin-left:40px;'>
+      <div class=left>
+        <b>Add Application AdminUser</b>
+        <br><br>
+        <span id=NotFirstMsg>Please enter the lowercase appid, an AdminUser id and the new password (twice)</span>
+        <br><br>
+        <span id=NotFirstMsg>The AdminUser administers users on the application space.</span>
+        <br><br>
+        <span id=NotFirstMsg>The existance of an AdminUser means the application space is ready.</span>
+        <br><br>
+        <table>
+          <tr>
+            <td class=c1><span class='darker instruct'>App id:&nbsp;</span></td>
+            <td><input type=input id=txtUserid value='' placeholder='Enter the application id' ng-model=oObj.AppID></td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>AdminUser id:&nbsp;</span></td>
+            <td><input type=input id=txtUserid value='' placeholder='Enter the AdminUser id' ng-model=oObj.User></td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>New Password:&nbsp;</span></td>
+            <td>
+              <input type=password id=txtPassword value='' placeholder='Enter new password' ng-model=oObj.NewPassword>
+              <span class=note>&nbsp;&nbsp;&nbsp;Must contain at least one alphabetic character</span>
+            </td>
+          </tr>
+          <tr>
+            <td class=c1><span class='darker instruct'>Repeat New Password:&nbsp;</span></td>
+            <td><input type=password id=txtPassword value='' placeholder='Enter new password' ng-model=oObj.ConfirmPassword></td>
+          </tr>
+        </table>
+        <br>
+        <input type=button class=button ng-click="addAppAdminuser(this)" id=butLogin value='   Add App AdminUser  '>
+      </div>
+      <p ng-show='hasError()'>
+        <span class=warn>Password Error:{{sPasswordErr}}</span>
+      </p>
+    </div>
+  </pre>
+
+  <pre id="apps-list-apps.html" class=template>
+    <style type="text/css">
+        div#app-list                                   {margin-top:30px;margin-left:40px;}
+        table#list-apps                                {width:602px; margin-top:0px;}
+        table#list-apps thead                          {width:600px;}
+        table#list-apps td.c1, table#list-apps th.c1   {width:150px; }
+        table#list-apps td.c2, table#list-apps th.c2   {width:150px; }
+        table#list-apps td.c3, table#list-apps th.c3   {width:300px; }
+        table#list-apps td.c1                          {text-align:center;}
+        table#list-apps td.c2                          {text-align:center;}
+        table#list-apps td.c3                          {text-align:center;}
+    </style>
+    <div id=app-list class="hideable" ng-controller=ctrlSect ng-show="(oApps != null) && isSect('AdminSystem')">
+      <div class=left>
+        <b>Defined Application Spaces(s)</b>
+        <br><br>
+        <table class=std id=list-apps>
+          <thead>
+            <tr>
+              <th class=C1>Application</th>
+              <th class=C2>SuperUser</th>
+              <th class=C3>User Admin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-class=tr-even><td colspan=4><img src='img/transparent.gif' width=1px height=10px></td></tr>
+            <tr ng-repeat='oRow in oApps' ng-class-even="'tr-even'" ng-class-odd="'tr-odd'">
+              <td class=C1><b>{{oRow.app}}</b></td>
+              <td class=C2>{{oRow.user}}</td>
+              <td class=C3><a class=action ng-click=xfrAdminFunctions('{{oRow.app}}') href=''>Add <b>{{oRow.app}}</b> Users</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </pre>
+
+
+
+</object>
+
+</html>
+

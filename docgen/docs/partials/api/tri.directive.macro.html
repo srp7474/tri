@@ -1,0 +1,65 @@
+<h1><code ng:non-bindable="">macro</code>
+<span class="hint">(directive in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Used to provide HTML manipulation and insertion.  Used for tempolates and to disable sections of code.</p>
+
+<p>The raw HTML passes through a modification cycle where the <code>alter</code> and other standard $word$ strings are
+replaced with new values just before the final insertion.</p>
+
+<p>Note that the new HTML can itself contain <code>macro</code> directives.  That is, the <code>macro</code> directive is recursive.</p>
+
+<p>The value <code>&lt;img-defer ...&gt;</code>  are replaced by <code>&lt;img ...&gt;</code>.  This defers the loading
+of the images until the template is actually used.  It also defers loading until the template is positioned under the correct
+base URL.  Refer to <a href="/guide/templates#theloadprocess">Template Load Process</a></p>
+
+<p>The <code>alter</code> param consists of a repeated group of pairs.
+Refer to <a href="/api/tri.object.Tri#applyAlters">tri.applyAlters</a> for the format.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre><code ng:non-bindable="">&lt;macro fetch='template-name.html' alter='fromstr/tostr;....' col='' mode='' marker='' obj='' objref=''&gt;&lt;/macro&gt;</code>
+</pre>
+<h3 id="Parameters">Parameters</h3>
+<ul class="parameters"><li><code ng:non-bindable="">alter – {string} – </code>
+<p>Alters the raw HTML string before insertion using RegExp patterns. Refer to <a href="/api/tri.object.Tri#applyAlters">tri.applyAlters</a> for the format.</p></li>
+<li><code ng:non-bindable="">col – {string} – </code>
+<p>Used internally in conjuction with the <code>mode</code> parameter to generate standard HTML chunks. Also used
+to extract the field name of the column.  The $MODEL$ will be replaced by this field name.</p></li>
+<li><code ng:non-bindable="">fetch – {string} – </code>
+<p>Template name to fetch.  If not specified the <code>col</code> and <code>mode</code> params are
+used to manufacture a standard block of HTML to insert.</p></li>
+<li><code ng:non-bindable="">marker – {string} – </code>
+<p>used to create HTML comments in the generated code containing the marker string for diagnostic purposes.</p></li>
+<li><code ng:non-bindable="">mode – {string} – </code>
+<p>Used internally in conjuction with the <code>mode</code> parameter to generate standard HTML chunks.</p></li>
+<li><code ng:non-bindable="">obj – {string} – </code>
+<p>The string $MODOBJ$ will be replaced by this value known as <code>sObj</code>.</p></li>
+<li><code ng:non-bindable="">objref – {string} – </code>
+<p>The object reference <code>sObj</code> is set by evaluation of the <code>objref</code> string.</p></li>
+</ul>
+</div>
+<h2 id="Example">Example</h2>
+<div class="example"><h4>Source</h4>
+<div source-edit="" source-edit-deps="angular.js script.js" source-edit-html="index.html-11" source-edit-css="" source-edit-js="script.js-10" source-edit-unit="" source-edit-scenario=""></div>
+<div class="tabbable"><div class="tab-pane" title="index.html">
+<pre class="prettyprint linenums" ng-set-text="index.html-11" ng-html-wrap-loaded=" angular.js script.js"></pre>
+<script type="text/ng-template" id="index.html-11">
+ 
+ <div><b>Note: examples do not execute yet until TRI.js hooked in properly to doc environment</b></div>
+   <macro fetch='apps-header.html'></macro>
+   <macro fetch='apps-login.html' alter='System Login/Donation Recording System Login;SINGLE/DOUBLE'></macro>
+   <macro col='oSubC' objref=oCol.objName mode='Edit' marker=mark-2a></macro>
+ </script>
+</div>
+<div class="tab-pane" title="script.js">
+<pre class="prettyprint linenums" ng-set-text="script.js-10"></pre>
+<script type="text/ng-template" id="script.js-10">
+   function Ctrl($scope) {
+     $scope.changeCurrency = function() {
+     }
+   }
+ </script>
+</div>
+</div><h4>Demo</h4>
+<div class="well doc-example-live animator-container" ng-embed-app="" ng-set-html="index.html-11" ng-eval-javascript="script.js-10"></div></div>
+</div>

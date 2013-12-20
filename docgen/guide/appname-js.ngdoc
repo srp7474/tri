@@ -1,0 +1,62 @@
+@ngdoc overview
+@name Guide: AppName js File
+@description
+### Overview
+The `appname.js` file is the file that contains the Javascript code that supports the matching {@link /guide/appname-html appname-html} file.  By convention it
+is uses the same name as the `appname.html` file with a replacement of the extension with .js.
+
+Samples include the `Deps.js` and `Chqs.js` in the Apps and tutorial examples.
+The samples are documented and can be used to create new
+`appname.js` files.
+
+The following major sections are found in the `appname.js` file:
+
+### ctrlMain function
+The `ctrlMain` function is called by the <a target=_blank href="http://angularjs.org/">AngularJS</a>  infrastructure because it is the ng-controller specified on the `<body>` statement
+of the `appname.html` file.
+
+Here is a sample of the beginning of the `ctrlMain` function taken from `Deps.js`.
+
+<pre>
+function ctrlMain($scope,servSess,servGAE,tblDEP,tblENV,tblDON,servCRUD,servREG) {
+  log("Created ctrlMain for deps application");
+  servGAE.setCust("deps");
+  servSess.setTitle("Deposit Recording System");
+  var oOpts = [{menu:"Admin Functions",func:xfrAdminFunctions,role:'admin'},{menu:"Deposit Summaries",func:printDepSum,role:'elder',sandbox:true}];
+  servSess.setOptMenuItems(oOpts);
+
+  function xfrAdminFunctions() {
+    servSess.xfrAdminApp("deps",["TableDonors"]);
+  }
+  ...
+</pre>
+
+
+It contains the following components.
+
+1. Line 1, the function statement references, beside the Triangular services such as `servSess`, the `Tables` that should be accessible to the application.
+
+1. Line 3, initialization code that defines the customer (see {@link /api/tri.servGAE#setCust servGAE.setCust})
+
+1. Line 4, initialization code that defines the application title (see {@link /api/tri.servSess#setTitle servSess.setTitle})
+
+1. lines 4 & 5, initialization code that defines the optional menu items (see {@link /api/tri.servSess#setOptMenuItems servSess.setOptMenuItems})
+
+1. line 8, the local function referenced in line 5 that defines how to transfer to the {@link /guide/admin Admin app}.
+
+1. An optional `logonExit` that modifies the optional menu items depending on the role or profile of the User that logged on.  See `Chq.js` as an example.
+
+1. Any functions required to support the optional menu items
+
+1. Any functions that extend the standard {@link /api/tri.controller:ctrlCommEdit Edit Controller}  or {@link /api/tri.controller:ctrlCommList List Controller}.  Note that the sample `Deps.js` code
+does extend the {@link /api/tri.controller:ctrlCommEdit Edit Controller} but has no additional functions as they were found useful and moved to the
+standard {@link /api/tri.controller:ctrlCommEdit Edit Controller}.
+
+
+
+### Table definition(s)
+The table defintition(s) can be defined in an external .js file or here.  By convention at least the primary 'Table` definition is coded here.
+External definitions have the advantage that they can be used in more than 1 application (such as the {@link /guide/admin Admin Application} where updates to
+certain tables can be limited to the system administrator).
+
+The `Table` defintion syntax is extensive and defined in {@link /guide/table Table (static version)}.

@@ -1,0 +1,94 @@
+@ngdoc overview
+@name Tutorial: 03 Add MyApp Files
+@description
+
+We will create an application called `MyApp`.  Vary it to suit your preferences.  Like all good programmers we will use another app as the base.  In this case
+we will use the `Hello App` because it has a basic foundation.
+
+In this step we are adding the app and creating the required administrative connections on the {@link /guide/datastore Datastore}
+
+The {@link /apps/hello-app Hello App Explained} may assist in understanding the changes being made.
+
+### Create `MyApp.htm` and `MyApp.js`
+
+1. In the folder `X:tri-devp\war\apps` you should see `Hello.htm` and `Hello.js`
+
+2. Copy each and rename to `MyApp.htm` and `MyApp.js`
+
+3. Edit `MyApp.htm`
+
+4. In line `3` change from `fav-msgs0.ico` to `fav-t1w.ico` to make the favorite icon <img class=screen src=/img/fav-t1w.ico>. See {@link /guide/hints-tech#makingicons Making Icons}
+
+4. In line `11` change from `Hello.js` to `MyApp.js`
+
+5. In line `12` change from `Hello:` to `MyApp:`
+
+5. In line `17` change from `Message Board System Login` to `MyApp System Login`
+
+3. Edit `MyApp.js`
+
+5. In line `15` change from `msgs` to `myapp` (**note case**)
+
+5. In line `22` change from `msgs` to `myapp` (**note case**)
+
+10. Edit `AppConfig,js` and change the `Hello.htm` in
+`oFuncs.getStartPage = function() {return "apps/Hello.htm";}` to `MyApp.htm`.  This will cause the `MyApp.htm` to be the default startup page
+if no app is specified in the URL.
+
+<span id=configurethedatastore></span>
+### Configure the {@link /guide/datastore Datastore}
+
+1. Login as {@link /guide/user#superuser SuperUser} using link
+   {@link http://localhost:8882/apps/tri/TriBoot.htm Local SuperUser Login}.
+   Use UserName `super` and Password `super`. You should see
+   <br><br>
+   <img class=screen src=/img/super-page50.JPG>
+
+2. In the `Add Application AdminUser` section enter `myapp` in the App ID field, `admin` in the remaining 3 fields.  Vary this if you wish but remember what you used.
+This creates the {@link /guide/user#adminuser AdminUser} for app `myapp`.  Press `Add App AdminUser` button.
+
+3. The line `myapp  admin   Add myapp Users` should be added at the foot of the page.
+
+4. Click on the `User Admin` column `myapp` row to get to the Admin Login page.
+
+5. Signon using the credentials set up in point 2.
+
+6. Click on `List User Records` and you should see 1 record with the user id set up in point 2.
+
+7. Press `Create New User Record`. It will ask you for a Unique UserID.  User `newuser` or vary as you wish.
+
+8. Add the password with at least one alphabetic character.
+
+9. Press `Save Changes` and you will see 2 records on the `User Record List`.
+
+
+### Validating `MyApp` now turns over
+
+1. Goto link {@link http://localhost:8882/apps/MyApp.htm Run MyApp}
+
+2. You should see the `MyApp System Login` login page with favorite icon
+<img class=screen src=/img/fav-t1w.ico>
+
+3. Login as `admin` as set up in point 2.
+
+4. Click `List Messages Records`.  You will see no records because this app has none.
+
+4. Create a record using `Create New Messages Record`.  You will be able to adjust the data because you are an {@link /guide/user#adminuser AdminUser}
+
+5. Click `Save Changes`
+
+6. Click `logoff`. You should see the `MyApp System Login` login page
+
+7. Login as `newuser` with the credentials setup in point 7.
+
+8. Create a record using `Create New Messages Record`.  You will be not able to adjust the data because you are not an {@link /guide/user#adminuser AdminUser}
+
+9. {@link /guide/variants GAE Variant}<br> You can use the <a target=_blank href=http://localhost:8882/_ah/admin>Datastore Viewer</a> to see your new data.  Use the class
+`com.rsi.cita.gdo.GdoCitaData`. You will see your raw data at the last page of the display.
+
+9. {@link /guide/variants Node.js Variant}<br>Use your editor to examine the `TRI-DB` folder within the `X:\tri-devp` folder. The structure of this
+folder is explained in {@link /guide/datastore-node Datestore NodeJS.}
+
+### Next Step
+
+Proceed to {@link /tutorial/step-04 04 Prepare MyApp Data}

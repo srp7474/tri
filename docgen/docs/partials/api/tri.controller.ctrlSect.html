@@ -1,0 +1,120 @@
+<h1><code ng:non-bindable="">ctrlSect</code>
+<span class="hint">(controller in module <code ng:non-bindable="">tri</code>
+)</span>
+</h1>
+<div><h2 id="Description">Description</h2>
+<div class="description"><p>Provides a context managment scheme to know what context the infrastructure
+is in.  For all cases the function is forwarded to the equivalent <a href="/api/tri.servSess">servSess</a> function
+and where appropriate the return of that function is returned.</p></div>
+<h2 id="Usage">Usage</h2>
+<div class="usage"><pre class="prettyprint linenums">ctrlSect($scope, servSess, servGAE);</pre>
+<h3 id="Parameters">Parameters</h3>
+<ul class="parameters"><li><code ng:non-bindable="">$scope – {Object} – </code>
+<p>The scope of the controller</p></li>
+<li><code ng:non-bindable="">servSess – {Object} – </code>
+<p>The <a href="/api/tri.servSess">servSess</a> service pointer</p></li>
+<li><code ng:non-bindable="">servGAE – {Object} – </code>
+<p>The <a href="/api/tri.servGAE">servGAE</a> service pointer</p></li>
+</ul>
+</div>
+<div class="member method"><h2 id="Methods">Methods</h2>
+<ul class="methods"><li><h3 id="cancelNewPassword">cancelNewPassword()</h3>
+<div class="cancelnewpassword"><p>Clears the <code>sPasswordErr</code> field</p></div>
+</li>
+<li><h3 id="closeConfirmMsg">closeConfirmMsg()</h3>
+<div class="closeconfirmmsg"><p>Clears any confirmation message.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#setConfirmMsg">servSess.setConfirmMsg</a> with a value of <code>null</code>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p><code>undefined</code></p></div>
+</div>
+</li>
+<li><h3 id="closeErrorMsg">closeErrorMsg()</h3>
+<div class="closeerrormsg"><p>Clears any error message.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#setErrorMsg">servSess.setErrorMsg</a> with a value of <code>null</code>.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Object}</code>
+– <p><code>undefined</code></p></div>
+</div>
+</li>
+<li><h3 id="getConfirmMsg">getConfirmMsg()</h3>
+<div class="getconfirmmsg"><p>Returns any User contextual confirmation message.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getConfirmMsg">servSess.getConfirmMsg</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#getConfirmMsg">servSess.getConfirmMsg</a></p></div>
+</div>
+</li>
+<li><h3 id="getErrorMsg">getErrorMsg()</h3>
+<div class="geterrormsg"><p>Returns any User contextual error message.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getErrorMsg">servSess.getErrorMsg</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#getErrorMsg">servSess.getErrorMsg</a></p></div>
+</div>
+</li>
+<li><h3 id="hasConfirmMsg">hasConfirmMsg()</h3>
+<div class="hasconfirmmsg"><p>Returns whether a User confirmation message exists.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getConfirmMsg">servSess.getConfirmMsg</a> and returns whether the result is null (false) or not (true).</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasConfirmMsg">servSess.hasConfirmMsg</a> != null</p></div>
+</div>
+</li>
+<li><h3 id="hasError">hasError()</h3>
+<div class="haserror"><p>Returns whether <code>sPasswordErr</code> contains any data.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>whether <code>sPasswordErr</code> is null (false) or not null (true)</p></div>
+</div>
+</li>
+<li><h3 id="hasErrorMsg">hasErrorMsg()</h3>
+<div class="haserrormsg"><p>Returns whether a User error message exists.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#getErrorMsg">servSess.getErrorMsg</a> and returns whether the result is null (false) or not (true).</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasErrorMsg">servSess.hasErrorMsg</a> != null</p></div>
+</div>
+</li>
+<li><h3 id="hasSession">hasSession()</h3>
+<div class="hassession"><p>Returns whether a valid session exists. ie. The User is properly logged in and validated.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#hasSession">servSess.hasSession</a> and returns the value obtained thereby.</p><h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#hasSession">servSess.hasSession</a></p></div>
+</div>
+</li>
+<li><h3 id="isSect">isSect(sSect)</h3>
+<div class="issect"><p>Returns whether <code>sect</code> section matches the current section.</p>
+
+<p>This call is forwarded  to <a href="/api/tri.servSess#isSect">servSess.isSect</a> and returns the value obtained thereby.</p><h4 id="Parameters">Parameters</h4>
+<ul class="parameters"><li><code ng:non-bindable="">sSect – {string} – </code>
+<p>value to match against</p></li>
+</ul>
+<h4 id="Returns">Returns</h4>
+<div class="returns"><code ng:non-bindable="">{Boolean}</code>
+– <p>the value returned by <a href="/api/tri.servSess#isSect">servSess.isSect</a></p></div>
+</div>
+</li>
+<li><h3 id="submitNewPassword">submitNewPassword()</h3>
+<div class="submitnewpassword"><p>Used in concert with the HTML template 'apps-change-password.html' to submit a password change.</p>
+
+<p>If the password entered is valid (at least one alphabetic) and the confirm field matches the method
+<a href="/api/tri.servGAE#changePassword">servGAE.changePassword</a> is called.</p>
+
+<p>If successful
+<a href="/api/tri.servSess#setConfirmMsg">servSess.setConfirmMsg</a> is called.</p>
+
+<p>If not successful
+<a href="/api/tri.servSess#setErrorMsg">servSess.Sess.#setErrorMsg</a> is called.</p></div>
+</li>
+</ul>
+</div>
+<div class="member property"><h2 id="Properties">Properties</h2>
+<ul class="properties"><li><h3 id="sPasswordErr">sPasswordErr</h3>
+<div class="spassworderr"><p>Initial password change validation error field.</p>
+
+<p>Set during a <code>submitNewPassword</code> method call.</p></div>
+</li>
+</ul>
+</div>
+</div>

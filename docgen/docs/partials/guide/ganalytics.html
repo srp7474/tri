@@ -1,0 +1,23 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h3 id="overview">Overview</h4>
+
+<p><strong>Triangular</strong> uses <a href="http://www.google.com/analytics/">Google Analytics</a> to record the website visit patterns.  The built in code
+makes it easy to add to your site with the following 2 steps.</p>
+
+<ol>
+<li><p>Obtain your Google Analytics script code and replace the script code in <a href="/guide/appsconfig">AppsConfig.js</a> with what you obtained. It should
+look the same apart from the tracking codes.</p></li>
+<li><p>In any HTML file you wish to include analytic information insert the statements
+<br><br>
+<code>&lt;script src="AppsConfig.js"&gt;&lt;/script&gt;</code> (If not already added)
+<br>
+<code>&lt;script&gt;gaTracking();&lt;/script&gt;</code></p></li>
+</ol>
+
+<p>This will record any activity on the HTML page in which the above code is inserted.</p>
+
+<p>In addition Google Analytics' <code>events</code> will be created whenever a <a href="/api/tri.directive:whenActive">whenActive</a> link is pressed.
+This typicaly gives a good idea of how the visitor(s) are traversing the website.  It is especially important in sites that would otherwise
+have only one page visit because the remainder of the page updating is done via AJAX calls.</p></div>

@@ -1,0 +1,82 @@
+[objects]
+
+[configuration]
+
+
+[App.Cita]
+  $if (${HOST} eQ HP03)
+    // TODO - pull this from web.xml as a token
+    Title="${HOST}:CITA - Triangular Demonstration -  Demonstration v1.0"
+  $else
+    Title="CITA - Triangular Demonstration -  Demonstration v1.0"
+  $endif
+  ReqClass="com.rsi.gems.bbb.run.B3Req"
+  MethClass="com.rsi.cita.CitaMethods"
+  Parms=(
+    PasswordObfuscator="customize this to secure user passwords" // do not change once passwords are established on datastore
+    IconName="Cita.ico"
+    // JSP stuff
+    JspPage="com.rsi.cita.jsp.page"
+    JspSnip="com.rsi.cita.jsp.snip"
+    AppClassLoc="WEB-INF/classes/"
+    // misc
+    StackTraceJSP="true"
+    $if (${HOST} eQ HP03x)
+      AnalyticsCall="false"
+    $else
+      AnalyticsCall="true"
+    $endif
+
+    // ACT Items to be managed
+    ActItems  = "com.rsi.cita.gdo.GdoCitaData"
+  )
+
+  Pages=(
+    [Page] Title="Home"
+           name="home"
+           JspPage="GemsB3Frame"
+           Snippet="cita.Home"
+           Parms=(
+             LeftSnipJSP="cita.LeftSnipCita"
+           )
+    [Page] name="*"
+           JspPage="GemsB3Frame"
+           Parms=(
+             LeftSnipJSP="cars.LeftSnipCita"
+           )
+  )
+[/]
+[App.Boot]
+  $if (${HOST} eQ HP03)
+    // TODO - pull this from web.xml as a token
+    Title="${HOST}:CITA - Triangular Demonstration -  Demonstration v1.0"
+  $else
+    Title="CITA - Triangular Demonstration -  Demonstration v1.0"
+  $endif
+  MethClass="com.rsi.cita.CitaMethods"
+  Parms=(
+    PasswordObfuscator="customize this to secure admin passwords" // do not change once passwords are established on datastore
+    IconName="Car.ico"
+    // JSP stuff
+    JspPage="com.rsi.cita.jsp.page"
+    JspSnip="com.rsi.cita.jsp.snip"
+    AppClassLoc="WEB-INF/classes/"
+  )
+  Pages=(
+    [Page] Title="Home"
+           name="home"
+           JspPage="GemsB3Frame"
+           Snippet="cita.Home"
+           Parms=(
+             LeftSnipJSP="cita.LeftSnipCita"
+           )
+    [Page] name="*"
+           JspPage="GemsB3Frame"
+           Parms=(
+             LeftSnipJSP="cars.LeftSnipCita"
+           )
+  )
+[/]
+
+
+

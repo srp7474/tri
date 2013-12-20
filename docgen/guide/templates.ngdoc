@@ -1,0 +1,65 @@
+@ngdoc overview
+@name Guide: Templates
+@description
+### Overview
+The **Triangular** template system is used to enable predefined HTML snippets to be easily included in application pages.
+
+The fact that they can be altered during injection, either by the {@link /api/tri.directive:macro#parameters alter} keyword or by the use of predefined
+keywords such as `$MODOBJ$` adds even more flexibility to the template facility.
+
+It relies on the {@link /api/tri.directive:macro macro fetch} directive to inject the template into the application page.
+
+**Triangular** predefined templates are stored in `tri/AppBase.htm`.  Custom templates are defined at the end of the
+{@link /guide/appname-html appname-html} file.
+
+The templates are loaded as described in {@link /api/tri.method:hookMsgListener hookMsgListener}.
+
+The Chrome browser `inspect` function is a helpful way to see the injected templates.  The comments before the
+injected code indicate their source and what process injected them.
+
+### The load process
+The templates are processed after the browser has parsed them.  This means that tags are converted to lower case and double quotes inserted
+around each HTML attribute, needed or not.
+
+The browser will also attempt to `GET` any `<img>` , `<audio>` or `<script>` tags in the file.  To prevent this from happening add a defer after the
+tag.  Thus `<img>` would be `<img-defer>`.  In the case of `<audio>` or `<script>` this also applies to the matching
+`</audio>` or `</script>` tags.
+
+The `img-defer` adjustment to `img` is done automatically by the {@link /api/tri.directive:macro macro fetch} process. For `script-defer` and `audio-defer` adjustments they
+should be added to the {@link /api/tri.directive:macro macro fetch.alter} parameter where applicable.
+
+### Template Syntax
+
+Each template is of the form
+<pre>
+  &LT;pre class=template id="name.html">
+     ...
+  &LT;/pre>
+</pre>
+
+where
+
+`name.html` is the template name that is registered and used in the
+{@link /api/tri.directive:macro macro fetch}
+
+and  the "..." is the template code that is inserted after processing as described in the
+{@link /api/tri.directive:macro macro} directive.
+
+
+### Example
+This is an example from the "Deps.htm" file.  It is used to display the donor address information.
+
+The string '$MODOBJ$' is replaced during the injection process by the current object in context.
+
+<pre>
+  &LT;pre class=template id="code.html">
+    <fieldset id=fld-code>
+      <legend>Donor {{$MODOBJ$.code}}</legend>
+      <div>{{$MODOBJ$.donor.name}}</div>
+      &LT;pre>{{$MODOBJ$.donor.address}}&LT;/pre>
+      &LT;pre>{{$MODOBJ$.donor.phones}}&LT;/pre>
+    </fieldset>
+  &LT;/pre>
+</pre>
+
+

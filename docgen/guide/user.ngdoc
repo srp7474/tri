@@ -1,0 +1,71 @@
+@ngdoc overview
+@name Guide: User Records
+@description
+
+### Overview
+User records control access to the system.  Before the **Triangular** system will allow access to the {@link /guide/data Data Objects} stored on the server
+the User must {@link /api/tri.controller:ctrlSess#login login} to the system.
+
+
+Refer to the {@link /guide/records#keystructure User Record Format} to learn how they are stored on the server.
+
+The User records contains a set of property values (key/value pairs).  The reserved keys are described in the next section.  The remainder are custom properties
+available to the application with the {@link /api/tri.servSess#getProfile servSess#getProfile} function.
+
+The page {@link /guide/userid-rec UserID Recovery} contains procedures to restore a lost User ID or password.
+
+### SuperUser
+When a server Datastore is first formatted a SuperUser is created whose key is '././userid' where `userid` is the SuperUser ID.
+The password property contains the encrypted token value for the SuperUser.
+
+The SuperUser is used to create the initial {@link /guide/user#AdminUser AdminUser} for an application.
+
+Assuming the Datastore is primed the link
+<a ng-click=appLoader($event); href=/apps/tri/TriBoot.htm>SuperUser Login</a> will take you to the SuperUser login screen.
+
+### AdminUser
+When an application is built at least one AdminUser record is created with the 'admin' role specified.  The password associated with it should be kept
+secure because the {@link /guide/admin Admin User} has unconstrained access to the application.
+
+The {@link /guide/admin Admin Application} is used to create more User records for the application.
+
+The presence of an AdminUser means that an application id exists.
+
+Assuming the Datastore is primed the link
+<a ng-click=appLoader($event); href=/apps/tri/TriBoot.htm>SuperUser Login</a> will take you to the SuperUser login screen.  Once logged in a list of available
+AdminUser IDs for each application will be displayed.  The link shown on the list can be used to sign in as an AdminUser.
+
+Alternately the link `/apps/tri/Admin.htm?cust=XXX` can be used where `XXX` is the application ID for the required AdminUser.
+
+
+### Reserved Property Names
+<style type="text/css">
+  code.srp-label {display:inline-block; width:100px; margin-left:-100px;}
+  span.srp-propdef {display:inline-block; margin-left:100px;}
+</style>
+
+<span class=srp-propdef><code class=srp-label>autolog:</code>Defines the timeout period for a User which is monitored in
+{@link /api/tri.servSess servSess}.  A value of 0 disables the inactivity timeout.
+Otherwise it is the number of seconds of inactivity before the timeout occurs.  If not specified a value of 300 (5 minutes) is implied.
+</span>
+
+<span class=srp-propdef><code class=srp-label>password:</code>Contains the encrypted password (A numeric integer).  When a User issues a
+{@link /api/tri.servGAE#changePassword servGAE.changePassword} function the value stored is the actual value until the first actual
+{@link /api/tri.controller:ctrlSess#login login}.  For this reason the password field must contain an alphabetic character to differentiate between
+the encrypted and unencrypted value,
+</span>
+
+<span class=srp-propdef><code class=srp-label>role:</code>A string containing ',' separated values.  Each value represents a role.  The value 'admin'
+is reserved and indicates the User has administrator privileges. The remainder are application defined.
+They may be tested once a User is {@link /api/tri.controller:ctrlSess#login logged in} with the function
+{@link /api/tri.servSess#isRole servSess#isRole}
+</span>
+
+<span class=srp-propdef><code class=srp-label>sandbox:</code>A value of `true` causes {@link /guide/sandbox Sandbox Mode} to be activated.
+</span>
+
+<span class=srp-propdef><code class=srp-label>token:</code>During
+the {@link /api/tri.controller:ctrlSess#login login} process the {@link /guide/server-inter#token token} is stored in the User record (as well as stored in a server side cache).
+This allows a session to be reconstructed if a client-side  token value is found to contain the same value as the server-side token. This value is maintained by the server.
+</span>
+

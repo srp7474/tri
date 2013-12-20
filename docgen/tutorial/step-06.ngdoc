@@ -1,0 +1,83 @@
+@ngdoc overview
+@name Tutorial: 06 Get GAE Site ID
+@description
+
+{@link /guide/variants Node.js Variant} Skip this step and go to {@link /tutorial/step-10 10 MyApp on NodeJS Site}
+
+Let us assume at this point that `MyApp` is complete and working.
+
+Theoretically, it could be hosted via an intranet or even globally by making your internal server running this code accessible to the internet.
+This may not be ideal for the following reasons:
+
+* The industrial strength of the development server provided by Google is questionable.  It is provided as a development tool.
+
+* Limited to a single machine serving
+
+* There is no built in data redundancy like that provided with the
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine Site</a>.
+
+To move `MyApp` to the
+<a target_blank href='http://developers.google.com/appengine/docs/whatisgoogleappengine'>Google App Engine Site</a>.
+the following steps are required
+
+### Get {@link /guide/gaesite GAE Site} ID
+1. If you do not yet have one get a Google Account from <a href=https://accounts.google.com/ServiceLogin target=_blank>Google Account Login</a>
+
+2. Logon to your  Google Account using <a href=https://accounts.google.com/ServiceLogin target=_blank>Google Account Login</a>
+
+3. Logon to AppEngine from this window.  Use the link `https://appengine.google.com/`
+
+4. If you already have applications they will listed on the screen.
+
+5. Press the `Create Application` button.
+
+6. Create an `Application Identifier:` that is acceptable.  This tutorial uses `tri-test`. Change as appropriate.
+Press the `Create Application` button.  You will the see `Application Registered Successfully` meaning the name chosen has
+been registered.
+
+### Insert {@link /guide/gaesite GAE Site} ID into your local setup
+
+<span style='color:red;'>**CAUTION**:</span> The following steps will cause the local server to **trash** your `local_db.bin` mentioned in {@link /guide/datastore Datastore}.
+If you have data you care about use the {@link /guide/waks WAKS Utility} to preserve it now.  You can also rename `local_db.bin` and
+`datastore-indexes-auto.xml` with the intent of retrieving the data later by switching back to
+`<application>triapps</application>` and using {@link /guide/waks WAKS Utility} at that time.
+
+1. Use `<Ctrl-C>` to stop the webserver started in {@link /tutorial/step-02 Starting the Local WebServer}
+
+1. Edit `appengine-web.xml` in `x:\tri-devp\war\WEB-INF` and change `triapps` in line `<application>triapps</application>`
+to you new {@link /guide/gaesite GAE Site} ID.  In our example this would be `tri-test`.
+
+2. As additional security, you can modify the file `x:\tri-devp\war\WEB-INF\app-cita\cita.ace`
+<br><br>
+In about line `16` of the `cita.ace` file change the string value of `PasswordObfuscator=` to a different value.
+This string is used in converting the password into a numeric token.  A value known only to you makes the cracking
+of the computed token value much more difficult.
+
+1. Restart the  webserver per {@link /tutorial/step-02 Starting the Local WebServer}
+
+### Configuring the Datastore
+At this point the {@link /guide/datastore Datastore} will be unprimed and will need to be primed as detailed in {@link /guide/dataprime Datastore Prime}.
+
+1. In the Browser goto URL `localhost:8882`
+
+2. You should see `The Triangular Datastore requires priming` screen
+   <br><br>
+   <img class=screen src=/img/needs-prime50.JPG>
+
+3. Create the {@link /guide/user#superuser SuperUser} as instructed.  It is suggested you use a value different from the demo value of `super`.
+
+4. Login as the {@link /guide/user#superuser SuperUser} using the credentials from point 3.
+
+5. You will be requested to add `Add Application AdminUser`. Do this using the procedure already used in
+{@link /tutorial/step-03#configurethedatastore Configure the Datastore} starting from point 2. There will be no other apps present.
+
+6. Add other {@link /guide/user User} records as required by `MyApp` using the {@link /tutorial/step-03#configurethedatastore Configure the Datastore point 7}.
+
+7. If you have data to add to `MyApp` do so now using the {@link /guide/waks WAKS Utility} and  as previously covered in {@link /tutorial/step-04 Prepare MyApp Data}.
+Remember to use the {@link /guide/user#superuser SuperUser} credentials from point 3.
+
+### Next Step
+
+You are now ready to proceed to {@link /tutorial/step-07 07 Retest MyApp}
+
+
